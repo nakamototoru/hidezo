@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EqC-sR-Dnl">
+    <dependencies>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--配送先の変更-->
+        <scene sceneID="Trv-lq-IDf">
+            <objects>
+                <viewController title="配送先の変更" id="EqC-sR-Dnl" customClass="HDZOrderToViewController" customModule="seller" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4QD-Mg-YJb"/>
+                        <viewControllerLayoutGuide type="bottom" id="3NI-Ok-ST2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IRW-Yt-pfW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eig-Fi-dZu">
+                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EqC-sR-Dnl" id="cOS-rb-UcZ"/>
+                                    <outlet property="delegate" destination="EqC-sR-Dnl" id="ZgS-2u-jNR"/>
+                                </connections>
+                            </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="LFK-oO-Kho">
+                                <rect key="frame" x="0.0" y="407" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="ZfN-4Q-GLy">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="dDN-Zu-Gku">
+                                            <rect key="frame" x="16" y="7" width="285" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="V9H-wS-cqS"/>
+                                    <barButtonItem title="決定" style="done" id="SBY-Jw-3bv">
+                                        <connections>
+                                            <action selector="didSelectedDoneWithButton:" destination="EqC-sR-Dnl" id="TZE-BT-5A6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="8L3-an-VSG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                <items>
+                                    <navigationItem title="配送先の変更" prompt=" " id="jrA-wD-7uq">
+                                        <barButtonItem key="rightBarButtonItem" title="閉じる" style="done" id="MJc-4Y-31a">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="didSelectedCloseWithButton:" destination="EqC-sR-Dnl" id="dmf-3C-moE"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8L3-an-VSG" secondAttribute="trailing" id="ANP-UE-V4M"/>
+                            <constraint firstItem="eig-Fi-dZu" firstAttribute="leading" secondItem="IRW-Yt-pfW" secondAttribute="leading" id="KA3-JX-WeI"/>
+                            <constraint firstItem="8L3-an-VSG" firstAttribute="leading" secondItem="IRW-Yt-pfW" secondAttribute="leading" id="NxY-X7-Qko"/>
+                            <constraint firstItem="LFK-oO-Kho" firstAttribute="leading" secondItem="IRW-Yt-pfW" secondAttribute="leading" id="SrZ-uG-hro"/>
+                            <constraint firstItem="eig-Fi-dZu" firstAttribute="top" secondItem="LFK-oO-Kho" secondAttribute="bottom" id="b3Q-xg-bCU"/>
+                            <constraint firstAttribute="trailing" secondItem="eig-Fi-dZu" secondAttribute="trailing" id="s9z-kl-p8W"/>
+                            <constraint firstItem="3NI-Ok-ST2" firstAttribute="top" secondItem="eig-Fi-dZu" secondAttribute="bottom" id="sOJ-HE-PRu"/>
+                            <constraint firstItem="8L3-an-VSG" firstAttribute="top" secondItem="IRW-Yt-pfW" secondAttribute="top" id="v0h-8g-bA4"/>
+                            <constraint firstAttribute="trailing" secondItem="LFK-oO-Kho" secondAttribute="trailing" id="xwf-a2-Nhd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomLayoutConstraint" destination="sOJ-HE-PRu" id="AAW-fn-njH"/>
+                        <outlet property="deliverToPickerView" destination="eig-Fi-dZu" id="T6Y-ds-gky"/>
+                        <outlet property="deliverToTextField" destination="dDN-Zu-Gku" id="CBv-xq-pPa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3AZ-CV-qze" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-153" y="-155"/>
+        </scene>
+    </scenes>
+</document>

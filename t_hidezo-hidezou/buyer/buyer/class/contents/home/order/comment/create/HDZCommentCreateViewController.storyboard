@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eiF-vC-uoZ">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Comment Create View Controller-->
+        <scene sceneID="UN8-e8-RcZ">
+            <objects>
+                <viewController id="eiF-vC-uoZ" customClass="HDZCommentCreateViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="41Q-LX-Rs6"/>
+                        <viewControllerLayoutGuide type="bottom" id="KR4-e0-ru5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lBG-bU-MwK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="266"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vgf-IS-hBO">
+                                <rect key="frame" x="16" y="216" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="xud-1D-jZ2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="コメントを送信">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectedSend:" destination="eiF-vC-uoZ" eventType="touchUpInside" id="4q8-mJ-I5u"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RUX-EN-Krj">
+                                <rect key="frame" x="16" y="80" width="343" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvE-qv-3uT">
+                                <rect key="frame" x="0.0" y="8" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="DlE-ru-LzM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="eiF-vC-uoZ" id="gp0-Ax-1gE"/>
+                                    <outlet property="delegate" destination="eiF-vC-uoZ" id="Ds6-bc-5N2"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vgf-IS-hBO" firstAttribute="top" secondItem="RUX-EN-Krj" secondAttribute="bottom" constant="8" id="8PO-co-leg"/>
+                            <constraint firstItem="IvE-qv-3uT" firstAttribute="top" secondItem="41Q-LX-Rs6" secondAttribute="bottom" constant="8" id="HpC-Tf-Ccs"/>
+                            <constraint firstAttribute="trailing" secondItem="Vgf-IS-hBO" secondAttribute="trailing" constant="16" id="NUV-ud-NWm"/>
+                            <constraint firstAttribute="trailing" secondItem="RUX-EN-Krj" secondAttribute="trailing" constant="16" id="RvW-Yf-oMe"/>
+                            <constraint firstItem="KR4-e0-ru5" firstAttribute="top" secondItem="Vgf-IS-hBO" secondAttribute="bottom" constant="20" id="ZTA-lg-EhV"/>
+                            <constraint firstItem="RUX-EN-Krj" firstAttribute="top" secondItem="IvE-qv-3uT" secondAttribute="bottom" constant="8" id="aW8-QI-IgR"/>
+                            <constraint firstItem="Vgf-IS-hBO" firstAttribute="leading" secondItem="lBG-bU-MwK" secondAttribute="leading" constant="16" id="mpr-yJ-HQh"/>
+                            <constraint firstItem="RUX-EN-Krj" firstAttribute="leading" secondItem="lBG-bU-MwK" secondAttribute="leading" constant="16" id="oo1-ZU-22m"/>
+                            <constraint firstItem="IvE-qv-3uT" firstAttribute="leading" secondItem="lBG-bU-MwK" secondAttribute="leading" id="prn-53-qTF"/>
+                            <constraint firstAttribute="trailing" secondItem="IvE-qv-3uT" secondAttribute="trailing" id="qcf-9o-ByT"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="266"/>
+                    <connections>
+                        <outlet property="commentTextView" destination="RUX-EN-Krj" id="itZ-Lf-MoD"/>
+                        <outlet property="pickerView" destination="IvE-qv-3uT" id="JpJ-Hc-tVY"/>
+                        <outlet property="sendCommentButton" destination="Vgf-IS-hBO" id="ueF-CZ-Uh0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hml-rK-MJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-159.19999999999999" y="32.833583208395808"/>
+        </scene>
+    </scenes>
+</document>

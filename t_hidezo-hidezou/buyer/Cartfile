@@ -1,0 +1,6 @@
+github "Alamofire/Alamofire"
+github "Alamofire/AlamofireImage"
+github "johnsundell/unbox"
+github "johnsundell/wrap"
+github "realm/realm-cocoa"
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="fag-fg-EKx">
+                                <rect key="frame" x="210" y="84" width="180" height="180"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2016 魚屋ひでぞう. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shb-sJ-v2t">
+                                <rect key="frame" x="20" y="566" width="560" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIDEZO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAY-Xh-tlv">
+                                <rect key="frame" x="253.5" y="272" width="93.5" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Shb-sJ-v2t" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="4NA-01-c0X"/>
+                            <constraint firstItem="QAY-Xh-tlv" firstAttribute="top" secondItem="fag-fg-EKx" secondAttribute="bottom" constant="8" id="Iau-Em-6Gf"/>
+                            <constraint firstItem="fag-fg-EKx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OEX-fu-fjS"/>
+                            <constraint firstItem="QAY-Xh-tlv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OOD-zk-h1g"/>
+                            <constraint firstItem="fag-fg-EKx" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="64" id="XQG-KT-dtr"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Shb-sJ-v2t" secondAttribute="bottom" constant="20" id="aZ7-m7-gAh"/>
+                            <constraint firstAttribute="trailing" secondItem="Shb-sJ-v2t" secondAttribute="trailing" constant="20" id="nLt-k3-CVn"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.173913043478265" y="374.18478260869568"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="sakana" width="180" height="180"/>
+    </resources>
+</document>

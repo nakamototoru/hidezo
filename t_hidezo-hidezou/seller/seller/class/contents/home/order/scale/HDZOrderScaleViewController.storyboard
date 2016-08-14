@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VYi-xN-YNz">
+    <dependencies>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Order Scale View Controller-->
+        <scene sceneID="nGU-8R-27O">
+            <objects>
+                <viewController id="VYi-xN-YNz" customClass="HDZOrderScaleViewController" customModule="seller" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I7y-Ky-Z7G"/>
+                        <viewControllerLayoutGuide type="bottom" id="7rE-ec-c75"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6vs-nk-mux">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u7K-OV-pNA">
+                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="VYi-xN-YNz" id="FLx-K1-yfH"/>
+                                    <outlet property="delegate" destination="VYi-xN-YNz" id="uQO-P2-mDu"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="u7K-OV-pNA" secondAttribute="trailing" id="IUw-zC-CZf"/>
+                            <constraint firstItem="u7K-OV-pNA" firstAttribute="leading" secondItem="6vs-nk-mux" secondAttribute="leading" id="XRD-xu-rW6"/>
+                            <constraint firstItem="7rE-ec-c75" firstAttribute="top" secondItem="u7K-OV-pNA" secondAttribute="bottom" id="ezZ-16-dfg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pickerView" destination="u7K-OV-pNA" id="kkk-wJ-lFp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGc-rc-TWj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-63" y="134"/>
+        </scene>
+    </scenes>
+</document>

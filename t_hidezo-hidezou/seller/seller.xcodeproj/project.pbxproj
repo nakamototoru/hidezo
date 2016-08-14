@@ -1,0 +1,780 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		350FFA1A1D1CB22500095830 /* ApiMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350FFA191D1CB22500095830 /* ApiMessage.swift */; };
+		3515C5441D1AD5F40074B38E /* HDZOrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3515C5421D1AD5F40074B38E /* HDZOrderDetailCell.swift */; };
+		3515C5451D1AD5F40074B38E /* HDZOrderDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3515C5431D1AD5F40074B38E /* HDZOrderDetailCell.xib */; };
+		3515C5471D1AD8DE0074B38E /* ApiMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3515C5461D1AD8DE0074B38E /* ApiMe.swift */; };
+		35255C621D17709300A8D627 /* AlamofireUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C611D17709300A8D627 /* AlamofireUtils.swift */; };
+		35255C651D17787500A8D627 /* HDZApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C641D17787500A8D627 /* HDZApi.swift */; };
+		35255C681D17793400A8D627 /* ApiLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C671D17793400A8D627 /* ApiLogin.swift */; };
+		35255C6A1D177E0D00A8D627 /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C691D177E0D00A8D627 /* String_Extension.swift */; };
+		35255C6D1D178B8300A8D627 /* HDZHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C6C1D178B8300A8D627 /* HDZHomeViewController.swift */; };
+		35255C6F1D178CC400A8D627 /* HDZHomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35255C6E1D178CC400A8D627 /* HDZHomeViewController.storyboard */; };
+		35255C731D178F1A00A8D627 /* HDZOrderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C721D178F1A00A8D627 /* HDZOrderTableViewController.swift */; };
+		35255C751D178F3600A8D627 /* HDZCustomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C741D178F3600A8D627 /* HDZCustomerTableViewController.swift */; };
+		35255C781D17902A00A8D627 /* HDZProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C771D17902A00A8D627 /* HDZProfileViewController.swift */; };
+		35255C7E1D1791DA00A8D627 /* HDZCustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C7C1D1791DA00A8D627 /* HDZCustomerCell.swift */; };
+		35255C7F1D1791DA00A8D627 /* HDZCustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35255C7D1D1791DA00A8D627 /* HDZCustomerCell.xib */; };
+		35255C831D1793CE00A8D627 /* HDZOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C811D1793CE00A8D627 /* HDZOrderCell.swift */; };
+		35255C841D1793CE00A8D627 /* HDZOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35255C821D1793CE00A8D627 /* HDZOrderCell.xib */; };
+		35255C881D179C3000A8D627 /* ApiFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35255C871D179C3000A8D627 /* ApiFriend.swift */; };
+		352F21B11D291EC6009F8028 /* HDZOrderToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352F21B01D291EC6009F8028 /* HDZOrderToViewController.swift */; };
+		352F21B31D291F05009F8028 /* HDZOrderToViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 352F21B21D291F05009F8028 /* HDZOrderToViewController.storyboard */; };
+		354FFDAB1D1E791100D70976 /* HDZOrderScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FFDAA1D1E791100D70976 /* HDZOrderScaleViewController.swift */; };
+		354FFDAD1D1E793700D70976 /* HDZOrderScaleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354FFDAC1D1E793700D70976 /* HDZOrderScaleViewController.storyboard */; };
+		354FFDAF1D1E872E00D70976 /* HDZOrderDetailFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FFDAE1D1E872E00D70976 /* HDZOrderDetailFooter.swift */; };
+		354FFDB11D1E895700D70976 /* HDZOrderDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354FFDB01D1E895700D70976 /* HDZOrderDetailFooter.xib */; };
+		354FFDB31D1EAE4500D70976 /* UIView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FFDB21D1EAE4500D70976 /* UIView_Extension.swift */; };
+		356D7CD91D1821A300867F91 /* HDZCustomerDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D7CD81D1821A300867F91 /* HDZCustomerDetailTableViewController.swift */; };
+		356D7CDB1D1821B400867F91 /* HDZCustomerDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 356D7CDA1D1821B400867F91 /* HDZCustomerDetailTableViewController.storyboard */; };
+		356D7CDD1D1850E700867F91 /* ApiOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D7CDC1D1850E700867F91 /* ApiOrder.swift */; };
+		357D6AC41D1EC6DD000CBAF2 /* HDZCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357D6AC21D1EC6DD000CBAF2 /* HDZCommentCell.swift */; };
+		357D6AC51D1EC6DD000CBAF2 /* HDZCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357D6AC31D1EC6DD000CBAF2 /* HDZCommentCell.xib */; };
+		358829CE1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */; };
+		358829D01D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 358829CF1D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard */; };
+		35899B911D16D7C300D2AA45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899B901D16D7C300D2AA45 /* AppDelegate.swift */; };
+		35899B931D16D7C300D2AA45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899B921D16D7C300D2AA45 /* ViewController.swift */; };
+		35899B981D16D7C300D2AA45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35899B971D16D7C300D2AA45 /* Assets.xcassets */; };
+		35899BA51D16D8F300D2AA45 /* HDZUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899BA41D16D8F300D2AA45 /* HDZUserDefaults.swift */; };
+		35899BA91D16E1E900D2AA45 /* HDZTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899BA81D16E1E900D2AA45 /* HDZTopViewController.swift */; };
+		35899BAB1D16E20C00D2AA45 /* HDZTopViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35899BAA1D16E20C00D2AA45 /* HDZTopViewController.storyboard */; };
+		35899BAE1D16E25600D2AA45 /* UIViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899BAD1D16E25600D2AA45 /* UIViewController_Extension.swift */; };
+		35899BB01D16E9A400D2AA45 /* UIApplication_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899BAF1D16E9A400D2AA45 /* UIApplication_Extension.swift */; };
+		35899BB31D16EC8A00D2AA45 /* HDZLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35899BB21D16EC8A00D2AA45 /* HDZLoginViewController.swift */; };
+		35899BB51D16EC9C00D2AA45 /* HDZLoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35899BB41D16EC9C00D2AA45 /* HDZLoginViewController.storyboard */; };
+		35B9B96E1D3220A30033B1D8 /* HDZOrderDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B9B96D1D3220A30033B1D8 /* HDZOrderDateViewController.swift */; };
+		35B9B9701D3220BB0033B1D8 /* HDZOrderDateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B9B96F1D3220BB0033B1D8 /* HDZOrderDateViewController.storyboard */; };
+		35C8F4B51D31E192002AFEB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35899B941D16D7C300D2AA45 /* Main.storyboard */; };
+		35C8F4B61D31E19A002AFEB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35899B991D16D7C300D2AA45 /* LaunchScreen.storyboard */; };
+		35C8F4B71D31E267002AFEB2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35255C591D176F4600A8D627 /* Alamofire.framework */; };
+		35C8F4B81D31E267002AFEB2 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35255C5A1D176F4600A8D627 /* Unbox.framework */; };
+		35C8F4B91D31E267002AFEB2 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35255C5B1D176F4600A8D627 /* Wrap.framework */; };
+		35F193451D1EED190027E50F /* HDZCommentCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F193441D1EED190027E50F /* HDZCommentCreateViewController.swift */; };
+		35F193471D1EED370027E50F /* HDZCommentCreateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F193461D1EED370027E50F /* HDZCommentCreateViewController.storyboard */; };
+		35F5250A1D1FABBC0035A940 /* HDZOrderItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F525091D1FABBC0035A940 /* HDZOrderItemTableViewController.swift */; };
+		35F5250C1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */; };
+		35F7A1C31D198C070012B42C /* HDZOrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */; };
+		35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		350FFA191D1CB22500095830 /* ApiMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiMessage.swift; path = class/utils/api/model/ApiMessage.swift; sourceTree = "<group>"; };
+		3515C5421D1AD5F40074B38E /* HDZOrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailCell.swift; path = class/contents/home/order/detail/view/HDZOrderDetailCell.swift; sourceTree = "<group>"; };
+		3515C5431D1AD5F40074B38E /* HDZOrderDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZOrderDetailCell.xib; path = class/contents/home/order/detail/view/HDZOrderDetailCell.xib; sourceTree = "<group>"; };
+		3515C5461D1AD8DE0074B38E /* ApiMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiMe.swift; path = class/utils/api/model/ApiMe.swift; sourceTree = "<group>"; };
+		35255C591D176F4600A8D627 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		35255C5A1D176F4600A8D627 /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/iOS/Unbox.framework; sourceTree = "<group>"; };
+		35255C5B1D176F4600A8D627 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/iOS/Wrap.framework; sourceTree = "<group>"; };
+		35255C611D17709300A8D627 /* AlamofireUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlamofireUtils.swift; path = class/utils/networks/AlamofireUtils.swift; sourceTree = "<group>"; };
+		35255C641D17787500A8D627 /* HDZApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZApi.swift; path = class/utils/api/HDZApi.swift; sourceTree = "<group>"; };
+		35255C671D17793400A8D627 /* ApiLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiLogin.swift; path = class/utils/api/model/ApiLogin.swift; sourceTree = "<group>"; };
+		35255C691D177E0D00A8D627 /* String_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String_Extension.swift; path = class/extension/String_Extension.swift; sourceTree = "<group>"; };
+		35255C6C1D178B8300A8D627 /* HDZHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZHomeViewController.swift; path = class/contents/home/HDZHomeViewController.swift; sourceTree = "<group>"; };
+		35255C6E1D178CC400A8D627 /* HDZHomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZHomeViewController.storyboard; path = class/contents/home/HDZHomeViewController.storyboard; sourceTree = "<group>"; };
+		35255C721D178F1A00A8D627 /* HDZOrderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderTableViewController.swift; path = class/contents/home/order/HDZOrderTableViewController.swift; sourceTree = "<group>"; };
+		35255C741D178F3600A8D627 /* HDZCustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCustomerTableViewController.swift; path = class/contents/home/customer/HDZCustomerTableViewController.swift; sourceTree = "<group>"; };
+		35255C771D17902A00A8D627 /* HDZProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZProfileViewController.swift; path = class/contents/home/profile/HDZProfileViewController.swift; sourceTree = "<group>"; };
+		35255C7C1D1791DA00A8D627 /* HDZCustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCustomerCell.swift; path = class/contents/home/customer/view/HDZCustomerCell.swift; sourceTree = "<group>"; };
+		35255C7D1D1791DA00A8D627 /* HDZCustomerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCustomerCell.xib; path = class/contents/home/customer/view/HDZCustomerCell.xib; sourceTree = "<group>"; };
+		35255C811D1793CE00A8D627 /* HDZOrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderCell.swift; path = class/contents/home/order/view/HDZOrderCell.swift; sourceTree = "<group>"; };
+		35255C821D1793CE00A8D627 /* HDZOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZOrderCell.xib; path = class/contents/home/order/view/HDZOrderCell.xib; sourceTree = "<group>"; };
+		35255C871D179C3000A8D627 /* ApiFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiFriend.swift; path = class/utils/api/model/ApiFriend.swift; sourceTree = "<group>"; };
+		352F21B01D291EC6009F8028 /* HDZOrderToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderToViewController.swift; path = class/contents/home/order/to/HDZOrderToViewController.swift; sourceTree = "<group>"; };
+		352F21B21D291F05009F8028 /* HDZOrderToViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderToViewController.storyboard; path = class/contents/home/order/to/HDZOrderToViewController.storyboard; sourceTree = "<group>"; };
+		354FFDAA1D1E791100D70976 /* HDZOrderScaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderScaleViewController.swift; path = class/contents/home/order/scale/HDZOrderScaleViewController.swift; sourceTree = "<group>"; };
+		354FFDAC1D1E793700D70976 /* HDZOrderScaleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderScaleViewController.storyboard; path = class/contents/home/order/scale/HDZOrderScaleViewController.storyboard; sourceTree = "<group>"; };
+		354FFDAE1D1E872E00D70976 /* HDZOrderDetailFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailFooter.swift; path = class/contents/home/order/detail/view/HDZOrderDetailFooter.swift; sourceTree = "<group>"; };
+		354FFDB01D1E895700D70976 /* HDZOrderDetailFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZOrderDetailFooter.xib; path = class/contents/home/order/detail/view/HDZOrderDetailFooter.xib; sourceTree = "<group>"; };
+		354FFDB21D1EAE4500D70976 /* UIView_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView_Extension.swift; path = class/extension/UIView_Extension.swift; sourceTree = "<group>"; };
+		356D7CD81D1821A300867F91 /* HDZCustomerDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCustomerDetailTableViewController.swift; path = class/contents/home/customer/detail/HDZCustomerDetailTableViewController.swift; sourceTree = "<group>"; };
+		356D7CDA1D1821B400867F91 /* HDZCustomerDetailTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZCustomerDetailTableViewController.storyboard; path = class/contents/home/customer/detail/HDZCustomerDetailTableViewController.storyboard; sourceTree = "<group>"; };
+		356D7CDC1D1850E700867F91 /* ApiOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiOrder.swift; path = class/utils/api/model/ApiOrder.swift; sourceTree = "<group>"; };
+		357D6AC21D1EC6DD000CBAF2 /* HDZCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentCell.swift; path = class/contents/home/order/comment/view/HDZCommentCell.swift; sourceTree = "<group>"; };
+		357D6AC31D1EC6DD000CBAF2 /* HDZCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentCell.xib; path = class/contents/home/order/comment/view/HDZCommentCell.xib; sourceTree = "<group>"; };
+		358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentTableViewController.swift; path = class/contents/home/order/comment/HDZCommentTableViewController.swift; sourceTree = "<group>"; };
+		358829CF1D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZCommentTableViewController.storyboard; path = class/contents/home/order/comment/HDZCommentTableViewController.storyboard; sourceTree = "<group>"; };
+		35899B8D1D16D7C300D2AA45 /* seller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seller.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35899B901D16D7C300D2AA45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		35899B921D16D7C300D2AA45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		35899B951D16D7C300D2AA45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		35899B971D16D7C300D2AA45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		35899B9A1D16D7C300D2AA45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		35899B9C1D16D7C300D2AA45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35899BA41D16D8F300D2AA45 /* HDZUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZUserDefaults.swift; path = class/utils/HDZUserDefaults.swift; sourceTree = "<group>"; };
+		35899BA81D16E1E900D2AA45 /* HDZTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZTopViewController.swift; path = class/contents/top/HDZTopViewController.swift; sourceTree = "<group>"; };
+		35899BAA1D16E20C00D2AA45 /* HDZTopViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZTopViewController.storyboard; path = class/contents/top/HDZTopViewController.storyboard; sourceTree = "<group>"; };
+		35899BAD1D16E25600D2AA45 /* UIViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewController_Extension.swift; path = class/extension/UIViewController_Extension.swift; sourceTree = "<group>"; };
+		35899BAF1D16E9A400D2AA45 /* UIApplication_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication_Extension.swift; path = class/extension/UIApplication_Extension.swift; sourceTree = "<group>"; };
+		35899BB21D16EC8A00D2AA45 /* HDZLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZLoginViewController.swift; path = class/contents/login/HDZLoginViewController.swift; sourceTree = "<group>"; };
+		35899BB41D16EC9C00D2AA45 /* HDZLoginViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZLoginViewController.storyboard; path = class/contents/login/HDZLoginViewController.storyboard; sourceTree = "<group>"; };
+		35B9B96D1D3220A30033B1D8 /* HDZOrderDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDateViewController.swift; path = class/contents/home/order/date/HDZOrderDateViewController.swift; sourceTree = "<group>"; };
+		35B9B96F1D3220BB0033B1D8 /* HDZOrderDateViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderDateViewController.storyboard; path = class/contents/home/order/comment/HDZOrderDateViewController.storyboard; sourceTree = "<group>"; };
+		35F193441D1EED190027E50F /* HDZCommentCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentCreateViewController.swift; path = class/contents/home/order/comment/create/HDZCommentCreateViewController.swift; sourceTree = "<group>"; };
+		35F193461D1EED370027E50F /* HDZCommentCreateViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZCommentCreateViewController.storyboard; path = class/contents/home/order/comment/create/HDZCommentCreateViewController.storyboard; sourceTree = "<group>"; };
+		35F525091D1FABBC0035A940 /* HDZOrderItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderItemTableViewController.swift; path = class/contents/home/order/item/HDZOrderItemTableViewController.swift; sourceTree = "<group>"; };
+		35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderItemTableViewController.storyboard; path = class/contents/home/order/item/HDZOrderItemTableViewController.storyboard; sourceTree = "<group>"; };
+		35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailTableViewController.swift; path = class/contents/home/order/detail/HDZOrderDetailTableViewController.swift; sourceTree = "<group>"; };
+		35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderDetailTableViewController.storyboard; path = class/contents/home/order/detail/HDZOrderDetailTableViewController.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		35899B8A1D16D7C300D2AA45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35C8F4B71D31E267002AFEB2 /* Alamofire.framework in Frameworks */,
+				35C8F4B81D31E267002AFEB2 /* Unbox.framework in Frameworks */,
+				35C8F4B91D31E267002AFEB2 /* Wrap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3515C5411D1AD5C20074B38E /* view */ = {
+			isa = PBXGroup;
+			children = (
+				3515C5421D1AD5F40074B38E /* HDZOrderDetailCell.swift */,
+				3515C5431D1AD5F40074B38E /* HDZOrderDetailCell.xib */,
+				354FFDAE1D1E872E00D70976 /* HDZOrderDetailFooter.swift */,
+				354FFDB01D1E895700D70976 /* HDZOrderDetailFooter.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		35226E8C1D185924008777C5 /* comment */ = {
+			isa = PBXGroup;
+			children = (
+				35F193431D1EECED0027E50F /* create */,
+				357D6AC11D1EC6AD000CBAF2 /* view */,
+				358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */,
+				358829CF1D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard */,
+			);
+			name = comment;
+			sourceTree = "<group>";
+		};
+		35255C581D176F4600A8D627 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35255C591D176F4600A8D627 /* Alamofire.framework */,
+				35255C5A1D176F4600A8D627 /* Unbox.framework */,
+				35255C5B1D176F4600A8D627 /* Wrap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		35255C601D17702400A8D627 /* networks */ = {
+			isa = PBXGroup;
+			children = (
+				35255C611D17709300A8D627 /* AlamofireUtils.swift */,
+			);
+			name = networks;
+			sourceTree = "<group>";
+		};
+		35255C631D17779A00A8D627 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				35255C661D17791500A8D627 /* model */,
+				35255C641D17787500A8D627 /* HDZApi.swift */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
+		35255C661D17791500A8D627 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				35255C671D17793400A8D627 /* ApiLogin.swift */,
+				35255C871D179C3000A8D627 /* ApiFriend.swift */,
+				356D7CDC1D1850E700867F91 /* ApiOrder.swift */,
+				3515C5461D1AD8DE0074B38E /* ApiMe.swift */,
+				350FFA191D1CB22500095830 /* ApiMessage.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		35255C6B1D178A6B00A8D627 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				35255C761D17900B00A8D627 /* profile */,
+				35255C711D178EA800A8D627 /* order */,
+				35255C701D178E8F00A8D627 /* customer */,
+				35255C6C1D178B8300A8D627 /* HDZHomeViewController.swift */,
+				35255C6E1D178CC400A8D627 /* HDZHomeViewController.storyboard */,
+			);
+			name = home;
+			sourceTree = "<group>";
+		};
+		35255C701D178E8F00A8D627 /* customer */ = {
+			isa = PBXGroup;
+			children = (
+				356D7CD71D1820F700867F91 /* detail */,
+				35255C7B1D1791AE00A8D627 /* view */,
+				35255C741D178F3600A8D627 /* HDZCustomerTableViewController.swift */,
+			);
+			name = customer;
+			sourceTree = "<group>";
+		};
+		35255C711D178EA800A8D627 /* order */ = {
+			isa = PBXGroup;
+			children = (
+				35B9B96C1D321FE30033B1D8 /* date */,
+				35226E8C1D185924008777C5 /* comment */,
+				35F7A1C11D1982FB0012B42C /* detail */,
+				35255C721D178F1A00A8D627 /* HDZOrderTableViewController.swift */,
+				35F525081D1FAAA60035A940 /* item */,
+				354FFDA91D1E78A600D70976 /* scale */,
+				352F21AF1D291E1E009F8028 /* to */,
+				35255C801D1793A600A8D627 /* view */,
+			);
+			name = order;
+			sourceTree = "<group>";
+		};
+		35255C761D17900B00A8D627 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				35255C771D17902A00A8D627 /* HDZProfileViewController.swift */,
+			);
+			name = profile;
+			sourceTree = "<group>";
+		};
+		35255C7B1D1791AE00A8D627 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				35255C7C1D1791DA00A8D627 /* HDZCustomerCell.swift */,
+				35255C7D1D1791DA00A8D627 /* HDZCustomerCell.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		35255C801D1793A600A8D627 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				35255C811D1793CE00A8D627 /* HDZOrderCell.swift */,
+				35255C821D1793CE00A8D627 /* HDZOrderCell.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		35255C851D17944900A8D627 /* order */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = order;
+			sourceTree = "<group>";
+		};
+		35255C861D17946500A8D627 /* customer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = customer;
+			sourceTree = "<group>";
+		};
+		352F21AF1D291E1E009F8028 /* to */ = {
+			isa = PBXGroup;
+			children = (
+				352F21B01D291EC6009F8028 /* HDZOrderToViewController.swift */,
+				352F21B21D291F05009F8028 /* HDZOrderToViewController.storyboard */,
+			);
+			name = to;
+			sourceTree = "<group>";
+		};
+		354FFDA91D1E78A600D70976 /* scale */ = {
+			isa = PBXGroup;
+			children = (
+				354FFDAA1D1E791100D70976 /* HDZOrderScaleViewController.swift */,
+				354FFDAC1D1E793700D70976 /* HDZOrderScaleViewController.storyboard */,
+			);
+			name = scale;
+			sourceTree = "<group>";
+		};
+		356D7CD71D1820F700867F91 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				356D7CD81D1821A300867F91 /* HDZCustomerDetailTableViewController.swift */,
+				356D7CDA1D1821B400867F91 /* HDZCustomerDetailTableViewController.storyboard */,
+			);
+			name = detail;
+			sourceTree = "<group>";
+		};
+		357D6AC11D1EC6AD000CBAF2 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				357D6AC21D1EC6DD000CBAF2 /* HDZCommentCell.swift */,
+				357D6AC31D1EC6DD000CBAF2 /* HDZCommentCell.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		35899B841D16D7C300D2AA45 = {
+			isa = PBXGroup;
+			children = (
+				35899B8F1D16D7C300D2AA45 /* seller */,
+				35899B8E1D16D7C300D2AA45 /* Products */,
+				35255C581D176F4600A8D627 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		35899B8E1D16D7C300D2AA45 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				35899B8D1D16D7C300D2AA45 /* seller.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		35899B8F1D16D7C300D2AA45 /* seller */ = {
+			isa = PBXGroup;
+			children = (
+				35899BA21D16D86100D2AA45 /* class */,
+				35899B901D16D7C300D2AA45 /* AppDelegate.swift */,
+				35899B921D16D7C300D2AA45 /* ViewController.swift */,
+				35899B941D16D7C300D2AA45 /* Main.storyboard */,
+				35899B971D16D7C300D2AA45 /* Assets.xcassets */,
+				35899B991D16D7C300D2AA45 /* LaunchScreen.storyboard */,
+				35899B9C1D16D7C300D2AA45 /* Info.plist */,
+			);
+			path = seller;
+			sourceTree = "<group>";
+		};
+		35899BA21D16D86100D2AA45 /* class */ = {
+			isa = PBXGroup;
+			children = (
+				35899BA61D16DEFF00D2AA45 /* contents */,
+				35899BAC1D16E22200D2AA45 /* extension */,
+				35899BA31D16D8BB00D2AA45 /* utils */,
+			);
+			name = class;
+			sourceTree = "<group>";
+		};
+		35899BA31D16D8BB00D2AA45 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				35255C631D17779A00A8D627 /* api */,
+				35255C601D17702400A8D627 /* networks */,
+				35899BA41D16D8F300D2AA45 /* HDZUserDefaults.swift */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		35899BA61D16DEFF00D2AA45 /* contents */ = {
+			isa = PBXGroup;
+			children = (
+				35255C861D17946500A8D627 /* customer */,
+				35255C6B1D178A6B00A8D627 /* home */,
+				35899BB11D16EC2100D2AA45 /* login */,
+				35255C851D17944900A8D627 /* order */,
+				35899BA71D16E1B000D2AA45 /* top */,
+			);
+			name = contents;
+			sourceTree = "<group>";
+		};
+		35899BA71D16E1B000D2AA45 /* top */ = {
+			isa = PBXGroup;
+			children = (
+				35899BA81D16E1E900D2AA45 /* HDZTopViewController.swift */,
+				35899BAA1D16E20C00D2AA45 /* HDZTopViewController.storyboard */,
+			);
+			name = top;
+			sourceTree = "<group>";
+		};
+		35899BAC1D16E22200D2AA45 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				35899BAD1D16E25600D2AA45 /* UIViewController_Extension.swift */,
+				35899BAF1D16E9A400D2AA45 /* UIApplication_Extension.swift */,
+				35255C691D177E0D00A8D627 /* String_Extension.swift */,
+				354FFDB21D1EAE4500D70976 /* UIView_Extension.swift */,
+			);
+			name = extension;
+			sourceTree = "<group>";
+		};
+		35899BB11D16EC2100D2AA45 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				35899BB21D16EC8A00D2AA45 /* HDZLoginViewController.swift */,
+				35899BB41D16EC9C00D2AA45 /* HDZLoginViewController.storyboard */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		35B9B96C1D321FE30033B1D8 /* date */ = {
+			isa = PBXGroup;
+			children = (
+				35B9B96D1D3220A30033B1D8 /* HDZOrderDateViewController.swift */,
+				35B9B96F1D3220BB0033B1D8 /* HDZOrderDateViewController.storyboard */,
+			);
+			name = date;
+			sourceTree = "<group>";
+		};
+		35F193431D1EECED0027E50F /* create */ = {
+			isa = PBXGroup;
+			children = (
+				35F193441D1EED190027E50F /* HDZCommentCreateViewController.swift */,
+				35F193461D1EED370027E50F /* HDZCommentCreateViewController.storyboard */,
+			);
+			name = create;
+			sourceTree = "<group>";
+		};
+		35F525081D1FAAA60035A940 /* item */ = {
+			isa = PBXGroup;
+			children = (
+				35F525091D1FABBC0035A940 /* HDZOrderItemTableViewController.swift */,
+				35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */,
+			);
+			name = item;
+			sourceTree = "<group>";
+		};
+		35F7A1C11D1982FB0012B42C /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				3515C5411D1AD5C20074B38E /* view */,
+				35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */,
+				35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */,
+			);
+			name = detail;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		35899B8C1D16D7C300D2AA45 /* seller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35899B9F1D16D7C300D2AA45 /* Build configuration list for PBXNativeTarget "seller" */;
+			buildPhases = (
+				35899B891D16D7C300D2AA45 /* Sources */,
+				35899B8A1D16D7C300D2AA45 /* Frameworks */,
+				35899B8B1D16D7C300D2AA45 /* Resources */,
+				35255C5F1D176F9600A8D627 /* Run Script - Carthage */,
+				35F193371D1ECF4E0027E50F /* Run Script - Fabric */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = seller;
+			productName = seller;
+			productReference = 35899B8D1D16D7C300D2AA45 /* seller.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		35899B851D16D7C300D2AA45 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HDZ;
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Shun Nakahara";
+				TargetAttributes = {
+					35899B8C1D16D7C300D2AA45 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = WZD6L926C2;
+						DevelopmentTeamName = "Shun Nakahara";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 35899B881D16D7C300D2AA45 /* Build configuration list for PBXProject "seller" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 35899B841D16D7C300D2AA45;
+			productRefGroup = 35899B8E1D16D7C300D2AA45 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				35899B8C1D16D7C300D2AA45 /* seller */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		35899B8B1D16D7C300D2AA45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35C8F4B61D31E19A002AFEB2 /* LaunchScreen.storyboard in Resources */,
+				35C8F4B51D31E192002AFEB2 /* Main.storyboard in Resources */,
+				35F5250C1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard in Resources */,
+				357D6AC51D1EC6DD000CBAF2 /* HDZCommentCell.xib in Resources */,
+				35B9B9701D3220BB0033B1D8 /* HDZOrderDateViewController.storyboard in Resources */,
+				358829D01D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard in Resources */,
+				354FFDAD1D1E793700D70976 /* HDZOrderScaleViewController.storyboard in Resources */,
+				35899B981D16D7C300D2AA45 /* Assets.xcassets in Resources */,
+				35255C6F1D178CC400A8D627 /* HDZHomeViewController.storyboard in Resources */,
+				3515C5451D1AD5F40074B38E /* HDZOrderDetailCell.xib in Resources */,
+				35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */,
+				35899BAB1D16E20C00D2AA45 /* HDZTopViewController.storyboard in Resources */,
+				35899BB51D16EC9C00D2AA45 /* HDZLoginViewController.storyboard in Resources */,
+				354FFDB11D1E895700D70976 /* HDZOrderDetailFooter.xib in Resources */,
+				356D7CDB1D1821B400867F91 /* HDZCustomerDetailTableViewController.storyboard in Resources */,
+				35F193471D1EED370027E50F /* HDZCommentCreateViewController.storyboard in Resources */,
+				352F21B31D291F05009F8028 /* HDZOrderToViewController.storyboard in Resources */,
+				35255C7F1D1791DA00A8D627 /* HDZCustomerCell.xib in Resources */,
+				35255C841D1793CE00A8D627 /* HDZOrderCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35255C5F1D176F9600A8D627 /* Run Script - Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
+			);
+			name = "Run Script - Carthage";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		35F193371D1ECF4E0027E50F /* Run Script - Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Fabric";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#./Fabric.framework/run 5d2ce6c5e79f7fe62709289e7c2da73da463542e 96254a53c204359ab2f8576901aba0d5660b9ad8ca5808993730e499e3712d1a";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		35899B891D16D7C300D2AA45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35255C731D178F1A00A8D627 /* HDZOrderTableViewController.swift in Sources */,
+				35255C651D17787500A8D627 /* HDZApi.swift in Sources */,
+				354FFDB31D1EAE4500D70976 /* UIView_Extension.swift in Sources */,
+				3515C5471D1AD8DE0074B38E /* ApiMe.swift in Sources */,
+				350FFA1A1D1CB22500095830 /* ApiMessage.swift in Sources */,
+				356D7CD91D1821A300867F91 /* HDZCustomerDetailTableViewController.swift in Sources */,
+				35255C881D179C3000A8D627 /* ApiFriend.swift in Sources */,
+				357D6AC41D1EC6DD000CBAF2 /* HDZCommentCell.swift in Sources */,
+				35899BA51D16D8F300D2AA45 /* HDZUserDefaults.swift in Sources */,
+				35255C6D1D178B8300A8D627 /* HDZHomeViewController.swift in Sources */,
+				35255C751D178F3600A8D627 /* HDZCustomerTableViewController.swift in Sources */,
+				354FFDAB1D1E791100D70976 /* HDZOrderScaleViewController.swift in Sources */,
+				35899BA91D16E1E900D2AA45 /* HDZTopViewController.swift in Sources */,
+				35255C831D1793CE00A8D627 /* HDZOrderCell.swift in Sources */,
+				35255C621D17709300A8D627 /* AlamofireUtils.swift in Sources */,
+				358829CE1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift in Sources */,
+				35255C781D17902A00A8D627 /* HDZProfileViewController.swift in Sources */,
+				35255C7E1D1791DA00A8D627 /* HDZCustomerCell.swift in Sources */,
+				35255C6A1D177E0D00A8D627 /* String_Extension.swift in Sources */,
+				35899B931D16D7C300D2AA45 /* ViewController.swift in Sources */,
+				35255C681D17793400A8D627 /* ApiLogin.swift in Sources */,
+				35F5250A1D1FABBC0035A940 /* HDZOrderItemTableViewController.swift in Sources */,
+				35899B911D16D7C300D2AA45 /* AppDelegate.swift in Sources */,
+				35899BB01D16E9A400D2AA45 /* UIApplication_Extension.swift in Sources */,
+				35F7A1C31D198C070012B42C /* HDZOrderDetailTableViewController.swift in Sources */,
+				35899BB31D16EC8A00D2AA45 /* HDZLoginViewController.swift in Sources */,
+				3515C5441D1AD5F40074B38E /* HDZOrderDetailCell.swift in Sources */,
+				354FFDAF1D1E872E00D70976 /* HDZOrderDetailFooter.swift in Sources */,
+				35899BAE1D16E25600D2AA45 /* UIViewController_Extension.swift in Sources */,
+				35B9B96E1D3220A30033B1D8 /* HDZOrderDateViewController.swift in Sources */,
+				352F21B11D291EC6009F8028 /* HDZOrderToViewController.swift in Sources */,
+				356D7CDD1D1850E700867F91 /* ApiOrder.swift in Sources */,
+				35F193451D1EED190027E50F /* HDZCommentCreateViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		35899B941D16D7C300D2AA45 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				35899B951D16D7C300D2AA45 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		35899B991D16D7C300D2AA45 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				35899B9A1D16D7C300D2AA45 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		35899B9D1D16D7C300D2AA45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		35899B9E1D16D7C300D2AA45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		35899BA01D16D7C300D2AA45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = seller/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dezamisystem.app.seller;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		35899BA11D16D7C300D2AA45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = seller/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dezamisystem.app.seller;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		35899B881D16D7C300D2AA45 /* Build configuration list for PBXProject "seller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35899B9D1D16D7C300D2AA45 /* Debug */,
+				35899B9E1D16D7C300D2AA45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35899B9F1D16D7C300D2AA45 /* Build configuration list for PBXNativeTarget "seller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35899BA01D16D7C300D2AA45 /* Debug */,
+				35899BA11D16D7C300D2AA45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 35899B851D16D7C300D2AA45 /* Project object */;
+}
