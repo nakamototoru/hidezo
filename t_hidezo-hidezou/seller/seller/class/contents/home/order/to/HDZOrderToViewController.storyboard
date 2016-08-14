@@ -17,19 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eig-Fi-dZu">
-                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eig-Fi-dZu">
+                                <rect key="frame" x="0.0" y="384" width="600" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="EqC-sR-Dnl" id="cOS-rb-UcZ"/>
                                     <outlet property="delegate" destination="EqC-sR-Dnl" id="ZgS-2u-jNR"/>
                                 </connections>
                             </pickerView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="LFK-oO-Kho">
-                                <rect key="frame" x="0.0" y="407" width="375" height="44"/>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="8L3-an-VSG">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="74"/>
+                                <items>
+                                    <navigationItem title="配送先の変更" prompt=" " id="jrA-wD-7uq">
+                                        <barButtonItem key="rightBarButtonItem" title="閉じる" style="done" id="MJc-4Y-31a">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="didSelectedCloseWithButton:" destination="EqC-sR-Dnl" id="dmf-3C-moE"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="LFK-oO-Kho">
+                                <rect key="frame" x="0.0" y="340" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" id="ZfN-4Q-GLy">
                                         <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="dDN-Zu-Gku">
-                                            <rect key="frame" x="16" y="7" width="285" height="30"/>
+                                            <rect key="frame" x="20" y="7" width="240" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -44,19 +57,6 @@
                                 </items>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="8L3-an-VSG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
-                                <items>
-                                    <navigationItem title="配送先の変更" prompt=" " id="jrA-wD-7uq">
-                                        <barButtonItem key="rightBarButtonItem" title="閉じる" style="done" id="MJc-4Y-31a">
-                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="didSelectedCloseWithButton:" destination="EqC-sR-Dnl" id="dmf-3C-moE"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

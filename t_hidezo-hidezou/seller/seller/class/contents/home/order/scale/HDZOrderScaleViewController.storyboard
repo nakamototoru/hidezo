@@ -3,6 +3,7 @@
     <dependencies>
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Order Scale View Controller-->
@@ -17,19 +18,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u7K-OV-pNA">
-                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7K-OV-pNA">
+                                <rect key="frame" x="0.0" y="384" width="600" height="216"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="VYi-xN-YNz" id="FLx-K1-yfH"/>
                                     <outlet property="delegate" destination="VYi-xN-YNz" id="uQO-P2-mDu"/>
                                 </connections>
                             </pickerView>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="oG4-xF-4Fv">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="74"/>
+                                <items>
+                                    <navigationItem title="OrderScale" prompt="　" id="bJH-wp-tMo">
+                                        <barButtonItem key="rightBarButtonItem" title="閉じる" style="done" id="d5L-nZ-vCc">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="didSelectedCloseWithButton:" destination="VYi-xN-YNz" id="FaJ-Og-hOb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="oG4-xF-4Fv" firstAttribute="top" secondItem="I7y-Ky-Z7G" secondAttribute="bottom" constant="-20" id="4Ft-TD-7QX"/>
                             <constraint firstAttribute="trailing" secondItem="u7K-OV-pNA" secondAttribute="trailing" id="IUw-zC-CZf"/>
+                            <constraint firstItem="oG4-xF-4Fv" firstAttribute="leading" secondItem="6vs-nk-mux" secondAttribute="leadingMargin" constant="-20" id="P73-I8-YIL"/>
                             <constraint firstItem="u7K-OV-pNA" firstAttribute="leading" secondItem="6vs-nk-mux" secondAttribute="leading" id="XRD-xu-rW6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oG4-xF-4Fv" secondAttribute="trailing" constant="-20" id="a52-Y4-hat"/>
                             <constraint firstItem="7rE-ec-c75" firstAttribute="top" secondItem="u7K-OV-pNA" secondAttribute="bottom" id="ezZ-16-dfg"/>
                         </constraints>
                     </view>

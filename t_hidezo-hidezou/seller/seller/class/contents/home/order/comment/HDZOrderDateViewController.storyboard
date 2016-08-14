@@ -3,6 +3,7 @@
     <dependencies>
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Order Date View Controller-->
@@ -17,19 +18,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tbj-dx-VpB">
-                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbj-dx-VpB">
+                                <rect key="frame" x="0.0" y="384" width="600" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="t96-7Y-zR2" id="MLC-SB-1ku"/>
                                     <outlet property="delegate" destination="t96-7Y-zR2" id="2nV-lc-7aT"/>
                                 </connections>
                             </pickerView>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="sKG-P0-ddc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="74"/>
+                                <items>
+                                    <navigationItem title="OrderDate" prompt="　" id="DTP-eM-oh0">
+                                        <barButtonItem key="rightBarButtonItem" title="閉じる" style="done" id="ysC-7c-2gP">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="didSelectedCloseWithButton:" destination="t96-7Y-zR2" id="izs-Db-lO6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sKG-P0-ddc" secondAttribute="trailing" constant="-20" id="O8t-SH-Lxm"/>
                             <constraint firstItem="11h-RW-y9u" firstAttribute="top" secondItem="Tbj-dx-VpB" secondAttribute="bottom" id="Ukj-dZ-hlR"/>
+                            <constraint firstItem="sKG-P0-ddc" firstAttribute="leading" secondItem="Rbb-Dw-Wyv" secondAttribute="leadingMargin" constant="-20" id="ZnX-dx-Vpt"/>
                             <constraint firstItem="Tbj-dx-VpB" firstAttribute="leading" secondItem="Rbb-Dw-Wyv" secondAttribute="leading" id="mYL-Nd-61m"/>
                             <constraint firstAttribute="trailing" secondItem="Tbj-dx-VpB" secondAttribute="trailing" id="n29-FK-EsX"/>
+                            <constraint firstItem="sKG-P0-ddc" firstAttribute="top" secondItem="P1u-Hj-D9Z" secondAttribute="bottom" id="yrW-PA-qip"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

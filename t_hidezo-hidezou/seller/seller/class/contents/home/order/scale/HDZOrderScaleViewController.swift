@@ -88,3 +88,19 @@ extension HDZOrderScaleViewController: UIPickerViewDataSource  {
         return self.numScale.count
     }
 }
+
+extension HDZOrderScaleViewController {
+	
+	@IBAction func didSelectedDoneWithButton(button: UIBarButtonItem) {
+		//        self.dismiss(animated: true) {
+		//            self.delegate?.didSelectedPlace(place: self.deliverToTextField.text)
+		//        }
+//		self.dismissViewControllerAnimated(true) {
+//			self.delegate?.didSelectedPlace(self.deliverToTextField.text)
+//		}
+	}
+	
+	@IBAction func didSelectedCloseWithButton(button: UIBarButtonItem) {
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+}
