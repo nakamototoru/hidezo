@@ -36,13 +36,14 @@ class HDZItemCategoryTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
-            self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
-        }
+		// !!!:デザミシステム・必ずフッター表示しない
+//        if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
+//            self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
+//        }
 
         self.request?.resume()
     }
-    
+	
     deinit {
         self.request?.cancel()
     }
@@ -107,10 +108,12 @@ extension HDZItemCategoryTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 0:
+			//動的商品
             let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo, dynamicItem: self.itemResult.dynamicItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
             self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
+			//静的商品
             if let keys: [Int] = self.categoryName.keys.sort() {
                 guard let categoryName: String = self.categoryName[keys[indexPath.row]] else {
                     return
@@ -155,10 +158,11 @@ extension HDZItemCategoryTableViewController {
                     }
                 }
             }
-            
-            if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
-                self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
-            }
+			
+			// !!!:デザミシステム・必ずフッター表示しない
+            //if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
+//                self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
+            //}
             
             self.tableView.reloadData()
         }
@@ -170,5 +174,24 @@ extension HDZItemCategoryTableViewController {
         
         self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
     }
+	
+	
+	internal func setupFriendInfo(friendInfo: FriendInfo) {
+		self.friendInfo = friendInfo
+	}
+	
+	@IBAction func onCloseSelf(sender: AnyObject) {
+		self.dismissViewControllerAnimated(true) { 
+			
+		}
+	}
+	
+	@IBAction func onCheckOrder(sender: AnyObject) {
+		
+		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.friendInfo.id)
+		self.navigationController?.pushViewController(controller, animated: true)
+
+	}
+	
 }
 

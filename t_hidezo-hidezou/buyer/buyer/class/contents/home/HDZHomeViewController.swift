@@ -14,6 +14,14 @@ class HDZHomeViewController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		
+		// !!!:・デザミシステム
+		// アイコンカラー（画像）の設定
+		var assets :Array<String> = ["customer_white", "order_white", "profile_white"]
+		for (idx, item) in self.tabBar.items!.enumerate() {
+			item.image = UIImage(named: assets[idx])?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+		}
+		
     }
 
     override func didReceiveMemoryWarning() {

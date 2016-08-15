@@ -59,7 +59,20 @@ extension HDZCustomerCell {
 extension HDZCustomerCell {
     
     @IBAction func didSelectedOrder(button: UIButton) {
+		/*
         let controller: HDZItemCategoryTableViewController = HDZItemCategoryTableViewController.createViewController(self.friendInfo)
+		// !!!:デザミシステム
+		// タブバーを隠す
+		controller.hidesBottomBarWhenPushed = true
         self.viewController.navigationController?.pushViewController(controller, animated: true)
+		*/
+		
+		// !!!:デザミシステム
+		// モーダルで開く
+		let controller:HDZItemCategoryNavigationController = HDZItemCategoryNavigationController.createViewController(self.friendInfo)
+		self.viewController.navigationController?.presentViewController(controller, animated: true, completion: { 
+			
+		})
+		
     }
 }

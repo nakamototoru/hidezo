@@ -59,3 +59,14 @@ extension HDZItemStaticTableViewController {
         return cell
      }
 }
+
+extension HDZItemStaticTableViewController {
+	
+	@IBAction func onCheckOrder(sender: AnyObject) {
+		
+		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.supplierId)
+		self.navigationController?.pushViewController(controller, animated: true)
+
+	}
+	
+}

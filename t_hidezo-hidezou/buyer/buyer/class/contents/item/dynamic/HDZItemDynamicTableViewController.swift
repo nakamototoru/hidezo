@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HDZItemDynamicTableViewController: UITableViewController {
     
@@ -14,7 +15,14 @@ class HDZItemDynamicTableViewController: UITableViewController {
     private var dynamicItem: [DynamicItem] = []
     private var attr_flg: AttrFlg = .other
     private var supplierId: Int = 0
-    
+	
+	private var friendInfo: FriendInfo! = nil
+	private var itemResult: ItemResult! = nil
+	private var request: Alamofire.Request? = nil
+	private var categoryName: [Int : String] = [:]
+	private var categoryItem: [Int: [StaticItem]] = [:]
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,8 +33,12 @@ class HDZItemDynamicTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo)
+		
+		// !!!:デザミシステム・必ずフッター表示
+//		self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.supplierId)
+
     }
-    
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,3 +109,12 @@ extension HDZItemDynamicTableViewController {
     }
 }
 
+extension HDZItemDynamicTableViewController {
+	
+	@IBAction func onCheckOrder(sender: AnyObject) {
+		
+		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.supplierId)
+		self.navigationController?.pushViewController(controller, animated: true)
+	}
+	
+}

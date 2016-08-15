@@ -24,7 +24,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !HDZUserDefaults.login {
             HDZUserDefaults.id = 0
         }
-        
+		
+		// !!!:デザミシステム
+		let buyerColor:UIColor = UIColor(red: 44.0/255, green: 166.0/255, blue: 224.0/255, alpha: 1)
+		//ナビゲーションバーの色
+		//ナビゲーションアイテムの色を変更
+		UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+		//ナビゲーションバーの背景を変更
+		UINavigationBar.appearance().barTintColor = buyerColor
+		//ナビゲーションのタイトル文字列の色を変更
+		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+		
+		// タブバー
+		//タブバーの色
+		//[UITabBar appearance].barTintColor = [UIColor appColor];
+		UITabBar.appearance().barTintColor = buyerColor
+
+		// fontの設定
+		let fontFamily: UIFont! = UIFont.systemFontOfSize(10)
+		
+		// 選択時の設定
+		let selectedColor:UIColor = UIColor.blackColor()
+		let selectedAttributes = [NSFontAttributeName: fontFamily, NSForegroundColorAttributeName: selectedColor]
+		/// タイトルテキストカラーの設定
+		UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, forState: UIControlState.Selected)
+		/// アイコンカラーの設定
+		UITabBar.appearance().tintColor = selectedColor
+		
+		// 非選択時の設定
+		let nomalAttributes = [NSFontAttributeName: fontFamily, NSForegroundColorAttributeName: UIColor.whiteColor()]
+		/// タイトルテキストカラーの設定
+		UITabBarItem.appearance().setTitleTextAttributes(nomalAttributes, forState: UIControlState.Normal)
+		
+		
         return true
     }
 

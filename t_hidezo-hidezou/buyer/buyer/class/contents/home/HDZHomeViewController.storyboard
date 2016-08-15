@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kk8-Un-wG2">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
@@ -10,7 +9,7 @@
             <objects>
                 <tabBarController id="Kk8-Un-wG2" customClass="HDZHomeViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="HGv-q4-BXf"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="LQn-Zv-Oe6">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="LQn-Zv-Oe6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -33,7 +32,7 @@
             <objects>
                 <tableViewController id="LIt-3H-ovH" customClass="HDZCustomerTableViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZfN-sw-shz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -52,7 +51,7 @@
             <objects>
                 <tableViewController id="ZI8-4f-xZc" customClass="HDZOrderTableViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="jBc-6N-8L6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -71,7 +70,7 @@
             <objects>
                 <navigationController id="vmG-10-5Mu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="プロフィール" image="profile_blue" selectedImage="profile_white" id="Us8-o3-NGT"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="7MY-Mx-Sof">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="7MY-Mx-Sof">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -90,14 +89,14 @@
             <objects>
                 <tableViewController title="プロフィール" id="ajc-7x-eGS" customClass="HDZProfileViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Wd-f5-i4k">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection headerTitle="本社所在地" id="Mbv-UQ-3I0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="kC1-OG-TEc" style="IBUITableViewCellStyleDefault" id="sQu-TS-r84">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQu-TS-r84" id="2Po-dg-OvD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -118,7 +117,7 @@
                             <tableViewSection headerTitle="メールアドレス" id="2le-dv-UU2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="QTj-Uf-3FU" style="IBUITableViewCellStyleDefault" id="YAW-fn-WWV">
-                                        <rect key="frame" x="0.0" y="164" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="100" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YAW-fn-WWV" id="faj-Qs-NIg">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -139,7 +138,7 @@
                             <tableViewSection headerTitle="携帯電話" id="cU8-v8-v6e">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="gpe-2L-wUc" style="IBUITableViewCellStyleDefault" id="xOs-Dv-fkf">
-                                        <rect key="frame" x="0.0" y="236" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="172" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xOs-Dv-fkf" id="DDb-TU-CZI">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -160,7 +159,7 @@
                             <tableViewSection headerTitle="電話番号" id="HED-aM-1na">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="bAS-YA-7b9" style="IBUITableViewCellStyleDefault" id="HGx-db-Sp7">
-                                        <rect key="frame" x="0.0" y="308" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="244" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HGx-db-Sp7" id="0KT-Rf-CKl">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -181,7 +180,7 @@
                             <tableViewSection headerTitle="代表者" id="Te2-XN-vD4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Isz-ZP-Cez" style="IBUITableViewCellStyleDefault" id="vh1-Tk-p0D">
-                                        <rect key="frame" x="0.0" y="380" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="316" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vh1-Tk-p0D" id="le3-V4-XeI">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -230,7 +229,7 @@
             <objects>
                 <navigationController id="SZX-t7-ode" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="注文" image="order_blue" selectedImage="order_white" id="mrg-fa-s2X"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="SA3-g4-wX2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SA3-g4-wX2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -252,7 +251,7 @@
             <objects>
                 <navigationController id="azL-7Q-7M8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="取引先" image="customer_blue" selectedImage="customer_white" id="ZeC-tv-DDX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="pnl-Fa-qPB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="pnl-Fa-qPB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

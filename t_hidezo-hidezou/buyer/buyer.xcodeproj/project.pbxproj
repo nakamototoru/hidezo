@@ -68,6 +68,9 @@
 		35F5250C1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */; };
 		35F7A1C31D198C070012B42C /* HDZOrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */; };
 		35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */; };
+		37E718721D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */; };
+		37E718741D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */; };
+		37E718781D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */; };
 		F74189811D4D97E2000C49F0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F741897F1D4D97E2000C49F0 /* Fabric.framework */; };
 		F74189821D4D97E2000C49F0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74189801D4D97E2000C49F0 /* Crashlytics.framework */; };
 		F74189841D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */; };
@@ -154,6 +157,9 @@
 		35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderItemTableViewController.storyboard; path = class/contents/home/order/item/HDZOrderItemTableViewController.storyboard; sourceTree = "<group>"; };
 		35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailTableViewController.swift; path = class/contents/home/order/detail/HDZOrderDetailTableViewController.swift; sourceTree = "<group>"; };
 		35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderDetailTableViewController.storyboard; path = class/contents/home/order/detail/HDZOrderDetailTableViewController.storyboard; sourceTree = "<group>"; };
+		37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderConfirmFooter.swift; path = class/contents/item/check/view/HDZItemOrderConfirmFooter.swift; sourceTree = "<group>"; };
+		37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemOrderConfirmFooter.xib; path = class/contents/item/check/view/HDZItemOrderConfirmFooter.xib; sourceTree = "<group>"; };
+		37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemCategoryNavigationController.swift; path = class/contents/item/category/HDZItemCategoryNavigationController.swift; sourceTree = "<group>"; };
 		F741897F1D4D97E2000C49F0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F74189801D4D97E2000C49F0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateFormatter_Extension.swift; path = class/extension/NSDateFormatter_Extension.swift; sourceTree = "<group>"; };
@@ -197,8 +203,9 @@
 		3511A0831D3AF1F500FC4AF9 /* category */ = {
 			isa = PBXGroup;
 			children = (
-				3511A0841D3B027E00FC4AF9 /* HDZItemCategoryTableViewController.swift */,
 				3511A0861D3B029000FC4AF9 /* HDZItemCategoryTableViewController.storyboard */,
+				37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */,
+				3511A0841D3B027E00FC4AF9 /* HDZItemCategoryTableViewController.swift */,
 			);
 			name = category;
 			sourceTree = "<group>";
@@ -583,6 +590,8 @@
 				F7C4C0101D4F625200021BD3 /* HDZItemCheckTableViewController.storyboard */,
 				F7C4C0121D4F6B4000021BD3 /* HDZItemCheckCell.swift */,
 				F7C4C0131D4F6B4000021BD3 /* HDZItemCheckCell.xib */,
+				37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */,
+				37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */,
 			);
 			name = check;
 			sourceTree = "<group>";
@@ -657,6 +666,7 @@
 				356997641D325AEE00BA0ECF /* HDZItemTableViewCell.xib in Resources */,
 				358829D01D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard in Resources */,
 				354FFDAD1D1E793700D70976 /* HDZOrderScaleViewController.storyboard in Resources */,
+				37E718741D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib in Resources */,
 				F7C4C0151D4F6B4000021BD3 /* HDZItemCheckCell.xib in Resources */,
 				3511A0871D3B029000FC4AF9 /* HDZItemCategoryTableViewController.storyboard in Resources */,
 				35899B9B1D16D7C300D2AA45 /* LaunchScreen.storyboard in Resources */,
@@ -734,6 +744,7 @@
 				F741898E1D4DA646000C49F0 /* HDZImage.swift in Sources */,
 				F74189931D4DC9E5000C49F0 /* HDZItemDynamicCell.swift in Sources */,
 				35255C881D179C3000A8D627 /* ApiFriend.swift in Sources */,
+				37E718721D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift in Sources */,
 				F7ADD9871D4EAD84001E126E /* HDZItemCheckOrderFooter.swift in Sources */,
 				356997631D325AEE00BA0ECF /* HDZItemTableViewCell.swift in Sources */,
 				357D6AC41D1EC6DD000CBAF2 /* HDZCommentCell.swift in Sources */,
@@ -749,6 +760,7 @@
 				35255C621D17709300A8D627 /* AlamofireUtils.swift in Sources */,
 				358829CE1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift in Sources */,
 				35255C781D17902A00A8D627 /* HDZProfileViewController.swift in Sources */,
+				37E718781D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift in Sources */,
 				35255C7E1D1791DA00A8D627 /* HDZCustomerCell.swift in Sources */,
 				35255C6A1D177E0D00A8D627 /* String_Extension.swift in Sources */,
 				35899B931D16D7C300D2AA45 /* ViewController.swift in Sources */,
