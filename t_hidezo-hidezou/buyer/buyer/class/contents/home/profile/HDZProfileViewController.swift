@@ -16,6 +16,7 @@ class HDZProfileViewController: UITableViewController {
     @IBOutlet weak var mobileCell: UITableViewCell!
     @IBOutlet weak var telCell: UITableViewCell!
     @IBOutlet weak var ownerCell: UITableViewCell!
+	@IBOutlet weak var nameCell: UITableViewCell!
 
     private var request: Alamofire.Request? = nil
     
@@ -99,6 +100,9 @@ extension HDZProfileViewController {
             self.mobileCell.textLabel?.text = result.mobile
             self.telCell.textLabel?.text = result.tel
             self.ownerCell.textLabel?.text = result.minister
+			
+			// !!!:デザミ
+			self.nameCell.textLabel?.text = result.name;
             
             self.tableView.reloadData()
         }

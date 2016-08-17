@@ -34,8 +34,8 @@ class HDZItemDynamicTableViewController: UITableViewController {
         
         self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo)
 		
-		// !!!:デザミシステム・必ずフッター表示
-//		self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.supplierId)
+		// !!!:デザミシステム・必ずフッター表示しない
+		//		self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.supplierId)
 
     }
 	
@@ -81,14 +81,23 @@ extension HDZItemDynamicTableViewController {
             }
         }
         
-        debugPrint(item.id)
-        
+//        debugPrint(item.id)
+		
+		/*
+		var str = "a b c"
+		var arr = split(str) {$0 == " "}
+		*/
+		let prices:[String] = item.price.componentsSeparatedByString(",")
+		let pricetext:String = "その他:" + prices[0] + "円＿グループ:" + prices[1] + "円＿直営店:" + prices[2] + "円"
+
+		
         if isInt {
             let cell: HDZItemDynamicCell = HDZItemDynamicCell.dequeueReusableCell(tableView, forIndexPath: indexPath, dynamicItem: item, attr_flg: self.attr_flg, supplierId: self.supplierId)
             cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
             cell.itemName.text = item.item_name
-            cell.priceLabel.text = item.price
-            
+			// TODO:価格設定は３つに分かれている
+			cell.priceLabel.text = pricetext
+			
             if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: item.id, dynamic: true) {
                 cell.count = item.size
             }
@@ -98,8 +107,11 @@ extension HDZItemDynamicTableViewController {
             let cell: HDZItemDynamicCell = HDZItemDynamicCell.dequeueReusableCell(tableView, forIndexPath: indexPath, dynamicItem: item, attr_flg: self.attr_flg, supplierId: self.supplierId)
             cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
             cell.itemName.text = item.item_name
-            cell.priceLabel.text = item.price
-            
+			// TODO:価格設定は３つに分かれている
+			cell.priceLabel.text = pricetext
+//			let price:Int = Int( item.price )!
+//			cell.priceLabel.text = String(format: "%d", price)
+			
             if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: item.id, dynamic: true) {
                 cell.count = item.size
             }
@@ -107,7 +119,13 @@ extension HDZItemDynamicTableViewController {
             return cell
         }
     }
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+		return HDZItemDynamicCell.getHeight()
+	}
 }
+
 
 extension HDZItemDynamicTableViewController {
 	
@@ -117,4 +135,9 @@ extension HDZItemDynamicTableViewController {
 		self.navigationController?.pushViewController(controller, animated: true)
 	}
 	
+	@IBAction func onBackHome(sender: AnyObject) {
+		
+		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+	}
+
 }

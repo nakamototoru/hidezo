@@ -16,6 +16,7 @@ class HDZItemStaticCell: UITableViewCell {
     @IBOutlet weak var itemCount: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
+	@IBOutlet weak var labelUnitPrice: UILabel!
 
     private var staticItem: StaticItem!
     private var attr_flg: AttrFlg = AttrFlg.direct
@@ -70,6 +71,11 @@ extension HDZItemStaticCell {
             cell.count = 0
         }
 
+		// !!!:デザミシステム
+		cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+		
+		cell.labelUnitPrice.text = String(format: "単価:\(staticItem.price)円/\(staticItem.scale)")
+		
         return cell
     }
 }

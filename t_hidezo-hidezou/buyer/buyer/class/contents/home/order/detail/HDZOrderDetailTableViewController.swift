@@ -21,7 +21,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.deleteBackButtonTitle()
-        
+		
         self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(HDZOrderDetailTableViewController.didSelectedMessage(_:)))
         
@@ -29,8 +29,10 @@ class HDZOrderDetailTableViewController: UITableViewController {
         
         self.tableView.tableFooterView = HDZOrderDetailFooter.createView()
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 113.0
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 113.0
+		self.edgesForExtendedLayout = UIRectEdge.None
+		self.extendedLayoutIncludesOpaqueBars = false
 
         self.orderDetail()
     }
@@ -45,7 +47,12 @@ class HDZOrderDetailTableViewController: UITableViewController {
         
         self.orderDetailRequest?.resume()
     }
-    
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+	}
+	
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -83,7 +90,7 @@ extension HDZOrderDetailTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let orderDetailItem: OrderDetailItem = self.orderDetailItems[indexPath.row]
         let controller: HDZOrderItemTableViewController = HDZOrderItemTableViewController.createViewController(orderDetailItem)
-        self.navigationController?.pushViewController(controller, animated: true)
+        self.navigationController?.pushViewController(controller, animated: false) // true
     }
 }
 
@@ -112,7 +119,17 @@ extension HDZOrderDetailTableViewController {
             self.orderDetailItems += result.staicItemList
             self.orderDetailItems += result.dynamicItemList
             self.attr_flg = result.attr_flg
-            
+			
+			// !!!:デザミ
+			// 小計計算
+			var subtotal: Int = 0
+			for item in self.orderDetailItems {
+				let value = self.priceValue(item.price, order_num: item.order_num, attr_flg: self.attr_flg)
+				subtotal += value
+			}
+			let footer: HDZOrderDetailFooter = self.tableView.tableFooterView as! HDZOrderDetailFooter
+			footer.subtotalLabel.text = "\(subtotal)" + "円"
+			
             self.tableView.reloadData()
         }
         
@@ -122,11 +139,59 @@ extension HDZOrderDetailTableViewController {
         
         self.orderDetailRequest = HDZApi.orderDitail(self.orderInfo.order_no, completionBlock: completion, errorBlock: error)
     }
+	
+	private func priceValue(price: String, order_num: String, attr_flg: AttrFlg) -> Int {
+		
+		let prices: [String] = price.componentsSeparatedByString(",")
+		if prices.count < 1 {
+			return 0
+		}
+		
+		
+		if prices.count == 1 {
+			guard let price: Int = Int(prices[0]) else {
+				return 0
+			}
+			
+			guard let orderNum: Int = Int(order_num) else {
+				return 0
+			}
+			
+			return price * orderNum
+		} else {
+			guard let orderNum: Int = Int(order_num) else {
+				return 0
+			}
+			
+			switch attr_flg {
+			case .direct:
+				guard let price: Int = Int(prices[2]) else {
+					return 0
+				}
+				
+				return price * orderNum
+			case .group:
+				guard let price: Int = Int(prices[1]) else {
+					return 0
+				}
+				
+				return price * orderNum
+			case .other:
+				
+				guard let price: Int = Int(prices[0]) else {
+					return 0
+				}
+				
+				return price * orderNum
+			}
+		}
+	}
+
 }
 
 // MARK: - action
 extension HDZOrderDetailTableViewController {
-    
+	
     @IBAction func didSelectedMessage(button: UIBarButtonItem) {
         let controller: HDZCommentTableViewController = HDZCommentTableViewController.createViewController(self.orderInfo)
         self.navigationController?.pushViewController(controller, animated: true)

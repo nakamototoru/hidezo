@@ -60,6 +60,15 @@ extension HDZItemStaticTableViewController {
      }
 }
 
+// MARK: - TabelViewDelegate
+extension HDZItemStaticTableViewController {
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		
+		tableView.deselectRowAtIndexPath(indexPath, animated: false)
+		
+	}
+}
+
 extension HDZItemStaticTableViewController {
 	
 	@IBAction func onCheckOrder(sender: AnyObject) {
@@ -69,4 +78,9 @@ extension HDZItemStaticTableViewController {
 
 	}
 	
+	@IBAction func onBackHome(sender: AnyObject) {
+		
+		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+	}
+
 }

@@ -68,6 +68,7 @@
 		35F5250C1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */; };
 		35F7A1C31D198C070012B42C /* HDZOrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */; };
 		35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */; };
+		37CA46BA1D6406D1006ED62E /* HDZOrderNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA46B91D6406D1006ED62E /* HDZOrderNavigationController.swift */; };
 		37E718721D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */; };
 		37E718741D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */; };
 		37E718781D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */; };
@@ -157,6 +158,7 @@
 		35F5250B1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderItemTableViewController.storyboard; path = class/contents/home/order/item/HDZOrderItemTableViewController.storyboard; sourceTree = "<group>"; };
 		35F7A1C21D198C070012B42C /* HDZOrderDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailTableViewController.swift; path = class/contents/home/order/detail/HDZOrderDetailTableViewController.swift; sourceTree = "<group>"; };
 		35F7A1C41D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZOrderDetailTableViewController.storyboard; path = class/contents/home/order/detail/HDZOrderDetailTableViewController.storyboard; sourceTree = "<group>"; };
+		37CA46B91D6406D1006ED62E /* HDZOrderNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderNavigationController.swift; path = class/contents/home/HDZOrderNavigationController.swift; sourceTree = "<group>"; };
 		37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderConfirmFooter.swift; path = class/contents/item/check/view/HDZItemOrderConfirmFooter.swift; sourceTree = "<group>"; };
 		37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemOrderConfirmFooter.xib; path = class/contents/item/check/view/HDZItemOrderConfirmFooter.xib; sourceTree = "<group>"; };
 		37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemCategoryNavigationController.swift; path = class/contents/item/category/HDZItemCategoryNavigationController.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				35255C701D178E8F00A8D627 /* customer */,
 				35255C6C1D178B8300A8D627 /* HDZHomeViewController.swift */,
 				35255C6E1D178CC400A8D627 /* HDZHomeViewController.storyboard */,
+				37CA46B91D6406D1006ED62E /* HDZOrderNavigationController.swift */,
 			);
 			name = home;
 			sourceTree = "<group>";
@@ -367,8 +370,8 @@
 			children = (
 				3540C33A1D3F89BD0048D148 /* HDZItemDynamicHeaderView.xib */,
 				35122DCC1D3FC3E900D13D79 /* HDZItemDinamicHeaderView.swift */,
-				F74189911D4DC9E5000C49F0 /* HDZItemDynamicCell.swift */,
 				F74189921D4DC9E5000C49F0 /* HDZItemDynamicCell.xib */,
+				F74189911D4DC9E5000C49F0 /* HDZItemDynamicCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				F7C4C0141D4F6B4000021BD3 /* HDZItemCheckCell.swift in Sources */,
 				F74189841D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift in Sources */,
 				35255C831D1793CE00A8D627 /* HDZOrderCell.swift in Sources */,
+				37CA46BA1D6406D1006ED62E /* HDZOrderNavigationController.swift in Sources */,
 				35255C621D17709300A8D627 /* AlamofireUtils.swift in Sources */,
 				358829CE1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift in Sources */,
 				35255C781D17902A00A8D627 /* HDZProfileViewController.swift in Sources */,

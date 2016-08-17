@@ -66,6 +66,17 @@ extension HDZItemDynamicCell {
             debugPrint(error)
         }
     }
+	
+	static func getHeight() -> CGFloat {
+		
+		//return [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil][0];
+		
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemDynamicCell", owner: self, options: nil)
+		let cell: HDZItemDynamicCell = views.firstObject as! HDZItemDynamicCell;
+		let height :CGFloat = cell.frame.size.height;
+		
+		return height;
+	}
 }
 
 extension HDZItemDynamicCell {

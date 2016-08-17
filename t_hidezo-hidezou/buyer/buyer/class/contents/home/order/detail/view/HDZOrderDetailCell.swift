@@ -42,16 +42,20 @@ extension HDZOrderDetailCell {
     }
     
     internal class func dequeueReusableCell(controller: HDZOrderDetailTableViewController, tableView: UITableView, for indexPath: NSIndexPath, orderDetailItem: OrderDetailItem, attr_flg: AttrFlg) -> HDZOrderDetailCell {
+		
         let cell: HDZOrderDetailCell = tableView.dequeueReusableCellWithIdentifier("HDZOrderDetailCell", forIndexPath: indexPath) as! HDZOrderDetailCell
+		
         cell.viewController = controller
         cell.orderDetailItem = orderDetailItem
         cell.attr_flg = attr_flg
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemNameLabel.text = orderDetailItem.name
+		
+		
         cell.priceLabel.text = String(format: "価格：%d円", priceValue(orderDetailItem.price, order_num: orderDetailItem.order_num, attr_flg: attr_flg))
         
         if orderDetailItem.scale != nil && orderDetailItem.standard != nil && orderDetailItem.loading != nil {
-        cell.detailLabel.text = String(format: "（単価:%@円/%@・%@/%@）",orderDetailItem.price, orderDetailItem.standard ?? "", orderDetailItem.loading ?? "", orderDetailItem.scale ?? "")
+			cell.detailLabel.text = String(format: "（単価:%@円/%@・%@/%@）",orderDetailItem.price, orderDetailItem.standard ?? "", orderDetailItem.loading ?? "", orderDetailItem.scale ?? "")
         } else {
             cell.detailLabel.text = nil
         }

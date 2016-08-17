@@ -11,7 +11,7 @@ import Alamofire
 
 class HDZItemCategoryTableViewController: UITableViewController {
 
-    private let dynamicTitle: String = "動的商品"
+    private let dynamicTitle: String = "毎日のおすすめ" // "動的商品"
     private var categoryName: [Int : String] = [:]
     private var categoryItem: [Int: [StaticItem]] = [:]
     
@@ -161,14 +161,17 @@ extension HDZItemCategoryTableViewController {
 			
 			// !!!:デザミシステム・必ずフッター表示しない
             //if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
-//                self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
+            //      self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
             //}
             
             self.tableView.reloadData()
         }
         
         let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
-            
+			
+			NSLog("HDZItemCategoryTableViewController.getItem")
+			NSLog("\(error.debugDescription)")
+			
             self.request = nil
         }
         

@@ -18,6 +18,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem title="ホーム" id="2bz-ZA-2VO">
+                            <connections>
+                                <action selector="onBackHome:" destination="7JB-sV-3m0" id="1c9-ub-1Ai"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="46I-BS-S8P"/>
                         <barButtonItem title="注文確定" style="done" id="UuX-VH-CWf">
                             <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -26,6 +31,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="lQe-i3-tIb"/>
+                        <barButtonItem title="　" id="S8h-1g-YQt"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hKw-HE-VpR"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

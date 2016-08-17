@@ -33,6 +33,9 @@ class HDZOrderTableViewController: UITableViewController {
         self.refreshControl = refreshControl
 
         self.orderList(true)
+		
+		// !!!:デザミ・テスト
+		//self.navigationItem.prompt = "デザミ・テスト"
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +80,11 @@ extension HDZOrderTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let orderIndo: OrderInfo = self.orderList[indexPath.row]
         let controller: HDZOrderDetailTableViewController = HDZOrderDetailTableViewController.createViewController(orderIndo)
-        self.navigationController?.pushViewController(controller, animated: true)
+		
+		// !!!:デザミシステム
+		controller.view.layoutIfNeeded()
+		
+        self.navigationController?.pushViewController(controller, animated: false) // true
     }
 }
 

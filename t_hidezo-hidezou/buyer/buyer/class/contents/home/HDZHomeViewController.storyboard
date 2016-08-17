@@ -93,10 +93,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
+                            <tableViewSection headerTitle="店名" id="t9I-LX-hZl">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="9aC-Jz-40l" style="IBUITableViewCellStyleDefault" id="niF-iR-8VN">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="niF-iR-8VN" id="tbn-aT-s1M">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9aC-Jz-40l">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="本社所在地" id="Mbv-UQ-3I0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="kC1-OG-TEc" style="IBUITableViewCellStyleDefault" id="sQu-TS-r84">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="100" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQu-TS-r84" id="2Po-dg-OvD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -117,7 +138,7 @@
                             <tableViewSection headerTitle="メールアドレス" id="2le-dv-UU2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="QTj-Uf-3FU" style="IBUITableViewCellStyleDefault" id="YAW-fn-WWV">
-                                        <rect key="frame" x="0.0" y="100" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="172" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YAW-fn-WWV" id="faj-Qs-NIg">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -138,7 +159,7 @@
                             <tableViewSection headerTitle="携帯電話" id="cU8-v8-v6e">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="gpe-2L-wUc" style="IBUITableViewCellStyleDefault" id="xOs-Dv-fkf">
-                                        <rect key="frame" x="0.0" y="172" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="244" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xOs-Dv-fkf" id="DDb-TU-CZI">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -159,7 +180,7 @@
                             <tableViewSection headerTitle="電話番号" id="HED-aM-1na">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="bAS-YA-7b9" style="IBUITableViewCellStyleDefault" id="HGx-db-Sp7">
-                                        <rect key="frame" x="0.0" y="244" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="316" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HGx-db-Sp7" id="0KT-Rf-CKl">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -180,7 +201,7 @@
                             <tableViewSection headerTitle="代表者" id="Te2-XN-vD4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Isz-ZP-Cez" style="IBUITableViewCellStyleDefault" id="vh1-Tk-p0D">
-                                        <rect key="frame" x="0.0" y="316" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="388" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vh1-Tk-p0D" id="le3-V4-XeI">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -216,6 +237,7 @@
                         <outlet property="addressCell" destination="sQu-TS-r84" id="qiS-tx-v7I"/>
                         <outlet property="emailCell" destination="YAW-fn-WWV" id="q3S-YR-JCx"/>
                         <outlet property="mobileCell" destination="xOs-Dv-fkf" id="giC-mF-gT9"/>
+                        <outlet property="nameCell" destination="niF-iR-8VN" id="ZE2-L7-rx1"/>
                         <outlet property="ownerCell" destination="vh1-Tk-p0D" id="sDK-Vq-Anh"/>
                         <outlet property="telCell" destination="HGx-db-Sp7" id="x4s-cP-ewe"/>
                     </connections>
@@ -227,7 +249,7 @@
         <!--注文-->
         <scene sceneID="Y7l-IA-ONb">
             <objects>
-                <navigationController id="SZX-t7-ode" sceneMemberID="viewController">
+                <navigationController id="SZX-t7-ode" customClass="HDZOrderNavigationController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="注文" image="order_blue" selectedImage="order_white" id="mrg-fa-s2X"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SA3-g4-wX2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
