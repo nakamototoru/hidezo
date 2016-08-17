@@ -34,12 +34,14 @@ struct ItemResult: Unboxable {
         self.badge_total = unboxer.unbox("badge_total")
         self.message = unboxer.unbox("message")
         self.result = unboxer.unbox("result")
-        self.charge_list = unboxer.unbox("charge_list")
+		self.charge_list = unboxer.unbox("charge_list")
         self.deliver_to_list = unboxer.unbox("deliver_to_list")
-        self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo")
+        //self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo")
+		self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo") // , isKeyPath: false, context: nil, allowInvalidElements: true
         self.supplier = unboxer.unbox("supplier")
-        self.dynamicItem = unboxer.unbox("dynamicItem")
-        self.staticItem = unboxer.unbox("staticItem")
+		//self.dynamicItem = unboxer.unbox("dynamicItem")
+		self.dynamicItem = unboxer.unbox("dynamicItem", isKeyPath: false, context: nil, allowInvalidElements: true)
+        self.staticItem = unboxer.unbox("staticItem", isKeyPath: false, context: nil, allowInvalidElements: true)
     }
 }
 

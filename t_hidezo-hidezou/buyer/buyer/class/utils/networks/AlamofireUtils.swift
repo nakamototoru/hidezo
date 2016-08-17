@@ -73,6 +73,7 @@ extension AlamofireUtils {
             
             if (result.isSuccess) {
                 if (result.value is [String: AnyObject]) {
+					
                     do {
                         let value: T = try Unbox(result.value as! UnboxableDictionary)
                         if statusCode >= 200 && statusCode < 300 {
@@ -104,6 +105,7 @@ extension AlamofireUtils {
             debugPrint(request)
             debugPrint("--------------- Request")
         #endif
+		
         return request
     }
 }

@@ -53,7 +53,8 @@ extension HDZItemStaticCell {
     }
     
     internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: Int) -> HDZItemStaticCell {
-        let cell: HDZItemStaticCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticCell", forIndexPath: indexPath) as! HDZItemStaticCell
+		
+		let cell: HDZItemStaticCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticCell", forIndexPath: indexPath) as! HDZItemStaticCell
         cell.staticItem = staticItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
@@ -72,7 +73,15 @@ extension HDZItemStaticCell {
         }
 
 		// !!!:デザミシステム
-		cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+		let standardstr:String = "\(staticItem.standard)"
+		let loadingstr:String = "\(staticItem.loading)"
+		let scalestr:String = "\(staticItem.scale)"
+		if standardstr.isEmpty && loadingstr.isEmpty && scalestr.isEmpty {
+			cell.priceLabel.text = ""
+		}
+		else {
+			cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+		}
 		
 		cell.labelUnitPrice.text = String(format: "単価:\(staticItem.price)円/\(staticItem.scale)")
 		
