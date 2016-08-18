@@ -37,14 +37,14 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7WJ-vb-qv9"/>
-                        <barButtonItem title="注文確認" style="done" id="CTL-Ds-p54">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="CeX-qz-HCR"/>
+                        <barButtonItem title="注文確認" style="done" id="KJ8-Jb-1by">
                             <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="onCheckOrder:" destination="JsZ-pn-FZH" id="Hns-m3-P2t"/>
+                                <action selector="onCheckOrder:" destination="JsZ-pn-FZH" id="8Zy-dD-dD6"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="pcc-o3-7cq"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="MNa-9t-CTP"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hNv-xH-fUg">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="zdN-3D-2e9">
@@ -70,6 +70,9 @@
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nDf-Pe-ZHM">
                         <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="ldQ-Kp-cdd" id="OwN-NN-yGl"/>
+                        </connections>
                     </toolbar>
                     <connections>
                         <segue destination="JsZ-pn-FZH" kind="relationship" relationship="rootViewController" id="jqO-vJ-YNb"/>

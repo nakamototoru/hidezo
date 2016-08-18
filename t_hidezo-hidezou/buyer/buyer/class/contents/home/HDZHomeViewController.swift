@@ -17,7 +17,7 @@ class HDZHomeViewController: UITabBarController {
 		
 		// !!!:・デザミシステム
 		// アイコンカラー（画像）の設定
-		var assets :Array<String> = ["customer_white", "order_white", "profile_white"]
+		var assets :Array<String> = ["maru", "maru", "maru"]
 		for (idx, item) in self.tabBar.items!.enumerate() {
 			item.image = UIImage(named: assets[idx])?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
 		}

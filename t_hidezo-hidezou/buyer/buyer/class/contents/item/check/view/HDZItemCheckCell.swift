@@ -23,7 +23,9 @@ class HDZItemCheckCell: UITableViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var sizeLabel: UILabel!
-    
+	
+	var parent:UIViewController!
+	
     var order: HDZOrder! = nil
     weak var delegate: HDZItemCheckCellDelegate?
     
@@ -31,6 +33,11 @@ class HDZItemCheckCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+		
+		//画像タップ
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDinamicHeaderView.tapGestureFromImageView1(_:)))
+		self.iconImageView.addGestureRecognizer(myTap)
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -65,3 +72,22 @@ extension HDZItemCheckCell {
     }
 }
 
+extension HDZItemCheckCell {
+	
+	func openImageViewer(imageview:UIImageView) {
+		
+		let imageProvider = SomeImageProvider()
+		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
+		
+		let imagesize = imageview.frame.size
+		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
+		
+		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
+		self.parent.presentImageViewer(imageViewer)
+	}
+	
+	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
+		openImageViewer(self.iconImageView)
+	}
+
+}

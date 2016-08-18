@@ -90,7 +90,7 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="fqx-O8-HWa">
+                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="fqx-O8-HWa">
                         <rect key="frame" x="54" y="37" width="80" height="83.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="Mya-g5-6hH"/>

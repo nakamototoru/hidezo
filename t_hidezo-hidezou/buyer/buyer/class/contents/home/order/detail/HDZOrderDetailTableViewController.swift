@@ -121,14 +121,11 @@ extension HDZOrderDetailTableViewController {
             self.attr_flg = result.attr_flg
 			
 			// !!!:デザミ
-			// 小計計算
-			var subtotal: Int = 0
-			for item in self.orderDetailItems {
-				let value = self.priceValue(item.price, order_num: item.order_num, attr_flg: self.attr_flg)
-				subtotal += value
-			}
+			// 計算
 			let footer: HDZOrderDetailFooter = self.tableView.tableFooterView as! HDZOrderDetailFooter
-			footer.subtotalLabel.text = "\(subtotal)" + "円"
+			footer.subtotalLabel.text = "\(result.subtotal)" + "円"
+			footer.postageLabel.text = String(result.deliveryFee) + "円"
+			footer.totalLabel.text = String(result.total) + "円"
 			
             self.tableView.reloadData()
         }

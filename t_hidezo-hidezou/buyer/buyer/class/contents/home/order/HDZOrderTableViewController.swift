@@ -20,10 +20,10 @@ class HDZOrderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let image: UIImage? = UIImage(named: "order_blue")?.imageWithRenderingMode(.AlwaysOriginal)
-        let selectedImage: UIImage? = UIImage(named: "order_white")?.imageWithRenderingMode(.AlwaysOriginal)
-        
-        self.tabBarItem = UITabBarItem(title: "注文", image: image, selectedImage: selectedImage)
+//        let image: UIImage? = UIImage(named: "order_blue")?.imageWithRenderingMode(.AlwaysOriginal)
+//        let selectedImage: UIImage? = UIImage(named: "order_white")?.imageWithRenderingMode(.AlwaysOriginal)
+		
+//        self.tabBarItem = UITabBarItem(title: "注文", image: image, selectedImage: selectedImage)
         self.deleteBackButtonTitle()
         
         HDZOrderCell.register(self.tableView)
@@ -34,8 +34,6 @@ class HDZOrderTableViewController: UITableViewController {
 
         self.orderList(true)
 		
-		// !!!:デザミ・テスト
-		//self.navigationItem.prompt = "デザミ・テスト"
     }
 
     override func didReceiveMemoryWarning() {

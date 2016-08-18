@@ -18,6 +18,8 @@ class HDZItemStaticCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
 	@IBOutlet weak var labelUnitPrice: UILabel!
 
+	var parent:UIViewController!
+	
     private var staticItem: StaticItem!
     private var attr_flg: AttrFlg = AttrFlg.direct
     private var supplierId: Int = 0
@@ -31,6 +33,10 @@ class HDZItemStaticCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+		
+		//画像タップ
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDinamicHeaderView.tapGestureFromImageView1(_:)))
+		self.iconImageView.addGestureRecognizer(myTap)
     }
     
     override func prepareForInterfaceBuilder() {
@@ -87,6 +93,26 @@ extension HDZItemStaticCell {
 		
         return cell
     }
+}
+
+extension HDZItemStaticCell {
+	
+	func openImageViewer(imageview:UIImageView) {
+		
+		let imageProvider = SomeImageProvider()
+		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
+		
+		let imagesize = imageview.frame.size
+		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
+		
+		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
+		self.parent.presentImageViewer(imageViewer)
+	}
+	
+	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
+		openImageViewer(self.iconImageView)
+	}
+
 }
 
 extension HDZItemStaticCell {

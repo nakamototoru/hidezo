@@ -24,7 +24,7 @@ struct ItemResult: Unboxable {
     let result: Int
     let charge_list: [String]
     let deliver_to_list: [String]
-    let dynamicItemInfo: DynamicItemInfo
+    let dynamicItemInfo: [DynamicItemInfo]
     let supplier: Supplier
     let dynamicItem: [DynamicItem]
     let staticItem: [StaticItem]?
@@ -36,12 +36,10 @@ struct ItemResult: Unboxable {
         self.result = unboxer.unbox("result")
 		self.charge_list = unboxer.unbox("charge_list")
         self.deliver_to_list = unboxer.unbox("deliver_to_list")
-        //self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo")
+		self.supplier = unboxer.unbox("supplier")
+		self.staticItem = unboxer.unbox("staticItem") // , isKeyPath: false, context: nil, allowInvalidElements: true
 		self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo") // , isKeyPath: false, context: nil, allowInvalidElements: true
-        self.supplier = unboxer.unbox("supplier")
-		//self.dynamicItem = unboxer.unbox("dynamicItem")
-		self.dynamicItem = unboxer.unbox("dynamicItem", isKeyPath: false, context: nil, allowInvalidElements: true)
-        self.staticItem = unboxer.unbox("staticItem", isKeyPath: false, context: nil, allowInvalidElements: true)
+		self.dynamicItem = unboxer.unbox("dynamicItem") // , isKeyPath: false, context: nil, allowInvalidElements: true
     }
 }
 

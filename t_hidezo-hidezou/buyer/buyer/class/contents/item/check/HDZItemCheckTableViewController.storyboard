@@ -31,6 +31,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="lQe-i3-tIb"/>
+                        <barButtonItem title="コメント" id="5rC-qO-6HX">
+                            <connections>
+                                <action selector="onCommentDialog:" destination="7JB-sV-3m0" id="O0m-SM-HHE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem title="　" id="S8h-1g-YQt"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hKw-HE-VpR"/>

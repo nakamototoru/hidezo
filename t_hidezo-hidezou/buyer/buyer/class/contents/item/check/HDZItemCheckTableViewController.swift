@@ -19,6 +19,7 @@ class HDZItemCheckTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "注文内容確認"
+		
         HDZItemCheckCell.register(self.tableView)
         
         self.settingSendButton()
@@ -72,6 +73,7 @@ extension HDZItemCheckTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: HDZItemCheckCell = HDZItemCheckCell.dequeueReusableCell(tableView, indexPath: indexPath, delegate: self)
+		cell.parent = self
 
         cell.indexText.text = String(format: "%d", indexPath.row + 1)
         
@@ -171,46 +173,6 @@ extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
     }
 }
 
-// !!!:デレゲートも使わないことに
-//extension HDZItemCheckTableViewController {
-//	
-//	func didConfirmOrder() {
-////		// 注文確定
-////		self.result = try! HDZOrder.queries(self.supplierId)
-////		
-////		guard let items: Results<HDZOrder> = self.result else {
-////			
-////			// アイテム無し
-////			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-////			let controller: UIAlertController = UIAlertController(title: "アイテム無し", message: nil, preferredStyle: .Alert)
-////			controller.addAction(action)
-////			self.presentViewController(controller, animated: true, completion: nil)
-////			
-////			return
-////		}
-////		
-////		let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
-////			
-////			// 注文確定
-////			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-////			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
-////			controller.addAction(action)
-////			self.presentViewController(controller, animated: true, completion: nil)
-////		}
-////		
-////		let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
-////			
-////			// 注文エラー
-////			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-////			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
-////			controller.addAction(action)
-////			self.presentViewController(controller, animated: true, completion: nil)
-////		}
-////		
-////		HDZApi.order(self.supplierId, deliver_to: "静岡", delivery_day: "明日", charge: "中本", items: items, completionBlock: completion, errorBlock: error)
-//	}
-//}
-
 extension HDZItemCheckTableViewController {
 	
 	@IBAction func onConfirmOrder(sender: AnyObject) {
@@ -269,7 +231,10 @@ extension HDZItemCheckTableViewController {
 
 		// ホームに戻る
 		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
-
 	}
 	
+	@IBAction func onCommentDialog(sender: AnyObject) {
+		
+		
+	}
 }

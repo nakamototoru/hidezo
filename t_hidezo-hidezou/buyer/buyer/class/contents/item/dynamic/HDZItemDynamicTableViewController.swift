@@ -32,10 +32,7 @@ class HDZItemDynamicTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo)
-		
-		// !!!:デザミシステム・必ずフッター表示しない
-		//		self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.supplierId)
+		self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo, parent:self)
 
     }
 	
@@ -87,8 +84,8 @@ extension HDZItemDynamicTableViewController {
 		var str = "a b c"
 		var arr = split(str) {$0 == " "}
 		*/
-		let prices:[String] = item.price.componentsSeparatedByString(",")
-		let pricetext:String = "その他:" + prices[0] + "円＿グループ:" + prices[1] + "円＿直営店:" + prices[2] + "円"
+		//let prices:[String] = item.price.componentsSeparatedByString(",")
+		let pricetext:String = item.price //"その他:" + prices[0] + "円＿グループ:" + prices[1] + "円＿直営店:" + prices[2] + "円"
 
 		
         if isInt {

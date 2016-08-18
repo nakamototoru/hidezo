@@ -20,31 +20,31 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="yBc-EE-EgV">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="yBc-EE-EgV">
                     <rect key="frame" x="112" y="32" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="yBc-EE-EgV" secondAttribute="height" multiplier="1:1" id="1yF-CV-J1i"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="oHL-wc-M0z">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="oHL-wc-M0z">
                     <rect key="frame" x="216" y="32" width="96" height="96"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="dmt-vw-pjd">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="dmt-vw-pjd">
                     <rect key="frame" x="8" y="136" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="dmt-vw-pjd" secondAttribute="height" multiplier="1:1" id="5mn-YS-6qI"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="lcc-sy-8Nc">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="lcc-sy-8Nc">
                     <rect key="frame" x="112" y="136" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="lcc-sy-8Nc" secondAttribute="height" multiplier="1:1" id="acg-If-TR6"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="1r9-HT-EX7">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="1r9-HT-EX7">
                     <rect key="frame" x="216" y="136" width="96" height="96"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="bYJ-cD-REU">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakana" translatesAutoresizingMaskIntoConstraints="NO" id="bYJ-cD-REU">
                     <rect key="frame" x="8" y="32" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="bYJ-cD-REU" secondAttribute="height" multiplier="1:1" id="rNJ-aS-Rqo"/>

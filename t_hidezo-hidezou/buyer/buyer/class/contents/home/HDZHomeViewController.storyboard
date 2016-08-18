@@ -69,7 +69,7 @@
         <scene sceneID="R4G-xG-gj7">
             <objects>
                 <navigationController id="vmG-10-5Mu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="プロフィール" image="profile_blue" selectedImage="profile_white" id="Us8-o3-NGT"/>
+                    <tabBarItem key="tabBarItem" title="プロフィール" image="maru" selectedImage="maru" id="Us8-o3-NGT"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="7MY-Mx-Sof">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -250,7 +250,7 @@
         <scene sceneID="Y7l-IA-ONb">
             <objects>
                 <navigationController id="SZX-t7-ode" customClass="HDZOrderNavigationController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="注文" image="order_blue" selectedImage="order_white" id="mrg-fa-s2X"/>
+                    <tabBarItem key="tabBarItem" title="注文" image="maru" selectedImage="maru" id="mrg-fa-s2X"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SA3-g4-wX2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -272,7 +272,7 @@
         <scene sceneID="VPp-ow-yGw">
             <objects>
                 <navigationController id="azL-7Q-7M8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="取引先" image="customer_blue" selectedImage="customer_white" id="ZeC-tv-DDX"/>
+                    <tabBarItem key="tabBarItem" title="取引先" image="maru" selectedImage="maru" id="ZeC-tv-DDX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="pnl-Fa-qPB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -289,11 +289,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="customer_blue" width="25" height="25"/>
-        <image name="customer_white" width="25" height="25"/>
-        <image name="order_blue" width="25" height="25"/>
-        <image name="order_white" width="25" height="25"/>
-        <image name="profile_blue" width="25" height="25"/>
-        <image name="profile_white" width="25" height="25"/>
+        <image name="maru" width="25" height="25"/>
     </resources>
 </document>

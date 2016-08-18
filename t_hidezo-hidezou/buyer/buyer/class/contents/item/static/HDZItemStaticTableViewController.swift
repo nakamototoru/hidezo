@@ -56,7 +56,8 @@ extension HDZItemStaticTableViewController {
     
      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItem[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
-        return cell
+		cell.parent = self
+		return cell
      }
 }
 

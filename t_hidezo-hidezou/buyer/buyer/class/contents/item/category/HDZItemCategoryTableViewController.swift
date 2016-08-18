@@ -11,6 +11,8 @@ import Alamofire
 
 class HDZItemCategoryTableViewController: UITableViewController {
 
+	@IBOutlet weak var barbuttonitemOrderCheck: UIBarButtonItem!
+	
     private let dynamicTitle: String = "毎日のおすすめ" // "動的商品"
     private var categoryName: [Int : String] = [:]
     private var categoryItem: [Int: [StaticItem]] = [:]
@@ -25,6 +27,20 @@ class HDZItemCategoryTableViewController: UITableViewController {
         self.getItem(self.friendInfo.id)
         
         self.title = self.friendInfo.name
+		
+		// !!!:デザミシステム
+//		let button:UIButton = UIButton(type: UIButtonType.Custom)
+//		button.setTitle("確認", forState: UIControlState.Normal)
+//		button.layer.backgroundColor = UIColor.greenColor().CGColor
+//		
+////		let testview:UIView = UIView()
+////		testview.backgroundColor = UIColor.greenColor()
+////		testview.frame = CGRectMake(0, 0, 200, 80)
+////		self.barbuttonitemOrderCheck.customView = button
+//		let buttonitem:UIBarButtonItem = UIBarButtonItem(customView: button)
+//		self.toolbarItems = [buttonitem]
+		
+		HDZItemCategoryTableViewCell.register(self.tableView)
     }
 
     override func viewDidDisappear(animated: Bool) {
@@ -89,19 +105,29 @@ extension HDZItemCategoryTableViewController {
         
         switch indexPath.section {
         case 0:
-            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("itemCategoryCell", forIndexPath: indexPath)
+			// おすすめ（動的商品）
+//            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("itemCategoryCell", forIndexPath: indexPath)
+//			cell.textLabel?.text = self.dynamicTitle
+//			return cell
+			
+			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
+			customcell.labelName.text = self.dynamicTitle
             
-            cell.textLabel?.text = self.dynamicTitle
-            
-            return cell
+			return customcell
+			
         default:
-            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("itemCategoryCell", forIndexPath: indexPath)
-            
-            if let keys: [Int] = self.categoryName.keys.sort() {
-                cell.textLabel?.text = self.categoryName[keys[indexPath.row]]
-            }
-            
-            return cell
+			// 静的商品
+//            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("itemCategoryCell", forIndexPath: indexPath)
+//            if let keys: [Int] = self.categoryName.keys.sort() {
+//                cell.textLabel?.text = self.categoryName[keys[indexPath.row]]
+//            }
+//            return cell
+			
+			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
+			if let keys: [Int] = self.categoryName.keys.sort() {
+				customcell.labelName.text = self.categoryName[keys[indexPath.row]]
+			}
+			return customcell
         }
     }
     
@@ -109,7 +135,7 @@ extension HDZItemCategoryTableViewController {
         switch indexPath.section {
         case 0:
 			//動的商品
-            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo, dynamicItem: self.itemResult.dynamicItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
+            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo[0], dynamicItem: self.itemResult.dynamicItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
             self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:

@@ -10,6 +10,8 @@ import UIKit
 
 class HDZItemCategoryNavigationController: UINavigationController {
 
+//	@IBOutlet weak var toolbarNavi: UIToolbar!
+	
 	private var friendInfo: FriendInfo! = nil
 
     override func viewDidLoad() {
@@ -21,6 +23,7 @@ class HDZItemCategoryNavigationController: UINavigationController {
 			let vc = rootviewcontroller as! HDZItemCategoryTableViewController
 			vc.setupFriendInfo(self.friendInfo)
 		}
+		
     }
 
     override func didReceiveMemoryWarning() {

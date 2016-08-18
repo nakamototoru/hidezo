@@ -43,8 +43,8 @@ extension HDZOrderCell {
         cell.orderInfo = orderInfo
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.shopNameLabel.text = orderInfo.supplier_name
-        cell.deliverDateLabel.text = orderInfo.deliver_at + "日納品"
-        cell.orderDateLabel.text = orderInfo.order_at + "日注文"
+        cell.deliverDateLabel.text = orderInfo.deliver_at + "納品"
+        cell.orderDateLabel.text = orderInfo.order_at + "注文"
         return cell
     }
 }
