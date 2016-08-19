@@ -1,19 +1,17 @@
 //
-//  HDZItemCategoryNavigationController.swift
+//  HDZItemOrderNavigationController.swift
 //  buyer
 //
-//  Created by デザミ on 2016/08/15.
+//  Created by デザミ on 2016/08/19.
 //  Copyright © 2016年 Shun Nakahara. All rights reserved.
 //
 
 import UIKit
 
-class HDZItemCategoryNavigationController: UINavigationController {
+class HDZItemOrderNavigationController: UINavigationController {
 
-//	@IBOutlet weak var toolbarNavi: UIToolbar!
+	var supplierId: Int = 0
 	
-	private var friendInfo: FriendInfo! = nil
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,10 +19,10 @@ class HDZItemCategoryNavigationController: UINavigationController {
 		// ルートビューに値を渡す
 		let rootviewcontroller = self.viewControllers.first;
 		if ((rootviewcontroller) != nil) {
-			let vc = rootviewcontroller as! HDZItemCategoryTableViewController
-			vc.setupFriendInfo(self.friendInfo)
+			let vc = rootviewcontroller as! HDZItemOrderDialogViewController
+			vc.supplierId = self.supplierId
 		}
-		
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,11 +43,11 @@ class HDZItemCategoryNavigationController: UINavigationController {
 
 }
 
-extension HDZItemCategoryNavigationController {
+extension HDZItemOrderNavigationController {
 	
-	internal class func createViewController(friendInfo: FriendInfo) -> HDZItemCategoryNavigationController {
-		let controller: HDZItemCategoryNavigationController = UIViewController.createViewController("HDZItemCategoryTableViewController", withIdentifier: "HDZItemCategoryNavigationController")
-		controller.friendInfo = friendInfo
+	internal class func createViewController() -> HDZItemOrderNavigationController {
+		let controller: HDZItemOrderNavigationController = UIViewController.createViewController("HDZItemOrderDialogViewController", withIdentifier: "HDZItemOrderNavigationController")
+		//controller.friendInfo = friendInfo
 		return controller
 	}
 }

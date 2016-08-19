@@ -1,4 +1,4 @@
-//
+
 //  AlamofireUtils.swift
 //
 //  Created by NakaharaShun on 3/6/16.
@@ -58,24 +58,34 @@ extension AlamofireUtils {
         
         let completionHandler: (Response<AnyObject, NSError>) -> Void = { (response: Response<AnyObject, NSError>) -> Void in
             
-            #if DEBUG
-                debugPrint("<<<<<<<<<<<< Response")
-                debugPrint(response)
-                debugPrint(">>>>>>>>>>>> Response")
-            #endif
-            
+//            #if DEBUG
+//                debugPrint(response)
+//            #endif
+			
             var statusCode: Int = 200
             if let nsResponse: NSHTTPURLResponse = response.response {
                 statusCode = nsResponse.statusCode
             }
             
             let result: Result<AnyObject, NSError> = response.result
-            
+			
+			#if DEBUG
+				debugPrint("<<<<<<<<<<<< Response <<<<<<<<<<<<<<<<<<")
+				debugPrint(result)
+				debugPrint(">>>>>>>>>>>> Response End >>>>>>>>>>>>>>>>>>")
+			#endif
+			
             if (result.isSuccess) {
                 if (result.value is [String: AnyObject]) {
 					
+//					let unboxvalue:UnboxableDictionary = result.value as! UnboxableDictionary
+//					#if DEBUG
+//					debugPrint(unboxvalue)
+//					#endif
+					
                     do {
-                        let value: T = try Unbox(result.value as! UnboxableDictionary)
+                       let value: T = try Unbox(result.value as! UnboxableDictionary)
+						
                         if statusCode >= 200 && statusCode < 300 {
                             completionBlock(unboxable: value)
                         } else {
@@ -101,9 +111,9 @@ extension AlamofireUtils {
         
         let request: Request = Alamofire.request(method, URLString, parameters: wrappedDictionary, encoding: encoding, headers: headers).responseJSON(completionHandler: completionHandler)
         #if DEBUG
-            debugPrint("+++++++++++++++ Request")
+            debugPrint("+++++++++++++++ Request ++++++++++++++")
             debugPrint(request)
-            debugPrint("--------------- Request")
+			debugPrint("+++++++++++++++ Request End ++++++++++++++")
         #endif
 		
         return request

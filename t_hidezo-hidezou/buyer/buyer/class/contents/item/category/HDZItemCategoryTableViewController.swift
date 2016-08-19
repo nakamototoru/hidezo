@@ -89,7 +89,7 @@ extension HDZItemCategoryTableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            if self.itemResult == nil || self.itemResult.dynamicItem.count <= 0 {
+            if self.itemResult == nil || self.itemResult.dynamicItem == nil || self.itemResult.dynamicItem!.count <= 0 {
                 return 0
             } else {
                 return 1
@@ -135,7 +135,7 @@ extension HDZItemCategoryTableViewController {
         switch indexPath.section {
         case 0:
 			//動的商品
-            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo[0], dynamicItem: self.itemResult.dynamicItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
+            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo![0], dynamicItem: self.itemResult.dynamicItem!, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
             self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:

@@ -159,8 +159,9 @@ extension HDZItemCheckTableViewController {
 			controller.addAction(action)
 			self.presentViewController(controller, animated: true, completion: nil)
         }
-        
-        HDZApi.order(self.supplierId, deliver_to: "静岡", delivery_day: "明日", charge: "中本", items: items, completionBlock: completion, errorBlock: error)
+		
+		//
+        HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
     }
 }
 
@@ -235,6 +236,12 @@ extension HDZItemCheckTableViewController {
 	
 	@IBAction func onCommentDialog(sender: AnyObject) {
 		
-		
+		// モーダルで開く
+		let controller:HDZItemOrderNavigationController = HDZItemOrderNavigationController.createViewController()
+		controller.supplierId = self.supplierId
+		self.navigationController?.presentViewController(controller, animated: true, completion: {
+			
+		})
+
 	}
 }

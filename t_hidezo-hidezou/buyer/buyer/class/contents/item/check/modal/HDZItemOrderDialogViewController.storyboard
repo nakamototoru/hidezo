@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Item Order Navigation Controller-->
+        <scene sceneID="on4-vH-cUl">
+            <objects>
+                <navigationController storyboardIdentifier="HDZItemOrderNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bBd-8s-6zl" customClass="HDZItemOrderNavigationController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2d0-du-6Le">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="5t5-d1-g7Z" kind="relationship" relationship="rootViewController" id="fRI-MX-6zb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yER-uB-aoB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-229" y="505"/>
+        </scene>
+        <!--入力画面（仮）-->
+        <scene sceneID="rMX-jP-E6U">
+            <objects>
+                <viewController storyboardIdentifier="HDZItemOrderDialogViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5t5-d1-g7Z" customClass="HDZItemOrderDialogViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PrB-uW-8s1"/>
+                        <viewControllerLayoutGuide type="bottom" id="z5n-UT-VtH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mJS-uh-iy7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvP-hG-tmv">
+                                <rect key="frame" x="0.0" y="244" width="600" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ogN-sc-UvB"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="5t5-d1-g7Z" id="n6b-Ep-PM9"/>
+                                    <outlet property="delegate" destination="5t5-d1-g7Z" id="a9d-3s-mOH"/>
+                                </connections>
+                            </pickerView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="コメント入力カッコカリ" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-7g-K5v">
+                                <rect key="frame" x="0.0" y="64" width="600" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Nac-8J-va3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJH-rG-OaG">
+                                <rect key="frame" x="0.0" y="344" width="600" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="MHB-Rb-psE"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="5t5-d1-g7Z" id="o82-mP-XcE"/>
+                                    <outlet property="delegate" destination="5t5-d1-g7Z" id="JQn-3f-kcr"/>
+                                </connections>
+                            </pickerView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdn-8P-uak">
+                                <rect key="frame" x="0.0" y="144" width="600" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="VhR-5a-rxT"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="5t5-d1-g7Z" id="O9P-M2-AJ1"/>
+                                    <outlet property="delegate" destination="5t5-d1-g7Z" id="fgw-wR-tGH"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vvP-hG-tmv" firstAttribute="top" secondItem="xdn-8P-uak" secondAttribute="bottom" id="0IY-zU-LDw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xdn-8P-uak" secondAttribute="trailing" constant="-20" id="3Jq-7z-ubE"/>
+                            <constraint firstItem="xdn-8P-uak" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-20" id="AMw-Q8-qOf"/>
+                            <constraint firstItem="vvP-hG-tmv" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-20" id="Age-Ht-6P2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vvP-hG-tmv" secondAttribute="trailing" constant="-20" id="QF9-IP-98T"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MJH-rG-OaG" secondAttribute="trailing" constant="-20" id="RDe-BM-5za"/>
+                            <constraint firstItem="MJH-rG-OaG" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-20" id="ZhK-pK-QXk"/>
+                            <constraint firstItem="6d4-7g-K5v" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-20" id="dun-7n-5SJ"/>
+                            <constraint firstItem="6d4-7g-K5v" firstAttribute="top" secondItem="PrB-uW-8s1" secondAttribute="bottom" id="eK8-iT-gqa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6d4-7g-K5v" secondAttribute="trailing" constant="-20" id="k7S-m0-ExW"/>
+                            <constraint firstItem="MJH-rG-OaG" firstAttribute="top" secondItem="vvP-hG-tmv" secondAttribute="bottom" id="sEH-pH-18F"/>
+                            <constraint firstItem="xdn-8P-uak" firstAttribute="top" secondItem="6d4-7g-K5v" secondAttribute="bottom" id="tjU-Xk-UdF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="入力画面（仮）" id="1JK-OX-5WV">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="kC6-PD-QjT">
+                            <connections>
+                                <action selector="onCloseDialog:" destination="5t5-d1-g7Z" id="GHN-o8-2cr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="p9E-vI-vKh">
+                            <connections>
+                                <action selector="onSaveDialog:" destination="5t5-d1-g7Z" id="cgn-ie-SvE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pickerviewCharge" destination="vvP-hG-tmv" id="QZM-5L-CP7"/>
+                        <outlet property="pickerviewDate" destination="xdn-8P-uak" id="DgR-kH-4YP"/>
+                        <outlet property="pickerviewPlace" destination="MJH-rG-OaG" id="A0f-mu-0Pg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mxz-eZ-qv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="481" y="505"/>
+        </scene>
+    </scenes>
+</document>

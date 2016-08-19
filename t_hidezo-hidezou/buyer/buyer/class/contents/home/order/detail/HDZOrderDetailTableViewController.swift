@@ -126,6 +126,10 @@ extension HDZOrderDetailTableViewController {
 			footer.subtotalLabel.text = "\(result.subtotal)" + "円"
 			footer.postageLabel.text = String(result.deliveryFee) + "円"
 			footer.totalLabel.text = String(result.total) + "円"
+			// 注文情報
+			footer.chargeLabel.text = result.charge
+			footer.deliveredLabel.text = result.delivery_day
+			footer.deliveredPlaceLabel.text = result.deliver_to
 			
             self.tableView.reloadData()
         }

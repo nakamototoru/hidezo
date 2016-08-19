@@ -24,22 +24,31 @@ struct ItemResult: Unboxable {
     let result: Int
     let charge_list: [String]
     let deliver_to_list: [String]
-    let dynamicItemInfo: [DynamicItemInfo]
     let supplier: Supplier
-    let dynamicItem: [DynamicItem]
-    let staticItem: [StaticItem]?
-    
+	let staticItem: [StaticItem]?
+    let dynamicItem: [DynamicItem]?
+	let dynamicItemInfo: [DynamicItemInfo]?
+	
     init(unboxer: Unboxer) {
-        self.attr_flg = unboxer.unbox("attr_flg")
-        self.badge_total = unboxer.unbox("badge_total")
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
-		self.charge_list = unboxer.unbox("charge_list")
-        self.deliver_to_list = unboxer.unbox("deliver_to_list")
+		self.result = unboxer.unbox("result")
+		self.message = unboxer.unbox("message")
 		self.supplier = unboxer.unbox("supplier")
-		self.staticItem = unboxer.unbox("staticItem") // , isKeyPath: false, context: nil, allowInvalidElements: true
-		self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo") // , isKeyPath: false, context: nil, allowInvalidElements: true
-		self.dynamicItem = unboxer.unbox("dynamicItem") // , isKeyPath: false, context: nil, allowInvalidElements: true
+		self.deliver_to_list = unboxer.unbox("deliver_to_list")
+		self.charge_list = unboxer.unbox("charge_list")
+		self.attr_flg = unboxer.unbox("attr_flg")
+        self.badge_total = unboxer.unbox("badge_total")
+		self.dynamicItem = unboxer.unbox("dynamicItem", isKeyPath: false, context: nil, allowInvalidElements: true) //
+//		if self.dynamicItem == nil {
+//			NSLog("ItemResult: dynamicItem is Nil")
+//		}
+		self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo", isKeyPath: false, context: nil, allowInvalidElements: true) //
+//		if (self.dynamicItemInfo == nil) {
+//			NSLog("ItemResult: dynamicItemInfo is Nil")
+//		}
+		self.staticItem = unboxer.unbox("staticItem" , isKeyPath: false, context: nil, allowInvalidElements: true) //
+//		if self.staticItem == nil {
+//			NSLog("ItemResult: staticItem is Nil")
+//		}
     }
 }
 

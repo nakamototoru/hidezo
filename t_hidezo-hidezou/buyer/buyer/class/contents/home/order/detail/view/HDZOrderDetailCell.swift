@@ -51,7 +51,6 @@ extension HDZOrderDetailCell {
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemNameLabel.text = orderDetailItem.name
 		
-		
         cell.priceLabel.text = String(format: "価格：%d円", priceValue(orderDetailItem.price, order_num: orderDetailItem.order_num, attr_flg: attr_flg))
         
         if orderDetailItem.scale != nil && orderDetailItem.standard != nil && orderDetailItem.loading != nil {

@@ -80,7 +80,7 @@ extension HDZOrderTableViewController {
         let controller: HDZOrderDetailTableViewController = HDZOrderDetailTableViewController.createViewController(orderIndo)
 		
 		// !!!:デザミシステム
-		controller.view.layoutIfNeeded()
+		//controller.view.layoutIfNeeded()
 		
         self.navigationController?.pushViewController(controller, animated: false) // true
     }
