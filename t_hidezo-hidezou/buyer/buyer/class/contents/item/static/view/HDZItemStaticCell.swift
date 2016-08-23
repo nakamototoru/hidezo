@@ -18,25 +18,36 @@ class HDZItemStaticCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
 	@IBOutlet weak var labelUnitPrice: UILabel!
 
-	var parent:UIViewController!
+	var parent:UITableViewController!
 	
     private var staticItem: StaticItem!
     private var attr_flg: AttrFlg = AttrFlg.direct
     private var supplierId: Int = 0
 
-    private var count: Int = 0 {
-        didSet {
-            self.itemCount.text = String(format: "%d", self.count)
-        }
-    }
-    
+//    private var count: Int = 0
+//		{
+//        didSet {
+//            self.itemCount.text = String(format: "%d", self.count)
+//        }
+//    }
+	var itemsize:String = "0" {
+		didSet {
+			self.itemCount.text = itemsize
+		}
+	}
+
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 		
 		//画像タップ
-		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDinamicHeaderView.tapGestureFromImageView1(_:)))
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemStaticCell.tapGestureFromImageView1(_:)))
 		self.iconImageView.addGestureRecognizer(myTap)
+		
+		//名前タップ
+		let nameTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemStaticCell.tapGestureFromNameLabel(_:)))
+		self.itemName.addGestureRecognizer(nameTap)
     }
     
     override func prepareForInterfaceBuilder() {
@@ -50,6 +61,7 @@ class HDZItemStaticCell: UITableViewCell {
     }
 }
 
+// MARK: - Create
 extension HDZItemStaticCell {
 
     internal class func register(tableView: UITableView) {
@@ -67,15 +79,18 @@ extension HDZItemStaticCell {
         
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemName.text = staticItem.name
-        
+		
+		cell.iconImageView.image = UIImage(named: "sakana")
         request(staticItem.image) { (image) in
             cell.iconImageView.image = image
         }
 
+		cell.itemsize = "0"
         if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
-            cell.count = item.size
-        } else {
-            cell.count = 0
+			if let _: Int = Int(item.size) {
+				//cell.count = Int(item.size)!
+				cell.itemsize = item.size
+			}
         }
 
 		// !!!:デザミシステム
@@ -95,6 +110,23 @@ extension HDZItemStaticCell {
     }
 }
 
+// MARK: - Cell
+extension HDZItemStaticCell {
+	
+	static func getHeight() -> CGFloat {
+		
+		//return [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil][0];
+		
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticCell", owner: self, options: nil)
+		let cell: HDZItemStaticCell = views.firstObject as! HDZItemStaticCell;
+		let height :CGFloat = cell.frame.size.height;
+		
+		return height;
+	}
+
+}
+
+// MARK: - Gesture
 extension HDZItemStaticCell {
 	
 	func openImageViewer(imageview:UIImageView) {
@@ -113,8 +145,13 @@ extension HDZItemStaticCell {
 		openImageViewer(self.iconImageView)
 	}
 
+	func tapGestureFromNameLabel(sender:UITapGestureRecognizer){
+		// TODO:商品詳細ダイアログ
+		NSLog("TODO:商品詳細ダイアログ")
+	}
 }
 
+// MARK: - API
 extension HDZItemStaticCell {
     
     private class func request(url: NSURL, completion: (image: UIImage?) -> Void) {
@@ -127,12 +164,9 @@ extension HDZItemStaticCell {
         
         let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
             if response.result.error != nil {
-                
+                //エラー処理
             } else {
                 if let data: NSData = response.result.value {
-                    
-                    //                    try! HDZImage.add(url.absoluteString, data: data)
-                    
                     if let resultImage: UIImage = UIImage(data: data) {
                         completion(image: resultImage)
                     }
@@ -143,38 +177,60 @@ extension HDZItemStaticCell {
     }
 }
 
+// MARK: - BuyCart
 extension HDZItemStaticCell {
     
     private func updateItem() {
         
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.count, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false)
+            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false)
         } catch let error as NSError {
             debugPrint(error)
         }
     }
 }
 
+// MARK: - Action
 extension HDZItemStaticCell {
     
     @IBAction func didSelectedAdd(button: UIButton) {
-        self.count += 1
-        
-        if self.count >= Int.max {
-            self.count = Int.max
-        }
-        
+		
+		var value:Int = Int(self.itemsize)!
+		value += 1
+		if (value > Int.max) {
+			value = Int.max
+		}
+		self.itemsize = String(value)
+		
+//        self.count += 1
+//        if self.count >= Int.max {
+//            self.count = Int.max
+//        }
+		
         self.updateItem()
     }
     
     @IBAction func didSelectedSub(button: UIButton) {
-        self.count -= 1
-        
-        if self.count <= 0 {
-            self.count = 0
-            try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
-        } else {
-            self.updateItem()
-        }
+		
+		var value:Int = Int(self.itemsize)!
+		value -= 1
+		if (value <= 0) {
+			value = 0
+			self.itemsize = String(value)
+			try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
+		}
+		else {
+			self.itemsize = String(value)
+			self.updateItem()
+		}
+
+//        self.count -= 1
+//        if self.count <= 0 {
+//            self.count = 0
+//            try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
+//        } else {
+//            self.updateItem()
+//        }
     }
 }
+

@@ -140,21 +140,51 @@ extension HDZItemDinamicHeaderView {
 	}
 	
 	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
+		
+		if self.dynamicItemInfo.imagePath.count < 1 {
+			return;
+		}
+		
 		openImageViewer(self.imageView1)
 	}
 	func tapGestureFromImageView2(sender:UITapGestureRecognizer){
+		
+		if self.dynamicItemInfo.imagePath.count < 2 {
+			return;
+		}
+
 		openImageViewer(self.imageView2)
 	}
 	func tapGestureFromImageView3(sender:UITapGestureRecognizer){
+		
+		if self.dynamicItemInfo.imagePath.count < 3 {
+			return;
+		}
+
 		openImageViewer(self.imageView3)
 	}
 	func tapGestureFromImageView4(sender:UITapGestureRecognizer){
+		
+		if self.dynamicItemInfo.imagePath.count < 4 {
+			return;
+		}
+
 		openImageViewer(self.imageView4)
 	}
 	func tapGestureFromImageView5(sender:UITapGestureRecognizer){
+		
+		if self.dynamicItemInfo.imagePath.count < 5 {
+			return;
+		}
+
 		openImageViewer(self.imageView5)
 	}
 	func tapGestureFromImageView6(sender:UITapGestureRecognizer){
+		
+		if self.dynamicItemInfo.imagePath.count < 6 {
+			return;
+		}
+
 		openImageViewer(self.imageView6)
 	}
 }

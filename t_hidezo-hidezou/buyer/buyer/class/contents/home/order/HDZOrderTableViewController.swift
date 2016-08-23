@@ -32,7 +32,8 @@ class HDZOrderTableViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(HDZOrderTableViewController.reloadRequest), forControlEvents: .ValueChanged)
         self.refreshControl = refreshControl
 
-        self.orderList(true)
+		// !!!:viewDidAppearで走っている
+        //self.orderList(true)
 		
     }
 
@@ -135,7 +136,16 @@ extension HDZOrderTableViewController {
         
         let error: (error: ErrorType?, result: OrderListError?) -> Void = { (error, result) in
             self.refreshControl?.endRefreshing()
-            self.page -= 1
+            //self.page -= 1
+			
+			#if DEBUG
+				let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
+					
+				})
+				let controller: UIAlertController = UIAlertController(title: "ERROR", message: error.debugDescription, preferredStyle: .Alert)
+				controller.addAction(action)
+				self.presentViewController(controller, animated: true, completion: nil)
+			#endif
         }
         
         self.request = HDZApi.orderList(page, completionBlock: completion, errorBlock: error)

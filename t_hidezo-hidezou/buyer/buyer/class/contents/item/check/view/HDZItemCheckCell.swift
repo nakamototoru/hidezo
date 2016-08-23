@@ -9,14 +9,11 @@
 import UIKit
 
 protocol HDZItemCheckCellDelegate: NSObjectProtocol {
-    
     func didSelectedDeleted()
-    
 }
 
 class HDZItemCheckCell: UITableViewCell {
 
-    
     @IBOutlet weak var indexText: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -35,7 +32,7 @@ class HDZItemCheckCell: UITableViewCell {
         // Initialization code
 		
 		//画像タップ
-		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDinamicHeaderView.tapGestureFromImageView1(_:)))
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemCheckCell.tapGestureFromImageView1(_:)))
 		self.iconImageView.addGestureRecognizer(myTap)
 
     }
@@ -47,6 +44,7 @@ class HDZItemCheckCell: UITableViewCell {
     }
 }
 
+// MARK: - Create
 extension HDZItemCheckCell {
     
     internal class func register(tableView: UITableView) {
@@ -63,6 +61,21 @@ extension HDZItemCheckCell {
     
 }
 
+// MARK: - Cell
+extension HDZItemCheckCell {
+	
+	static func getHeight() -> CGFloat {
+		
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemCheckCell", owner: self, options: nil)
+		let cell: HDZItemCheckCell = views.firstObject as! HDZItemCheckCell;
+		let height :CGFloat = cell.frame.size.height;
+		
+		return height;
+	}
+
+}
+
+// MARK: - Action
 extension HDZItemCheckCell {
     
     @IBAction func didSelectedDelete(button: UIButton) {
@@ -70,8 +83,22 @@ extension HDZItemCheckCell {
         try! HDZOrder.deleteObject(self.order)
         self.delegate?.didSelectedDeleted()
     }
+	
+	@IBAction func onSelectedAdd(sender: AnyObject) {
+		
+		// TODO:カート内カウント加算
+		NSLog("TODO:カート内カウント加算")
+	}
+	
+	@IBAction func onSelectedSub(sender: AnyObject) {
+		
+		// TODO:カート内カウント減算
+		NSLog("TODO:カート内カウント減算")
+	}
+	
 }
 
+// MARK: - Gesture
 extension HDZItemCheckCell {
 	
 	func openImageViewer(imageview:UIImageView) {

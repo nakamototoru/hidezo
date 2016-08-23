@@ -16,12 +16,18 @@ class HDZItemDynamicCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     
     private var dynamicItem: DynamicItem! = nil
-    var count: Int = 0 {
-        didSet {
-            self.itemCount.text = String(format: "%d", count)
-        }
-    }
-    
+//    var count: Int = 0
+//		{
+//        didSet {
+//            self.itemCount.text = String(format: "%d", count)
+//        }
+//    }
+	var itemsize:String = "0" {
+		didSet {
+			self.itemCount.text = itemsize
+		}
+	}
+	
     private var attr_flg: AttrFlg = AttrFlg.direct
     private var supplierId: Int = 0
     
@@ -51,7 +57,7 @@ extension HDZItemDynamicCell {
         cell.dynamicItem = dynamicItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
-        cell.count = 0
+//        cell.count = 0
         return cell
     }
 }
@@ -61,7 +67,7 @@ extension HDZItemDynamicCell {
     private func updateItem() {
         
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.count, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true)
+            try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true)
         } catch let error as NSError {
             debugPrint(error)
         }
@@ -82,23 +88,42 @@ extension HDZItemDynamicCell {
 extension HDZItemDynamicCell {
     
     @IBAction func didSelectedAdd(button: UIButton) {
-        self.count += 1
+		
+		var value:Int = Int(self.itemsize)!
+		value += 1
+		if (value > Int.max) {
+			value = Int.max
+		}
+		self.itemsize = String(value)
 
-        if self.count >= Int.max {
-            self.count = Int.max
-        }
-        
+//        self.count += 1
+//        if self.count >= Int.max {
+//            self.count = Int.max
+//        }
+		
         self.updateItem()
     }
     
     @IBAction func didSelectedSub(button: UIButton) {
-        self.count -= 1
+		
+		var value:Int = Int(self.itemsize)!
+		value -= 1
+		if (value <= 0) {
+			value = 0
+			self.itemsize = String(value)
+			try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
+		}
+		else {
+			self.itemsize = String(value)
+			self.updateItem()
+		}
 
-        if self.count <= 0 {
-            self.count = 0
-            try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
-        } else {
-            self.updateItem()
-        }
+//        self.count -= 1
+//        if self.count <= 0 {
+//            self.count = 0
+//            try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
+//        } else {
+//            self.updateItem()
+//        }
     }
 }

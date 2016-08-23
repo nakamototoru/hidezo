@@ -9,12 +9,124 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/utils/realm/HDZOrder.swift"
-            timestampString = "493029604.028663"
+            filePath = "buyer/class/contents/home/customer/HDZCustomerTableViewController.swift"
+            timestampString = "493544304.572668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "friend()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/contents/home/customer/HDZCustomerTableViewController.swift"
+            timestampString = "493544304.572668"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "friend()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/utils/realm/HDZOrder.swift"
+            timestampString = "493630539.865689"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "queries(_:itemId:dynamic:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/utils/realm/HDZOrder.swift"
+            timestampString = "493614039.425644"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "queries(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/contents/home/order/HDZOrderTableViewController.swift"
+            timestampString = "493624367.065057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "orderList(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/contents/home/order/HDZOrderTableViewController.swift"
+            timestampString = "493624367.065057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "orderList(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/contents/item/static/view/HDZItemStaticCell.swift"
+            timestampString = "493631080.750204"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "updateItem()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/utils/realm/HDZOrder.swift"
+            timestampString = "493627462.097545"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "add(_:itemId:size:name:price:scale:standard:imageURL:dynamic:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -25,13 +137,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/home/customer/HDZCustomerTableViewController.swift"
-            timestampString = "493029897.392873"
+            filePath = "buyer/class/contents/item/view/HDZItemFractionViewController.swift"
+            timestampString = "493632297.364235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "friend()"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "onCloseFraction(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +153,93 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/home/customer/HDZCustomerTableViewController.swift"
-            timestampString = "493029929.11984"
+            filePath = "buyer/class/contents/item/static/view/HDZItemStaticFractionCell.swift"
+            timestampString = "493631080.750204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "friend()"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "onFractionSelect(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/category/HDZItemCategoryTableViewController.swift"
-            timestampString = "493286450.036952"
+            filePath = "buyer/class/utils/realm/HDZOrder.swift"
+            timestampString = "493627991.200038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "createViewController(_:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "add(_:itemId:size:name:price:scale:standard:imageURL:dynamic:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static buyer.HDZOrder.add (Swift.Int, itemId : Swift.Int, size : Swift.Int, name : Swift.String, price : Swift.String, scale : Swift.String, standard : Swift.String, imageURL : Swift.Optional&lt;Swift.String&gt;, dynamic : Swift.Bool) throws -&gt; ()"
+                  moduleName = "buyer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dezami/Documents/xcodeproject/t_hidezo-hidezou/t_hidezo-hidezou/buyer/buyer/class/utils/realm/HDZOrder.swift"
+                  timestampString = "493628061.41539"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "521">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static buyer.HDZOrder.(add (Swift.Int, itemId : Swift.Int, size : Swift.Int, name : Swift.String, price : Swift.String, scale : Swift.String, standard : Swift.String, imageURL : Swift.Optional&lt;Swift.String&gt;, dynamic : Swift.Bool) throws -&gt; ()).(closure #1)"
+                  moduleName = "buyer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dezami/Documents/xcodeproject/t_hidezo-hidezou/t_hidezo-hidezou/buyer/buyer/class/utils/realm/HDZOrder.swift"
+                  timestampString = "493628061.41554"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "110">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/utils/api/HDZApi.swift"
+            timestampString = "493629741.277349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "order(_:deliver_to:delivery_day:charge:items:completionBlock:errorBlock:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
+            timestampString = "493632674.109427"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

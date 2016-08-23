@@ -10,6 +10,7 @@ import UIKit
 
 class HDZCustomerDetailTableViewController: UITableViewController {
 
+	@IBOutlet weak var shopnameCell: UITableViewCell!
     @IBOutlet weak var addressCell: UITableViewCell!
     @IBOutlet weak var emailCell: UITableViewCell!
     @IBOutlet weak var mobileCell: UITableViewCell!
@@ -27,6 +28,9 @@ class HDZCustomerDetailTableViewController: UITableViewController {
         self.mobileCell.textLabel?.text = self.friendInfo.mobile
         self.telCell.textLabel?.text = self.friendInfo.tel
         self.ownerCell.textLabel?.text = self.friendInfo.minister
+		
+		// !!!:デザミ
+		self.shopnameCell.textLabel?.text = self.friendInfo.name
     }
 
     override func didReceiveMemoryWarning() {

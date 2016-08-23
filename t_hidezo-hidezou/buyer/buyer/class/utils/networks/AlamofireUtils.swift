@@ -111,9 +111,10 @@ extension AlamofireUtils {
         
         let request: Request = Alamofire.request(method, URLString, parameters: wrappedDictionary, encoding: encoding, headers: headers).responseJSON(completionHandler: completionHandler)
         #if DEBUG
-            debugPrint("+++++++++++++++ Request ++++++++++++++")
+            debugPrint("+++++++++++++++ Request Start +++++++++++++++++++++++++")
             debugPrint(request)
-			debugPrint("+++++++++++++++ Request End ++++++++++++++")
+			debugPrint(wrappedDictionary)
+			debugPrint("+++++++++++++++ Request End +++++++++++++++++++++++++++")
         #endif
 		
         return request

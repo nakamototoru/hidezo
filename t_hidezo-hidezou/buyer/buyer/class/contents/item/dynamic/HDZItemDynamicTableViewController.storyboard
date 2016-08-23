@@ -31,6 +31,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Cjw-dc-fpK"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Muo-N4-e5g"/>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

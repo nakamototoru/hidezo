@@ -106,10 +106,6 @@ extension HDZItemCategoryTableViewController {
         switch indexPath.section {
         case 0:
 			// おすすめ（動的商品）
-//            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("itemCategoryCell", forIndexPath: indexPath)
-//			cell.textLabel?.text = self.dynamicTitle
-//			return cell
-			
 			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
 			customcell.labelName.text = self.dynamicTitle
             
@@ -117,12 +113,6 @@ extension HDZItemCategoryTableViewController {
 			
         default:
 			// 静的商品
-//            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("itemCategoryCell", forIndexPath: indexPath)
-//            if let keys: [Int] = self.categoryName.keys.sort() {
-//                cell.textLabel?.text = self.categoryName[keys[indexPath.row]]
-//            }
-//            return cell
-			
 			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
 			if let keys: [Int] = self.categoryName.keys.sort() {
 				customcell.labelName.text = self.categoryName[keys[indexPath.row]]
@@ -130,7 +120,8 @@ extension HDZItemCategoryTableViewController {
 			return customcell
         }
     }
-    
+	
+	// TODO:使わない、セル内ゼスチャーに変更
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 0:

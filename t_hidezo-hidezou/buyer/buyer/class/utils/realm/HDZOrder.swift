@@ -14,14 +14,17 @@ class HDZOrder: Object {
     dynamic var id: String = ""
     dynamic var supplierId: Int64 = 0
     dynamic var itemId: Int = 0
-    dynamic var size: Int = 0
+    dynamic var size: String = "0" //Int = 0
     dynamic var name: String = ""
     dynamic var price: String = ""
     dynamic var scale: String = ""
     dynamic var standard: String = ""
     dynamic var dynamic: Bool = false
     dynamic var imageURL: String = ""
-    
+	
+	// !!!:dezami
+	dynamic var createdAt: NSTimeInterval = 0.0
+	
     override static func primaryKey() -> String? {
         return "id"
     }
@@ -33,7 +36,7 @@ class HDZOrder: Object {
 
 extension HDZOrder {
     
-    internal class func add(supplierId: Int, itemId: Int, size: Int, name: String, price: String, scale: String, standard: String, imageURL: String?, dynamic: Bool) throws {
+    internal class func add(supplierId: Int, itemId: Int, size: String, name: String, price: String, scale: String, standard: String, imageURL: String?, dynamic: Bool) throws {
         
         var order: HDZOrder! = nil
         do {
@@ -48,9 +51,13 @@ extension HDZOrder {
             order.itemId = itemId
             order.supplierId = Int64(supplierId)
             order.dynamic = dynamic
+			
+			// !!!:dezami
+			// 1970から現在までの秒数
+			order.createdAt = NSDate().timeIntervalSince1970
+			//
         }
-        
-        
+		
         let realm: Realm = try Realm()
         
         let block: () throws -> Void = { 
@@ -72,12 +79,14 @@ extension HDZOrder {
     
     internal class func queries(supplierId: Int, itemId: Int, dynamic: Bool) throws -> HDZOrder? {
         let predicate = NSPredicate(format: "supplierId = %ld AND itemId = %ld AND dynamic = %d", supplierId, itemId, dynamic.hashValue)
-        return try Realm().objects(HDZOrder.self).filter(predicate).first
+		// !!!:ソート追加
+        return try Realm().objects(HDZOrder.self).filter(predicate).sorted("createdAt").first
     }
 
     internal class func queries(supplierId: Int) throws -> Results<HDZOrder> {
         let predicate = NSPredicate(format: "supplierId = %ld", supplierId)
-        return try Realm().objects(HDZOrder.self).filter(predicate)
+		// !!!:ソート追加
+        return try Realm().objects(HDZOrder.self).filter(predicate).sorted("createdAt")
     }
 
     internal class func deleteObject(object: HDZOrder) throws {

@@ -13,10 +13,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
+                            <tableViewSection headerTitle="店舗名" id="y7H-AS-5f2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="veh-KO-Vrp" style="IBUITableViewCellStyleDefault" id="qHl-gd-G4Q">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHl-gd-G4Q" id="MyH-Cp-Ubq">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="veh-KO-Vrp">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="本社所在地" id="n5P-8a-bLX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="oUT-mg-Gzr" style="IBUITableViewCellStyleDefault" id="Gyz-24-fKH">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="164" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gyz-24-fKH" id="5Ph-yH-5ac">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -37,7 +58,7 @@
                             <tableViewSection headerTitle="メールアドレス" id="PEh-W7-ufz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="3gg-gg-d6J" style="IBUITableViewCellStyleDefault" id="MnY-nJ-Mll">
-                                        <rect key="frame" x="0.0" y="164" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="236" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MnY-nJ-Mll" id="mQK-QC-E7T">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -58,7 +79,7 @@
                             <tableViewSection headerTitle="携帯電話" id="zyi-zo-fuZ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="AYr-J4-EZs" style="IBUITableViewCellStyleDefault" id="GKU-Ov-iE2">
-                                        <rect key="frame" x="0.0" y="236" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="308" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GKU-Ov-iE2" id="uHz-mU-LG0">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -79,7 +100,7 @@
                             <tableViewSection headerTitle="電話番号" id="l0U-E3-pLk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="mtk-xf-rEf" style="IBUITableViewCellStyleDefault" id="mdQ-MR-lRZ">
-                                        <rect key="frame" x="0.0" y="308" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="380" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mdQ-MR-lRZ" id="xRW-WG-Qtl">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -100,7 +121,7 @@
                             <tableViewSection headerTitle="代表者" id="TM3-Dz-2Sz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="PvN-qQ-vDF" style="IBUITableViewCellStyleDefault" id="kky-Pe-XSa">
-                                        <rect key="frame" x="0.0" y="380" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="452" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kky-Pe-XSa" id="DuR-Qq-FOt">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -130,6 +151,7 @@
                         <outlet property="emailCell" destination="MnY-nJ-Mll" id="7VA-rU-L3a"/>
                         <outlet property="mobileCell" destination="GKU-Ov-iE2" id="JBv-CU-bQb"/>
                         <outlet property="ownerCell" destination="kky-Pe-XSa" id="K8b-pH-GRF"/>
+                        <outlet property="shopnameCell" destination="qHl-gd-G4Q" id="q8K-0r-woF"/>
                         <outlet property="telCell" destination="mdQ-MR-lRZ" id="5fZ-9d-s7v"/>
                     </connections>
                 </tableViewController>

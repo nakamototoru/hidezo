@@ -64,15 +64,28 @@ extension HDZCustomerTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let friendInfo: FriendInfo = self.friendList[indexPath.row]
         let cell: HDZCustomerCell = HDZCustomerCell.dequeueReusableCell(self, tableView: tableView, for: indexPath, friendInfo: friendInfo)
+		cell.delegate = self
+		cell.rowOfCell = indexPath.row
         return cell
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let friendInfo: FriendInfo = self.friendList[indexPath.row]
-        let controller: HDZCustomerDetailTableViewController = HDZCustomerDetailTableViewController.createViewController(friendInfo)
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
-    
+	
+	// TODO:使わない
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let friendInfo: FriendInfo = self.friendList[indexPath.row]
+//        let controller: HDZCustomerDetailTableViewController = HDZCustomerDetailTableViewController.createViewController(friendInfo)
+//        self.navigationController?.pushViewController(controller, animated: true)
+//    }
+	
+}
+
+extension HDZCustomerTableViewController : HDZCustomerCellDelegate {
+
+	func customercellSelectedRow(row: Int) {
+		// 卸業者の詳細画面へ
+		let friendInfo: FriendInfo = self.friendList[row]
+		let controller: HDZCustomerDetailTableViewController = HDZCustomerDetailTableViewController.createViewController(friendInfo)
+		self.navigationController?.pushViewController(controller, animated: true)
+	}
 }
 
 // MARK: - private

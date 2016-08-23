@@ -66,14 +66,23 @@ extension HDZApi {
         
         for item in items {
             if item.dynamic {
-                dynamic_item.append("\(item.itemId),\(item.size)")
-            } else {
-                static_item.append("\(item.itemId),\(item.size)")
+                //dynamic_item.append("\(item.itemId),\(item.size)")
+				
+				dynamic_item.append(String(item.itemId) + "," + item.size)
+            }
+			else {
+                //static_item.append("\(item.itemId),\(item.size)")
+				
+				static_item.append(String(item.itemId) + "," + item.size)
             }
         }
-        
+		
         let order: Order = Order(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id, static_item: static_item, dynamic_item: dynamic_item, deliver_to: deliver_to, delivery_day: delivery_day, charge: charge)
-        
+
+//		#if DEBUG
+//			debugPrint(order)
+//		#endif
+
         AlamofireUtils.request(.POST, requestUrl, structParameters: order, completionBlock: completionBlock, errorBlock: errorBlock)
     }
     

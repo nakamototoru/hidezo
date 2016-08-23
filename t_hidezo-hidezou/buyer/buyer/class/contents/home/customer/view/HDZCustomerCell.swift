@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HDZCustomerCellDelegate {
+	func customercellSelectedRow(row:Int)
+}
+
 class HDZCustomerCell: UITableViewCell {
 
     @IBOutlet weak var indexLabel: UILabel!
@@ -16,12 +20,18 @@ class HDZCustomerCell: UITableViewCell {
     
     private var friendInfo: FriendInfo! = nil
     private var viewController: UIViewController!
-    
+	
+	var rowOfCell:Int = 0
+	var delegate: HDZCustomerCellDelegate?
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         self.orderButton.layer.cornerRadius = 5.0
+		
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZCustomerCell.tapGestureFromLabel(_:)))
+		self.shopNameLabel .addGestureRecognizer(myTap)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -75,4 +85,12 @@ extension HDZCustomerCell {
 		})
 		
     }
+}
+
+extension HDZCustomerCell {
+	
+	func tapGestureFromLabel(sender:UITapGestureRecognizer){
+		delegate?.customercellSelectedRow(self.rowOfCell)
+	}
+
 }

@@ -21,8 +21,15 @@ class HDZItemStaticTableViewController: UITableViewController {
         self.title = self.categoryName
         HDZItemStaticCell.register(self.tableView)
 
+		HDZItemStaticFractionCell.register(self.tableView)
     }
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.tableView.reloadData()
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,23 +60,44 @@ extension HDZItemStaticTableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.staticItem.count
     }
-    
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItem[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
-		cell.parent = self
-		return cell
-     }
-}
-
-// MARK: - TabelViewDelegate
-extension HDZItemStaticTableViewController {
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
-		tableView.deselectRowAtIndexPath(indexPath, animated: false)
+		// 整数かどうかチェック
+		var isInt: Bool = true
+		for numScale: String in self.staticItem[indexPath.row].num_scale {
+			if let _: Int = Int(numScale) {
+				//整数
+			} else {
+				//分数
+				isInt = false
+			}
+		}
 		
+		if isInt {
+			// 整数セル
+			let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItem[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+			cell.parent = self
+			
+			return cell
+		}
+		else {
+			// 分数セル
+			let cell = HDZItemStaticFractionCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItem[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+			cell.parent = self
+			
+			return cell
+		}
 	}
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+		return HDZItemStaticCell.getHeight()
+	}
+
 }
 
+// MARK: - Action
 extension HDZItemStaticTableViewController {
 	
 	@IBAction func onCheckOrder(sender: AnyObject) {

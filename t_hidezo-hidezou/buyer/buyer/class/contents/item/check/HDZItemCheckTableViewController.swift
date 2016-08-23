@@ -12,6 +12,8 @@ import RealmSwift
 
 class HDZItemCheckTableViewController: UITableViewController {
 
+	@IBOutlet weak var barbuttonitemConfirm: UIBarButtonItem!
+	
     private var supplierId: Int = 0
     private var result: Results<HDZOrder>? = nil
     
@@ -30,8 +32,16 @@ class HDZItemCheckTableViewController: UITableViewController {
 		super.viewDidAppear(animated)
 		
 		// !!!:デザミシステム
-		// フッター
-//		self.tableView.tableFooterView = HDZItemOrderConfirmFooter.createView(self, supplierId: 0, delegate: self)
+		if self.result?.count == 0 {
+			// アイテム無しの場合
+			let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+				self.navigationController?.popViewControllerAnimated(false)
+			})
+			let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
+			controller.addAction(action2)
+			self.presentViewController(controller, animated: false, completion: nil)
+		}
+
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -81,13 +91,11 @@ extension HDZItemCheckTableViewController {
 
             cell.order = item
 
+			//画像取得
 			// 結果
 			let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
 				
 				if response.result.error != nil {
-//					NSLog("HDZItemCheckTableViewController")
-//					NSLog("\(response.result.error.debugDescription)")
-					
 					//代替画像
 					cell.iconImageView.image = UIImage(named: "sakana")
 				}
@@ -100,16 +108,31 @@ extension HDZItemCheckTableViewController {
 				}
 			}
 			let _: Alamofire.Request? = Alamofire.request(.GET, item.imageURL).responseData(completionHandler: completionHandler)
-//			NSLog("HDZItemCheckTableViewController:requestImage")
-//			NSLog("URL = \(item.imageURL)")
 			
             cell.priceLabel.text = item.price
             cell.titleLabel.text = item.name
-            cell.sizeLabel.text = String(format: "%d", item.size)
+			
+			//cell.sizeLabel.text = String(format: "%d", item.size)
+			cell.sizeLabel.text = item.size
+			
+//			// !!!:dezami
+//			if item.size == 0 {
+//				cell.sizeLabel.text = item.scale
+//			}
+//			else {
+//				cell.sizeLabel.text = String(format: "%d", item.size)
+//			}
+			
         }
         
         return cell
     }
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+		return HDZItemCheckCell.getHeight()
+	}
+
 }
 
 extension HDZItemCheckTableViewController {
@@ -158,6 +181,8 @@ extension HDZItemCheckTableViewController {
 			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
 			controller.addAction(action)
 			self.presentViewController(controller, animated: true, completion: nil)
+			
+			self.barbuttonitemConfirm.enabled = true;
         }
 		
 		//
@@ -171,15 +196,31 @@ extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
 		
 		//削除後に
         self.loadItem()
+		
+		// !!!:デザミシステム
+		if self.result?.count == 0 {
+			// アイテム無しの場合
+			let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+				self.navigationController?.popViewControllerAnimated(false)
+			})
+			let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
+			controller.addAction(action2)
+			self.presentViewController(controller, animated: false, completion: nil)
+		}
+
     }
 }
 
 extension HDZItemCheckTableViewController {
 	
 	@IBAction func onConfirmOrder(sender: AnyObject) {
+
+		self.barbuttonitemConfirm.enabled = false
 		
 		// 「注文しますか？」
-		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel, handler: nil)
+		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel) { (action:UIAlertAction!) in
+			self.barbuttonitemConfirm.enabled = true;
+		}
 		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .Default) { (action:UIAlertAction!) in
 			self.didSelectedOrder()
 		}

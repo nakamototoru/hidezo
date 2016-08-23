@@ -27,13 +27,15 @@ class HDZItemDynamicTableViewController: UITableViewController {
         super.viewDidLoad()
         
         HDZItemDynamicCell.register(self.tableView)
+		HDZItemDynamicFractionCell.register(self.tableView)
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
 		self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo, parent:self)
-
+		
+		self.tableView.reloadData()
     }
 	
     override func didReceiveMemoryWarning() {
@@ -68,50 +70,53 @@ extension HDZItemDynamicTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let item: DynamicItem = self.dynamicItem[indexPath.row]
-        
+		
+		// 整数かどうかチェック
         var isInt: Bool = true
         for numScale: String in item.num_scale {
             if let _: Int = Int(numScale) {
-                
+                //整数
             } else {
+				//分数
                 isInt = false
             }
         }
-        
-//        debugPrint(item.id)
 		
-		/*
-		var str = "a b c"
-		var arr = split(str) {$0 == " "}
-		*/
 		//let prices:[String] = item.price.componentsSeparatedByString(",")
 		let pricetext:String = item.price //"その他:" + prices[0] + "円＿グループ:" + prices[1] + "円＿直営店:" + prices[2] + "円"
-
 		
         if isInt {
+			// 整数セル
             let cell: HDZItemDynamicCell = HDZItemDynamicCell.dequeueReusableCell(tableView, forIndexPath: indexPath, dynamicItem: item, attr_flg: self.attr_flg, supplierId: self.supplierId)
             cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
             cell.itemName.text = item.item_name
-			// TODO:価格設定は３つに分かれている
+			// 価格設定は３つに分かれている
 			cell.priceLabel.text = pricetext
 			
             if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: item.id, dynamic: true) {
-                cell.count = item.size
+                cell.itemsize = item.size
             }
+			else {
+				cell.itemsize = "0"
+			}
 
             return cell
-        } else {
-            let cell: HDZItemDynamicCell = HDZItemDynamicCell.dequeueReusableCell(tableView, forIndexPath: indexPath, dynamicItem: item, attr_flg: self.attr_flg, supplierId: self.supplierId)
+        }
+		else {
+			// 分数セル
+            let cell: HDZItemDynamicFractionCell = HDZItemDynamicFractionCell.dequeueReusableCell(tableView, forIndexPath: indexPath, dynamicItem: item, attr_flg: self.attr_flg, supplierId: self.supplierId)
+			cell.parent = self
             cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
             cell.itemName.text = item.item_name
-			// TODO:価格設定は３つに分かれている
+			// 価格設定は３つに分かれている
 			cell.priceLabel.text = pricetext
-//			let price:Int = Int( item.price )!
-//			cell.priceLabel.text = String(format: "%d", price)
 			
             if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: item.id, dynamic: true) {
-                cell.count = item.size
+                cell.itemsize = item.size
             }
+			else {
+				cell.itemsize = "0"
+			}
 
             return cell
         }
@@ -123,7 +128,7 @@ extension HDZItemDynamicTableViewController {
 	}
 }
 
-
+// MARK: - Action
 extension HDZItemDynamicTableViewController {
 	
 	@IBAction func onCheckOrder(sender: AnyObject) {

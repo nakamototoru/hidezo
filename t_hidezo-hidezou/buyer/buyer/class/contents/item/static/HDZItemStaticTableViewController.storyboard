@@ -8,7 +8,7 @@
         <scene sceneID="fcd-IL-kGg">
             <objects>
                 <tableViewController id="fuw-1K-6W9" customClass="HDZItemStaticTableViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="129" sectionHeaderHeight="28" sectionFooterHeight="28" id="5YN-97-dEJ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="129" sectionHeaderHeight="28" sectionFooterHeight="28" id="5YN-97-dEJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -31,6 +31,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="r7f-9R-XkG"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="rm5-fC-pfE"/>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

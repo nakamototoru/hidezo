@@ -132,10 +132,13 @@ extension HDZCommentCreateViewController {
             controller.addAction(action)
             self.presentViewController(controller, animated: true, completion: nil)
             
+			self.sendCommentButton.enabled = true
+			
             return
         }
         
         guard let message: String = self.commentTextView.text else {
+			self.sendCommentButton.enabled = true
             return
         }
         
@@ -150,5 +153,7 @@ extension HDZCommentCreateViewController {
         }
         
         self.request = HDZApi.adMessage(self.order_no, charge: self.charge, message: message, completionBlock: completion, errorBlock: error)
+		
+		self.sendCommentButton.enabled = false
     }
 }
