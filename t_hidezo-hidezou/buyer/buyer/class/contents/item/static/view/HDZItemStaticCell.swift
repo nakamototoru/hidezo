@@ -80,7 +80,7 @@ extension HDZItemStaticCell {
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemName.text = staticItem.name
 		
-		cell.iconImageView.image = UIImage(named: "sakana")
+//		cell.iconImageView.image = UIImage(named: "sakana")
         request(staticItem.image) { (image) in
             cell.iconImageView.image = image
         }
@@ -88,7 +88,6 @@ extension HDZItemStaticCell {
 		cell.itemsize = "0"
         if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
 			if let _: Int = Int(item.size) {
-				//cell.count = Int(item.size)!
 				cell.itemsize = item.size
 			}
         }
@@ -164,13 +163,19 @@ extension HDZItemStaticCell {
         
         let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
             if response.result.error != nil {
-                //エラー処理
-            } else {
+				let sakanaimage:UIImage = UIImage(named: "sakana")!
+				completion(image: sakanaimage)
+            }
+			else {
                 if let data: NSData = response.result.value {
                     if let resultImage: UIImage = UIImage(data: data) {
                         completion(image: resultImage)
                     }
                 }
+				else {
+					let sakanaimage:UIImage = UIImage(named: "sakana")!
+					completion(image: sakanaimage)
+				}
             }
         }
         let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
@@ -197,15 +202,10 @@ extension HDZItemStaticCell {
 		
 		var value:Int = Int(self.itemsize)!
 		value += 1
-		if (value > Int.max) {
-			value = Int.max
+		if (value > 100) {
+			value = 100
 		}
 		self.itemsize = String(value)
-		
-//        self.count += 1
-//        if self.count >= Int.max {
-//            self.count = Int.max
-//        }
 		
         self.updateItem()
     }
@@ -214,23 +214,17 @@ extension HDZItemStaticCell {
 		
 		var value:Int = Int(self.itemsize)!
 		value -= 1
-		if (value <= 0) {
-			value = 0
-			self.itemsize = String(value)
-			try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
-		}
-		else {
+		if (value > 0) {
+			//更新
 			self.itemsize = String(value)
 			self.updateItem()
 		}
-
-//        self.count -= 1
-//        if self.count <= 0 {
-//            self.count = 0
-//            try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
-//        } else {
-//            self.updateItem()
-//        }
+		else {
+			value = 0
+			self.itemsize = String(value)
+			//削除
+			try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
+		}
     }
 }
 

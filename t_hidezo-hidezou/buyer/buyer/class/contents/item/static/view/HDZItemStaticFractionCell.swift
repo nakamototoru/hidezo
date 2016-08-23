@@ -77,6 +77,7 @@ extension HDZItemStaticFractionCell {
 		cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
 		cell.itemName.text = staticItem.name
 		
+//		cell.iconImageView.image = UIImage(named: "sakana")
 		request(staticItem.image) { (image) in
 			cell.iconImageView.image = image
 		}
@@ -152,15 +153,19 @@ extension HDZItemStaticFractionCell {
 		
 		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
 			if response.result.error != nil {
-				
-			} else {
+				let sakanaimage:UIImage = UIImage(named: "sakana")!
+				completion(image: sakanaimage)
+			}
+			else {
 				if let data: NSData = response.result.value {
-					
-					//                    try! HDZImage.add(url.absoluteString, data: data)
 					
 					if let resultImage: UIImage = UIImage(data: data) {
 						completion(image: resultImage)
 					}
+				}
+				else {
+					let sakanaimage:UIImage = UIImage(named: "sakana")!
+					completion(image: sakanaimage)
 				}
 			}
 		}
@@ -201,6 +206,7 @@ extension HDZItemStaticFractionCell: HDZItemFractionViewControllerDelegate {
 	func itemfractionSelected(fraction: String) {
 		//分数入力
 		if fraction != "0" {
+			//更新
 			self.itemsize = fraction
 			self.updateItem()
 		}

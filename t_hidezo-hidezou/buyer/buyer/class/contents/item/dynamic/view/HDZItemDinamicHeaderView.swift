@@ -93,16 +93,19 @@ extension HDZItemDinamicHeaderView {
         
         let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
             if response.result.error != nil {
-                
-            } else {
+				let sakanaimage:UIImage = UIImage(named: "sakana")!
+				completion(image: sakanaimage)
+            }
+			else {
                 if let data: NSData = response.result.value {
-                    
-//                    try! HDZImage.add(url.absoluteString, data: data)
-                    
                     if let resultImage: UIImage = UIImage(data: data) {
                         completion(image: resultImage)
                     }
                 }
+				else {
+					let sakanaimage:UIImage = UIImage(named: "sakana")!
+					completion(image: sakanaimage)
+				}
             }
         }
         let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)

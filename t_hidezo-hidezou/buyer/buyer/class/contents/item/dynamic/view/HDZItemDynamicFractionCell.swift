@@ -117,16 +117,14 @@ extension HDZItemDynamicFractionCell: HDZItemFractionViewControllerDelegate {
 	func itemfractionSelected(fraction: String) {
 		//分数入力
 		if fraction != "0" {
+			//更新
 			self.itemsize = fraction
 			self.updateItem()
 		}
 		else {
 			self.itemsize = "0"
-			
 			// 注文削除処理
 			try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
 		}
-		
-		//self.parent.reloadInputViews()
 	}
 }

@@ -91,15 +91,10 @@ extension HDZItemDynamicCell {
 		
 		var value:Int = Int(self.itemsize)!
 		value += 1
-		if (value > Int.max) {
-			value = Int.max
+		if (value > 100) {
+			value = 100
 		}
 		self.itemsize = String(value)
-
-//        self.count += 1
-//        if self.count >= Int.max {
-//            self.count = Int.max
-//        }
 		
         self.updateItem()
     }
@@ -108,22 +103,16 @@ extension HDZItemDynamicCell {
 		
 		var value:Int = Int(self.itemsize)!
 		value -= 1
-		if (value <= 0) {
-			value = 0
-			self.itemsize = String(value)
-			try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
-		}
-		else {
+		if (value > 0) {
+			//更新
 			self.itemsize = String(value)
 			self.updateItem()
 		}
-
-//        self.count -= 1
-//        if self.count <= 0 {
-//            self.count = 0
-//            try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
-//        } else {
-//            self.updateItem()
-//        }
+		else {
+			value = 0
+			self.itemsize = String(value)
+			//削除
+			try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
+		}
     }
 }
