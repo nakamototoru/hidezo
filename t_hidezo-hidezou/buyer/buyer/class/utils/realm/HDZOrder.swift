@@ -109,4 +109,17 @@ extension HDZOrder {
         let result: Results<HDZOrder> = try self.queries(supplierId)
         try Realm().delete(result)
     }
+	
+	// !!!: dezami
+	internal class func updateSize(supplierId: Int, itemId: Int, dynamic: Bool, newsize: String) throws {
+
+		if let result: HDZOrder = try self.queries(supplierId, itemId: itemId, dynamic: dynamic) {
+			let realm: Realm = try Realm()
+			try realm.write({
+				//realm.delete(result)
+				result.size = newsize
+			})
+		}
+
+	}
 }

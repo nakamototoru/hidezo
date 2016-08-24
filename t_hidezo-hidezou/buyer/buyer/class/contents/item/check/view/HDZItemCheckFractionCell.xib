@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="Oyg-mf-Eae" customClass="HDZItemCheckCell" customModule="buyer" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="Oyg-mf-Eae" customClass="HDZItemCheckFractionCell" customModule="buyer" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oyg-mf-Eae" id="8XB-DN-oBO">
@@ -37,34 +37,19 @@
                             <action selector="didSelectedDelete:" destination="Oyg-mf-Eae" eventType="touchUpInside" id="JLs-ZB-A4A"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyA-Ip-Bfs">
-                        <rect key="frame" x="276" y="28" width="36" height="36"/>
-                        <color key="backgroundColor" red="0.17254901959999999" green="0.65098039220000004" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="36" id="Wd0-32-pwq"/>
-                            <constraint firstAttribute="width" constant="36" id="vJI-io-HnV"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
-                        <state key="normal" title="ー">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="onSelectedSub:" destination="Oyg-mf-Eae" eventType="touchUpInside" id="VvS-l5-0s3"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEz-Jv-jqf">
-                        <rect key="frame" x="220" y="28" width="36" height="36"/>
+                        <rect key="frame" x="220" y="28" width="92" height="36"/>
                         <color key="backgroundColor" red="0.17254901959999999" green="0.65098039220000004" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="q7D-39-fFx"/>
-                            <constraint firstAttribute="width" constant="36" id="vg7-nb-6w3"/>
+                            <constraint firstAttribute="width" constant="92" id="vg7-nb-6w3"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
-                        <state key="normal" title="＋">
+                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                        <state key="normal" title="変更">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="onSelectedAdd:" destination="Oyg-mf-Eae" eventType="touchUpInside" id="1n3-5z-LbR"/>
+                            <action selector="onChangeOrder:" destination="Oyg-mf-Eae" eventType="touchUpInside" id="VGk-my-Mhe"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="f0h-Ky-IeR">
@@ -90,15 +75,13 @@
                 <constraints>
                     <constraint firstItem="YEz-Jv-jqf" firstAttribute="top" secondItem="dac-Tb-D56" secondAttribute="bottom" id="DBt-KQ-wOj"/>
                     <constraint firstItem="dac-Tb-D56" firstAttribute="top" secondItem="8XB-DN-oBO" secondAttribute="topMargin" constant="-8" id="HFN-lD-Gfp"/>
-                    <constraint firstItem="KyA-Ip-Bfs" firstAttribute="leading" secondItem="YEz-Jv-jqf" secondAttribute="trailing" constant="20" id="JBd-E9-4oz"/>
                     <constraint firstItem="dac-Tb-D56" firstAttribute="trailing" secondItem="8XB-DN-oBO" secondAttribute="trailingMargin" id="Z3y-z6-1mZ"/>
                     <constraint firstItem="f0h-Ky-IeR" firstAttribute="top" secondItem="dac-Tb-D56" secondAttribute="bottom" id="Z4D-LP-KL4"/>
-                    <constraint firstItem="KyA-Ip-Bfs" firstAttribute="top" secondItem="dac-Tb-D56" secondAttribute="bottom" id="g2b-dK-Dd4"/>
+                    <constraint firstItem="YEz-Jv-jqf" firstAttribute="trailing" secondItem="8XB-DN-oBO" secondAttribute="trailingMargin" id="Zho-LV-wRV"/>
                     <constraint firstItem="YEz-Jv-jqf" firstAttribute="leading" secondItem="f0h-Ky-IeR" secondAttribute="trailing" constant="20" id="nBI-dT-EHF"/>
                     <constraint firstItem="EfN-0e-yN1" firstAttribute="leading" secondItem="8XB-DN-oBO" secondAttribute="leadingMargin" constant="-8" id="oN3-en-46q"/>
                     <constraint firstItem="8EE-Tk-Jjd" firstAttribute="leading" secondItem="EfN-0e-yN1" secondAttribute="trailing" id="pCJ-bb-tjK"/>
                     <constraint firstItem="EfN-0e-yN1" firstAttribute="top" secondItem="dac-Tb-D56" secondAttribute="bottom" id="q3d-mY-L8L"/>
-                    <constraint firstItem="KyA-Ip-Bfs" firstAttribute="trailing" secondItem="8XB-DN-oBO" secondAttribute="trailingMargin" id="rqx-Nl-P2W"/>
                     <constraint firstItem="dac-Tb-D56" firstAttribute="leading" secondItem="8XB-DN-oBO" secondAttribute="leadingMargin" id="vBt-8Z-uCd"/>
                     <constraint firstItem="8EE-Tk-Jjd" firstAttribute="top" secondItem="dac-Tb-D56" secondAttribute="bottom" id="yfl-wT-5sb"/>
                 </constraints>

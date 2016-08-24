@@ -4,3 +4,8 @@
 
 #import "MJPopupBackgroundView.h"
 #import "UIViewController+MJPopupViewController.h"
+
+#import "JASidePanelController.h"
+#import "UIViewController+JASidePanel.h"
+
+#import "UIWarning.h"

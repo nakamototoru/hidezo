@@ -9,16 +9,17 @@
 import UIKit
 
 protocol HDZItemCheckCellDelegate: NSObjectProtocol {
-    func didSelectedDeleted()
+//    func didSelectedDeleted()
+	func itemcheckcellReload()
 }
 
 class HDZItemCheckCell: UITableViewCell {
 
     @IBOutlet weak var indexText: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    
-    @IBOutlet weak var iconImageView: UIImageView!
+//    @IBOutlet weak var priceLabel: UILabel!
+	
+//    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var sizeLabel: UILabel!
 	
 	var parent:UIViewController!
@@ -31,9 +32,9 @@ class HDZItemCheckCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 		
-		//画像タップ
-		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemCheckCell.tapGestureFromImageView1(_:)))
-		self.iconImageView.addGestureRecognizer(myTap)
+//		//画像タップ
+//		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemCheckCell.tapGestureFromImageView1(_:)))
+//		self.iconImageView.addGestureRecognizer(myTap)
 
     }
 
@@ -75,46 +76,78 @@ extension HDZItemCheckCell {
 
 }
 
+// MARK: - API
+extension HDZItemCheckCell {
+	
+	private func updateCart(newsizestr: String ) {
+		
+		let supplierId:Int = Int( self.order.supplierId )
+		try! HDZOrder.updateSize(supplierId, itemId: self.order.itemId, dynamic: self.order.dynamic, newsize: newsizestr)
+
+		//
+		self.delegate?.itemcheckcellReload()
+		
+//		do {
+//			try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true)
+//		} catch let error as NSError {
+//			debugPrint(error)
+//		}
+		
+	}
+	
+	private func deleteCartObject() {
+		
+		try! HDZOrder.deleteObject(self.order)
+		self.delegate?.itemcheckcellReload()
+	}
+
+}
+
 // MARK: - Action
 extension HDZItemCheckCell {
     
     @IBAction func didSelectedDelete(button: UIButton) {
-        
-        try! HDZOrder.deleteObject(self.order)
-        self.delegate?.didSelectedDeleted()
+		
+		self.deleteCartObject()
+		
+//        try! HDZOrder.deleteObject(self.order)
+//		self.delegate?.itemcheckcellReload()
+//        self.delegate?.didSelectedDeleted()
     }
 	
 	@IBAction func onSelectedAdd(sender: AnyObject) {
 		
 		// TODO:カート内カウント加算
 		NSLog("TODO:カート内カウント加算")
+		
+		var value:Int = Int(self.order.size)!
+		value += 1
+		if (value > 100) {
+			value = 100
+		}
+		let newsize:String = String(value)
+
+		updateCart(newsize)
 	}
 	
 	@IBAction func onSelectedSub(sender: AnyObject) {
 		
 		// TODO:カート内カウント減算
 		NSLog("TODO:カート内カウント減算")
+		var value:Int = Int(self.order.size)!
+		value -= 1
+		if (value > 0) {
+			//更新
+			let newsize:String = String(value)
+			updateCart(newsize)
+		}
+		else {
+			value = 0
+			//削除
+//			try! HDZOrder.deleteObject(self.order)
+//			self.delegate?.itemcheckcellReload()
+			self.deleteCartObject()
+		}
 	}
 	
-}
-
-// MARK: - Gesture
-extension HDZItemCheckCell {
-	
-	func openImageViewer(imageview:UIImageView) {
-		
-		let imageProvider = SomeImageProvider()
-		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
-		
-		let imagesize = imageview.frame.size
-		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
-		
-		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
-		self.parent.presentImageViewer(imageViewer)
-	}
-	
-	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
-		openImageViewer(self.iconImageView)
-	}
-
 }

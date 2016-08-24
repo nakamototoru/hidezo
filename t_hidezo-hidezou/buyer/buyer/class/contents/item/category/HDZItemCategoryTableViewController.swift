@@ -13,7 +13,7 @@ class HDZItemCategoryTableViewController: UITableViewController {
 
 	@IBOutlet weak var barbuttonitemOrderCheck: UIBarButtonItem!
 	
-    private let dynamicTitle: String = "毎日のおすすめ" // "動的商品"
+    private let dynamicTitle: String = "新着" // "動的商品"
     private var categoryName: [Int : String] = [:]
     private var categoryItem: [Int: [StaticItem]] = [:]
     

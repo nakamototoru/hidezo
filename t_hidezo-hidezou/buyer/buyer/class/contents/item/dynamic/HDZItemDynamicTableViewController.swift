@@ -30,10 +30,17 @@ class HDZItemDynamicTableViewController: UITableViewController {
 		HDZItemDynamicFractionCell.register(self.tableView)
     }
 
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
+		self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
+	}
+	
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-		self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo, parent:self)
+		//self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo, parent:self)
 		
 		self.tableView.reloadData()
     }

@@ -23,8 +23,9 @@ class HDZItemCheckTableViewController: UITableViewController {
         self.title = "注文内容確認"
 		
         HDZItemCheckCell.register(self.tableView)
+		HDZItemCheckFractionCell.register(self.tableView)
         
-        self.settingSendButton()
+//        self.settingSendButton()
         self.loadItem()
     }
 
@@ -50,6 +51,7 @@ class HDZItemCheckTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Create
 extension HDZItemCheckTableViewController {
     
     internal class func createViewController(supplierId: Int) -> HDZItemCheckTableViewController {
@@ -58,12 +60,12 @@ extension HDZItemCheckTableViewController {
         return controller
     }
     
-    private func settingSendButton() {
-		
-//        let button: UIBarButtonItem = UIBarButtonItem(title: "注文する", style: .Done, target: self, action: #selector(HDZItemCheckTableViewController.didSelectedOrder))
-//        self.navigationItem.setRightBarButtonItem(button, animated: true)
-		
-    }
+//    private func settingSendButton() {
+//		
+////        let button: UIBarButtonItem = UIBarButtonItem(title: "注文する", style: .Done, target: self, action: #selector(HDZItemCheckTableViewController.didSelectedOrder))
+////        self.navigationItem.setRightBarButtonItem(button, animated: true)
+//		
+//    }
 }
 
 // MARK: - Table view data source
@@ -82,50 +84,39 @@ extension HDZItemCheckTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: HDZItemCheckCell = HDZItemCheckCell.dequeueReusableCell(tableView, indexPath: indexPath, delegate: self)
-		cell.parent = self
-
-        cell.indexText.text = String(format: "%d", indexPath.row + 1)
-        
+		
         if let item: HDZOrder = self.result?[indexPath.row] {
 
-            cell.order = item
-
-			//画像取得
-			// 結果
-			let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
+			// 整数かどうかチェック
+			if let _: Int = Int(item.size) {
+				//整数
+				let cell: HDZItemCheckCell = HDZItemCheckCell.dequeueReusableCell(tableView, indexPath: indexPath, delegate: self)
 				
-				if response.result.error != nil {
-					//代替画像
-					cell.iconImageView.image = UIImage(named: "sakana")
-				}
-				else {
-					if let value: NSData = response.result.value {
-						if let resultImage: UIImage = UIImage(data: value) {
-							cell.iconImageView.image = resultImage
-						}
-					}
-				}
+				cell.parent = self
+				cell.indexText.text = String(format: "%d", indexPath.row + 1)
+				cell.order = item
+				cell.titleLabel.text = item.name
+				cell.sizeLabel.text = item.size
+				
+				return cell
 			}
-			let _: Alamofire.Request? = Alamofire.request(.GET, item.imageURL).responseData(completionHandler: completionHandler)
-			
-            cell.priceLabel.text = item.price
-            cell.titleLabel.text = item.name
-			
-			//cell.sizeLabel.text = String(format: "%d", item.size)
-			cell.sizeLabel.text = item.size
-			
-//			// !!!:dezami
-//			if item.size == 0 {
-//				cell.sizeLabel.text = item.scale
-//			}
-//			else {
-//				cell.sizeLabel.text = String(format: "%d", item.size)
-//			}
-			
+			else {
+				//分数
+				let cell: HDZItemCheckFractionCell = HDZItemCheckFractionCell.dequeueReusableCell(tableView, indexPath: indexPath, delegate: self)
+				
+				cell.parent = self
+				cell.indexText.text = String(format: "%d", indexPath.row + 1)
+				cell.order = item
+				cell.titleLabel.text = item.name
+				cell.sizeLabel.text = item.size
+				
+				return cell
+			}
         }
+		else {
+			return HDZItemCheckCell.dequeueReusableCell(tableView, indexPath: indexPath, delegate: self)
+		}
         
-        return cell
     }
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -209,6 +200,22 @@ extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
 		}
 
     }
+	
+	func itemcheckcellReload() {
+		
+		self.loadItem()
+		
+		// !!!:デザミシステム
+		if self.result?.count == 0 {
+			// アイテム無しの場合
+			let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+				self.navigationController?.popViewControllerAnimated(false)
+			})
+			let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
+			controller.addAction(action2)
+			self.presentViewController(controller, animated: false, completion: nil)
+		}
+	}
 }
 
 extension HDZItemCheckTableViewController {

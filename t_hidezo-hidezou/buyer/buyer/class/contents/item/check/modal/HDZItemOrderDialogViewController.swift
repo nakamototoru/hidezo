@@ -37,16 +37,12 @@ class HDZItemOrderDialogViewController: UIViewController {
 		self.arrayDate .addObjectsFromArray(["選択なし","最短納品日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日","日曜日"])
 		
 		self.arrayCharge = NSMutableArray()
-		//self.arrayCharge.addObject("選択なし")
-		//self.arrayCharge.addObjectsFromArray(["担当者X","担当者Y"])
 		
 		self.arrayPlace = NSMutableArray()
-		//self.arrayPlace.addObject("選択なし")
-		//self.arrayPlace.addObjectsFromArray(["配送先X","配送先Y","配送先Z"])
 		
-		HDZItemOrderManager.shared.deliverto = ""
-		HDZItemOrderManager.shared.charge = ""
-		HDZItemOrderManager.shared.deliverdate = ""
+//		HDZItemOrderManager.shared.deliverto = ""
+//		HDZItemOrderManager.shared.charge = ""
+//		HDZItemOrderManager.shared.deliverdate = ""
 
 		// APi
 		self.getItem(self.supplierId)
@@ -68,7 +64,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 
 }
 
-// MARK: - api
+// MARK: - API
 extension HDZItemOrderDialogViewController {
 	
 	private func getItem(supplierId: Int) {
@@ -104,6 +100,38 @@ extension HDZItemOrderDialogViewController {
 			// ピッカー更新
 			self.pickerviewCharge.reloadAllComponents()
 			self.pickerviewPlace.reloadAllComponents()
+			
+			//ピッカー位置
+			var count:Int = 0;
+			for str in self.arrayDate {
+				if HDZItemOrderManager.shared.deliverdate == str as! String {
+					self.ddate = str as! String
+					self.pickerviewDate.selectRow(count, inComponent: 0, animated: false)
+					break;
+				}
+				count += 1
+			}
+			
+			count = 0
+			for str in self.arrayCharge {
+				if HDZItemOrderManager.shared.charge == str as! String {
+					self.charge = str as! String
+					self.pickerviewCharge.selectRow(count, inComponent: 0, animated: false)
+					break;
+				}
+				count += 1
+			}
+			
+			count = 0
+			for str in self.arrayPlace {
+				if HDZItemOrderManager.shared.deliverto == str as! String {
+					self.place = str as! String
+					self.pickerviewPlace.selectRow(count, inComponent: 0, animated: false)
+					break;
+				}
+				count += 1
+			}
+			// end
 		}
 		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
