@@ -46,7 +46,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="MNa-9t-CTP"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hNv-xH-fUg">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="zdN-3D-2e9">
+                        <barButtonItem key="leftBarButtonItem" image="ic_action_previous_item" id="zdN-3D-2e9">
                             <connections>
                                 <action selector="onCloseSelf:" destination="JsZ-pn-FZH" id="BOD-nr-Xsu"/>
                             </connections>
@@ -82,4 +82,7 @@
             <point key="canvasLocation" x="-648" y="-4"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_action_previous_item" width="32" height="32"/>
+    </resources>
 </document>

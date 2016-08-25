@@ -10,6 +10,16 @@
 
 @implementation UIWarning
 
++(UIViewController*)getBaseViewController:(NSInteger)dummy
+{
+	// 親ビューコンをなんとか検索
+	UIViewController *baseView = [UIApplication sharedApplication].keyWindow.rootViewController;
+	while (baseView.presentedViewController != nil && !baseView.presentedViewController.isBeingDismissed) {
+		baseView = baseView.presentedViewController;
+	}
+	return baseView;
+}
+
 // 警告を表示します。OKボタンタップで閉じます。
 +(void)Warning:(NSString *)message
 {

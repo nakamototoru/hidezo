@@ -16,7 +16,10 @@ class HDZItemCheckTableViewController: UITableViewController {
 	
     private var supplierId: Int = 0
     private var result: Results<HDZOrder>? = nil
-    
+	
+	// !!!: dezami
+	private var indicatorView:CustomIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +27,13 @@ class HDZItemCheckTableViewController: UITableViewController {
 		
         HDZItemCheckCell.register(self.tableView)
 		HDZItemCheckFractionCell.register(self.tableView)
-        
+		
+		//インジケーター
+		//let basevc:UIViewController = UIWarning.getBaseViewController(0)
+		
+		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+		self.view.addSubview(self.indicatorView)
+		
 //        self.settingSendButton()
         self.loadItem()
     }
@@ -150,6 +159,7 @@ extension HDZItemCheckTableViewController {
 		
         let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
 			// 注文確定
+			self.indicatorView.stopAnimating()
 			
 			//履歴を全て消す
 			for object in self.result! {
@@ -166,8 +176,10 @@ extension HDZItemCheckTableViewController {
         }
         
         let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
-            
+			
 			// 注文エラー
+			self.indicatorView.stopAnimating()
+			
 			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
 			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
 			controller.addAction(action)
@@ -175,9 +187,13 @@ extension HDZItemCheckTableViewController {
 			
 			self.barbuttonitemConfirm.enabled = true;
         }
-		
-		//
+
+		//インジケータ
+		self.indicatorView.startAnimating()
+
+		// Request
         HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
+		
     }
 }
 
@@ -236,7 +252,7 @@ extension HDZItemCheckTableViewController {
 		                                                preferredStyle: UIAlertControllerStyle.Alert)
 		alert.addAction(cancelaction)
 		alert.addAction(confirmaction)
-		self.presentViewController(alert, animated: true, completion: nil)
+		self.presentViewController(alert, animated: false, completion: nil)
 		
 		/*
 		// 注文確定

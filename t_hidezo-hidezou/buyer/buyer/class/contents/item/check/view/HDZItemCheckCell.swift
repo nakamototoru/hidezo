@@ -110,15 +110,12 @@ extension HDZItemCheckCell {
 		
 		self.deleteCartObject()
 		
-//        try! HDZOrder.deleteObject(self.order)
-//		self.delegate?.itemcheckcellReload()
-//        self.delegate?.didSelectedDeleted()
     }
 	
 	@IBAction func onSelectedAdd(sender: AnyObject) {
 		
 		// TODO:カート内カウント加算
-		NSLog("TODO:カート内カウント加算")
+//		NSLog("TODO:カート内カウント加算")
 		
 		var value:Int = Int(self.order.size)!
 		value += 1
@@ -133,7 +130,7 @@ extension HDZItemCheckCell {
 	@IBAction func onSelectedSub(sender: AnyObject) {
 		
 		// TODO:カート内カウント減算
-		NSLog("TODO:カート内カウント減算")
+//		NSLog("TODO:カート内カウント減算")
 		var value:Int = Int(self.order.size)!
 		value -= 1
 		if (value > 0) {
@@ -144,8 +141,6 @@ extension HDZItemCheckCell {
 		else {
 			value = 0
 			//削除
-//			try! HDZOrder.deleteObject(self.order)
-//			self.delegate?.itemcheckcellReload()
 			self.deleteCartObject()
 		}
 	}

@@ -23,20 +23,12 @@ class HDZItemStaticCell: UITableViewCell {
     private var staticItem: StaticItem!
     private var attr_flg: AttrFlg = AttrFlg.direct
     private var supplierId: Int = 0
-
-//    private var count: Int = 0
-//		{
-//        didSet {
-//            self.itemCount.text = String(format: "%d", self.count)
-//        }
-//    }
 	var itemsize:String = "0" {
 		didSet {
 			self.itemCount.text = itemsize
 		}
 	}
 
-	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -46,8 +38,8 @@ class HDZItemStaticCell: UITableViewCell {
 		self.iconImageView.addGestureRecognizer(myTap)
 		
 		//名前タップ
-		let nameTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemStaticCell.tapGestureFromNameLabel(_:)))
-		self.itemName.addGestureRecognizer(nameTap)
+//		let nameTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemStaticCell.tapGestureFromNameLabel(_:)))
+//		self.itemName.addGestureRecognizer(nameTap)
     }
     
     override func prepareForInterfaceBuilder() {
@@ -80,9 +72,11 @@ extension HDZItemStaticCell {
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemName.text = staticItem.name
 		
-//		cell.iconImageView.image = UIImage(named: "sakana")
-        request(staticItem.image) { (image) in
+        requestImage(staticItem.image) { (image) in
             cell.iconImageView.image = image
+			
+//			debugPrint("IMAGE in CELL :")
+//			debugPrint(cell.iconImageView.image)
         }
 
 		cell.itemsize = "0"
@@ -114,8 +108,6 @@ extension HDZItemStaticCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		//return [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil][0];
-		
 		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticCell", owner: self, options: nil)
 		let cell: HDZItemStaticCell = views.firstObject as! HDZItemStaticCell;
 		let height :CGFloat = cell.frame.size.height;
@@ -128,39 +120,23 @@ extension HDZItemStaticCell {
 // MARK: - Gesture
 extension HDZItemStaticCell {
 	
-	func openImageViewer(imageview:UIImageView) {
-		
-		let imageProvider = SomeImageProvider()
-		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
-		
-		let imagesize = imageview.frame.size
-		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
-		
-		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
-		self.parent.presentImageViewer(imageViewer)
-	}
-	
 	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
-		openImageViewer(self.iconImageView)
+
+		//詳細画面
+		let controller: HDZItemStaticDetailViewController = HDZItemStaticDetailViewController.createViewController(self.staticItem)
+		self.parent.navigationController?.pushViewController(controller, animated: true)
 	}
 
 	func tapGestureFromNameLabel(sender:UITapGestureRecognizer){
-		// TODO:商品詳細ダイアログ
-		NSLog("TODO:商品詳細ダイアログ")
+		// TODO:消去
 	}
 }
 
 // MARK: - API
 extension HDZItemStaticCell {
     
-    private class func request(url: NSURL, completion: (image: UIImage?) -> Void) {
-        
-        // 画像ローカル保存したかった。。。
-        //        if let image: HDZImage = try! HDZImage.queries(url.absoluteString) {
-        //            completion(image: image.image)
-        //            return
-        //        }
-        
+    private class func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
+		
         let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
             if response.result.error != nil {
 				let sakanaimage:UIImage = UIImage(named: "sakana")!
@@ -169,6 +145,9 @@ extension HDZItemStaticCell {
 			else {
                 if let data: NSData = response.result.value {
                     if let resultImage: UIImage = UIImage(data: data) {
+						
+//						debugPrint(resultImage.size)
+						
                         completion(image: resultImage)
                     }
                 }
@@ -188,7 +167,7 @@ extension HDZItemStaticCell {
     private func updateItem() {
         
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false)
+            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
         } catch let error as NSError {
             debugPrint(error)
         }

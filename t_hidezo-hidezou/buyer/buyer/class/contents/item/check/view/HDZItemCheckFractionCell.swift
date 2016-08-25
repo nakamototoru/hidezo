@@ -81,13 +81,13 @@ extension HDZItemCheckFractionCell {
 	@IBAction func onChangeOrder(sender: AnyObject) {
 		
 		// TODO: 分数変更ダイアログ
-		NSLog("TODO: 分数変更ダイアログ")
-
-		UIWarning.WarningWithTitle("工事中", message: "ご迷惑をおかけします")
+//		NSLog("TODO: 分数変更ダイアログ")
 		
-//		let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: self.dynamicItem.num_scale, itemsize: self.order.size)
-//		vc.delegate = self
-//		self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+		let numScale:[String] = self.order.numScaleStr.componentsSeparatedByString("|")
+		
+		let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: numScale, itemsize: self.order.size)
+		vc.delegate = self
+		self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
 
 	}
 }

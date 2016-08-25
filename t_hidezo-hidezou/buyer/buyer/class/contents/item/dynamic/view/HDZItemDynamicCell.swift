@@ -67,7 +67,7 @@ extension HDZItemDynamicCell {
     private func updateItem() {
         
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true)
+            try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true, numScale: self.dynamicItem.num_scale)
         } catch let error as NSError {
             debugPrint(error)
         }

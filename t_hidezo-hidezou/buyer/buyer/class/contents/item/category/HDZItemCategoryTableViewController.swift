@@ -20,13 +20,12 @@ class HDZItemCategoryTableViewController: UITableViewController {
     private var friendInfo: FriendInfo! = nil
     private var itemResult: ItemResult! = nil
     private var request: Alamofire.Request? = nil
-    
+	
+	// !!!: dezami
+	private var indicatorView:CustomIndicatorView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.getItem(self.friendInfo.id)
-        
-        self.title = self.friendInfo.name
 		
 		// !!!:デザミシステム
 //		let button:UIButton = UIButton(type: UIButtonType.Custom)
@@ -40,7 +39,17 @@ class HDZItemCategoryTableViewController: UITableViewController {
 //		let buttonitem:UIBarButtonItem = UIBarButtonItem(customView: button)
 //		self.toolbarItems = [buttonitem]
 		
+		// テーブルセル
 		HDZItemCategoryTableViewCell.register(self.tableView)
+		
+		//インジケータ
+		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+		self.view.addSubview(self.indicatorView)
+		
+		// API
+		self.getItem(self.friendInfo.id)
+		
+		self.title = self.friendInfo.name
     }
 
     override func viewDidDisappear(animated: Bool) {
@@ -51,11 +60,6 @@ class HDZItemCategoryTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-		// !!!:デザミシステム・必ずフッター表示しない
-//        if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
-//            self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
-//        }
 
         self.request?.resume()
     }
@@ -70,6 +74,7 @@ class HDZItemCategoryTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Create
 extension HDZItemCategoryTableViewController {
     
     internal class func createViewController(friendInfo: FriendInfo) -> HDZItemCategoryTableViewController {
@@ -121,8 +126,9 @@ extension HDZItemCategoryTableViewController {
         }
     }
 	
-	// TODO:使わない、セル内ゼスチャーに変更
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		
         switch indexPath.section {
         case 0:
 			//動的商品
@@ -150,6 +156,7 @@ extension HDZItemCategoryTableViewController {
     }
 }
 
+// MARK: - API
 extension HDZItemCategoryTableViewController {
     
     private func getItem(supplierId: Int) {
@@ -176,11 +183,8 @@ extension HDZItemCategoryTableViewController {
                 }
             }
 			
-			// !!!:デザミシステム・必ずフッター表示しない
-            //if try! HDZOrder.queries(self.friendInfo.id).count > 0 {
-            //      self.tableView.tableFooterView = HDZItemCheckOrderFooter.createView(self, supplierId: self.friendInfo.id)
-            //}
-            
+			self.indicatorView.stopAnimating()
+			
             self.tableView.reloadData()
         }
         
@@ -189,12 +193,18 @@ extension HDZItemCategoryTableViewController {
 			NSLog("HDZItemCategoryTableViewController.getItem")
 			NSLog("\(error.debugDescription)")
 			
+			self.indicatorView.stopAnimating()
+
             self.request = nil
         }
-        
+
+		// インジケーター開始
+		self.indicatorView.startAnimating()
+
+		// Request
         self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
+
     }
-	
 	
 	internal func setupFriendInfo(friendInfo: FriendInfo) {
 		self.friendInfo = friendInfo

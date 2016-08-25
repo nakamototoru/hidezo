@@ -80,8 +80,8 @@ extension HDZItemDynamicTableViewController {
 		
 		// 整数かどうかチェック
         var isInt: Bool = true
-        for numScale: String in item.num_scale {
-            if let _: Int = Int(numScale) {
+        if item.num_scale.count > 0 {
+            if let _: Int = Int(item.num_scale[0]) {
                 //整数
             } else {
 				//分数

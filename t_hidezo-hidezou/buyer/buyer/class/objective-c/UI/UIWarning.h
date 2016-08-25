@@ -11,6 +11,8 @@
 
 @interface UIWarning : NSObject
 
++(UIViewController*)getBaseViewController:(NSInteger)dummy;
+
 +(void)Warning:(NSString *)message;
 
 +(void)WarningWithTitle:(NSString*)title Message:(NSString*)message;

@@ -28,18 +28,11 @@ class HDZItemStaticFractionCell: UITableViewCell {
 	private var staticItem: StaticItem!
 	private var attr_flg: AttrFlg = AttrFlg.direct
 	private var supplierId: Int = 0
-//	private var count: Int = 0
-//		{
-//		didSet {
-//			self.itemCount.text = String(format: "%d", self.count)
-//		}
-//	}
 	private var itemsize:String = "0" {
 		didSet {
 			self.itemCount.text = itemsize
 		}
 	}
-	
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -77,7 +70,6 @@ extension HDZItemStaticFractionCell {
 		cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
 		cell.itemName.text = staticItem.name
 		
-//		cell.iconImageView.image = UIImage(named: "sakana")
 		request(staticItem.image) { (image) in
 			cell.iconImageView.image = image
 		}
@@ -119,23 +111,14 @@ extension HDZItemStaticFractionCell {
 	
 }
 
-// MARK: - ImageViewer
+// MARK: - Gesture
 extension HDZItemStaticFractionCell {
 	
-	func openImageViewer(imageview:UIImageView) {
-		
-		let imageProvider = SomeImageProvider()
-		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
-		
-		let imagesize = imageview.frame.size
-		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
-		
-		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
-		self.parent.presentImageViewer(imageViewer)
-	}
-	
 	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
-		openImageViewer(self.iconImageView)
+		
+		//詳細画面
+		let controller: HDZItemStaticDetailViewController = HDZItemStaticDetailViewController.createViewController(self.staticItem)
+		self.parent.navigationController?.pushViewController(controller, animated: true)
 	}
 	
 }
@@ -144,12 +127,6 @@ extension HDZItemStaticFractionCell {
 extension HDZItemStaticFractionCell {
 	
 	private class func request(url: NSURL, completion: (image: UIImage?) -> Void) {
-		
-		// 画像ローカル保存したかった。。。
-		//        if let image: HDZImage = try! HDZImage.queries(url.absoluteString) {
-		//            completion(image: image.image)
-		//            return
-		//        }
 		
 		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
 			if response.result.error != nil {
@@ -179,7 +156,7 @@ extension HDZItemStaticFractionCell {
 	private func updateItem() {
 		
 		do {
-			try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false)
+			try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
 		} catch let error as NSError {
 			debugPrint(error)
 		}

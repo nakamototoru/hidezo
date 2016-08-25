@@ -13,7 +13,9 @@ class HDZCustomerTableViewController: UITableViewController {
 
     private lazy var friendList: [FriendInfo] = []
     private var request: Alamofire.Request? = nil
-    
+	
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,6 +54,7 @@ class HDZCustomerTableViewController: UITableViewController {
         self.request?.cancel()
         self.friendList.removeAll()
     }
+
 }
 
 // MARK: - Table view data source
@@ -78,6 +81,7 @@ extension HDZCustomerTableViewController {
 	
 }
 
+// MARK: - Table view delegate
 extension HDZCustomerTableViewController : HDZCustomerCellDelegate {
 
 	func customercellSelectedRow(row: Int) {

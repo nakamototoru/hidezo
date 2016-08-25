@@ -16,7 +16,10 @@ class HDZOrderTableViewController: UITableViewController {
     private var page: Int = 0
     
     private var stopLoading: Bool = false
-    
+	
+	// !!!: dezami
+	private var indicatorView:CustomIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,17 +27,20 @@ class HDZOrderTableViewController: UITableViewController {
 //        let selectedImage: UIImage? = UIImage(named: "order_white")?.imageWithRenderingMode(.AlwaysOriginal)
 		
 //        self.tabBarItem = UITabBarItem(title: "注文", image: image, selectedImage: selectedImage)
+		// ナビゲーションバー
         self.deleteBackButtonTitle()
-        
+
+		// テーブルセル
         HDZOrderCell.register(self.tableView)
-        
+		
+		// 再読み込みイベント
         let refreshControl: UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(HDZOrderTableViewController.reloadRequest), forControlEvents: .ValueChanged)
         self.refreshControl = refreshControl
-
-		// !!!:viewDidAppearで走っている
-        //self.orderList(true)
 		
+		//インジケータ
+		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+		self.view.addSubview(self.indicatorView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,7 +136,9 @@ extension HDZOrderTableViewController {
             }
             
             self.orderList += result.orderList
-            
+			
+			self.indicatorView.stopAnimating()
+			
             self.tableView.reloadData()
         }
         
@@ -138,6 +146,8 @@ extension HDZOrderTableViewController {
             self.refreshControl?.endRefreshing()
             //self.page -= 1
 			
+			self.indicatorView.stopAnimating()
+
 			#if DEBUG
 				let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
 					
@@ -147,7 +157,12 @@ extension HDZOrderTableViewController {
 				self.presentViewController(controller, animated: true, completion: nil)
 			#endif
         }
-        
+
+		// インジケータ
+		self.indicatorView.startAnimating()
+
+		// Request
         self.request = HDZApi.orderList(page, completionBlock: completion, errorBlock: error)
+		
     }
 }

@@ -21,7 +21,9 @@ class HDZOrder: Object {
     dynamic var standard: String = ""
     dynamic var dynamic: Bool = false
     dynamic var imageURL: String = ""
-	
+
+	// !!!: dezami
+	dynamic var numScaleStr: String = ""
 	// !!!:dezami
 	dynamic var createdAt: NSTimeInterval = 0.0
 	
@@ -36,7 +38,7 @@ class HDZOrder: Object {
 
 extension HDZOrder {
     
-    internal class func add(supplierId: Int, itemId: Int, size: String, name: String, price: String, scale: String, standard: String, imageURL: String?, dynamic: Bool) throws {
+	internal class func add(supplierId: Int, itemId: Int, size: String, name: String, price: String, scale: String, standard: String, imageURL: String?, dynamic: Bool, numScale: [String]) throws {
         
         var order: HDZOrder! = nil
         do {
@@ -55,6 +57,18 @@ extension HDZOrder {
 			// !!!:dezami
 			// 1970から現在までの秒数
 			order.createdAt = NSDate().timeIntervalSince1970
+			
+			// 分数対応
+			//order.numScale = numScale
+			var count:Int = 0
+			for str:String in numScale {
+				if count > 0 {
+					order.numScaleStr += "|"
+				}
+				order.numScaleStr += str
+				
+				count += 1
+			}
 			//
         }
 		

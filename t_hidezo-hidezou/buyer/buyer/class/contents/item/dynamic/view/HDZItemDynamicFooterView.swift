@@ -34,6 +34,14 @@ class HDZItemDynamicFooterView: UIView {
 			return
 		}
 		
+		self.imageView1.contentMode = UIViewContentMode.ScaleAspectFit
+		self.imageView2.contentMode = UIViewContentMode.ScaleAspectFit
+		self.imageView3.contentMode = UIViewContentMode.ScaleAspectFit
+		self.imageView4.contentMode = UIViewContentMode.ScaleAspectFit
+		self.imageView5.contentMode = UIViewContentMode.ScaleAspectFit
+		self.imageView6.contentMode = UIViewContentMode.ScaleAspectFit
+		
+		
 		for imagePath in self.dynamicItemInfo.imagePath.enumerate() {
 			var imageView: UIImageView? = nil
 			switch imagePath.index {
