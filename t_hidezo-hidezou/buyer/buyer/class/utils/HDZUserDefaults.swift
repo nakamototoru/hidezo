@@ -86,5 +86,21 @@ internal class HDZUserDefaults {
         }
     }
     
-    
+    // MARK: - DeviceToken
+	private static let KEY_USER_DEFAULTS_DEVICETOKEN: String = "key_user_defaults_device_token"
+	
+	internal class var devicetoken: String {
+		get {
+			let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+			if let response:String = userDefaults.stringForKey(KEY_USER_DEFAULTS_DEVICETOKEN) {
+				return response
+			}
+			return ""
+		}
+		set {
+			let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+			userDefaults.setObject(newValue, forKey: KEY_USER_DEFAULTS_DEVICETOKEN)
+			userDefaults.synchronize()
+		}
+	}
 }

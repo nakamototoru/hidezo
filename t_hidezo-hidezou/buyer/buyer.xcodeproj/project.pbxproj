@@ -86,6 +86,7 @@
 		3752B8CF1D66D4F80080E0AE /* HDZItemOrderDialogViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3752B8CE1D66D4F80080E0AE /* HDZItemOrderDialogViewController.storyboard */; };
 		3752B8D11D66D6320080E0AE /* HDZItemOrderNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752B8D01D66D6320080E0AE /* HDZItemOrderNavigationController.swift */; };
 		3752B8D31D66FE4D0080E0AE /* HDZItemOrderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752B8D21D66FE4D0080E0AE /* HDZItemOrderManager.swift */; };
+		3787AF071D704489005428AD /* ApiPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3787AF061D704489005428AD /* ApiPush.swift */; };
 		37CA46BA1D6406D1006ED62E /* HDZOrderNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA46B91D6406D1006ED62E /* HDZOrderNavigationController.swift */; };
 		37CA46C21D644C8A006ED62E /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CA46BF1D644C8A006ED62E /* MJPopupBackgroundView.m */; };
 		37CA46C31D644C8A006ED62E /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CA46C11D644C8A006ED62E /* UIViewController+MJPopupViewController.m */; };
@@ -226,6 +227,7 @@
 		3752B8CE1D66D4F80080E0AE /* HDZItemOrderDialogViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZItemOrderDialogViewController.storyboard; path = class/contents/item/check/modal/HDZItemOrderDialogViewController.storyboard; sourceTree = "<group>"; };
 		3752B8D01D66D6320080E0AE /* HDZItemOrderNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderNavigationController.swift; path = class/contents/item/check/modal/HDZItemOrderNavigationController.swift; sourceTree = "<group>"; };
 		3752B8D21D66FE4D0080E0AE /* HDZItemOrderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderManager.swift; path = class/contents/item/check/modal/HDZItemOrderManager.swift; sourceTree = "<group>"; };
+		3787AF061D704489005428AD /* ApiPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiPush.swift; path = class/utils/api/model/ApiPush.swift; sourceTree = "<group>"; };
 		37CA46B91D6406D1006ED62E /* HDZOrderNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderNavigationController.swift; path = class/contents/home/HDZOrderNavigationController.swift; sourceTree = "<group>"; };
 		37CA46BD1D644C89006ED62E /* buyer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "buyer-Bridging-Header.h"; sourceTree = "<group>"; };
 		37CA46BE1D644C8A006ED62E /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPopupBackgroundView.h; path = "class/objective-c/MJPopupSource/MJPopupBackgroundView.h"; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				3515C5461D1AD8DE0074B38E /* ApiMe.swift */,
 				350FFA191D1CB22500095830 /* ApiMessage.swift */,
 				356997651D3270F700BA0ECF /* ApiItem.swift */,
+				3787AF061D704489005428AD /* ApiPush.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1045,6 +1048,7 @@
 				37CA46BA1D6406D1006ED62E /* HDZOrderNavigationController.swift in Sources */,
 				35255C621D17709300A8D627 /* AlamofireUtils.swift in Sources */,
 				358829CE1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift in Sources */,
+				3787AF071D704489005428AD /* ApiPush.swift in Sources */,
 				37F15E1A1D65400D008B469E /* GalleryCloseTransition.swift in Sources */,
 				371300F61D6AB902001DF093 /* HDZItemDynamicFractionCell.swift in Sources */,
 				371DF41A1D6EFEAE00D70D7F /* HDZItemStaticDetailHeaderView.swift in Sources */,

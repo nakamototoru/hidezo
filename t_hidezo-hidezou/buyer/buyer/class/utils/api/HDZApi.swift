@@ -268,5 +268,15 @@ extension HDZApi {
     }
 }
 
+// MARK: - PushNotification
+extension HDZApi {
+	
+	internal class func postDeviceToken(id: Int, password: String, completionBlock: (unboxable: DeviceTokenResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: DeviceTokenResult?) -> Void) -> Alamofire.Request? {
+		let requestUrl: String = BASE_URL + "/store/device_token"
+		let parameters: DeviceToken = DeviceToken(id: id, uuid: HDZUserDefaults.uuid, device_token: HDZUserDefaults.devicetoken, device_flg: "1")
+		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+	}
+
+}
 
 

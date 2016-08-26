@@ -17,6 +17,9 @@ class HDZLoginViewController: UIViewController {
     
     private var loginRequest: Alamofire.Request? = nil
     private var loginCheckRequest: Alamofire.Request? = nil
+	
+	// !!!:dezami
+	private var deviceTokenRequest: Alamofire.Request? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,11 +128,26 @@ extension HDZLoginViewController {
                 // login success
                 HDZUserDefaults.login = true
                 HDZUserDefaults.id = id
-                
+				
                 self.dismissViewControllerAnimated(true, completion: { 
                     let controller: HDZHomeViewController = HDZHomeViewController.createViewController()
                     UIApplication.setRootViewController(controller)
                 })
+				
+				// !!!:dezami
+				// Device Token Post
+				#if TARGET_OS_SIMULATOR
+					//トークンは送れない
+				#else
+				let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
+					//debugPrint("****** completionToken ******")
+				}
+				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
+					debugPrint(error)
+				}
+				self.deviceTokenRequest = HDZApi.postDeviceToken(id, password: password, completionBlock: completionToken, errorBlock: errorToken)
+				#endif
+				
             } else {
                 // login error
                 HDZUserDefaults.login = false

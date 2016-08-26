@@ -71,9 +71,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-	// Push通知の登録が完了した場合、deviceTokenが返される
+	// デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
 		print("deviceToken: \(deviceToken.description)")
+		
+		// デバイスに保存		
+		HDZUserDefaults.devicetoken = deviceToken.description
 	}
 
 	// Push通知が利用不可であればerrorが返ってくる
@@ -86,12 +89,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		switch application.applicationState {
 		case .Inactive:
 			// アプリがバックグラウンドにいる状態で、Push通知から起動したとき
+			NSLog("applicationState.Inactive")
 			break
 		case .Active:
 			// アプリ起動時にPush通知を受信したとき
+			NSLog("applicationState.Active")
 			break
 		case .Background:
 			// アプリがバックグラウンドにいる状態でPush通知を受信したとき
+			NSLog("applicationState.Background")
 			break
 		}
 	}
