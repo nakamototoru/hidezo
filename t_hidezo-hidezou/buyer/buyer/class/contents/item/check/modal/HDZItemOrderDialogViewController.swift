@@ -16,6 +16,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 	@IBOutlet weak var pickerviewDate: UIPickerView!
 	@IBOutlet weak var pickerviewCharge: UIPickerView!
 	@IBOutlet weak var pickerviewPlace: UIPickerView!
+	@IBOutlet weak var textviewComment: UITextView!
 
 	private var arrayDate:NSMutableArray!
 	private var arrayCharge:NSMutableArray!
@@ -39,6 +40,8 @@ class HDZItemOrderDialogViewController: UIViewController {
 		self.arrayCharge = NSMutableArray()
 		
 		self.arrayPlace = NSMutableArray()
+		
+		self.textviewComment.text = HDZItemOrderManager.shared.comment
 		
 //		HDZItemOrderManager.shared.deliverto = ""
 //		HDZItemOrderManager.shared.charge = ""
@@ -163,6 +166,7 @@ extension HDZItemOrderDialogViewController {
 		HDZItemOrderManager.shared.deliverto = self.place
 		HDZItemOrderManager.shared.charge = self.charge
 		HDZItemOrderManager.shared.deliverdate = self.ddate
+		HDZItemOrderManager.shared.comment = self.textviewComment.text
 		
 		self.dismissViewControllerAnimated(true) {
 			

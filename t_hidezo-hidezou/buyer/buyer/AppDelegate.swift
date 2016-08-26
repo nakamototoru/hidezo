@@ -57,9 +57,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UITabBarItem.appearance().setTitleTextAttributes(nomalAttributes, forState: UIControlState.Normal)
 		
 		
+		// !!!:dezami
+		// プッシュ通知
+		// バッジ、サウンド、アラートをリモート通知対象として登録する
+		let settings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories:nil)
+		UIApplication.sharedApplication().registerForRemoteNotifications()
+		UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+		
+		if (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]) != nil {
+			// アプリが起動していない時にpush通知が届き、push通知から起動した場合
+		}
+		
         return true
     }
 
+	// Push通知の登録が完了した場合、deviceTokenが返される
+	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
+		print("deviceToken: \(deviceToken.description)")
+	}
+
+	// Push通知が利用不可であればerrorが返ってくる
+	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+		NSLog("error: " + "\(error)")
+	}
+	
+	// Push通知受信時とPush通知をタッチして起動したときに呼ばれる
+	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+		switch application.applicationState {
+		case .Inactive:
+			// アプリがバックグラウンドにいる状態で、Push通知から起動したとき
+			break
+		case .Active:
+			// アプリ起動時にPush通知を受信したとき
+			break
+		case .Background:
+			// アプリがバックグラウンドにいる状態でPush通知を受信したとき
+			break
+		}
+	}
+	
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

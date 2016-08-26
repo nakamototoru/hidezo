@@ -51,6 +51,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5t5-d1-g7Z" id="EhL-Cr-vb2"/>
+                                </connections>
                             </textView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJH-rG-OaG">
                                 <rect key="frame" x="0.0" y="344" width="600" height="100"/>
@@ -105,6 +108,7 @@
                         <outlet property="pickerviewCharge" destination="vvP-hG-tmv" id="QZM-5L-CP7"/>
                         <outlet property="pickerviewDate" destination="xdn-8P-uak" id="DgR-kH-4YP"/>
                         <outlet property="pickerviewPlace" destination="MJH-rG-OaG" id="A0f-mu-0Pg"/>
+                        <outlet property="textviewComment" destination="6d4-7g-K5v" id="V2W-jb-hFH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxz-eZ-qv0" userLabel="First Responder" sceneMemberID="firstResponder"/>

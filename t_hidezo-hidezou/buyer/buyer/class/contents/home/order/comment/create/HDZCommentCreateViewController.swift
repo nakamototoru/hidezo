@@ -21,7 +21,11 @@ class HDZCommentCreateViewController: UIViewController {
 
     private var order_no: String! = nil
     private var messageResult: MessageResult! = nil
-    private lazy var chargeList: [String] = []
+//    private lazy var chargeList: [String] = []
+
+	// !!!: dezami
+	private var listCharger:NSMutableArray!
+	
     private var charge: String! = nil
     private var request: Alamofire.Request? = nil
     private weak var delegate: HDZCommentCreateViewControllerDelegate?
@@ -29,11 +33,12 @@ class HDZCommentCreateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        if self.chargeList.count > 0 {
-            self.pickerView.selectRow(0, inComponent: 0, animated: true)
-            self.charge = self.chargeList[0]
-        }
+        // ピッカー
+//        if self.chargeList.count > 0 {
+//            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+//            self.charge = self.chargeList[0]
+//        }
+		self.charge = ""
 
         self.sendCommentButton.layer.cornerRadius = 5.0
         
@@ -70,9 +75,14 @@ extension HDZCommentCreateViewController {
         
         controller.order_no = order_no
         controller.messageResult = messageResult
-        controller.chargeList = messageResult.chargeList
+//        controller.chargeList = messageResult.chargeList
         controller.delegate = viewController
-        
+		
+		// !!!:dezami
+		controller.listCharger = NSMutableArray()
+		controller.listCharger.addObject("選択しない")
+		controller.listCharger.addObjectsFromArray(messageResult.chargeList)
+		
         let size: CGSize = UIScreen.mainScreen().bounds.size
         controller.preferredContentSize = CGSize(width: size.width, height: 266.0)
         controller.modalPresentationStyle = .Popover
@@ -99,11 +109,19 @@ extension HDZCommentCreateViewController {
 extension HDZCommentCreateViewController: UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.charge = self.chargeList[row]
+//        self.charge = self.chargeList[row]
+		
+		if (row == 0) {
+			self.charge = ""
+		}
+		else {
+			self.charge = self.listCharger[row] as! String
+		}
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.chargeList[row]
+//        return self.chargeList[row]
+		return self.listCharger[row] as? String
     }
 
 }
@@ -116,7 +134,8 @@ extension HDZCommentCreateViewController: UIPickerViewDataSource {
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.chargeList.count
+//        return self.chargeList.count
+		return self.listCharger.count
     }
 }
 
@@ -125,18 +144,18 @@ extension HDZCommentCreateViewController {
     
     @IBAction func didSelectedSend(sender: AnyObject) {
         
-        if self.charge == nil {
-            
-            let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            let controller: UIAlertController = UIAlertController(title: "担当者が選択されていません。", message: nil, preferredStyle: .Alert)
-            controller.addAction(action)
-            self.presentViewController(controller, animated: true, completion: nil)
-            
-			self.sendCommentButton.enabled = true
-			
-            return
-        }
-        
+//        if self.charge == nil {
+//            
+//            let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//            let controller: UIAlertController = UIAlertController(title: "担当者が選択されていません。", message: nil, preferredStyle: .Alert)
+//            controller.addAction(action)
+//            self.presentViewController(controller, animated: true, completion: nil)
+//            
+//			self.sendCommentButton.enabled = true
+//			
+//            return
+//        }
+		
         guard let message: String = self.commentTextView.text else {
 			self.sendCommentButton.enabled = true
             return

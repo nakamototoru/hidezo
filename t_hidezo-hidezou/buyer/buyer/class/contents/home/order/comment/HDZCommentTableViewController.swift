@@ -110,15 +110,15 @@ extension HDZCommentTableViewController {
 		
 		// !!!:デザミ
 		// 担当者チェック
-		if self.messageResult.chargeList.count == 0 {
-			
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-			let controller: UIAlertController = UIAlertController(title: "担当者が登録されていません。", message: nil, preferredStyle: .Alert)
-			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
-			
-			return;
-		}
+//		if self.messageResult.chargeList.count == 0 {
+//			
+//			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//			let controller: UIAlertController = UIAlertController(title: "担当者が登録されていません。", message: nil, preferredStyle: .Alert)
+//			controller.addAction(action)
+//			self.presentViewController(controller, animated: true, completion: nil)
+//			
+//			return;
+//		}
 		
         let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
         self.presentViewController(controller, animated: true, completion: nil)

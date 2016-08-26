@@ -175,9 +175,11 @@ struct Order: WrapCustomizable {
 struct OrderResult: Unboxable {
     
     let message: String
+	let order_no: String
     
     init(unboxer: Unboxer) {
         self.message = unboxer.unbox("message")
+		self.order_no = unboxer.unbox("order_no")
     }
 }
 

@@ -139,6 +139,9 @@ extension HDZItemStaticCell {
 		
         let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
             if response.result.error != nil {
+				
+				debugPrint(response.result.error)
+				
 				let sakanaimage:UIImage = UIImage(named: "sakana")!
 				completion(image: sakanaimage)
             }

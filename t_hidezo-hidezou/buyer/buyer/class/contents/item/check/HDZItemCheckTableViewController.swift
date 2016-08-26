@@ -16,7 +16,8 @@ class HDZItemCheckTableViewController: UITableViewController {
 	
     private var supplierId: Int = 0
     private var result: Results<HDZOrder>? = nil
-	
+	private var request: Alamofire.Request? = nil
+
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
 
@@ -158,6 +159,7 @@ extension HDZItemCheckTableViewController {
         }
 		
         let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
+
 			// 注文確定
 			self.indicatorView.stopAnimating()
 			
@@ -173,8 +175,33 @@ extension HDZItemCheckTableViewController {
 			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
 			controller.addAction(action)
 			self.presentViewController(controller, animated: true, completion: nil)
+			
+			
+			// メッセージ送信API
+			guard let result: OrderResult = unboxable else {
+				return
+			}
+
+			if HDZItemOrderManager.shared.comment == "" {
+				return
+			}
+//			guard let message: String = HDZItemOrderManager.shared.comment else {
+//				//self.sendCommentButton.enabled = true
+//				return
+//			}
+			
+			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
+				//self.dismissViewControllerAnimated(true, completion: nil)
+			}
+			
+			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
+				//self.dismissViewControllerAnimated(true, completion: nil)
+				debugPrint(error)
+			}
+			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
+
         }
-        
+		
         let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
 			
 			// 注文エラー

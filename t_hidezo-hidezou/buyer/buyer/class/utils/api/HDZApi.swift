@@ -57,8 +57,11 @@ extension HDZApi {
 
 // MARK: - order
 extension HDZApi {
-    
+	
+	// 注文
     internal class func order(supplier_id: Int, deliver_to: String, delivery_day: String, charge: String, items: Results<HDZOrder>, completionBlock: (unboxable: OrderResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderError?) -> Void) {
+		
+		//
         let requestUrl: String = BASE_URL + "/store/order"
         
         var dynamic_item: [String] = []
@@ -85,8 +88,10 @@ extension HDZApi {
 
         AlamofireUtils.request(.POST, requestUrl, structParameters: order, completionBlock: completionBlock, errorBlock: errorBlock)
     }
-    
+	
+	// 注文履歴
     internal class func orderList(page: Int, completionBlock: (unboxable: OrderListResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderListError?) -> Void) -> Alamofire.Request? {
+		
         let requestUrl: String = BASE_URL + "/store/order_list"
         let parameters: OrderList = OrderList(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, page: page)
 
@@ -105,8 +110,10 @@ extension HDZApi {
 
         return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
     }
-    
+	
+	// 注文詳細
     internal class func orderDitail(orderNo: String, completionBlock: (unboxable: OrderDetailResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderDetailError?) -> Void) -> Alamofire.Request? {
+		
         let requestUrl: String = BASE_URL + "/store/order_detail"
         let parameters: OrderDetail = OrderDetail(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: orderNo)
         
@@ -197,6 +204,7 @@ extension HDZApi {
     }
 }
 
+// MARK: - Item
 extension HDZApi {
     
     internal class func item(supplierId: Int, completionBlock: (unboxable: ItemResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: ItemError?) -> Void) -> Alamofire.Request? {

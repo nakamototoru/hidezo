@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "buyer/class/utils/api/HDZApi.swift"
-            timestampString = "493629741.277349"
+            timestampString = "493877672.75021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "order(_:deliver_to:delivery_day:charge:items:completionBlock:errorBlock:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "buyer/class/contents/item/check/HDZItemCheckTableViewController.swift"
-            timestampString = "493788892.768356"
+            timestampString = "493877672.75021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -249,13 +249,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/check/HDZItemCheckTableViewController.swift"
-            timestampString = "493788892.768356"
+            filePath = "buyer/class/contents/item/static/view/HDZItemStaticCell.swift"
+            timestampString = "493875335.720919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "didSelectedOrder()"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "requestImage(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,13 +265,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/check/HDZItemCheckTableViewController.swift"
-            timestampString = "493788941.836253"
+            filePath = "buyer/class/contents/item/static/view/HDZItemStaticCell.swift"
+            timestampString = "493875335.720919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "didSelectedOrder()"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "requestImage(_:completion:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "buyer/class/contents/item/static/view/HDZItemStaticCell.swift"
+            timestampString = "493875335.720919"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "requestImage(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

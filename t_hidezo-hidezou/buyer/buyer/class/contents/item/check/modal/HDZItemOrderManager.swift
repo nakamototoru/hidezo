@@ -13,6 +13,7 @@ class HDZItemOrderManager: NSObject {
 	var deliverto:String! = ""
 	var charge:String! = ""
 	var deliverdate:String! = ""
+	var comment:String! = ""
 	
 	static let shared = HDZItemOrderManager()
 	private override init() {
