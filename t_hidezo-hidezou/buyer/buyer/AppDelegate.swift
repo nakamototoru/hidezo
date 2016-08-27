@@ -10,6 +10,9 @@ import UIKit
 import Fabric
 import Crashlytics
 
+import Alamofire
+import Unbox
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -66,6 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		if (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]) != nil {
 			// アプリが起動していない時にpush通知が届き、push通知から起動した場合
+			//全ての通知を削除
+			UIApplication.sharedApplication().cancelAllLocalNotifications()
+			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 		}
 		
         return true
@@ -75,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
 		print("deviceToken: \(deviceToken.description)")
 		
-		// デバイスに保存		
+		// デバイスに保存
 		HDZUserDefaults.devicetoken = deviceToken.description
 	}
 
@@ -100,11 +106,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			NSLog("applicationState.Background")
 			break
 		}
+		//全ての通知を削除
+		UIApplication.sharedApplication().cancelAllLocalNotifications()
+		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+
+		
+		// カスタムデータ
+		guard let dict:[NSObject : AnyObject] = userInfo else {
+			print("No userInfo found in RemoteNotification")
+			return
+		}
+		#if DEBUG
+		debugPrint("Remote UserInfo")
+		#endif
+		for (key, value) in dict {
+			
+			let strkey:String = key as! String
+			if strkey != "aps" {
+				#if DEBUG
+				debugPrint(strkey)
+				debugPrint(value)
+				debugPrint("/")
+				#endif
+			}
+		}
+		
 	}
 	
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -114,6 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
