@@ -20,7 +20,9 @@ class HDZCommentTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
+        //self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
+		self.title = self.orderInfo.supplier_name + "様宛"
+		
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(HDZCommentTableViewController.didSelectedCommentCreate(_:)))
         
         let refreshControl: UIRefreshControl = UIRefreshControl()
@@ -29,9 +31,9 @@ class HDZCommentTableViewController: UITableViewController {
         
         HDZCommentCell.register(self.tableView)
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 95.0
-        
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 95.0
+		
         self.requestMessage()
     }
 

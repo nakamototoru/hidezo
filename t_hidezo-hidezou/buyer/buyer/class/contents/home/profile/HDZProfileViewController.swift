@@ -58,11 +58,12 @@ class HDZProfileViewController: UITableViewController {
 extension HDZProfileViewController {
     
     @IBAction func didSelectedLogout(sender: UIBarButtonItem) {
-     
+		
+		// ログアウト実行
         let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
             HDZUserDefaults.login = false
-            HDZUserDefaults.id = 0
-            
+//            HDZUserDefaults.id = 0
+			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
             UIApplication.setRootViewController(controller)
             

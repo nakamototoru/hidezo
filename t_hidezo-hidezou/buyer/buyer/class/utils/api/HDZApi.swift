@@ -11,8 +11,9 @@ import Alamofire
 import RealmSwift
 
 internal class HDZApi {
-    
-    private static let BASE_URL: String = "http://api.hidezo.co"
+	
+	// !!!:dezami SSL対応アドレス
+    private static let BASE_URL: String = "https://api.hidezo.co"
 }
 
 // MARK: - Login

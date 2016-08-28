@@ -22,7 +22,10 @@ class HDZOrderDetailTableViewController: UITableViewController {
 
         self.deleteBackButtonTitle()
 		
-        self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
+//        self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
+		self.title = self.orderInfo.supplier_name + "様宛"
+		
+		
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(HDZOrderDetailTableViewController.didSelectedMessage(_:)))
         
         HDZOrderDetailCell.register(self.tableView)
@@ -31,8 +34,10 @@ class HDZOrderDetailTableViewController: UITableViewController {
 
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //        self.tableView.estimatedRowHeight = 113.0
-		self.edgesForExtendedLayout = UIRectEdge.None
-		self.extendedLayoutIncludesOpaqueBars = false
+
+		// !!!: dezami
+//		self.edgesForExtendedLayout = UIRectEdge.None
+//		self.extendedLayoutIncludesOpaqueBars = false
 
         self.orderDetail()
     }
@@ -90,7 +95,7 @@ extension HDZOrderDetailTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let orderDetailItem: OrderDetailItem = self.orderDetailItems[indexPath.row]
         let controller: HDZOrderItemTableViewController = HDZOrderItemTableViewController.createViewController(orderDetailItem)
-        self.navigationController?.pushViewController(controller, animated: false) // true
+        self.navigationController?.pushViewController(controller, animated: true) // true
     }
 }
 

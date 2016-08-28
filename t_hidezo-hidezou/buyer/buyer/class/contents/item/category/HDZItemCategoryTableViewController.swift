@@ -160,7 +160,10 @@ extension HDZItemCategoryTableViewController {
 extension HDZItemCategoryTableViewController {
     
     private func getItem(supplierId: Int) {
-        
+		
+		// インジケーター開始
+		self.indicatorView.startAnimating()
+
         let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
             
             self.request = nil
@@ -197,9 +200,6 @@ extension HDZItemCategoryTableViewController {
 
             self.request = nil
         }
-
-		// インジケーター開始
-		self.indicatorView.startAnimating()
 
 		// Request
         self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)

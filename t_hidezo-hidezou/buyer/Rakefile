@@ -8,10 +8,10 @@ task :push_notification do
   # Environment variables are automatically read, or can be overridden by any specified options. You can also
   # conveniently use `Houston::Client.development` or `Houston::Client.production`.
   APN = Houston::Client.development
-  APN.certificate = File.read("./development_com.dezamisystem.app.buyer.pem")
+  APN.certificate = File.read("./production_com.dezamisystem.app.buyer.pem")
   # An example of the token sent back when a device registers for notifications
-  token = "<5670d567 f974e915 584791d3 6d511f6a da654bb1 3d3fff1b acb568f1 d887a9be>"
-  # token = ENV['DEVICE_TOKEN']
+  # token = "<bf3625a0 bb13bc71 e0438c6f 12435503 d4c8dce0 5a5a7506 c1d3d22a 7d295638>"
+  token = "bf3625a0bb13bc71e0438c6f12435503d4c8dce05a5a7506c1d3d22a7d295638"
 
   # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
   notification = Houston::Notification.new(device: token)

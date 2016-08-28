@@ -22,10 +22,10 @@ class HDZOrderNavigationController: UINavigationController {
     }
 	
 	// !!!:デザミ・アニメーションさせない
-	override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
-		
-		return super.popViewControllerAnimated(false);
-	}
+//	override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
+//		
+//		return super.popViewControllerAnimated(false);
+//	}
 	
     /*
     // MARK: - Navigation

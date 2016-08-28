@@ -89,7 +89,7 @@ extension HDZOrderTableViewController {
 		// !!!:デザミシステム
 		//controller.view.layoutIfNeeded()
 		
-        self.navigationController?.pushViewController(controller, animated: false) // true
+        self.navigationController?.pushViewController(controller, animated: true) // true
     }
 }
 
@@ -105,12 +105,19 @@ extension HDZOrderTableViewController {
 extension HDZOrderTableViewController {
     
     private func orderList(reset: Bool) {
-        
+		
+		// インジケータ
+		self.indicatorView.startAnimating()
+
         self.refreshControl?.beginRefreshing()
 
         if self.stopLoading {
             self.refreshControl?.endRefreshing()
             self.request = nil
+			
+			//インジケータ
+			self.indicatorView.stopAnimating()
+			
             return
         }
         
@@ -137,6 +144,7 @@ extension HDZOrderTableViewController {
             
             self.orderList += result.orderList
 			
+			//インジケータ
 			self.indicatorView.stopAnimating()
 			
             self.tableView.reloadData()
@@ -146,6 +154,7 @@ extension HDZOrderTableViewController {
             self.refreshControl?.endRefreshing()
             //self.page -= 1
 			
+			//インジケータ
 			self.indicatorView.stopAnimating()
 
 			#if DEBUG
@@ -157,9 +166,6 @@ extension HDZOrderTableViewController {
 				self.presentViewController(controller, animated: true, completion: nil)
 			#endif
         }
-
-		// インジケータ
-		self.indicatorView.startAnimating()
 
 		// Request
         self.request = HDZApi.orderList(page, completionBlock: completion, errorBlock: error)

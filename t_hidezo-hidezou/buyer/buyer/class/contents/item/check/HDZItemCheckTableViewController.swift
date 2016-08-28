@@ -158,6 +158,9 @@ extension HDZItemCheckTableViewController {
             return
         }
 		
+		//インジケータ
+		self.indicatorView.startAnimating()
+
         let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
 
 			// 注文確定
@@ -215,8 +218,6 @@ extension HDZItemCheckTableViewController {
 			self.barbuttonitemConfirm.enabled = true;
         }
 
-		//インジケータ
-		self.indicatorView.startAnimating()
 
 		// Request
         HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
