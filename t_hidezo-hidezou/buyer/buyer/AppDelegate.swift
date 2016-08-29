@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         
         if !HDZUserDefaults.login {
-            HDZUserDefaults.id = ""
+//            HDZUserDefaults.id = ""
         }
 		
 		// !!!:デザミシステム
@@ -83,6 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// デバイスに保存
 		HDZUserDefaults.devicetoken = deviceToken.description
+		
+		//ログイン状態
+		if HDZUserDefaults.login {
+			debugPrint("Now Login")
+		}
+
 	}
 
 	// Push通知が利用不可であればerrorが返ってくる
@@ -151,6 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+		
     }
 
     func applicationWillTerminate(application: UIApplication) {

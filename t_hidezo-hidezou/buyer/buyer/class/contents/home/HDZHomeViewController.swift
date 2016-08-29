@@ -22,6 +22,11 @@ class HDZHomeViewController: UITabBarController {
 			item.image = UIImage(named: assets[idx])?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
 		}
 		
+		// !!!:タブバーへバッジ表示
+		//self.tabBarController?.tabBar.items![0].badgeValue = "3" // 下階層から呼ぶ場合
+
+		self.tabBar.items![0].badgeValue = "3"
+		self.tabBar.items![1].badgeValue = "4"
     }
 
     override func didReceiveMemoryWarning() {

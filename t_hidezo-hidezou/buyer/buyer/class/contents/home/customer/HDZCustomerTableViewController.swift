@@ -31,6 +31,8 @@ class HDZCustomerTableViewController: UITableViewController {
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
+		
+		
     }
     
     override func didReceiveMemoryWarning() {
