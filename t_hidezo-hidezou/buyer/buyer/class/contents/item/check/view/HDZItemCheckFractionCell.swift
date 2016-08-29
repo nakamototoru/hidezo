@@ -56,7 +56,7 @@ extension HDZItemCheckFractionCell {
 	
 	private func updateCart(newsizestr: String ) {
 		
-		let supplierId:Int = Int( self.order.supplierId )
+		let supplierId:String = self.order.supplierId
 		try! HDZOrder.updateSize(supplierId, itemId: self.order.itemId, dynamic: self.order.dynamic, newsize: newsizestr)
 		
 		self.delegate?.itemcheckcellReload()		

@@ -81,17 +81,11 @@ extension HDZItemCheckCell {
 	
 	private func updateCart(newsizestr: String ) {
 		
-		let supplierId:Int = Int( self.order.supplierId )
+		let supplierId:String = self.order.supplierId
 		try! HDZOrder.updateSize(supplierId, itemId: self.order.itemId, dynamic: self.order.dynamic, newsize: newsizestr)
 
 		//
 		self.delegate?.itemcheckcellReload()
-		
-//		do {
-//			try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true)
-//		} catch let error as NSError {
-//			debugPrint(error)
-//		}
 		
 	}
 	

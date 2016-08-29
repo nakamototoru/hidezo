@@ -29,7 +29,7 @@ class HDZItemDynamicCell: UITableViewCell {
 	}
 	
     private var attr_flg: AttrFlg = AttrFlg.direct
-    private var supplierId: Int = 0
+    private var supplierId: String = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,7 +52,7 @@ extension HDZItemDynamicCell {
         tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemDynamicCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, dynamicItem: DynamicItem, attr_flg: AttrFlg, supplierId: Int) -> HDZItemDynamicCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, dynamicItem: DynamicItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemDynamicCell {
         let cell: HDZItemDynamicCell = tableView.dequeueReusableCellWithIdentifier("HDZItemDynamicCell", forIndexPath: indexPath) as! HDZItemDynamicCell
         cell.dynamicItem = dynamicItem
         cell.attr_flg = attr_flg

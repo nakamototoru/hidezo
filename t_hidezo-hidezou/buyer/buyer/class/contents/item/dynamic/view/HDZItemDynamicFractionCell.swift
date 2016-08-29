@@ -33,7 +33,7 @@ class HDZItemDynamicFractionCell: UITableViewCell {
 	}
 	
 	private var attr_flg: AttrFlg = AttrFlg.direct
-	private var supplierId: Int = 0
+	private var supplierId: String = ""
 
 	var parent:UITableViewController!
 //	var delegate:HDZItemFractionViewControllerDelegate?
@@ -61,7 +61,7 @@ extension HDZItemDynamicFractionCell {
 		tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemDynamicFractionCell")
 	}
 	
-	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, dynamicItem: DynamicItem, attr_flg: AttrFlg, supplierId: Int) -> HDZItemDynamicFractionCell {
+	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, dynamicItem: DynamicItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemDynamicFractionCell {
 		let cell: HDZItemDynamicFractionCell = tableView.dequeueReusableCellWithIdentifier("HDZItemDynamicFractionCell", forIndexPath: indexPath) as! HDZItemDynamicFractionCell
 		cell.dynamicItem = dynamicItem
 		cell.attr_flg = attr_flg

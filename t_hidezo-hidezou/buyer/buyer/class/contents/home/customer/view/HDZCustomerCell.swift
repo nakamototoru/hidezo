@@ -17,7 +17,9 @@ class HDZCustomerCell: UITableViewCell {
     @IBOutlet weak var indexLabel: UILabel!
     @IBOutlet weak var shopNameLabel: UILabel!
     @IBOutlet weak var orderButton: UIButton!
-    
+	
+	var viewBadge:HDZBadgeView! = nil
+	
     private var friendInfo: FriendInfo! = nil
     private var viewController: UIViewController!
 	
@@ -48,6 +50,7 @@ class HDZCustomerCell: UITableViewCell {
     }
 }
 
+// MARK: - Create
 extension HDZCustomerCell {
     
     internal class func register(tableView: UITableView) {
@@ -66,6 +69,7 @@ extension HDZCustomerCell {
     }
 }
 
+// MARK: - Action
 extension HDZCustomerCell {
     
     @IBAction func didSelectedOrder(button: UIButton) {
@@ -87,10 +91,28 @@ extension HDZCustomerCell {
     }
 }
 
+// MARK: - Gesture
 extension HDZCustomerCell {
 	
 	func tapGestureFromLabel(sender:UITapGestureRecognizer){
 		delegate?.customercellSelectedRow(self.rowOfCell)
 	}
+}
 
+// MARK: - Badge
+extension HDZCustomerCell {
+	
+	func putBadge(value: Int) {
+		
+		// !!!バッジビュー
+		if self.viewBadge == nil {
+			let badgepos: CGPoint = CGPointMake(self.orderButton.frame.origin.x , self.orderButton.frame.origin.y)
+			self.viewBadge = HDZBadgeView.createWithCenter(badgepos)
+			self.addSubview(self.viewBadge)
+		}
+		self.viewBadge.updateBadge(value)
+	}
+	func eraseBadge() {
+		self.viewBadge.hideBadge()
+	}
 }

@@ -11,7 +11,7 @@ import UIKit
 class HDZItemStaticTableViewController: UITableViewController {
 
     var attr_flg: AttrFlg = AttrFlg.direct
-    var supplierId: Int = 0
+    var supplierId: String = ""
     var categoryName: String = ""
     var staticItem: [StaticItem] = []
 
@@ -39,7 +39,7 @@ class HDZItemStaticTableViewController: UITableViewController {
 
 extension HDZItemStaticTableViewController {
     
-    internal class func createViewController(categoryName: String, categoryItems: [StaticItem], attr_flg: AttrFlg, supplierId: Int) -> HDZItemStaticTableViewController {
+    internal class func createViewController(categoryName: String, categoryItems: [StaticItem], attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticTableViewController {
         let controller: HDZItemStaticTableViewController = UIViewController.createViewController("HDZItemStaticTableViewController")
         controller.categoryName = categoryName
         controller.staticItem = categoryItems

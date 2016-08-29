@@ -12,7 +12,7 @@ import Wrap
 
 struct Message: WrapCustomizable {
     
-    let id: Int
+    let id: String
     let uuid: String
     let order_no: String
 }
@@ -64,7 +64,7 @@ struct MessageInfo: Unboxable {
 
 struct MessageAdd: WrapCustomizable {
 
-    let id: Int
+    let id: String
     let uuid: String
     let charge: String
     let message: String

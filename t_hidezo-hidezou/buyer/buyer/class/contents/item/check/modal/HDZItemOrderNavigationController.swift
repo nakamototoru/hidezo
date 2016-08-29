@@ -10,7 +10,7 @@ import UIKit
 
 class HDZItemOrderNavigationController: UINavigationController {
 
-	var supplierId: Int = 0
+	var supplierId: String = ""
 	
     override func viewDidLoad() {
         super.viewDidLoad()

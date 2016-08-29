@@ -22,7 +22,7 @@ class HDZItemStaticCell: UITableViewCell {
 	
     private var staticItem: StaticItem!
     private var attr_flg: AttrFlg = AttrFlg.direct
-    private var supplierId: Int = 0
+    private var supplierId: String = ""
 	var itemsize:String = "0" {
 		didSet {
 			self.itemCount.text = itemsize
@@ -62,7 +62,7 @@ extension HDZItemStaticCell {
         tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: Int) -> HDZItemStaticCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticCell {
 		
 		let cell: HDZItemStaticCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticCell", forIndexPath: indexPath) as! HDZItemStaticCell
         cell.staticItem = staticItem

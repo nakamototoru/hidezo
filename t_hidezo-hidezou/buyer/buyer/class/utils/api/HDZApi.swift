@@ -19,13 +19,13 @@ internal class HDZApi {
 // MARK: - Login
 extension HDZApi {
 
-    internal class func loginCheck(id: Int, password: String, completionBlock: (unboxable: LoginCheckResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginCheckError?) -> Void) -> Alamofire.Request? {
+    internal class func loginCheck(id: String, password: String, completionBlock: (unboxable: LoginCheckResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginCheckError?) -> Void) -> Alamofire.Request? {
         let requestUrl: String = BASE_URL + "/login_check/store"
         let parameters: LoginCheck = LoginCheck(id: id, uuid: HDZUserDefaults.uuid, password: password)
         return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
     }
 
-    internal class func login(id: Int, password: String, completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginResult?) -> Void) -> Alamofire.Request? {
+    internal class func login(id: String, password: String, completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginResult?) -> Void) -> Alamofire.Request? {
         let requestUrl: String = BASE_URL + "/login/store"
         let parameters: Login = Login(id: id, uuid: HDZUserDefaults.uuid, password: password)
         return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
@@ -60,7 +60,7 @@ extension HDZApi {
 extension HDZApi {
 	
 	// 注文
-    internal class func order(supplier_id: Int, deliver_to: String, delivery_day: String, charge: String, items: Results<HDZOrder>, completionBlock: (unboxable: OrderResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderError?) -> Void) {
+    internal class func order(supplier_id: String, deliver_to: String, delivery_day: String, charge: String, items: Results<HDZOrder>, completionBlock: (unboxable: OrderResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderError?) -> Void) {
 		
 		//
         let requestUrl: String = BASE_URL + "/store/order"
@@ -208,7 +208,7 @@ extension HDZApi {
 // MARK: - Item
 extension HDZApi {
     
-    internal class func item(supplierId: Int, completionBlock: (unboxable: ItemResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: ItemError?) -> Void) -> Alamofire.Request? {
+    internal class func item(supplierId: String, completionBlock: (unboxable: ItemResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: ItemError?) -> Void) -> Alamofire.Request? {
         let requestUrl: String = BASE_URL + "/store/item"
         let parameters: Item = Item(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplierId)
         
@@ -272,7 +272,7 @@ extension HDZApi {
 // MARK: - PushNotification
 extension HDZApi {
 	
-	internal class func postDeviceToken(id: Int, password: String, completionBlock: (unboxable: DeviceTokenResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: DeviceTokenResult?) -> Void) -> Alamofire.Request? {
+	internal class func postDeviceToken(id: String, password: String, completionBlock: (unboxable: DeviceTokenResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: DeviceTokenResult?) -> Void) -> Alamofire.Request? {
 		let requestUrl: String = BASE_URL + "/store/device_token"
 		let parameters: DeviceToken = DeviceToken(id: id, uuid: HDZUserDefaults.uuid, device_token: HDZUserDefaults.devicetoken, device_flg: "1")
 		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)

@@ -11,7 +11,7 @@ import Unbox
 import Wrap
 
 struct Friend: WrapCustomizable {
-    let id: Int
+    let id: String
     let uuid: String
 }
 
@@ -42,7 +42,7 @@ struct FriendResult: Unboxable {
 struct FriendInfo: Unboxable {
     
     let address: String
-    let id: Int
+    let id: String
     let mail_addr: String
     let minister: String
     let mobile: String

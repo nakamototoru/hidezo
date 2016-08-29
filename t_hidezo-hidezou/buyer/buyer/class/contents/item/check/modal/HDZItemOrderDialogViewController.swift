@@ -11,7 +11,7 @@ import Alamofire
 
 class HDZItemOrderDialogViewController: UIViewController {
 
-	var supplierId: Int = 0
+	var supplierId: String = ""
 
 	@IBOutlet weak var pickerviewDate: UIPickerView!
 	@IBOutlet weak var pickerviewCharge: UIPickerView!
@@ -70,7 +70,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 // MARK: - API
 extension HDZItemOrderDialogViewController {
 	
-	private func getItem(supplierId: Int) {
+	private func getItem(supplierId: String) {
 		
 		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
 			

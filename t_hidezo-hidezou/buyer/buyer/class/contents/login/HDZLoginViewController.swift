@@ -70,25 +70,34 @@ extension HDZLoginViewController {
     @IBAction func didSelectedLogin(button: UIButton) {
         
         guard let idString: String = self.idTextField.text else {
+			
+			UIWarning.Warning("IDが入力されていません")
+			
             return
         }
         
-        guard let id: Int = Int(idString) else {
-            return
-        }
-        
+//        guard let id: Int = Int(idString) else {
+//
+//			UIWarning.Warning("IDフォーマットに誤りがあります。")
+//
+//			return
+//        }
+		
         guard let password: String = self.passwordTextField.text else {
+			
+			UIWarning.Warning("パスワードが入力されていません")
+
             return
         }
         
-        self.loginCheck(id, password: password)
+        self.loginCheck(idString, password: password)
     }
 }
 
 // MARK: - private
 extension HDZLoginViewController {
     
-    private func loginCheck(id: Int, password: String) {
+    private func loginCheck(id: String, password: String) {
         
         let completion: (unboxable: LoginCheckResult?) -> Void = { (unboxable) in
             
@@ -114,7 +123,7 @@ extension HDZLoginViewController {
         self.loginCheckRequest = HDZApi.loginCheck(id, password: password, completionBlock: completion, errorBlock: error)
     }
     
-    private func login(id: Int, password: String) {
+    private func login(id: String, password: String) {
      
         let completion: (unboxable: LoginResult?) -> Void = { (unboxable) in
             
@@ -176,9 +185,12 @@ extension HDZLoginViewController {
     }
     
     private func settingIdText(notification: NSNotification!) {
-        let id: Int = HDZUserDefaults.id
-        if id > 0 {
-            self.idTextField.text = String(format: "%ld", id)
-        }
+		
+		self.idTextField.text = HDZUserDefaults.id
+		
+//        let id: Int = Int( HDZUserDefaults.id )!
+//        if id > 0 {
+//            self.idTextField.text = String(format: "%ld", id)
+//        }
     }
 }

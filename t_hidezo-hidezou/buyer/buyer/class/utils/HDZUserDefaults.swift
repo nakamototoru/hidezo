@@ -39,14 +39,17 @@ internal class HDZUserDefaults {
     // MARK: - ID
     private static let KEY_USER_DEFAULTS_ID: String = "key_user_defaults_id"
     
-    internal class var id: Int {
+    internal class var id: String {
         get {
             let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            return userDefaults.integerForKey(KEY_USER_DEFAULTS_ID)
+			if let response:String = userDefaults.stringForKey( KEY_USER_DEFAULTS_ID ) {
+				return response
+			}
+            return ""
         }
         set {
             let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setInteger(newValue, forKey: KEY_USER_DEFAULTS_ID)
+            userDefaults.setValue(newValue, forKey: KEY_USER_DEFAULTS_ID)
             userDefaults.synchronize()
         }
     }

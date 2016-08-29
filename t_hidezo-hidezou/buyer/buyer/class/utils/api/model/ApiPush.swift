@@ -14,7 +14,7 @@ import Wrap
 // MARK: Request
 internal struct DeviceToken: WrapCustomizable {
 	
-	let id: Int
+	let id: String
 	let uuid: String
 	let device_token: String
 	let device_flg: String

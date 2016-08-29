@@ -14,7 +14,7 @@ class HDZItemCheckTableViewController: UITableViewController {
 
 	@IBOutlet weak var barbuttonitemConfirm: UIBarButtonItem!
 	
-    private var supplierId: Int = 0
+    private var supplierId: String = ""
     private var result: Results<HDZOrder>? = nil
 	private var request: Alamofire.Request? = nil
 
@@ -64,7 +64,7 @@ class HDZItemCheckTableViewController: UITableViewController {
 // MARK: - Create
 extension HDZItemCheckTableViewController {
     
-    internal class func createViewController(supplierId: Int) -> HDZItemCheckTableViewController {
+    internal class func createViewController(supplierId: String) -> HDZItemCheckTableViewController {
         let controller: HDZItemCheckTableViewController = UIViewController.createViewController("HDZItemCheckTableViewController")
         controller.supplierId = supplierId
         return controller

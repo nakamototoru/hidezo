@@ -159,7 +159,7 @@ extension HDZItemCategoryTableViewController {
 // MARK: - API
 extension HDZItemCategoryTableViewController {
     
-    private func getItem(supplierId: Int) {
+    private func getItem(supplierId: String) {
 		
 		// インジケーター開始
 		self.indicatorView.startAnimating()
@@ -176,12 +176,15 @@ extension HDZItemCategoryTableViewController {
             
             if let staticItems: [StaticItem] = result.staticItem {
                 for staticItem in staticItems {
-                    self.categoryName[staticItem.category.id] = staticItem.category.name
+					
+					let index:Int = Int(staticItem.category.id)!
+					
+                    self.categoryName[ index ] = staticItem.category.name
                     
-                    if self.categoryItem[staticItem.category.id] == nil {
-                        self.categoryItem[staticItem.category.id] = [staticItem]
+                    if self.categoryItem[ index ] == nil {
+                        self.categoryItem[ index ] = [staticItem]
                     } else {
-                        self.categoryItem[staticItem.category.id]?.append(staticItem)
+                        self.categoryItem[ index ]?.append(staticItem)
                     }
                 }
             }

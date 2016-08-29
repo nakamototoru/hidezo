@@ -27,7 +27,7 @@ class HDZItemStaticFractionCell: UITableViewCell {
 	
 	private var staticItem: StaticItem!
 	private var attr_flg: AttrFlg = AttrFlg.direct
-	private var supplierId: Int = 0
+	private var supplierId: String = ""
 	private var itemsize:String = "0" {
 		didSet {
 			self.itemCount.text = itemsize
@@ -60,7 +60,7 @@ extension HDZItemStaticFractionCell {
 		tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticFractionCell")
 	}
 	
-	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: Int) -> HDZItemStaticFractionCell {
+	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticFractionCell {
 		
 		let cell: HDZItemStaticFractionCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticFractionCell", forIndexPath: indexPath) as! HDZItemStaticFractionCell
 		cell.staticItem = staticItem

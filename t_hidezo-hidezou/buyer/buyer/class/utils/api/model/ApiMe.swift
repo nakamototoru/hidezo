@@ -12,7 +12,7 @@ import Wrap
 
 struct Me: WrapCustomizable {
     
-    let id: Int
+    let id: String
     let uuid: String
 }
 

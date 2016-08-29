@@ -12,8 +12,8 @@ import RealmSwift
 class HDZOrder: Object {
     
     dynamic var id: String = ""
-    dynamic var supplierId: Int64 = 0
-    dynamic var itemId: Int = 0
+    dynamic var supplierId: String = ""
+    dynamic var itemId: String = ""
     dynamic var size: String = "0" //Int = 0
     dynamic var name: String = ""
     dynamic var price: String = ""
@@ -38,7 +38,7 @@ class HDZOrder: Object {
 
 extension HDZOrder {
     
-	internal class func add(supplierId: Int, itemId: Int, size: String, name: String, price: String, scale: String, standard: String, imageURL: String?, dynamic: Bool, numScale: [String]) throws {
+	internal class func add(supplierId: String, itemId: String, size: String, name: String, price: String, scale: String, standard: String, imageURL: String?, dynamic: Bool, numScale: [String]) throws {
         
         var order: HDZOrder! = nil
         do {
@@ -51,7 +51,7 @@ extension HDZOrder {
             order = HDZOrder()
             order.id = NSUUID().UUIDString
             order.itemId = itemId
-            order.supplierId = Int64(supplierId)
+            order.supplierId = supplierId
             order.dynamic = dynamic
 			
 			// !!!:dezami
@@ -91,14 +91,21 @@ extension HDZOrder {
         try realm.write(block)
     }
     
-    internal class func queries(supplierId: Int, itemId: Int, dynamic: Bool) throws -> HDZOrder? {
-        let predicate = NSPredicate(format: "supplierId = %ld AND itemId = %ld AND dynamic = %d", supplierId, itemId, dynamic.hashValue)
+    internal class func queries(supplierId: String, itemId: String, dynamic: Bool) throws -> HDZOrder? {
+//        let predicate = NSPredicate(format: "supplierId = %ld AND itemId = %ld AND dynamic = %d", supplierId, itemId, dynamic.hashValue)
+		
+		let hash:String = String( dynamic.hashValue )
+		let str:String = "supplierId = '" + supplierId + "' AND itemId = '" + itemId + "' AND dynamic = " + hash
+		let predicate = NSPredicate(format: str)
 		// !!!:ソート追加
         return try Realm().objects(HDZOrder.self).filter(predicate).sorted("createdAt").first
     }
 
-    internal class func queries(supplierId: Int) throws -> Results<HDZOrder> {
-        let predicate = NSPredicate(format: "supplierId = %ld", supplierId)
+    internal class func queries(supplierId: String) throws -> Results<HDZOrder> {
+//        let predicate = NSPredicate(format: "supplierId = %ld", supplierId)
+
+		let str:String = "supplierId = '" + supplierId + "'"
+		let predicate = NSPredicate(format: str)
 		// !!!:ソート追加
         return try Realm().objects(HDZOrder.self).filter(predicate).sorted("createdAt")
     }
@@ -110,7 +117,7 @@ extension HDZOrder {
             })
     }
 
-    internal class func deleteItem(supplierId: Int, itemId: Int, dynamic: Bool) throws {
+    internal class func deleteItem(supplierId: String, itemId: String, dynamic: Bool) throws {
         if let result: HDZOrder = try self.queries(supplierId, itemId: itemId, dynamic: dynamic) {
             let realm: Realm = try Realm()
             try realm.write({
@@ -119,13 +126,13 @@ extension HDZOrder {
         }
     }
     
-    internal class func deleteSupplier(supplierId: Int) throws {
+    internal class func deleteSupplier(supplierId: String) throws {
         let result: Results<HDZOrder> = try self.queries(supplierId)
         try Realm().delete(result)
     }
 	
 	// !!!: dezami
-	internal class func updateSize(supplierId: Int, itemId: Int, dynamic: Bool, newsize: String) throws {
+	internal class func updateSize(supplierId: String, itemId: String, dynamic: Bool, newsize: String) throws {
 
 		if let result: HDZOrder = try self.queries(supplierId, itemId: itemId, dynamic: dynamic) {
 			let realm: Realm = try Realm()

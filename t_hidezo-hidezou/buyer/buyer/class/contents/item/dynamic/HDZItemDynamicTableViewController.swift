@@ -14,7 +14,7 @@ class HDZItemDynamicTableViewController: UITableViewController {
     private var dynamicItemInfo: DynamicItemInfo!
     private var dynamicItem: [DynamicItem] = []
     private var attr_flg: AttrFlg = .other
-    private var supplierId: Int = 0
+    private var supplierId: String = ""
 	
 	private var friendInfo: FriendInfo! = nil
 	private var itemResult: ItemResult! = nil
@@ -53,7 +53,7 @@ class HDZItemDynamicTableViewController: UITableViewController {
 
 extension HDZItemDynamicTableViewController {
     
-    internal class func createViewController(dynamicItemInfo: DynamicItemInfo, dynamicItem: [DynamicItem], attr_flg: AttrFlg, supplierId: Int) -> HDZItemDynamicTableViewController {
+    internal class func createViewController(dynamicItemInfo: DynamicItemInfo, dynamicItem: [DynamicItem], attr_flg: AttrFlg, supplierId: String) -> HDZItemDynamicTableViewController {
         let controller: HDZItemDynamicTableViewController = UIViewController.createViewController("HDZItemDynamicTableViewController")
         controller.dynamicItem = dynamicItem
         controller.dynamicItemInfo = dynamicItemInfo

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         
         if !HDZUserDefaults.login {
-            HDZUserDefaults.id = 0
+            HDZUserDefaults.id = ""
         }
 		
 		// !!!:デザミシステム
@@ -161,10 +161,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let host: String = url.host else {
             return true
         }
-        
-        if let id: Int = Int(host) {
-            HDZUserDefaults.id = id
-        }
+		HDZUserDefaults.id = host
+		
+//        if let id: String = Int(host) {
+//        }
+		
         return true
     }
 

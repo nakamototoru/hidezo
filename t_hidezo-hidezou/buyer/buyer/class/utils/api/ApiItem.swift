@@ -11,9 +11,9 @@ import Unbox
 import Wrap
 
 struct Item: WrapCustomizable {
-    let id: Int
+    let id: String
     let uuid: String
-    let supplier_id: Int
+    let supplier_id: String
 }
 
 struct ItemResult: Unboxable {
@@ -57,7 +57,7 @@ struct StaticItem: Unboxable {
     let category: Category
     let code: String
     let detail: String
-    let id: Int
+    let id: String
     let image: NSURL
     let loading: Int
     let min_order_count: String
@@ -98,7 +98,7 @@ struct DynamicItemInfo: Unboxable {
 
 struct Supplier: Unboxable {
     
-    let supplier_id: Int
+    let supplier_id: String
     let supplier_name: String
     
     init(unboxer: Unboxer) {
@@ -109,7 +109,7 @@ struct Supplier: Unboxable {
 
 struct DynamicItem: Unboxable {
     
-    let id: Int
+    let id: String
     let item_name: String
     let num_scale: [String]
     let price: String
@@ -124,7 +124,7 @@ struct DynamicItem: Unboxable {
 
 struct Category: Unboxable {
     
-    let id: Int
+    let id: String
     let name: String
     
     init(unboxer: Unboxer) {

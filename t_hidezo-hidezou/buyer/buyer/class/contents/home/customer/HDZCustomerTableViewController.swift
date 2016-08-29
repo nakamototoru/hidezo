@@ -65,23 +65,26 @@ extension HDZCustomerTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		
         let friendInfo: FriendInfo = self.friendList[indexPath.row]
         let cell: HDZCustomerCell = HDZCustomerCell.dequeueReusableCell(self, tableView: tableView, for: indexPath, friendInfo: friendInfo)
 		cell.delegate = self
 		cell.rowOfCell = indexPath.row
+		
         return cell
     }
-	
-	// TODO:使わない
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let friendInfo: FriendInfo = self.friendList[indexPath.row]
-//        let controller: HDZCustomerDetailTableViewController = HDZCustomerDetailTableViewController.createViewController(friendInfo)
-//        self.navigationController?.pushViewController(controller, animated: true)
-//    }
+
+	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		let customcell:HDZCustomerCell = cell as! HDZCustomerCell
+		
+		// !!!:バッジ表示
+		customcell.putBadge( indexPath.row + 1 )
+	}
 	
 }
 
-// MARK: - Table view delegate
+// MARK: - HDZCustomerCellDelegate
 extension HDZCustomerTableViewController : HDZCustomerCellDelegate {
 
 	func customercellSelectedRow(row: Int) {

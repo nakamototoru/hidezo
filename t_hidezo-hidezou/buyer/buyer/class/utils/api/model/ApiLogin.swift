@@ -23,7 +23,7 @@ internal enum LoginCheckStatus: String, UnboxableEnum {
 
 internal struct LoginCheck: WrapCustomizable {
     
-    let id: Int
+    let id: String
     let uuid: String
     let password: String
 }
@@ -54,7 +54,7 @@ internal struct LoginCheckResult: Unboxable {
 
 internal struct Login: WrapCustomizable {
     
-    let id: Int
+    let id: String
     let uuid: String
     let password: String
 }

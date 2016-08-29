@@ -12,7 +12,7 @@ import Wrap
 
 struct OrderList: WrapCustomizable {
     
-    let id: Int
+    let id: String
     let uuid: String
     let page: Int
 }
@@ -46,7 +46,7 @@ struct OrderInfo: Unboxable {
     let deliver_at: String // = "01/01"
     let order_at: String // = "06/12"
     let order_no: String
-    let supplier: Int
+    let supplier: String
     let supplier_name: String
     
     init(unboxer: Unboxer) {
@@ -60,7 +60,7 @@ struct OrderInfo: Unboxable {
 
 struct OrderDetail: WrapCustomizable {
     
-    let id: Int
+    let id: String
     let uuid: String
     let order_no: String
 }
@@ -127,7 +127,7 @@ struct OrderDetailItem: Unboxable {
     
     // Dynamic
     let code: String
-    let id: Int
+    let id: String
     let name: String
     let num_scale: [String]?
     let order_num: String
@@ -162,9 +162,9 @@ struct Order: WrapCustomizable {
 //    delivery_day	配送日
 //    charge	注文担当者
     
-    let id: Int
+    let id: String
     let uuid: String
-    let supplier_id: Int
+    let supplier_id: String
     let static_item: [String] // ID,個数　カンマ区切り
     let dynamic_item: [String] // ID,個数　カンマ区切り
     let deliver_to: String
