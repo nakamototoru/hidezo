@@ -22,8 +22,7 @@ task :push_notification do
   notification.sound = "sosumi.aiff"
   notification.category = "INVITE_CATEGORY"
   notification.content_available = true
-  notification.custom_data = {"data": {"supplierList": [ {"supplierId": "0000"}, {"supplierId": "1111"} ], "messageUpList": [ {"supplierId": "0011", "messageCount": "1"},{"supplierId": "1100", "messageCount": "9"}] }}
-
+  notification.custom_data = {"supplierUp": {"supplierUpList": [ {"supplierId": "0000"}, {"supplierId": "1111"} ]}, "messageUp": {"messageUpList": [ {"order_no": "0011", "messageCount": "1"},{"order_no": "1100", "messageCount": "9"} ] }}
 
   # And... sent! That's all it takes.
   APN.push(notification)

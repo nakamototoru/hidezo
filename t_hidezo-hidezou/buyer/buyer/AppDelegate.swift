@@ -143,28 +143,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		for (key, value) in dict {
 			
 			let strkey:String = key as! String
-			if strkey != "aps" {
+			if strkey == "aps" {
+			}
+			else if strkey == "supplierUp" {
 				#if DEBUG
 					debugPrint(strkey)
-//					debugPrint(value)
+					debugPrint(value)
 				#endif
-				
+
 				do {
-					let supplierList: NotificationDataResult = try Unbox(value as! UnboxableDictionary)
-						
+					let supplierList: SupplierUpListResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
-					debugPrint(supplierList)
-						
+					//debugPrint(supplierList)
+					HDZPushNotificationManager.shared.supplierUpList = supplierList
+					
+					// TODO:ローカル通知
+
 				} catch {
-						
 					//... パース失敗...
 					debugPrint("... パース失敗...")
 				}
 
-				#if DEBUG
-					debugPrint("/")
-				#endif
 			}
+			else if strkey == "messageUp" {
+				#if DEBUG
+					debugPrint(strkey)
+					debugPrint(value)
+				#endif
+				
+				do {
+					let messageList: MessageUpListResult = try Unbox(value as! UnboxableDictionary)
+					//... パース成功...
+					//debugPrint(supplierList)
+					HDZPushNotificationManager.shared.messageUpList = messageList
+					
+					// TODO:ローカル通知
+					
+				} catch {
+					//... パース失敗...
+					debugPrint("... パース失敗...")
+				}
+			}
+			#if DEBUG
+				debugPrint("/")
+			#endif
 		}
 		
 	}

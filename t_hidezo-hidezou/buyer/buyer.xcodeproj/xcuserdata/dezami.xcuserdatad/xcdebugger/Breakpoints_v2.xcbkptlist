@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "buyer/AppDelegate.swift"
-            timestampString = "494248550.083835"
+            timestampString = "494249741.619874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "application(_:handleOpenURL:)"
             landmarkType = "5">
          </BreakpointContent>

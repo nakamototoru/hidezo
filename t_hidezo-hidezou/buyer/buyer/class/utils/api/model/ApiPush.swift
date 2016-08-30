@@ -45,33 +45,40 @@ internal struct SupplierId:Unboxable {
 
 internal struct MessageUp:Unboxable {
 	
-	let supplierId:String
+	let order_no:String
 	let messageCount:String
 	
 	init(unboxer: Unboxer) {
-		self.supplierId = unboxer.unbox("supplierId")
+		self.order_no = unboxer.unbox("order_no")
 		self.messageCount = unboxer.unbox("messageCount")
 	}
-	
 }
 
-//internal struct SupplierListResult: Unboxable {
-//	
-//	let supplierList: [SupplierId]
-//	
-//	init(unboxer: Unboxer) {
-//		self.supplierList = unboxer.unbox("supplierList")
-//	}
-//}
-
-internal struct NotificationDataResult:Unboxable {
+internal struct SupplierUpListResult: Unboxable {
 	
-	let supplierList: [SupplierId]
-	let messageUpList: [MessageUp]
-
+	let supplierUpList: [SupplierId]
+	
 	init(unboxer: Unboxer) {
-		self.supplierList = unboxer.unbox("supplierList")
+		self.supplierUpList = unboxer.unbox("supplierUpList")
+	}
+}
+
+internal struct MessageUpListResult: Unboxable {
+	
+	let messageUpList: [MessageUp]
+	
+	init(unboxer: Unboxer) {
 		self.messageUpList = unboxer.unbox("messageUpList")
 	}
-
 }
+
+//internal struct NotificationDataResult:Unboxable {
+//	
+//	let supplierList: [SupplierId]
+//	let messageUpList: [MessageUp]
+//
+//	init(unboxer: Unboxer) {
+//		self.supplierList = unboxer.unbox("supplierList")
+//		self.messageUpList = unboxer.unbox("messageUpList")
+//	}
+//}
