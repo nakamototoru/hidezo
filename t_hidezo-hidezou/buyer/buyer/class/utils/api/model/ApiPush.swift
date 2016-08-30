@@ -33,12 +33,45 @@ internal struct DeviceTokenResult: Unboxable {
 }
 
 // MARK: - CustomData
-// MARK: Response
-internal struct CustomDataResult: Unboxable {
+
+internal struct SupplierId:Unboxable {
 	
-	let custom_data: String
+	let supplierId: String
 	
 	init(unboxer: Unboxer) {
-		self.custom_data = unboxer.unbox("custom_data")
+		self.supplierId = unboxer.unbox("supplierId")
 	}
+}
+
+internal struct MessageUp:Unboxable {
+	
+	let supplierId:String
+	let messageCount:String
+	
+	init(unboxer: Unboxer) {
+		self.supplierId = unboxer.unbox("supplierId")
+		self.messageCount = unboxer.unbox("messageCount")
+	}
+	
+}
+
+//internal struct SupplierListResult: Unboxable {
+//	
+//	let supplierList: [SupplierId]
+//	
+//	init(unboxer: Unboxer) {
+//		self.supplierList = unboxer.unbox("supplierList")
+//	}
+//}
+
+internal struct NotificationDataResult:Unboxable {
+	
+	let supplierList: [SupplierId]
+	let messageUpList: [MessageUp]
+
+	init(unboxer: Unboxer) {
+		self.supplierList = unboxer.unbox("supplierList")
+		self.messageUpList = unboxer.unbox("messageUpList")
+	}
+
 }

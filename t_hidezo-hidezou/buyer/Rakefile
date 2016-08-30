@@ -11,7 +11,7 @@ task :push_notification do
   APN.certificate = File.read("./production_com.dezamisystem.app.buyer.pem")
   # An example of the token sent back when a device registers for notifications
   # token = "<bf3625a0 bb13bc71 e0438c6f 12435503 d4c8dce0 5a5a7506 c1d3d22a 7d295638>"
-  token = "bf3625a0bb13bc71e0438c6f12435503d4c8dce05a5a7506c1d3d22a7d295638"
+  token = "be46aa4f9508a4409c2bc61695442dbc751f57c2635e70b759d1c7af956e8a37"
 
   # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
   notification = Houston::Notification.new(device: token)
@@ -22,7 +22,8 @@ task :push_notification do
   notification.sound = "sosumi.aiff"
   notification.category = "INVITE_CATEGORY"
   notification.content_available = true
-  notification.custom_data = {custom_data: "json format"}
+  notification.custom_data = {"data": {"supplierList": [ {"supplierId": "0000"}, {"supplierId": "1111"} ], "messageUpList": [ {"supplierId": "0011", "messageCount": "1"},{"supplierId": "1100", "messageCount": "9"}] }}
+
 
   # And... sent! That's all it takes.
   APN.push(notification)

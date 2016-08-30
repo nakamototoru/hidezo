@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
 		
-		print("deviceToken: \(deviceToken.description)")
+		print(">>>> deviceToken: \(deviceToken.description)")
 		
 		// デバイスに保存
 		HDZUserDefaults.devicetoken = deviceToken.description
@@ -110,18 +110,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	// Push通知受信時とPush通知をタッチして起動したときに呼ばれる
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+		
+		NSLog("**** didReceiveRemoteNotification ****")
+		
 		switch application.applicationState {
 		case .Inactive:
 			// アプリがバックグラウンドにいる状態で、Push通知から起動したとき
-			NSLog("applicationState.Inactive")
+			NSLog("> applicationState.Inactive")
 			break
 		case .Active:
 			// アプリ起動時にPush通知を受信したとき
-			NSLog("applicationState.Active")
+			NSLog("> applicationState.Active")
 			break
 		case .Background:
 			// アプリがバックグラウンドにいる状態でPush通知を受信したとき
-			NSLog("applicationState.Background")
+			NSLog("> applicationState.Background")
 			break
 		}
 		//全ての通知を削除
@@ -131,20 +134,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// カスタムデータ
 		guard let dict:[NSObject : AnyObject] = userInfo else {
-			print("No userInfo found in RemoteNotification")
+			print(">> No userInfo found in RemoteNotification")
 			return
 		}
 		#if DEBUG
-		debugPrint("Remote UserInfo")
+		debugPrint("> Remote UserInfo")
 		#endif
 		for (key, value) in dict {
 			
 			let strkey:String = key as! String
 			if strkey != "aps" {
 				#if DEBUG
-				debugPrint(strkey)
-				debugPrint(value)
-				debugPrint("/")
+					debugPrint(strkey)
+//					debugPrint(value)
+				#endif
+				
+				do {
+					let supplierList: NotificationDataResult = try Unbox(value as! UnboxableDictionary)
+						
+					//... パース成功...
+					debugPrint(supplierList)
+						
+				} catch {
+						
+					//... パース失敗...
+					debugPrint("... パース失敗...")
+				}
+
+				#if DEBUG
+					debugPrint("/")
 				#endif
 			}
 		}
