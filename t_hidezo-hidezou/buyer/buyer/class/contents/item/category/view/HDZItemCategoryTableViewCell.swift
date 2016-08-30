@@ -12,6 +12,8 @@ class HDZItemCategoryTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var labelName: UILabel!
 	
+	var viewBadge:HDZBadgeView! = nil
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,6 +39,25 @@ extension HDZItemCategoryTableViewCell {
 		let cell: HDZItemCategoryTableViewCell = tableView.dequeueReusableCellWithIdentifier("HDZItemCategoryTableViewCell", forIndexPath: indexPath) as! HDZItemCategoryTableViewCell
 
 		return cell
+	}
+
+}
+
+extension HDZItemCategoryTableViewCell {
+	
+	func putBadge(value: Int) {
+		
+		// !!!バッジビュー
+		if self.viewBadge == nil {
+			let badgepos: CGPoint = CGPointMake(self.labelName.frame.origin.x, 0) // self.labelName.frame.origin.x
+			let anchor:CGPoint = CGPointMake(1, 0)
+			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+			self.addSubview(self.viewBadge)
+		}
+		self.viewBadge.updateBadge(value)
+	}
+	func eraseBadge() {
+		self.viewBadge.hideBadge()
 	}
 
 }

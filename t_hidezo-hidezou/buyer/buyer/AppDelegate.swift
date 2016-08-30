@@ -23,10 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
-        
+
+		#if DEBUG
+		debugPrint("------------ didFinishLaunchingWithOptions ----------")
         if !HDZUserDefaults.login {
 //            HDZUserDefaults.id = ""
+			debugPrint("Out of Login")
         }
+		else {
+			debugPrint("Now Login")
+		}
+		#endif
 		
 		// !!!:デザミシステム
 		let buyerColor:UIColor = UIColor(red: 44.0/255, green: 166.0/255, blue: 224.0/255, alpha: 1)
@@ -79,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	// デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
+		
 		print("deviceToken: \(deviceToken.description)")
 		
 		// デバイスに保存
@@ -86,7 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		//ログイン状態
 		if HDZUserDefaults.login {
+			#if DEBUG
 			debugPrint("Now Login")
+			#endif
+			
+			HDZApi.postDeviceTokenByLogin()
 		}
 
 	}

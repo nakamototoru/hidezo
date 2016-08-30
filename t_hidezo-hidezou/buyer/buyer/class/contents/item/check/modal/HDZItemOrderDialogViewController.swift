@@ -138,15 +138,9 @@ extension HDZItemOrderDialogViewController {
 		}
 		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
-			
-//			NSLog("HDZItemOrderDialogViewController.getItem")
-//			NSLog("\(error.debugDescription)")
-			
+
 			self.request = nil
 		}
-		
-//		let userid:String = String(supplierId)
-//		debugPrint(userid)
 
 		self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
 	}

@@ -73,13 +73,6 @@ extension HDZCustomerCell {
 extension HDZCustomerCell {
     
     @IBAction func didSelectedOrder(button: UIButton) {
-		/*
-        let controller: HDZItemCategoryTableViewController = HDZItemCategoryTableViewController.createViewController(self.friendInfo)
-		// !!!:デザミシステム
-		// タブバーを隠す
-		controller.hidesBottomBarWhenPushed = true
-        self.viewController.navigationController?.pushViewController(controller, animated: true)
-		*/
 		
 		// !!!:デザミシステム
 		// モーダルで開く
@@ -106,8 +99,9 @@ extension HDZCustomerCell {
 		
 		// !!!バッジビュー
 		if self.viewBadge == nil {
-			let badgepos: CGPoint = CGPointMake(self.orderButton.frame.origin.x , self.orderButton.frame.origin.y)
-			self.viewBadge = HDZBadgeView.createWithCenter(badgepos)
+			let badgepos: CGPoint = CGPointMake(self.orderButton.frame.origin.x , 0)
+			let anchor:CGPoint = CGPointMake(0.5, 0)
+			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
 			self.addSubview(self.viewBadge)
 		}
 		self.viewBadge.updateBadge(value)

@@ -17,7 +17,9 @@ class HDZOrderCell: UITableViewCell {
     @IBOutlet weak var deliverDateLabel: UILabel!
     
     private var orderInfo: OrderInfo! = nil
-    
+	
+	var viewBadge:HDZBadgeView! = nil
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -47,4 +49,23 @@ extension HDZOrderCell {
         cell.orderDateLabel.text = orderInfo.order_at + "注文"
         return cell
     }
+}
+
+// MARK: - Badge
+extension HDZOrderCell {
+	
+	func putBadge(value: Int) {
+		
+		// !!!バッジビュー
+		if self.viewBadge == nil {
+			let badgepos: CGPoint = CGPointMake(self.frame.size.width, 0)
+			let anchor:CGPoint = CGPointMake(1, 0)
+			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+			self.addSubview(self.viewBadge)
+		}
+		self.viewBadge.updateBadge(value)
+	}
+	func eraseBadge() {
+		self.viewBadge.hideBadge()
+	}
 }

@@ -67,6 +67,7 @@ class HDZOrderTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Tableview datasource
 extension HDZOrderTableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,6 +92,16 @@ extension HDZOrderTableViewController {
 		
         self.navigationController?.pushViewController(controller, animated: true) // true
     }
+	
+	
+	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		let customcell:HDZOrderCell = cell as! HDZOrderCell
+		
+		// !!!:バッジ表示
+		customcell.putBadge( 1 )
+		
+	}
 }
 
 extension HDZOrderTableViewController {

@@ -126,10 +126,25 @@ extension HDZItemCategoryTableViewController {
         }
     }
 	
+	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		if indexPath.section == 0 {
+			let customcell:HDZItemCategoryTableViewCell = cell as! HDZItemCategoryTableViewCell
+			// !!!:バッジ表示
+			customcell.putBadge( 1 )
+		}
+		
+	}
+
+
+}
+
+// MARK: - Tableview delegate
+extension HDZItemCategoryTableViewController {
 
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		
-        switch indexPath.section {
+		switch indexPath.section {
         case 0:
 			//動的商品
             let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo![0], dynamicItem: self.itemResult.dynamicItem!, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
@@ -154,6 +169,7 @@ extension HDZItemCategoryTableViewController {
             break
         }
     }
+	
 }
 
 // MARK: - API

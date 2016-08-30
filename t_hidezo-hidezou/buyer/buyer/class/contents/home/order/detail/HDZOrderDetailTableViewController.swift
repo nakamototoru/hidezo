@@ -16,7 +16,10 @@ class HDZOrderDetailTableViewController: UITableViewController {
     
     private var attr_flg: AttrFlg = .other
     private lazy var orderDetailItems: [OrderDetailItem] = []
-    
+	
+	var viewBadge:HDZBadgeView! = nil
+
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,9 +28,10 @@ class HDZOrderDetailTableViewController: UITableViewController {
 //        self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
 		self.title = self.orderInfo.supplier_name + "様宛"
 		
-		
+		// ナビゲーション右ボタン
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(HDZOrderDetailTableViewController.didSelectedMessage(_:)))
-        
+		
+		// セル登録
         HDZOrderDetailCell.register(self.tableView)
         
         self.tableView.tableFooterView = HDZOrderDetailFooter.createView()
@@ -35,10 +39,16 @@ class HDZOrderDetailTableViewController: UITableViewController {
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //        self.tableView.estimatedRowHeight = 113.0
 
-		// !!!: dezami
-//		self.edgesForExtendedLayout = UIRectEdge.None
-//		self.extendedLayoutIncludesOpaqueBars = false
-
+		// !!!:バッジビュー
+		// ステータスバーの高さを取得
+		let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height
+		let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
+		let anchor:CGPoint = CGPointMake(1, 0)
+		self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+		self.navigationController?.view.addSubview(self.viewBadge)
+		
+		
+		// API
         self.orderDetail()
     }
 
@@ -51,11 +61,16 @@ class HDZOrderDetailTableViewController: UITableViewController {
         super.viewDidDisappear(animated)
         
         self.orderDetailRequest?.resume()
+
+		// !!!:バッジ表示
+		self.viewBadge.updateBadge(2)
     }
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
+		// !!!:バッジ隠す
+		self.viewBadge.hideBadge()
 	}
 	
     override func viewDidDisappear(animated: Bool) {

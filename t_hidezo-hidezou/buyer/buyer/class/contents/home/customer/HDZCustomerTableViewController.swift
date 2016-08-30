@@ -81,7 +81,7 @@ extension HDZCustomerTableViewController {
 		let customcell:HDZCustomerCell = cell as! HDZCustomerCell
 		
 		// !!!:バッジ表示
-		customcell.putBadge( indexPath.row + 1 )
+		customcell.putBadge( 1 )
 	}
 	
 }

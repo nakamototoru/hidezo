@@ -13,7 +13,7 @@ protocol HDZOrderDetailFooterDelegate {
 }
 
 struct OrderDetailFooterParam {
-//    let subTotal = <#value#>
+//    let subTotal = value
     
 }
 
@@ -51,7 +51,7 @@ extension HDZOrderDetailFooter {
 extension HDZOrderDetailFooter {
 
     @IBAction func didSelectedEdit(sender: UIButton) {
-        debugPrint("-0-------------------")
+        debugPrint("--------------------")
     }
 }
 

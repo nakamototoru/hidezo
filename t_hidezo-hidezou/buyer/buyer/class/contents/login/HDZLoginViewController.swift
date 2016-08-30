@@ -154,7 +154,7 @@ extension HDZLoginViewController {
 				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
 					debugPrint(error)
 				}
-				self.deviceTokenRequest = HDZApi.postDeviceToken(id, password: password, completionBlock: completionToken, errorBlock: errorToken)
+				self.deviceTokenRequest = HDZApi.postDeviceToken(id, completionBlock: completionToken, errorBlock: errorToken)
 				#endif
 				
             } else {

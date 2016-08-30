@@ -75,8 +75,6 @@ extension HDZItemStaticCell {
         requestImage(staticItem.image) { (image) in
             cell.iconImageView.image = image
 			
-//			debugPrint("IMAGE in CELL :")
-//			debugPrint(cell.iconImageView.image)
         }
 
 		cell.itemsize = "0"
@@ -140,7 +138,9 @@ extension HDZItemStaticCell {
         let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
             if response.result.error != nil {
 				
+				#if DEBUG
 				debugPrint(response.result.error)
+				#endif
 				
 				let sakanaimage:UIImage = UIImage(named: "sakana")!
 				completion(image: sakanaimage)
@@ -148,8 +148,6 @@ extension HDZItemStaticCell {
 			else {
                 if let data: NSData = response.result.value {
                     if let resultImage: UIImage = UIImage(data: data) {
-						
-//						debugPrint(resultImage.size)
 						
                         completion(image: resultImage)
                     }
