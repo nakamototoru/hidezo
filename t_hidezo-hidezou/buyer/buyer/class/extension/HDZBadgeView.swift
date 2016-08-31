@@ -61,11 +61,17 @@ extension HDZBadgeView {
 	
 	func updateBadge(value:Int) {
 
+		if value <= 0 {
+			self.hidden = true
+			return
+		}
+		
 		self.hidden = false
 		self.labelBadge.text = String(value)
 	}
 	
-	func hideBadge() {
-		self.hidden = true
-	}
+//	func hideBadge() {
+//		self.hidden = true
+//	}
+	
 }

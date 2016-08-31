@@ -38,7 +38,10 @@ class HDZItemCategoryTableViewController: UITableViewController {
 ////		self.barbuttonitemOrderCheck.customView = button
 //		let buttonitem:UIBarButtonItem = UIBarButtonItem(customView: button)
 //		self.toolbarItems = [buttonitem]
-		
+
+		// タイトル
+		self.title = self.friendInfo.name
+
 		// テーブルセル
 		HDZItemCategoryTableViewCell.register(self.tableView)
 		
@@ -49,7 +52,8 @@ class HDZItemCategoryTableViewController: UITableViewController {
 		// API
 		self.getItem(self.friendInfo.id)
 		
-		self.title = self.friendInfo.name
+		// !!!:バッジ通知
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZItemCategoryTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
     }
 
     override func viewDidDisappear(animated: Bool) {
@@ -66,7 +70,16 @@ class HDZItemCategoryTableViewController: UITableViewController {
 	
     deinit {
         self.request?.cancel()
+		
+		//イベントリスナーの削除
+		NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+
+	// !!!:通知受け取り時
+	func getNotification(notification: NSNotification)  {
+		
+		self.tableView.reloadData()
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -110,7 +123,7 @@ extension HDZItemCategoryTableViewController {
         
         switch indexPath.section {
         case 0:
-			// おすすめ（動的商品）
+			// 新着（動的商品）
 			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
 			customcell.labelName.text = self.dynamicTitle
             
@@ -129,9 +142,23 @@ extension HDZItemCategoryTableViewController {
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		if indexPath.section == 0 {
+			#if true
+			// 動的商品
 			let customcell:HDZItemCategoryTableViewCell = cell as! HDZItemCategoryTableViewCell
+			
+			// !!!:バッジ表示判定
+			let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
+			var badgeValue:Int = 0
+			for obj:SupplierId in list {
+				let id:String = obj.supplierId
+				if id == friendInfo.id {
+					badgeValue = 1
+					break
+				}
+			}
 			// !!!:バッジ表示
-			customcell.putBadge( 1 )
+			customcell.putBadge( badgeValue )
+			#endif
 		}
 		
 	}

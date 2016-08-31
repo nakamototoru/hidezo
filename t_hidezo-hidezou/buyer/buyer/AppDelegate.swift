@@ -155,9 +155,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					let supplierList: SupplierUpListResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
 					//debugPrint(supplierList)
-					HDZPushNotificationManager.shared.supplierUpList = supplierList
+					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
 					
-					// TODO:ローカル通知
+					//NSNotificationのインスタンスを作成
+					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
+					//通知を送る
+					NSNotificationCenter.defaultCenter().postNotification(n)
 
 				} catch {
 					//... パース失敗...
@@ -175,9 +178,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					let messageList: MessageUpListResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
 					//debugPrint(supplierList)
-					HDZPushNotificationManager.shared.messageUpList = messageList
+					HDZPushNotificationManager.shared.setMessageUpList( messageList )
 					
-					// TODO:ローカル通知
+					//NSNotificationのインスタンスを作成
+					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+					//通知を送る
+					NSNotificationCenter.defaultCenter().postNotification(n)
 					
 				} catch {
 					//... パース失敗...

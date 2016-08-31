@@ -23,10 +23,6 @@ class HDZOrderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let image: UIImage? = UIImage(named: "order_blue")?.imageWithRenderingMode(.AlwaysOriginal)
-//        let selectedImage: UIImage? = UIImage(named: "order_white")?.imageWithRenderingMode(.AlwaysOriginal)
-		
-//        self.tabBarItem = UITabBarItem(title: "注文", image: image, selectedImage: selectedImage)
 		// ナビゲーションバー
         self.deleteBackButtonTitle()
 
@@ -41,6 +37,10 @@ class HDZOrderTableViewController: UITableViewController {
 		//インジケータ
 		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
+		
+		// !!!:バッジ通知
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZOrderTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,7 +64,17 @@ class HDZOrderTableViewController: UITableViewController {
     
     deinit {
         self.request?.cancel()
+		
+		//イベントリスナーの削除
+		NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+	
+	// !!!:通知受け取り時
+	func getNotification(notification: NSNotification)  {
+		
+		self.tableView.reloadData()
+	}
+
 }
 
 // MARK: - Tableview datasource
@@ -98,8 +108,22 @@ extension HDZOrderTableViewController {
 		
 		let customcell:HDZOrderCell = cell as! HDZOrderCell
 		
+		guard let order:OrderInfo = self.orderList[indexPath.row] else {
+			return
+		}
+		
+		// !!!:バッジ表示判定
+		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+		var badgeValue:Int = 0
+		for obj:MessageUp in list {
+			let order_no:String = obj.order_no
+			if order_no == order.order_no {
+				badgeValue = Int( obj.messageCount )!
+				break
+			}
+		}
 		// !!!:バッジ表示
-		customcell.putBadge( 1 )
+		customcell.putBadge( badgeValue )
 		
 	}
 }

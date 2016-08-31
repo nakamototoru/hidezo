@@ -106,7 +106,5 @@ extension HDZCustomerCell {
 		}
 		self.viewBadge.updateBadge(value)
 	}
-	func eraseBadge() {
-		self.viewBadge.hideBadge()
-	}
+
 }

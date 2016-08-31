@@ -10,8 +10,8 @@ task :push_notification do
   APN = Houston::Client.development
   APN.certificate = File.read("./production_com.dezamisystem.app.buyer.pem")
   # An example of the token sent back when a device registers for notifications
-  # token = "<bf3625a0 bb13bc71 e0438c6f 12435503 d4c8dce0 5a5a7506 c1d3d22a 7d295638>"
-  token = "be46aa4f9508a4409c2bc61695442dbc751f57c2635e70b759d1c7af956e8a37"
+  token = "<588ea7da e6f2accb 387c5f01 9f2832c7 5eb8c014 6474783d fab7dce3 6d71e1aa>"
+  # token = "be46aa4f9508a4409c2bc61695442dbc751f57c2635e70b759d1c7af956e8a37"
 
   # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
   notification = Houston::Notification.new(device: token)
@@ -22,7 +22,7 @@ task :push_notification do
   notification.sound = "sosumi.aiff"
   notification.category = "INVITE_CATEGORY"
   notification.content_available = true
-  notification.custom_data = {"supplierUp": {"supplierUpList": [ {"supplierId": "0000"}, {"supplierId": "1111"} ]}, "messageUp": {"messageUpList": [ {"order_no": "0011", "messageCount": "1"},{"order_no": "1100", "messageCount": "9"} ] }}
+  notification.custom_data = {"supplierUp": {"supplierUpList": [ {"supplierId": "6170513005638324225"}, {"supplierId": "6147666687253549057"} ]}, "messageUp": {"messageUpList": [ {"order_no": "6170512017103785986-00028", "messageCount": "21"},{"order_no": "6170512017103785986-00027", "messageCount": "9"} ] }}
 
   # And... sent! That's all it takes.
   APN.push(notification)

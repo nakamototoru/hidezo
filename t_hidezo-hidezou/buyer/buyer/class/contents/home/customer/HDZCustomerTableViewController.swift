@@ -32,7 +32,8 @@ class HDZCustomerTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
 		
-		
+		// !!!:バッジ通知
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZCustomerTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,8 +56,16 @@ class HDZCustomerTableViewController: UITableViewController {
     deinit {
         self.request?.cancel()
         self.friendList.removeAll()
+		
+		//イベントリスナーの削除
+		NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
+	// !!!:通知受け取り時
+	func getNotification(notification: NSNotification)  {
+		
+		self.tableView.reloadData()
+	}
 }
 
 // MARK: - Table view data source
@@ -78,10 +87,26 @@ extension HDZCustomerTableViewController {
 
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
+		#if true
 		let customcell:HDZCustomerCell = cell as! HDZCustomerCell
 		
-		// !!!:バッジ表示
-		customcell.putBadge( 1 )
+		// !!!:バッジ表示判定
+		guard let friendInfo: FriendInfo = self.friendList[indexPath.row] else {
+			return
+		}
+		let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
+		var badgeValue:Int = 0
+		for obj:SupplierId in list {
+			let id:String = obj.supplierId
+			if id == friendInfo.id {
+				// !!!:バッジ表示
+				badgeValue = 1
+				break
+			}
+		}
+		customcell.putBadge( badgeValue )
+		#endif
+
 	}
 	
 }

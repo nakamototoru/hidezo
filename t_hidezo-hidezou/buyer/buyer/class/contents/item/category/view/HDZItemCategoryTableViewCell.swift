@@ -46,7 +46,7 @@ extension HDZItemCategoryTableViewCell {
 extension HDZItemCategoryTableViewCell {
 	
 	func putBadge(value: Int) {
-		
+
 		// !!!バッジビュー
 		if self.viewBadge == nil {
 			let badgepos: CGPoint = CGPointMake(self.labelName.frame.origin.x, 0) // self.labelName.frame.origin.x
@@ -55,9 +55,6 @@ extension HDZItemCategoryTableViewCell {
 			self.addSubview(self.viewBadge)
 		}
 		self.viewBadge.updateBadge(value)
-	}
-	func eraseBadge() {
-		self.viewBadge.hideBadge()
 	}
 
 }

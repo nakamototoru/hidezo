@@ -24,27 +24,64 @@ class HDZHomeViewController: UITabBarController {
 		
 		// !!!:タブバーへバッジ表示
 		//self.tabBarController?.tabBar.items![0].badgeValue = "3" // 下階層から呼ぶ場合
+		self.updateBadgeSupplier()
+		self.updateBadgeMessage()
 
-		self.tabBar.items![0].badgeValue = "3"
-		self.tabBar.items![1].badgeValue = "4"
+		// !!!:バッジ通知
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
+	// !!!:通知受け取り時
+	func getNotificationSupplier(notification: NSNotification)  {
+		
+		self.updateBadgeSupplier()
+	}
+	
+	func getNotificationMessage(notification: NSNotification) {
+		
+		self.updateBadgeMessage()
+	}
+	
+	func updateBadgeSupplier() {
+		
+		// 商品更新
+		let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
+		let count:Int = list.count
+		if count > 0 {
+			self.tabBar.items![0].badgeValue = String(count)
+		}
+//		else {
+//			self.tabBar.items![0].badgeValue = String(-1)
+//		}
+	}
+	
+	func updateBadgeMessage() {
+		
+		// メッセージ更新
+		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+		var count:Int = 0
+		for obje:MessageUp in list {
+			let num:Int = Int( obje.messageCount )!
+			count += num
+		}
+		if count > 0 {
+			self.tabBar.items![1].badgeValue = String(count)
+		}
+//		else {
+//			self.tabBar.items![1].badgeValue = String(-1)
+//		}
+	}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	deinit {
+		//イベントリスナーの削除
+		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
 }
 
 extension HDZHomeViewController {

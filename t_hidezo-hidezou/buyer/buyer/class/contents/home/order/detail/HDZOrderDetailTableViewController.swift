@@ -39,14 +39,8 @@ class HDZOrderDetailTableViewController: UITableViewController {
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //        self.tableView.estimatedRowHeight = 113.0
 
-		// !!!:バッジビュー
-		// ステータスバーの高さを取得
-		let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height
-		let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
-		let anchor:CGPoint = CGPointMake(1, 0)
-		self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
-		self.navigationController?.view.addSubview(self.viewBadge)
-		
+		// !!!:バッジ通知
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZOrderDetailTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
 		
 		// API
         self.orderDetail()
@@ -63,14 +57,15 @@ class HDZOrderDetailTableViewController: UITableViewController {
         self.orderDetailRequest?.resume()
 
 		// !!!:バッジ表示
-		self.viewBadge.updateBadge(2)
+		self.updateBadgeMessage()
+
     }
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
 		// !!!:バッジ隠す
-		self.viewBadge.hideBadge()
+		self.putBadge(-1)
 	}
 	
     override func viewDidDisappear(animated: Bool) {
@@ -81,7 +76,49 @@ class HDZOrderDetailTableViewController: UITableViewController {
     
     deinit {
         self.orderDetailRequest?.cancel()
+		
+		//イベントリスナーの削除
+		NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+
+	// !!!:通知受け取り時
+	func getNotification(notification: NSNotification)  {
+		
+		//self.tableView.reloadData()
+		self.updateBadgeMessage()
+	}
+}
+
+extension HDZOrderDetailTableViewController {
+	
+	func putBadge(value: Int) {
+		
+		// !!!バッジビュー
+		if self.viewBadge == nil {
+			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
+
+			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
+			let anchor:CGPoint = CGPointMake(1, 0)
+			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+			self.navigationController?.view.addSubview(self.viewBadge)
+		}
+		self.viewBadge.updateBadge(value)
+	}
+	
+	func updateBadgeMessage() {
+		
+		// メッセージ更新
+		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+		var badgeValue:Int = 0
+		for obj:MessageUp in list {
+			let order_no:String = obj.order_no
+			if order_no == orderInfo.order_no {
+				badgeValue = Int( obj.messageCount )!
+				break
+			}
+		}
+		self.putBadge(badgeValue)
+	}
 
 }
 
