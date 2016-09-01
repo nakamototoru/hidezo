@@ -9,3 +9,5 @@
 #import "UIViewController+JASidePanel.h"
 
 #import "UIWarning.h"
+
+#import <DeployGateSDK/DeployGateSDK.h>

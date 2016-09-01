@@ -75,6 +75,11 @@ extension HDZCommentTableViewController {
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(format: "%d件のコメントがあります。", self.messageList.count)
     }
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+		return HDZCommentCell.getHeight()
+	}
 }
 
 // MARK: - static

@@ -19,7 +19,7 @@ class HDZCommentCreateViewController: UIViewController {
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var sendCommentButton: UIButton!
 
-    private var order_no: String! = nil
+    private var order_no: String! = ""
     private var messageResult: MessageResult! = nil
 //    private lazy var chargeList: [String] = []
 
@@ -38,7 +38,7 @@ class HDZCommentCreateViewController: UIViewController {
 //            self.pickerView.selectRow(0, inComponent: 0, animated: true)
 //            self.charge = self.chargeList[0]
 //        }
-		self.charge = ""
+		self.charge = self.listCharger[0] as! String
 
         self.sendCommentButton.layer.cornerRadius = 5.0
         
@@ -75,12 +75,11 @@ extension HDZCommentCreateViewController {
         
         controller.order_no = order_no
         controller.messageResult = messageResult
-//        controller.chargeList = messageResult.chargeList
         controller.delegate = viewController
 		
 		// !!!:dezami
 		controller.listCharger = NSMutableArray()
-		controller.listCharger.addObject("選択しない")
+//		controller.listCharger.addObject("選択しない")
 		controller.listCharger.addObjectsFromArray(messageResult.chargeList)
 		
         let size: CGSize = UIScreen.mainScreen().bounds.size
@@ -109,14 +108,14 @@ extension HDZCommentCreateViewController {
 extension HDZCommentCreateViewController: UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        self.charge = self.chargeList[row]
+        self.charge = self.listCharger[row] as! String
 		
-		if (row == 0) {
-			self.charge = ""
-		}
-		else {
-			self.charge = self.listCharger[row] as! String
-		}
+//		if (row == 0) {
+//			self.charge = ""
+//		}
+//		else {
+//			self.charge = self.listCharger[row] as! String
+//		}
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

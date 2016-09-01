@@ -81,16 +81,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 		}
 		
+		// !!!:deploygate
+		// [[DeployGateSDK sharedInstance] launchApplicationWithAuthor:@"dezamisystem" key:@"[target_application_api_key]"];
+		DeployGateSDK.sharedInstance().launchApplicationWithAuthor("dezamisystem", key: "ad54c96060d3afc722b95ed48a3e249bf279e8d3")
+		
         return true
     }
 
 	// デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
 		
-		print(">>>> deviceToken: \(deviceToken.description)")
+//		print(">>>> deviceToken: \(deviceToken.description)")
 		
+		let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+		
+		let deviceTokenString: String = ( deviceToken.description as NSString )
+			.stringByTrimmingCharactersInSet( characterSet )
+			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+
+		print(">>>> deviceToken: \(deviceTokenString)")
+
 		// デバイスに保存
-		HDZUserDefaults.devicetoken = deviceToken.description
+		HDZUserDefaults.devicetoken = deviceTokenString //deviceToken.description
 		
 		//ログイン状態
 		if HDZUserDefaults.login {

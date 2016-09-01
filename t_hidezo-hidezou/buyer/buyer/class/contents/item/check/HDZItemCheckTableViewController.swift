@@ -180,26 +180,26 @@ extension HDZItemCheckTableViewController {
 			self.presentViewController(controller, animated: true, completion: nil)
 			
 			
-			// メッセージ送信API
+			// メッセージ送信
 			guard let result: OrderResult = unboxable else {
+				HDZItemOrderManager.shared.clearAllData()
 				return
 			}
 
 			if HDZItemOrderManager.shared.comment == "" {
+				HDZItemOrderManager.shared.clearAllData()
 				return
 			}
-//			guard let message: String = HDZItemOrderManager.shared.comment else {
-//				//self.sendCommentButton.enabled = true
-//				return
-//			}
 			
+			// API
 			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
 				//self.dismissViewControllerAnimated(true, completion: nil)
+				HDZItemOrderManager.shared.clearAllData()
 			}
-			
 			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
 				//self.dismissViewControllerAnimated(true, completion: nil)
 				debugPrint(error)
+				HDZItemOrderManager.shared.clearAllData()
 			}
 			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
 

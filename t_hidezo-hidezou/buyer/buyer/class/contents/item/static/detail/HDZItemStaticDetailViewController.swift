@@ -38,10 +38,12 @@ class HDZItemStaticDetailViewController: UITableViewController {
 		self.cellLoading.textLabel?.text = String( self.staticItem.loading )
 		self.cellScale.textLabel?.text = self.staticItem.scale
 		self.cellMinCount.textLabel?.text = self.staticItem.min_order_count
-		self.cellDetail.textLabel?.text = self.staticItem.detail
+//		self.cellDetail.textLabel?.text = self.staticItem.detail
 		
 		// Header
 		self.tableView.tableHeaderView = HDZItemStaticDetailHeaderView.createView(self.staticItem, parent:self)
+		// Footer
+		self.tableView.tableFooterView = HDZItemStaticDetailFooterView.createView(self.staticItem, parent:self)
     }
 
 	override func viewDidAppear(animated: Bool) {
@@ -55,6 +57,15 @@ class HDZItemStaticDetailViewController: UITableViewController {
     }
 
     // MARK: Table view data source
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+
+		if ( indexPath.section == 7 ) {
+			return 0.0 // self.tableView.tableFooterView!.frame.size.height
+		}
+
+		return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+	}
+	
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
 //        return 0

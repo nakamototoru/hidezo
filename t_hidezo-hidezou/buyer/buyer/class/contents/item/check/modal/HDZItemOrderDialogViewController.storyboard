@@ -43,13 +43,13 @@
                                     <outlet property="delegate" destination="5t5-d1-g7Z" id="a9d-3s-mOH"/>
                                 </connections>
                             </pickerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="コメント入力カッコカリ" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-7g-K5v">
-                                <rect key="frame" x="0.0" y="64" width="600" height="80"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="コメント入力カッコカリ" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-7g-K5v" customClass="UIPlaceHolderTextView" customModule="buyer" customModuleProvider="target">
+                                <rect key="frame" x="8" y="72" width="584" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="Nac-8J-va3"/>
+                                    <constraint firstAttribute="height" constant="64" id="Nac-8J-va3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="5t5-d1-g7Z" id="EhL-Cr-vb2"/>
@@ -85,11 +85,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="vvP-hG-tmv" secondAttribute="trailing" constant="-20" id="QF9-IP-98T"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MJH-rG-OaG" secondAttribute="trailing" constant="-20" id="RDe-BM-5za"/>
                             <constraint firstItem="MJH-rG-OaG" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-20" id="ZhK-pK-QXk"/>
-                            <constraint firstItem="6d4-7g-K5v" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-20" id="dun-7n-5SJ"/>
-                            <constraint firstItem="6d4-7g-K5v" firstAttribute="top" secondItem="PrB-uW-8s1" secondAttribute="bottom" id="eK8-iT-gqa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6d4-7g-K5v" secondAttribute="trailing" constant="-20" id="k7S-m0-ExW"/>
+                            <constraint firstItem="6d4-7g-K5v" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-12" id="dun-7n-5SJ"/>
+                            <constraint firstItem="6d4-7g-K5v" firstAttribute="top" secondItem="PrB-uW-8s1" secondAttribute="bottom" constant="8" id="eK8-iT-gqa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6d4-7g-K5v" secondAttribute="trailing" constant="-12" id="k7S-m0-ExW"/>
                             <constraint firstItem="MJH-rG-OaG" firstAttribute="top" secondItem="vvP-hG-tmv" secondAttribute="bottom" id="sEH-pH-18F"/>
-                            <constraint firstItem="xdn-8P-uak" firstAttribute="top" secondItem="6d4-7g-K5v" secondAttribute="bottom" id="tjU-Xk-UdF"/>
+                            <constraint firstItem="xdn-8P-uak" firstAttribute="top" secondItem="6d4-7g-K5v" secondAttribute="bottom" constant="8" id="tjU-Xk-UdF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="入力画面（仮）" id="1JK-OX-5WV">
@@ -108,7 +108,7 @@
                         <outlet property="pickerviewCharge" destination="vvP-hG-tmv" id="QZM-5L-CP7"/>
                         <outlet property="pickerviewDate" destination="xdn-8P-uak" id="DgR-kH-4YP"/>
                         <outlet property="pickerviewPlace" destination="MJH-rG-OaG" id="A0f-mu-0Pg"/>
-                        <outlet property="textviewComment" destination="6d4-7g-K5v" id="V2W-jb-hFH"/>
+                        <outlet property="textviewComment" destination="6d4-7g-K5v" id="jwd-ly-NyK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxz-eZ-qv0" userLabel="First Responder" sceneMemberID="firstResponder"/>

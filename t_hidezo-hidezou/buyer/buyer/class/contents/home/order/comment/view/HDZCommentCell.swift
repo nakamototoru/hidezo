@@ -48,4 +48,14 @@ extension HDZCommentCell {
         cell.indexLabel.text = String(format: "%d", maxIndex - indexPath.row)
         return cell
     }
+	
+	static func getHeight() -> CGFloat {
+		
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZCommentCell", owner: self, options: nil)
+		let cell: HDZCommentCell = views.firstObject as! HDZCommentCell;
+		let height :CGFloat = cell.frame.size.height;
+		
+		return height;
+	}
+
 }

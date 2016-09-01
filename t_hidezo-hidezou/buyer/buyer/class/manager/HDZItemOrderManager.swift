@@ -18,4 +18,11 @@ class HDZItemOrderManager: NSObject {
 	static let shared = HDZItemOrderManager()
 	private override init() {
 	}
+	
+	func clearAllData() {
+		self.deliverto = ""
+		self.charge = ""
+		self.deliverdate = ""
+		self.comment = ""
+	}
 }
