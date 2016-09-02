@@ -26,18 +26,6 @@ class HDZItemCategoryTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		// !!!:デザミシステム
-//		let button:UIButton = UIButton(type: UIButtonType.Custom)
-//		button.setTitle("確認", forState: UIControlState.Normal)
-//		button.layer.backgroundColor = UIColor.greenColor().CGColor
-//		
-////		let testview:UIView = UIView()
-////		testview.backgroundColor = UIColor.greenColor()
-////		testview.frame = CGRectMake(0, 0, 200, 80)
-////		self.barbuttonitemOrderCheck.customView = button
-//		let buttonitem:UIBarButtonItem = UIBarButtonItem(customView: button)
-//		self.toolbarItems = [buttonitem]
 
 		// タイトル
 		self.title = self.friendInfo.name

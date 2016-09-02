@@ -20,7 +20,6 @@
                     <connections>
                         <segue destination="azL-7Q-7M8" kind="relationship" relationship="viewControllers" id="5Cy-mN-yFy"/>
                         <segue destination="SZX-t7-ode" kind="relationship" relationship="viewControllers" id="34D-qn-XE4"/>
-                        <segue destination="vmG-10-5Mu" kind="relationship" relationship="viewControllers" id="2c6-bx-cDg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OIy-Dr-vyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,7 +88,7 @@
             <objects>
                 <tableViewController title="プロフィール" id="ajc-7x-eGS" customClass="HDZProfileViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Wd-f5-i4k">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -272,7 +271,7 @@
         <scene sceneID="VPp-ow-yGw">
             <objects>
                 <navigationController id="azL-7Q-7M8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="取引先" image="customer_white" selectedImage="customer_white" id="ZeC-tv-DDX"/>
+                    <tabBarItem key="tabBarItem" title="取引先" image="profile_white" selectedImage="profile_white" id="ZeC-tv-DDX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="pnl-Fa-qPB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -289,8 +288,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="customer_white" width="25" height="25"/>
-        <image name="order_white" width="37" height="37"/>
+        <image name="order_white" width="25" height="25"/>
         <image name="profile_white" width="25" height="25"/>
     </resources>
 </document>

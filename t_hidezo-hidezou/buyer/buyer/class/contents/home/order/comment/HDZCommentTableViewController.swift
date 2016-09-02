@@ -69,6 +69,7 @@ extension HDZCommentTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let messageInfo: MessageInfo = self.messageList[indexPath.row]
         let cell = HDZCommentCell.dequeueReusable(tableView, indexPath: indexPath, messageInfo: messageInfo, maxIndex: self.messageList.count)
+		cell.parent = self
         return cell
      }
     

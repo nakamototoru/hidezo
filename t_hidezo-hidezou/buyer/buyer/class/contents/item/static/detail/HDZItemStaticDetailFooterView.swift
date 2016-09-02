@@ -10,7 +10,8 @@ import UIKit
 
 class HDZItemStaticDetailFooterView: UIView {
 
-	@IBOutlet weak var labelDetail: UILabel!
+//	@IBOutlet weak var labelDetail: UILabel!
+	@IBOutlet weak var textviewDetail: UITextView!
 	
 	private var staticItem: StaticItem!
 
@@ -22,7 +23,7 @@ class HDZItemStaticDetailFooterView: UIView {
     override func drawRect(rect: CGRect) {
         // Drawing code
 		
-		self.labelDetail.text = self.staticItem.detail
+		self.textviewDetail.text = self.staticItem.detail
     }
 
 }

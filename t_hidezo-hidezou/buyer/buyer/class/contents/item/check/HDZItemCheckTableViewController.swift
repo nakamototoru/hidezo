@@ -266,6 +266,16 @@ extension HDZItemCheckTableViewController {
 	
 	@IBAction func onConfirmOrder(sender: AnyObject) {
 
+		// 配送情報
+		let charge:String = HDZItemOrderManager.shared.charge
+		let place:String = HDZItemOrderManager.shared.deliverto
+		let ddate:String = HDZItemOrderManager.shared.deliverdate
+		if charge == "" || place == "" || ddate == "" {
+			UIWarning.Warning("配送情報を入力して下さい。")
+			
+			return
+		}
+		
 		self.barbuttonitemConfirm.enabled = false
 		
 		// 「注文しますか？」

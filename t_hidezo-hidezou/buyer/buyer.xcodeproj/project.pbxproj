@@ -132,6 +132,8 @@
 		37F15E3E1D654076008B469E /* ImageViewerDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E381D654076008B469E /* ImageViewerDismissTransition.swift */; };
 		37F15E3F1D654076008B469E /* ImageViewerPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E391D654076008B469E /* ImageViewerPresentTransition.swift */; };
 		37F15E401D654076008B469E /* ImageViewerSwipeToDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */; };
+		37FBC3DB1D7985BE009F9C41 /* HDZCommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */; };
+		37FBC3DC1D7985BE009F9C41 /* HDZCommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */; };
 		F74189811D4D97E2000C49F0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F741897F1D4D97E2000C49F0 /* Fabric.framework */; };
 		F74189821D4D97E2000C49F0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74189801D4D97E2000C49F0 /* Crashlytics.framework */; };
 		F74189841D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */; };
@@ -286,6 +288,8 @@
 		37F15E381D654076008B469E /* ImageViewerDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerDismissTransition.swift; sourceTree = "<group>"; };
 		37F15E391D654076008B469E /* ImageViewerPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerPresentTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerPresentTransition.swift; sourceTree = "<group>"; };
 		37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerSwipeToDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerSwipeToDismissTransition.swift; sourceTree = "<group>"; };
+		37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentDetailViewController.swift; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.swift; sourceTree = "<group>"; };
+		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
 		F741897F1D4D97E2000C49F0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F74189801D4D97E2000C49F0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateFormatter_Extension.swift; path = class/extension/NSDateFormatter_Extension.swift; sourceTree = "<group>"; };
@@ -361,6 +365,7 @@
 		35226E8C1D185924008777C5 /* comment */ = {
 			isa = PBXGroup;
 			children = (
+				37FBC3D81D79858A009F9C41 /* detail */,
 				35F193431D1EECED0027E50F /* create */,
 				357D6AC11D1EC6AD000CBAF2 /* view */,
 				358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */,
@@ -833,6 +838,15 @@
 			name = ImageViewer;
 			sourceTree = "<group>";
 		};
+		37FBC3D81D79858A009F9C41 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */,
+				37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */,
+			);
+			name = detail;
+			sourceTree = "<group>";
+		};
 		F741898B1D4DA605000C49F0 /* realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,6 +969,7 @@
 				371301021D6BE2EE001DF093 /* HDZItemStaticFractionCell.xib in Resources */,
 				35F5250C1D1FADD20035A940 /* HDZOrderItemTableViewController.storyboard in Resources */,
 				357D6AC51D1EC6DD000CBAF2 /* HDZCommentCell.xib in Resources */,
+				37FBC3DC1D7985BE009F9C41 /* HDZCommentDetailViewController.xib in Resources */,
 				356997641D325AEE00BA0ECF /* HDZItemTableViewCell.xib in Resources */,
 				358829D01D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard in Resources */,
 				354FFDAD1D1E793700D70976 /* HDZOrderScaleViewController.storyboard in Resources */,
@@ -1113,6 +1128,7 @@
 				35899B911D16D7C300D2AA45 /* AppDelegate.swift in Sources */,
 				35899BB01D16E9A400D2AA45 /* UIApplication_Extension.swift in Sources */,
 				37F15E1E1D65400D008B469E /* GalleryViewControllerDatasource.swift in Sources */,
+				37FBC3DB1D7985BE009F9C41 /* HDZCommentDetailViewController.swift in Sources */,
 				371DF4161D6EF06900D70D7F /* HDZItemStaticDetailViewController.swift in Sources */,
 				37F15E221D65400D008B469E /* ImageViewController.swift in Sources */,
 				35F7A1C31D198C070012B42C /* HDZOrderDetailTableViewController.swift in Sources */,
@@ -1255,7 +1271,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1279,7 +1295,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

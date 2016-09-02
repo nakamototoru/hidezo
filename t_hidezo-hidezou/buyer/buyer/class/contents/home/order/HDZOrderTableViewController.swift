@@ -26,6 +26,9 @@ class HDZOrderTableViewController: UITableViewController {
 		// ナビゲーションバー
         self.deleteBackButtonTitle()
 
+		// ナビゲーション右ボタン
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .Done, target: self, action: #selector(HDZOrderTableViewController.didSelectedLogout(_:)))
+
 		// テーブルセル
         HDZOrderCell.register(self.tableView)
 		
@@ -73,6 +76,33 @@ class HDZOrderTableViewController: UITableViewController {
 	func getNotification(notification: NSNotification)  {
 		
 		self.tableView.reloadData()
+	}
+
+	// !!!:ログアウト実行
+	func didSelectedLogout(sender: UIBarButtonItem) {
+		
+		// ログアウト実行
+		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
+			HDZUserDefaults.login = false
+			//            HDZUserDefaults.id = 0
+			
+			let controller: HDZTopViewController = HDZTopViewController.createViewController()
+			UIApplication.setRootViewController(controller)
+			
+			let navigationController: UINavigationController = HDZLoginViewController.createViewController()
+			self.presentViewController(navigationController, animated: true, completion: {
+				self.tabBarController?.selectedIndex = 0
+			})
+		}
+		
+		let action: UIAlertAction = UIAlertAction(title: "OK", style: .Destructive, handler: handler)
+		let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+		
+		let controller: UIAlertController = UIAlertController(title: "ログアウトしますか？", message: "別のアカウントや現在のアカウントで再ログインすることができます。", preferredStyle: .Alert)
+		controller.addAction(action)
+		controller.addAction(cancel)
+		
+		self.presentViewController(controller, animated: true, completion: nil)
 	}
 
 }
@@ -128,6 +158,7 @@ extension HDZOrderTableViewController {
 	}
 }
 
+// MARK: - API
 extension HDZOrderTableViewController {
     
     @IBAction func reloadRequest() {
@@ -193,6 +224,9 @@ extension HDZOrderTableViewController {
 			self.indicatorView.stopAnimating()
 
 			#if DEBUG
+				
+				debugPrint(error.debugDescription)
+				
 				let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
 					
 				})

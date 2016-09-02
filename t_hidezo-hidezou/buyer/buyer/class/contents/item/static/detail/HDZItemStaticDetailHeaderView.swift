@@ -54,6 +54,12 @@ extension HDZItemStaticDetailHeaderView {
 	
 	func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
 		
+		#if DEBUG
+			debugPrint( "HDZItemStaticDetailHeaderView:requestImage" )
+			debugPrint( self.staticItem.name )
+			debugPrint( url )
+		#endif
+		
 		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
 			if response.result.error != nil {
 				let sakanaimage:UIImage = UIImage(named: "sakana")!

@@ -17,10 +17,15 @@ class HDZCommentCell: UITableViewCell {
     
     private var messageInfo: MessageInfo! = nil
     private var maxIndex: Int = 0
-    
+	
+	var parent:UIViewController!
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+		
+		let tg:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapCommentLabel(_:)))
+		self.commentLabel.addGestureRecognizer(tg)
         
     }
 
@@ -31,6 +36,7 @@ class HDZCommentCell: UITableViewCell {
     }
 }
 
+// MARK: - Create
 extension HDZCommentCell {
     
     internal class func register(tableView: UITableView) {
@@ -58,4 +64,17 @@ extension HDZCommentCell {
 		return height;
 	}
 
+}
+
+// MARK: - Gesture
+extension HDZCommentCell {
+	
+	func onTapCommentLabel(g:UIGestureRecognizer) {
+		
+		NSLog("onTapCommentLabel")
+		
+		let vc:HDZCommentDetailViewController = HDZCommentDetailViewController(nibName: "HDZCommentDetailViewController", bundle: nil)
+		vc.textDetail = messageInfo.message
+		self.parent .presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+	}
 }
