@@ -24,6 +24,7 @@ class HDZItemCheckTableViewController: UITableViewController {
 	private var dynamicItemInfo: DynamicItemInfo!
 	private var dynamicItem: [DynamicItem] = []
 	private var attr_flg: AttrFlg = .other
+	private var staticItems:[StaticItem] = []
 
 	
     override func viewDidLoad() {
@@ -98,15 +99,55 @@ extension HDZItemCheckTableViewController {
 			// 動的アイテム登録
 			self.dynamicItemInfo = result.dynamicItemInfo![0]
 			self.dynamicItem = result.dynamicItem!
+
+			// 静的商品登録
+			self.staticItems = result.staticItem!
 			
+			// カートチェック
+			for order:HDZOrder in self.result! {
+				if order.dynamic {
+					var isEqual:Bool = false
+					for item:DynamicItem in self.dynamicItem {
+						if order.itemId == item.id {
+							isEqual = true
+							break;
+						}
+					}
+					if (!isEqual) {
+						// TODO: 存在しない商品だった場合
+						#if DEBUG
+							debugPrint("存在しない動的商品：ID=" + order.id)
+						#endif
+					}
+					else {
+						break
+					}
+				}
+				else {
+					var isEqual:Bool = false
+					for item:StaticItem in self.staticItems {
+						if order.itemId == item.id {
+							isEqual = true
+							break;
+						}
+					}
+					if (!isEqual) {
+						// TODO: 存在しない商品だった場合
+						#if DEBUG
+							debugPrint("存在しない静的商品：ID=" + order.id)
+						#endif
+					}
+					else {
+						break
+					}
+				}
+			}
 			
 			// インジケーター停止
 			self.indicatorView.stopAnimating()
 			
 			//テーブル更新
 //			self.tableView.reloadData()
-//			self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
-//			self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
 		}
 		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
@@ -268,7 +309,7 @@ extension HDZItemCheckTableViewController {
     }
 }
 
-// MARK: -
+// MARK: - BuyerCart
 extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
     
     func didSelectedDeleted() {
@@ -312,14 +353,20 @@ extension HDZItemCheckTableViewController {
 	@IBAction func onConfirmOrder(sender: AnyObject) {
 
 		// 配送情報
-		let charge:String = HDZItemOrderManager.shared.charge
-		let place:String = HDZItemOrderManager.shared.deliverto
-		let ddate:String = HDZItemOrderManager.shared.deliverdate
-		if charge == "" || place == "" || ddate == "" {
-			UIWarning.Warning("配送情報を入力して下さい。")
-			
-			return
+		// 担当者
+		if HDZItemOrderManager.shared.charge == "" {
+			// 担当者一覧
+			let charges:[String] = self.itemResult.charge_list
+			HDZItemOrderManager.shared.charge = charges[0]
 		}
+		// 配送日
+		if HDZItemOrderManager.shared.deliverdate == "" {
+			// 配送日一覧
+			let dates:[String] = HDZItemOrderManager.shared.getListDate()
+			HDZItemOrderManager.shared.deliverdate = dates[0]
+		}
+		// 配送先（空白あり）
+//		let place:String = HDZItemOrderManager.shared.deliverto
 		
 		self.barbuttonitemConfirm.enabled = false
 		
@@ -351,7 +398,6 @@ extension HDZItemCheckTableViewController {
 		let controller:HDZItemOrderNavigationController = HDZItemOrderNavigationController.createViewController()
 		controller.supplierId = self.supplierId
 		self.navigationController?.presentViewController(controller, animated: true, completion: {
-			
 		})
 
 	}

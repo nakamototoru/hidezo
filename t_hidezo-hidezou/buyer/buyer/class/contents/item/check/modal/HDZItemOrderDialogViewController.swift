@@ -33,10 +33,8 @@ class HDZItemOrderDialogViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		
 		self.arrayDate = NSMutableArray()
-		self.arrayDate.addObjectsFromArray(["最短納品日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日","日曜日"])
-		//self.ddate = self.arrayDate[0] as! String
+		self.arrayDate.addObjectsFromArray(HDZItemOrderManager.shared.getListDate())
 		
 		self.arrayCharge = NSMutableArray()
 		
@@ -56,15 +54,6 @@ class HDZItemOrderDialogViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -89,15 +78,17 @@ extension HDZItemOrderDialogViewController {
 			debugPrint(supid + ":" + supname)
 			#endif
 			
+			// Picekr init
 			// 担当者一覧
 			let charges:NSArray = self.itemResult.charge_list
 			self.arrayCharge.removeAllObjects()
 			self.arrayCharge.addObjectsFromArray(charges as! [String])
 			self.charge = self.arrayCharge[0] as! String
 			
-			// 配達先一覧
+			// 配達先一覧（任意）
 			let places:NSArray = self.itemResult.deliver_to_list
 			self.arrayPlace.removeAllObjects()
+			self.arrayPlace.addObject("選択なし")
 			self.arrayPlace.addObjectsFromArray(places as! [String])
 			self.place = self.arrayPlace[0] as! String
 			
@@ -158,7 +149,6 @@ extension HDZItemOrderDialogViewController {
 	@IBAction func onCloseDialog(sender: AnyObject) {
 		
 		self.dismissViewControllerAnimated(true) {
-			
 		}
 	}
 	
@@ -170,12 +160,14 @@ extension HDZItemOrderDialogViewController {
 		else {
 			HDZItemOrderManager.shared.deliverto = self.arrayPlace[0] as! String
 		}
+		
 		if self.charge != "" {
 			HDZItemOrderManager.shared.charge = self.charge
 		}
 		else {
 			HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
 		}
+		
 		if self.ddate != "" {
 			HDZItemOrderManager.shared.deliverdate = self.ddate
 		}
@@ -185,7 +177,6 @@ extension HDZItemOrderDialogViewController {
 		HDZItemOrderManager.shared.comment = self.textviewComment.text
 		
 		self.dismissViewControllerAnimated(true) {
-			
 		}
 	}
 	
@@ -230,21 +221,20 @@ extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 	func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		
 		if pickerView == self.pickerviewDate {
+			// 必須
 			self.ddate = self.arrayDate[row] as! String
 		}
 		else if pickerView == self.pickerviewCharge {
-			if row >= 1 {
-				self.charge = self.arrayCharge[row] as! String
-			}
-			else {
-				self.charge = ""
-			}
+			// 必須
+			self.charge = self.arrayCharge[row] as! String
 		}
 		else if pickerView == self.pickerviewPlace {
 			if row >= 1 {
+				// 任意
 				self.place = self.arrayPlace[row] as! String
 			}
 			else {
+				// 空白
 				self.place = ""
 			}
 		}

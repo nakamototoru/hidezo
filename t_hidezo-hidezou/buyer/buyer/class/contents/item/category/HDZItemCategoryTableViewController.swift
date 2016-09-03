@@ -13,10 +13,10 @@ class HDZItemCategoryTableViewController: UITableViewController {
 
 	@IBOutlet weak var barbuttonitemOrderCheck: UIBarButtonItem!
 	
-    private let dynamicTitle: String = "新着" // "動的商品"
+    private let dynamicTitle: String = "新着"
     private var categoryName: [Int : String] = [:]
     private var categoryItem: [Int: [StaticItem]] = [:]
-    
+	
     private var friendInfo: FriendInfo! = nil
     private var itemResult: ItemResult! = nil
     private var request: Alamofire.Request? = nil
@@ -51,7 +51,6 @@ class HDZItemCategoryTableViewController: UITableViewController {
 		
 		// API
 		self.getItem(self.friendInfo.id)
-
 	}
 
     override func viewDidDisappear(animated: Bool) {
@@ -155,7 +154,6 @@ extension HDZItemCategoryTableViewController {
 		
 	}
 
-
 }
 
 // MARK: - Tableview delegate
@@ -211,7 +209,10 @@ extension HDZItemCategoryTableViewController {
             }
                         
             self.itemResult = result
-            
+			
+			// 静的商品の登録
+			self.categoryName = [:]
+			self.categoryItem = [:]
             if let staticItems: [StaticItem] = result.staticItem {
                 for staticItem in staticItems {
 					

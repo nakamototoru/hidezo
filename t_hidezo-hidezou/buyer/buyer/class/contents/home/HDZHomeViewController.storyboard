@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kk8-Un-wG2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kk8-Un-wG2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -245,11 +245,11 @@
             </objects>
             <point key="canvasLocation" x="1179" y="1029"/>
         </scene>
-        <!--注文-->
+        <!--注文履歴-->
         <scene sceneID="Y7l-IA-ONb">
             <objects>
                 <navigationController id="SZX-t7-ode" customClass="HDZOrderNavigationController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="注文" image="order_white" selectedImage="order_white" id="mrg-fa-s2X"/>
+                    <tabBarItem key="tabBarItem" title="注文履歴" image="order_white" selectedImage="order_white" id="mrg-fa-s2X"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SA3-g4-wX2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
