@@ -424,10 +424,10 @@
 		35255C6B1D178A6B00A8D627 /* home */ = {
 			isa = PBXGroup;
 			children = (
-				3569975B1D32588B00BA0ECF /* item */,
-				35255C761D17900B00A8D627 /* profile */,
-				35255C711D178EA800A8D627 /* order */,
 				35255C701D178E8F00A8D627 /* customer */,
+				3569975B1D32588B00BA0ECF /* item */,
+				35255C711D178EA800A8D627 /* order */,
+				35255C761D17900B00A8D627 /* profile */,
 				35255C6C1D178B8300A8D627 /* HDZHomeViewController.swift */,
 				35255C6E1D178CC400A8D627 /* HDZHomeViewController.storyboard */,
 				37CA46B91D6406D1006ED62E /* HDZOrderNavigationController.swift */,

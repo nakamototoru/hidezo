@@ -20,7 +20,12 @@ class HDZItemCheckTableViewController: UITableViewController {
 
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
+	private var itemResult: ItemResult! = nil
+	private var dynamicItemInfo: DynamicItemInfo!
+	private var dynamicItem: [DynamicItem] = []
+	private var attr_flg: AttrFlg = .other
 
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,12 +35,9 @@ class HDZItemCheckTableViewController: UITableViewController {
 		HDZItemCheckFractionCell.register(self.tableView)
 		
 		//インジケーター
-		//let basevc:UIViewController = UIWarning.getBaseViewController(0)
-		
 		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
 		
-//        self.settingSendButton()
         self.loadItem()
     }
 
@@ -51,8 +53,11 @@ class HDZItemCheckTableViewController: UITableViewController {
 			let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
 			controller.addAction(action2)
 			self.presentViewController(controller, animated: false, completion: nil)
+			
+			return
 		}
 
+		self.getItem(self.supplierId)
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -69,13 +74,50 @@ extension HDZItemCheckTableViewController {
         controller.supplierId = supplierId
         return controller
     }
-    
-//    private func settingSendButton() {
-//		
-////        let button: UIBarButtonItem = UIBarButtonItem(title: "注文する", style: .Done, target: self, action: #selector(HDZItemCheckTableViewController.didSelectedOrder))
-////        self.navigationItem.setRightBarButtonItem(button, animated: true)
-//		
-//    }
+
+}
+
+// MARK: - API
+extension HDZItemCheckTableViewController {
+	
+	private func getItem(supplierId: String) {
+		
+		// インジケーター開始
+		self.indicatorView.startAnimating()
+		
+		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
+			
+			self.request = nil
+			
+			guard let result: ItemResult = unboxable else {
+				return
+			}
+			
+			self.itemResult = result
+			
+			// 動的アイテム登録
+			self.dynamicItemInfo = result.dynamicItemInfo![0]
+			self.dynamicItem = result.dynamicItem!
+			
+			
+			// インジケーター停止
+			self.indicatorView.stopAnimating()
+			
+			//テーブル更新
+//			self.tableView.reloadData()
+//			self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
+//			self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
+		}
+		
+		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+			
+			self.indicatorView.stopAnimating()
+			self.request = nil
+		}
+		// Request
+		self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
+	}
+
 }
 
 // MARK: - Table view data source
@@ -136,6 +178,7 @@ extension HDZItemCheckTableViewController {
 
 }
 
+// MARK: - Order
 extension HDZItemCheckTableViewController {
     
     private func loadItem() {
@@ -225,6 +268,7 @@ extension HDZItemCheckTableViewController {
     }
 }
 
+// MARK: -
 extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
     
     func didSelectedDeleted() {
@@ -262,6 +306,7 @@ extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
 	}
 }
 
+// MARK: - Action
 extension HDZItemCheckTableViewController {
 	
 	@IBAction func onConfirmOrder(sender: AnyObject) {

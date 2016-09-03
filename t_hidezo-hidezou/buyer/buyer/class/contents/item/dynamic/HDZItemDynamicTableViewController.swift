@@ -16,11 +16,14 @@ class HDZItemDynamicTableViewController: UITableViewController {
     private var attr_flg: AttrFlg = .other
     private var supplierId: String = ""
 	
-	private var friendInfo: FriendInfo! = nil
+//	private var friendInfo: FriendInfo! = nil
 	private var itemResult: ItemResult! = nil
 	private var request: Alamofire.Request? = nil
 	private var categoryName: [Int : String] = [:]
 	private var categoryItem: [Int: [StaticItem]] = [:]
+
+	// !!!: dezami
+	private var indicatorView:CustomIndicatorView!
 
 
     override func viewDidLoad() {
@@ -28,21 +31,25 @@ class HDZItemDynamicTableViewController: UITableViewController {
         
         HDZItemDynamicCell.register(self.tableView)
 		HDZItemDynamicFractionCell.register(self.tableView)
+		
+		//インジケータ
+		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+		self.view.addSubview(self.indicatorView)
+
     }
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
-		self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
+//		self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
+//		self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
 	}
 	
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-		//self.tableView.tableHeaderView = HDZItemDinamicHeaderView.createView(self.dynamicItemInfo, parent:self)
 		
-		self.tableView.reloadData()
+//		self.tableView.reloadData()
+		self.getItem(self.supplierId)
     }
 	
     override func didReceiveMemoryWarning() {
@@ -51,6 +58,7 @@ class HDZItemDynamicTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Create
 extension HDZItemDynamicTableViewController {
     
     internal class func createViewController(dynamicItemInfo: DynamicItemInfo, dynamicItem: [DynamicItem], attr_flg: AttrFlg, supplierId: String) -> HDZItemDynamicTableViewController {
@@ -61,15 +69,82 @@ extension HDZItemDynamicTableViewController {
         controller.supplierId = supplierId
         return controller
     }
+	
+	internal class func createViewController(supplierId: String, attr_flg: AttrFlg) -> HDZItemDynamicTableViewController {
+		let controller: HDZItemDynamicTableViewController = UIViewController.createViewController("HDZItemDynamicTableViewController")
+		controller.supplierId = supplierId
+		controller.attr_flg = attr_flg
+		return controller
+	}
+}
+
+// MARK: - API
+extension HDZItemDynamicTableViewController {
+	
+	private func getItem(supplierId: String) {
+		
+		// インジケーター開始
+		self.indicatorView.startAnimating()
+		
+		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
+			
+			self.request = nil
+			
+			guard let result: ItemResult = unboxable else {
+				return
+			}
+			
+			self.itemResult = result
+			
+//			if let staticItems: [StaticItem] = result.staticItem {
+//				for staticItem in staticItems {
+//					
+//					let index:Int = Int(staticItem.category.id)!
+//					
+//					self.categoryName[ index ] = staticItem.category.name
+//					
+//					if self.categoryItem[ index ] == nil {
+//						self.categoryItem[ index ] = [staticItem]
+//					} else {
+//						self.categoryItem[ index ]?.append(staticItem)
+//					}
+//				}
+//			}
+
+			// 動的アイテム登録
+			self.dynamicItemInfo = result.dynamicItemInfo![0]
+			self.dynamicItem = result.dynamicItem!
+			
+			
+			// インジケーター停止
+			self.indicatorView.stopAnimating()
+
+			
+			//テーブル更新
+			self.tableView.reloadData()
+			self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
+			self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
+		}
+		
+		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+			
+			self.indicatorView.stopAnimating()
+			
+			self.request = nil
+		}
+		// Request
+		self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
+	}
+
 }
 
 // MARK: - Table view data source
 extension HDZItemDynamicTableViewController {
-    
+	
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+	
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dynamicItem.count
     }

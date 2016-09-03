@@ -38,26 +38,30 @@ class HDZItemCategoryTableViewController: UITableViewController {
 		self.view.addSubview(self.indicatorView)
 		
 		// API
-		self.getItem(self.friendInfo.id)
+//		self.getItem(self.friendInfo.id)
 		
 		// !!!:バッジ通知
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZItemCategoryTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
     }
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+//		self.request?.resume()
+		
+		// API
+		self.getItem(self.friendInfo.id)
+
+	}
+
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.request?.suspend()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        self.request?.resume()
+//        self.request?.suspend()
     }
 	
     deinit {
-        self.request?.cancel()
+//        self.request?.cancel()
 		
 		//イベントリスナーの削除
 		NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -162,7 +166,10 @@ extension HDZItemCategoryTableViewController {
 		switch indexPath.section {
         case 0:
 			//動的商品
-            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo![0], dynamicItem: self.itemResult.dynamicItem!, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
+//            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo![0], dynamicItem: self.itemResult.dynamicItem!, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
+			
+			let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.supplier.supplier_id, attr_flg: self.itemResult.attr_flg)
+			
             self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
@@ -227,8 +234,8 @@ extension HDZItemCategoryTableViewController {
         
         let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			
-			NSLog("HDZItemCategoryTableViewController.getItem")
-			NSLog("\(error.debugDescription)")
+//			NSLog("HDZItemCategoryTableViewController.getItem")
+//			NSLog("\(error.debugDescription)")
 			
 			self.indicatorView.stopAnimating()
 
@@ -240,12 +247,18 @@ extension HDZItemCategoryTableViewController {
 
     }
 	
+	// モーダルビューに値を渡す
 	internal func setupFriendInfo(friendInfo: FriendInfo) {
 		self.friendInfo = friendInfo
 	}
 	
+}
+
+// MARK: - Action
+extension HDZItemCategoryTableViewController {
+
 	@IBAction func onCloseSelf(sender: AnyObject) {
-		self.dismissViewControllerAnimated(true) { 
+		self.dismissViewControllerAnimated(true) {
 			
 		}
 	}
@@ -254,8 +267,8 @@ extension HDZItemCategoryTableViewController {
 		
 		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.friendInfo.id)
 		self.navigationController?.pushViewController(controller, animated: true)
-
+		
 	}
-	
 }
+
 
