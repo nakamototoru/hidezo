@@ -44,6 +44,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barbuttonitemConfirm" destination="UuX-VH-CWf" id="NX8-q7-vYJ"/>
+                        <outlet property="barbuttonitemHome" destination="2bz-ZA-2VO" id="WAi-7z-DaY"/>
+                        <outlet property="barbuttonitemNote" destination="5rC-qO-6HX" id="oIm-Fc-Xql"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9eJ-mN-dPK" userLabel="First Responder" sceneMemberID="firstResponder"/>

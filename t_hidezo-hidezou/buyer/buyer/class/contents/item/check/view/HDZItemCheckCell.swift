@@ -79,16 +79,17 @@ extension HDZItemCheckCell {
 // MARK: - API
 extension HDZItemCheckCell {
 	
+	// カート内容を更新
 	private func updateCart(newsizestr: String ) {
 		
 		let supplierId:String = self.order.supplierId
 		try! HDZOrder.updateSize(supplierId, itemId: self.order.itemId, dynamic: self.order.dynamic, newsize: newsizestr)
 
-		//
+		// 親に通達
 		self.delegate?.itemcheckcellReload()
-		
 	}
 	
+	// カートから削除
 	private func deleteCartObject() {
 		
 		try! HDZOrder.deleteObject(self.order)
@@ -103,14 +104,11 @@ extension HDZItemCheckCell {
     @IBAction func didSelectedDelete(button: UIButton) {
 		
 		self.deleteCartObject()
-		
     }
 	
 	@IBAction func onSelectedAdd(sender: AnyObject) {
 		
-		// TODO:カート内カウント加算
-//		NSLog("TODO:カート内カウント加算")
-		
+		// カート内カウント加算
 		var value:Int = Int(self.order.size)!
 		value += 1
 		if (value > 100) {
@@ -123,8 +121,7 @@ extension HDZItemCheckCell {
 	
 	@IBAction func onSelectedSub(sender: AnyObject) {
 		
-		// TODO:カート内カウント減算
-//		NSLog("TODO:カート内カウント減算")
+		// カート内カウント減算
 		var value:Int = Int(self.order.size)!
 		value -= 1
 		if (value > 0) {

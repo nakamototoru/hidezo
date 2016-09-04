@@ -13,6 +13,8 @@ import RealmSwift
 class HDZItemCheckTableViewController: UITableViewController {
 
 	@IBOutlet weak var barbuttonitemConfirm: UIBarButtonItem!
+	@IBOutlet weak var barbuttonitemNote: UIBarButtonItem!
+	@IBOutlet weak var barbuttonitemHome: UIBarButtonItem!
 	
     private var supplierId: String = ""
     private var result: Results<HDZOrder>? = nil
@@ -39,25 +41,29 @@ class HDZItemCheckTableViewController: UITableViewController {
 		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
 		
-        self.loadItem()
+		// Realm（ローカルSQL）
+//        self.loadItem()
+		
+		// ボタン無効
+		self.updateButtonEnabled(false)
+//		self.barbuttonitemConfirm.enabled = false
     }
 
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
+		// Realm（ローカルSQL）
+		self.result = try! HDZOrder.queries(self.supplierId)
+
 		// !!!:デザミシステム
 		if self.result?.count == 0 {
 			// アイテム無しの場合
-			let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
-				self.navigationController?.popViewControllerAnimated(false)
-			})
-			let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
-			controller.addAction(action2)
-			self.presentViewController(controller, animated: false, completion: nil)
+			self.openAlertNoCart()
 			
 			return
 		}
 
+		// API
 		self.getItem(self.supplierId)
 	}
 	
@@ -65,6 +71,13 @@ class HDZItemCheckTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	// ボタン状態
+	private func updateButtonEnabled(enabled:Bool) {
+		self.barbuttonitemConfirm.enabled = enabled
+		self.barbuttonitemNote.enabled = enabled
+		self.barbuttonitemHome.enabled = enabled
+	}
 }
 
 // MARK: - Create
@@ -86,6 +99,10 @@ extension HDZItemCheckTableViewController {
 		// インジケーター開始
 		self.indicatorView.startAnimating()
 		
+		// ボタン無効
+		self.updateButtonEnabled(false)
+//		self.barbuttonitemConfirm.enabled = false
+		
 		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
 			
 			self.request = nil
@@ -106,6 +123,7 @@ extension HDZItemCheckTableViewController {
 			// カートチェック
 			for order:HDZOrder in self.result! {
 				if order.dynamic {
+					// 動的
 					var isEqual:Bool = false
 					for item:DynamicItem in self.dynamicItem {
 						if order.itemId == item.id {
@@ -114,16 +132,18 @@ extension HDZItemCheckTableViewController {
 						}
 					}
 					if (!isEqual) {
-						// TODO: 存在しない商品だった場合
+						// 存在しない商品だった場合は削除
 						#if DEBUG
 							debugPrint("存在しない動的商品：ID=" + order.id)
 						#endif
+						try! HDZOrder.deleteObject(order)
 					}
 					else {
 						break
 					}
 				}
 				else {
+					// 静的
 					var isEqual:Bool = false
 					for item:StaticItem in self.staticItems {
 						if order.itemId == item.id {
@@ -132,10 +152,11 @@ extension HDZItemCheckTableViewController {
 						}
 					}
 					if (!isEqual) {
-						// TODO: 存在しない商品だった場合
+						// 存在しない商品だった場合は削除
 						#if DEBUG
 							debugPrint("存在しない静的商品：ID=" + order.id)
 						#endif
+						try! HDZOrder.deleteObject(order)
 					}
 					else {
 						break
@@ -143,11 +164,30 @@ extension HDZItemCheckTableViewController {
 				}
 			}
 			
+			// カート更新
+			self.result = try! HDZOrder.queries(self.supplierId)
+			//テーブル更新
+			self.tableView.reloadData()
+
 			// インジケーター停止
 			self.indicatorView.stopAnimating()
+
+			if self.result?.count == 0 {
+				// アイテム無しの場合
+//				let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+//					self.navigationController?.popViewControllerAnimated(false)
+//				})
+//				let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
+//				controller.addAction(action2)
+//				self.presentViewController(controller, animated: false, completion: nil)
+				self.openAlertNoCart()
+				
+				return
+			}
 			
-			//テーブル更新
-//			self.tableView.reloadData()
+			// ボタン有効
+			self.updateButtonEnabled(true)
+//			self.barbuttonitemConfirm.enabled = true
 		}
 		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
@@ -222,12 +262,27 @@ extension HDZItemCheckTableViewController {
 // MARK: - Order
 extension HDZItemCheckTableViewController {
     
-    private func loadItem() {
-        self.result = try! HDZOrder.queries(self.supplierId)
-
-        self.tableView.reloadData()
-    }
+//    private func loadItem() {
+//        self.result = try! HDZOrder.queries(self.supplierId)
+//
+//        self.tableView.reloadData()
+//    }
  
+	private func openAlertNoCart() {
+		// アイテム無しの場合
+		self.updateButtonEnabled(false)
+		
+		// アラートビュー
+		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+			// 画面戻る
+			self.navigationController?.popViewControllerAnimated(false)
+		})
+		let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
+		controller.addAction(action2)
+		self.presentViewController(controller, animated: false, completion: nil)
+	}
+	
+	// 注文実行
     internal func didSelectedOrder() {
         self.result = try! HDZOrder.queries(self.supplierId)
 
@@ -264,18 +319,17 @@ extension HDZItemCheckTableViewController {
 			self.presentViewController(controller, animated: true, completion: nil)
 			
 			
-			// メッセージ送信
+			// メッセージ送信チェック
 			guard let result: OrderResult = unboxable else {
 				HDZItemOrderManager.shared.clearAllData()
 				return
 			}
-
 			if HDZItemOrderManager.shared.comment == "" {
 				HDZItemOrderManager.shared.clearAllData()
 				return
 			}
 			
-			// API
+			// APIメッセージ送信
 			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
 				//self.dismissViewControllerAnimated(true, completion: nil)
 				HDZItemOrderManager.shared.clearAllData()
@@ -299,9 +353,10 @@ extension HDZItemCheckTableViewController {
 			controller.addAction(action)
 			self.presentViewController(controller, animated: true, completion: nil)
 			
-			self.barbuttonitemConfirm.enabled = true;
+			// ボタン有効
+//			self.barbuttonitemConfirm.enabled = true;
+			self.updateButtonEnabled(true)
         }
-
 
 		// Request
         HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
@@ -309,30 +364,14 @@ extension HDZItemCheckTableViewController {
     }
 }
 
-// MARK: - BuyerCart
+// MARK: - HDZItemCheckCellDelegate
 extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
-    
-    func didSelectedDeleted() {
-		
-		//削除後に
-        self.loadItem()
-		
-		// !!!:デザミシステム
-		if self.result?.count == 0 {
-			// アイテム無しの場合
-			let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
-				self.navigationController?.popViewControllerAnimated(false)
-			})
-			let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
-			controller.addAction(action2)
-			self.presentViewController(controller, animated: false, completion: nil)
-		}
 
-    }
-	
 	func itemcheckcellReload() {
 		
-		self.loadItem()
+//		self.loadItem()
+		self.result = try! HDZOrder.queries(self.supplierId)
+		self.tableView.reloadData()
 		
 		// !!!:デザミシステム
 		if self.result?.count == 0 {
@@ -365,16 +404,22 @@ extension HDZItemCheckTableViewController {
 			let dates:[String] = HDZItemOrderManager.shared.getListDate()
 			HDZItemOrderManager.shared.deliverdate = dates[0]
 		}
-		// 配送先（空白あり）
-//		let place:String = HDZItemOrderManager.shared.deliverto
+		// 配送先は空白ありなのでそのまま
+		//		let place:String = HDZItemOrderManager.shared.deliverto
 		
-		self.barbuttonitemConfirm.enabled = false
+		// ボタン無効
+		self.updateButtonEnabled(false)
+//		self.barbuttonitemConfirm.enabled = false
 		
 		// 「注文しますか？」
 		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel) { (action:UIAlertAction!) in
-			self.barbuttonitemConfirm.enabled = true;
+			// キャンセル
+			// ボタン有効
+//			self.barbuttonitemConfirm.enabled = true;
+			self.updateButtonEnabled(true)
 		}
 		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .Default) { (action:UIAlertAction!) in
+			// 確定
 			self.didSelectedOrder()
 		}
 		let alert:UIAlertController = UIAlertController(title:"注文",
@@ -383,7 +428,6 @@ extension HDZItemCheckTableViewController {
 		alert.addAction(cancelaction)
 		alert.addAction(confirmaction)
 		self.presentViewController(alert, animated: false, completion: nil)
-
 	}
 	
 	@IBAction func onBackHome(sender: AnyObject) {

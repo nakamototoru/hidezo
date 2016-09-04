@@ -173,15 +173,21 @@ extension HDZItemCategoryTableViewController {
         case 1:
 			//静的商品
             if let keys: [Int] = self.categoryName.keys.sort() {
-                guard let categoryName: String = self.categoryName[keys[indexPath.row]] else {
+                guard let category_name: String = self.categoryName[keys[indexPath.row]] else {
                     return
                 }
                 
-                guard let categoryItem: [StaticItem] = self.categoryItem[keys[indexPath.row]] else {
-                    return
-                }
-                
-                let controller: HDZItemStaticTableViewController = HDZItemStaticTableViewController.createViewController(categoryName, categoryItems: categoryItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
+//                guard let categoryItem: [StaticItem] = self.categoryItem[keys[indexPath.row]] else {
+//                    return
+//                }
+				
+//                let controller: HDZItemStaticTableViewController = HDZItemStaticTableViewController.createViewController(categoryName, categoryItems: categoryItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
+				
+				let controller:HDZItemStaticTableViewController = HDZItemStaticTableViewController.createViewController(self.itemResult.supplier.supplier_id,
+				                                                                                                        attr_flg: self.itemResult.attr_flg,
+				                                                                                                        categoryKey: keys[indexPath.row],
+				                                                                                                        categoryName: category_name)
+				
                 self.navigationController?.pushViewController(controller, animated: true)                
             }
             break
@@ -214,10 +220,10 @@ extension HDZItemCategoryTableViewController {
 			self.categoryName = [:]
 			self.categoryItem = [:]
             if let staticItems: [StaticItem] = result.staticItem {
+				
                 for staticItem in staticItems {
 					
 					let index:Int = Int(staticItem.category.id)!
-					
                     self.categoryName[ index ] = staticItem.category.name
                     
                     if self.categoryItem[ index ] == nil {
@@ -225,6 +231,7 @@ extension HDZItemCategoryTableViewController {
                     } else {
                         self.categoryItem[ index ]?.append(staticItem)
                     }
+
                 }
             }
 			
@@ -234,9 +241,6 @@ extension HDZItemCategoryTableViewController {
         }
         
         let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
-			
-//			NSLog("HDZItemCategoryTableViewController.getItem")
-//			NSLog("\(error.debugDescription)")
 			
 			self.indicatorView.stopAnimating()
 

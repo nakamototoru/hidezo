@@ -14,8 +14,6 @@ class HDZCustomerTableViewController: UITableViewController {
     private lazy var friendList: [FriendInfo] = []
     private var request: Alamofire.Request? = nil
 	
-	
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -99,9 +97,42 @@ class HDZCustomerTableViewController: UITableViewController {
 
 }
 
+// MARK: - API
+extension HDZCustomerTableViewController {
+	
+	private func friend() {
+		
+		self.refreshControl?.beginRefreshing()
+		
+		let completion: (unboxable: FriendResult?) -> Void = { (unboxable) in
+			
+			self.refreshControl?.endRefreshing()
+			
+			guard let result: FriendResult = unboxable else {
+				return
+			}
+			
+			self.request = nil
+			
+			self.friendList = result.friendList
+			
+			self.tableView.reloadData()
+		}
+		
+		let error: (error: ErrorType?, result: FriendError?) -> Void = { (error, result) in
+			
+			self.refreshControl?.endRefreshing()
+			debugPrint(error)
+			debugPrint(result)
+		}
+		
+		self.request = HDZApi.friend(completion, errorBlock: error)
+	}
+}
+
 // MARK: - Table view data source
 extension HDZCustomerTableViewController {
-    
+	
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.friendList.count
     }
@@ -153,39 +184,7 @@ extension HDZCustomerTableViewController : HDZCustomerCellDelegate {
 	}
 }
 
-// MARK: - private
-extension HDZCustomerTableViewController {
-    
-    private func friend() {
-        
-        self.refreshControl?.beginRefreshing()
-        
-        let completion: (unboxable: FriendResult?) -> Void = { (unboxable) in
-            
-            self.refreshControl?.endRefreshing()
-            
-            guard let result: FriendResult = unboxable else {
-                return
-            }
-            
-            self.request = nil
-            
-            self.friendList = result.friendList
-            
-            self.tableView.reloadData()
-        }
-        
-        let error: (error: ErrorType?, result: FriendError?) -> Void = { (error, result) in
-            
-            self.refreshControl?.endRefreshing()
-            debugPrint(error)
-            debugPrint(result)
-        }
-        
-        self.request = HDZApi.friend(completion, errorBlock: error)
-    }
-}
-
+// MARK: - Action
 extension HDZCustomerTableViewController {
     
     @IBAction func reloadRequest() {

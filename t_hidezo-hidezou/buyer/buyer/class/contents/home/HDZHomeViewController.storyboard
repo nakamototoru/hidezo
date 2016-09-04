@@ -59,6 +59,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="注文一覧" id="vjj-Z0-FcO"/>
+                    <connections>
+                        <segue destination="vmG-10-5Mu" kind="show" identifier="dummyGoProfile" id="rpu-rh-ShP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xt5-xX-xzD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,14 +84,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aOz-JM-u71" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171" y="1029"/>
+            <point key="canvasLocation" x="851" y="1035"/>
         </scene>
         <!--プロフィール-->
         <scene sceneID="i92-HQ-WqB">
             <objects>
                 <tableViewController title="プロフィール" id="ajc-7x-eGS" customClass="HDZProfileViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Wd-f5-i4k">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -243,7 +246,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x9U-1D-n3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="1029"/>
+            <point key="canvasLocation" x="1587" y="1035"/>
         </scene>
         <!--注文履歴-->
         <scene sceneID="Y7l-IA-ONb">
