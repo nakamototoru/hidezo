@@ -291,15 +291,5 @@ extension HDZApi {
 		let _:Alamofire.Request = HDZApi.postDeviceToken(HDZUserDefaults.id, completionBlock: completionToken, errorBlock: errorToken)!
 
 	}
-//	// ログイン状態
-//	internal class func isLoginNow() -> Bool {
-//		
-//		guard let _: UIViewController = UIApplication.sharedApplication().keyWindow?.rootViewController else {
-//			return false
-//		}
-//		return true
-//
-//	}
+
 }
-
-

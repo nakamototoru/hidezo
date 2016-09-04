@@ -16,7 +16,6 @@ class HDZItemDynamicTableViewController: UITableViewController {
     private var attr_flg: AttrFlg = .other
     private var supplierId: String = ""
 	
-//	private var friendInfo: FriendInfo! = nil
 	private var itemResult: ItemResult! = nil
 	private var request: Alamofire.Request? = nil
 	private var categoryName: [Int : String] = [:]
@@ -89,43 +88,27 @@ extension HDZItemDynamicTableViewController {
 		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
 			
 			self.request = nil
-			
 			guard let result: ItemResult = unboxable else {
 				return
 			}
-			
 			self.itemResult = result
-			
-//			if let staticItems: [StaticItem] = result.staticItem {
-//				for staticItem in staticItems {
-//					
-//					let index:Int = Int(staticItem.category.id)!
-//					
-//					self.categoryName[ index ] = staticItem.category.name
-//					
-//					if self.categoryItem[ index ] == nil {
-//						self.categoryItem[ index ] = [staticItem]
-//					} else {
-//						self.categoryItem[ index ]?.append(staticItem)
-//					}
-//				}
-//			}
 
 			// 動的アイテム登録
-			self.dynamicItemInfo = result.dynamicItemInfo![0]
-			self.dynamicItem = result.dynamicItem!
-			
+			if result.dynamicItemInfo != nil && result.dynamicItemInfo?.count > 0 {
+				self.dynamicItemInfo = result.dynamicItemInfo![0]
+			}
+			if result.dynamicItem != nil {
+				self.dynamicItem = result.dynamicItem!
+			}
 			
 			// インジケーター停止
 			self.indicatorView.stopAnimating()
-
 			
 			//テーブル更新
 			self.tableView.reloadData()
 			self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
 			self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
 		}
-		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			
 			self.indicatorView.stopAnimating()

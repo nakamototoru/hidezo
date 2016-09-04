@@ -17,14 +17,14 @@ class HDZItemCheckTableViewController: UITableViewController {
 	@IBOutlet weak var barbuttonitemHome: UIBarButtonItem!
 	
     private var supplierId: String = ""
-    private var result: Results<HDZOrder>? = nil
 	private var request: Alamofire.Request? = nil
+	private var orderResult: Results<HDZOrder>? = nil
 
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
 	private var itemResult: ItemResult! = nil
-	private var dynamicItemInfo: DynamicItemInfo!
-	private var dynamicItem: [DynamicItem] = []
+//	private var dynamicItemInfo: DynamicItemInfo!
+	private var dynamicItems: [DynamicItem] = []
 	private var attr_flg: AttrFlg = .other
 	private var staticItems:[StaticItem] = []
 
@@ -53,11 +53,12 @@ class HDZItemCheckTableViewController: UITableViewController {
 		super.viewDidAppear(animated)
 		
 		// Realm（ローカルSQL）
-		self.result = try! HDZOrder.queries(self.supplierId)
+		self.orderResult = try! HDZOrder.queries(self.supplierId)
 
 		// !!!:デザミシステム
-		if self.result?.count == 0 {
+		if self.orderResult?.count == 0 {
 			// アイテム無しの場合
+			self.updateButtonEnabled(false)
 			self.openAlertNoCart()
 			
 			return
@@ -101,85 +102,67 @@ extension HDZItemCheckTableViewController {
 		
 		// ボタン無効
 		self.updateButtonEnabled(false)
-//		self.barbuttonitemConfirm.enabled = false
 		
 		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
 			
 			self.request = nil
-			
 			guard let result: ItemResult = unboxable else {
 				return
 			}
-			
 			self.itemResult = result
-			
 			// 動的アイテム登録
-			self.dynamicItemInfo = result.dynamicItemInfo![0]
-			self.dynamicItem = result.dynamicItem!
-
+			if result.dynamicItem != nil {
+				self.dynamicItems = result.dynamicItem!
+			}
 			// 静的商品登録
-			self.staticItems = result.staticItem!
+			if result.staticItem != nil {
+				self.staticItems = result.staticItem!
+			}
 			
 			// カートチェック
-			for order:HDZOrder in self.result! {
-				if order.dynamic {
-					// 動的
-					var isEqual:Bool = false
-					for item:DynamicItem in self.dynamicItem {
-						if order.itemId == item.id {
-							isEqual = true
-							break;
-						}
-					}
-					if (!isEqual) {
-						// 存在しない商品だった場合は削除
-						#if DEBUG
-							debugPrint("存在しない動的商品：ID=" + order.id)
-						#endif
-						try! HDZOrder.deleteObject(order)
-					}
-					else {
-						break
+			for order:HDZOrder in self.orderResult! {
+				// 動的から
+				var isEqual:Bool = false
+				for item:DynamicItem in self.dynamicItems {
+					if order.itemId == item.id {
+						isEqual = true
+						break;
 					}
 				}
-				else {
-					// 静的
-					var isEqual:Bool = false
-					for item:StaticItem in self.staticItems {
-						if order.itemId == item.id {
-							isEqual = true
-							break;
-						}
-					}
-					if (!isEqual) {
-						// 存在しない商品だった場合は削除
-						#if DEBUG
-							debugPrint("存在しない静的商品：ID=" + order.id)
-						#endif
-						try! HDZOrder.deleteObject(order)
-					}
-					else {
-						break
+				if (isEqual) {
+					// 見つかったので次へ
+					continue
+				}
+				
+				// 見つからなかったら静的を
+				for item:StaticItem in self.staticItems {
+					if order.itemId == item.id {
+						isEqual = true
+						break;
 					}
 				}
+				if (isEqual) {
+					// 見つかったので次へ
+					continue
+				}
+
+				// 存在しない商品だった場合は削除
+				#if DEBUG
+					debugPrint("存在しない静的商品：ID=" + order.id)
+				#endif
+				try! HDZOrder.deleteObject(order)
 			}
 			
 			// カート更新
-			self.result = try! HDZOrder.queries(self.supplierId)
+			self.orderResult = try! HDZOrder.queries(self.supplierId)
 			//テーブル更新
 			self.tableView.reloadData()
 
 			// インジケーター停止
 			self.indicatorView.stopAnimating()
 
-			if self.result?.count == 0 {
+			if self.orderResult?.count == 0 {
 				// アイテム無しの場合
-//				let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
-//					self.navigationController?.popViewControllerAnimated(false)
-//				})
-//				let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
-//				controller.addAction(action2)
-//				self.presentViewController(controller, animated: false, completion: nil)
 				self.openAlertNoCart()
 				
 				return
@@ -187,7 +170,6 @@ extension HDZItemCheckTableViewController {
 			
 			// ボタン有効
 			self.updateButtonEnabled(true)
-//			self.barbuttonitemConfirm.enabled = true
 		}
 		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
@@ -209,16 +191,16 @@ extension HDZItemCheckTableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.result == nil {
+        if self.orderResult == nil {
             return 0
         } else {
-            return self.result!.count
+            return self.orderResult!.count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
-        if let item: HDZOrder = self.result?[indexPath.row] {
+        if let item: HDZOrder = self.orderResult?[indexPath.row] {
 
 			// 整数かどうかチェック
 			if let _: Int = Int(item.size) {
@@ -269,8 +251,6 @@ extension HDZItemCheckTableViewController {
 //    }
  
 	private func openAlertNoCart() {
-		// アイテム無しの場合
-		self.updateButtonEnabled(false)
 		
 		// アラートビュー
 		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
@@ -284,9 +264,9 @@ extension HDZItemCheckTableViewController {
 	
 	// 注文実行
     internal func didSelectedOrder() {
-        self.result = try! HDZOrder.queries(self.supplierId)
+        self.orderResult = try! HDZOrder.queries(self.supplierId)
 
-        guard let items: Results<HDZOrder> = self.result else {
+        guard let items: Results<HDZOrder> = self.orderResult else {
 			
 			// アイテム無し
 			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -306,7 +286,7 @@ extension HDZItemCheckTableViewController {
 			self.indicatorView.stopAnimating()
 			
 			//履歴を全て消す
-			for object in self.result! {
+			for object in self.orderResult! {
 				try! HDZOrder.deleteObject(object)
 			}
 			
@@ -370,11 +350,11 @@ extension HDZItemCheckTableViewController: HDZItemCheckCellDelegate {
 	func itemcheckcellReload() {
 		
 //		self.loadItem()
-		self.result = try! HDZOrder.queries(self.supplierId)
+		self.orderResult = try! HDZOrder.queries(self.supplierId)
 		self.tableView.reloadData()
 		
 		// !!!:デザミシステム
-		if self.result?.count == 0 {
+		if self.orderResult?.count == 0 {
 			// アイテム無しの場合
 			let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
 				self.navigationController?.popViewControllerAnimated(false)
