@@ -12,6 +12,10 @@ Carthage/
 # 生成フォルダ
 
 # SSL
+*.pem
+*.pkey
+*.p12
+fastlane/
 
 # 中間ファイル
 *.bcsymbolmap

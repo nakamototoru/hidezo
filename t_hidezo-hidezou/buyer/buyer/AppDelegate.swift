@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// !!!:deploygate
 		// [[DeployGateSDK sharedInstance] launchApplicationWithAuthor:@"dezamisystem" key:@"[target_application_api_key]"];
-		DeployGateSDK.sharedInstance().launchApplicationWithAuthor("dezamisystem", key: "ad54c96060d3afc722b95ed48a3e249bf279e8d3")
+		DeployGateSDK.sharedInstance().launchApplicationWithAuthor("dezamisystem", key: "ab3219a7cb8eefbc04bc0ebe0af036b97d82ae4f")
 		
         return true
     }
