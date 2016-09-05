@@ -99,10 +99,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			.stringByTrimmingCharactersInSet( characterSet )
 			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
 
-		print(">>>> deviceToken: \(deviceTokenString)")
+//		NSLog(">>>> deviceToken: " + deviceTokenString)
+		DeployGateExtra.DGSLog("<deviceToken>: " + deviceTokenString)
 
 		// デバイスに保存
-		HDZUserDefaults.devicetoken = deviceTokenString //deviceToken.description
+		HDZUserDefaults.devicetoken = deviceTokenString
 		
 		//ログイン状態
 		if HDZUserDefaults.login {

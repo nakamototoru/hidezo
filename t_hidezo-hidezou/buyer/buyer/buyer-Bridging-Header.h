@@ -10,4 +10,6 @@
 
 #import "UIWarning.h"
 
+#import "DeployGateExtra.h"
+
 #import <DeployGateSDK/DeployGateSDK.h>

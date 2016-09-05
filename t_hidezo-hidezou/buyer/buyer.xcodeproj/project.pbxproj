@@ -88,6 +88,7 @@
 		37584BEE1D77E73100C879DE /* UIPlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37584BED1D77E73100C879DE /* UIPlaceHolderTextView.swift */; };
 		37584BF01D781C9C00C879DE /* HDZItemStaticDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37584BEF1D781C9C00C879DE /* HDZItemStaticDetailFooterView.swift */; };
 		37584BF21D781CAF00C879DE /* HDZItemStaticDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37584BF11D781CAF00C879DE /* HDZItemStaticDetailFooterView.xib */; };
+		37695F481D7DB432004E79B0 /* DeployGateExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 37695F471D7DB432004E79B0 /* DeployGateExtra.m */; };
 		3787AF071D704489005428AD /* ApiPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3787AF061D704489005428AD /* ApiPush.swift */; };
 		37C6E5821D73EE3900D8E7C6 /* HDZBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6E5811D73EE3900D8E7C6 /* HDZBadgeView.swift */; };
 		37C6E58A1D75AB0000D8E7C6 /* HDZItemOrderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6E5891D75AB0000D8E7C6 /* HDZItemOrderManager.swift */; };
@@ -236,6 +237,8 @@
 		37584BED1D77E73100C879DE /* UIPlaceHolderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIPlaceHolderTextView.swift; path = class/extension/UIPlaceHolderTextView.swift; sourceTree = "<group>"; };
 		37584BEF1D781C9C00C879DE /* HDZItemStaticDetailFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticDetailFooterView.swift; path = class/contents/item/static/detail/HDZItemStaticDetailFooterView.swift; sourceTree = "<group>"; };
 		37584BF11D781CAF00C879DE /* HDZItemStaticDetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemStaticDetailFooterView.xib; path = class/contents/item/static/detail/HDZItemStaticDetailFooterView.xib; sourceTree = "<group>"; };
+		37695F461D7DB432004E79B0 /* DeployGateExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeployGateExtra.h; path = "class/objective-c/UI/DeployGateExtra.h"; sourceTree = "<group>"; };
+		37695F471D7DB432004E79B0 /* DeployGateExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeployGateExtra.m; path = "class/objective-c/UI/DeployGateExtra.m"; sourceTree = "<group>"; };
 		3787AF061D704489005428AD /* ApiPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiPush.swift; path = class/utils/api/model/ApiPush.swift; sourceTree = "<group>"; };
 		37C6E5811D73EE3900D8E7C6 /* HDZBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZBadgeView.swift; path = class/extension/HDZBadgeView.swift; sourceTree = "<group>"; };
 		37C6E5891D75AB0000D8E7C6 /* HDZItemOrderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderManager.swift; path = class/manager/HDZItemOrderManager.swift; sourceTree = "<group>"; };
@@ -766,6 +769,8 @@
 			children = (
 				37E669831D6DE20A007B2468 /* UIWarning.h */,
 				37E669841D6DE20A007B2468 /* UIWarning.m */,
+				37695F461D7DB432004E79B0 /* DeployGateExtra.h */,
+				37695F471D7DB432004E79B0 /* DeployGateExtra.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1056,6 +1061,7 @@
 				37F15E1C1D65400D008B469E /* GallerySwipeToDismissTransition.swift in Sources */,
 				F74189931D4DC9E5000C49F0 /* HDZItemDynamicCell.swift in Sources */,
 				37F15E3F1D654076008B469E /* ImageViewerPresentTransition.swift in Sources */,
+				37695F481D7DB432004E79B0 /* DeployGateExtra.m in Sources */,
 				35255C881D179C3000A8D627 /* ApiFriend.swift in Sources */,
 				37E718721D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift in Sources */,
 				356997631D325AEE00BA0ECF /* HDZItemTableViewCell.swift in Sources */,
