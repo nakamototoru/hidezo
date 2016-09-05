@@ -71,7 +71,7 @@ extension HDZCommentCell {
 	
 	func onTapCommentLabel(g:UIGestureRecognizer) {
 		
-		NSLog("onTapCommentLabel")
+		print("onTapCommentLabel")
 		
 		let vc:HDZCommentDetailViewController = HDZCommentDetailViewController(nibName: "HDZCommentDetailViewController", bundle: nil)
 		vc.textDetail = messageInfo.message

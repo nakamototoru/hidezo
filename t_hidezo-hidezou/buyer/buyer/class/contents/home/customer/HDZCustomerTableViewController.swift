@@ -122,8 +122,10 @@ extension HDZCustomerTableViewController {
 		let error: (error: ErrorType?, result: FriendError?) -> Void = { (error, result) in
 			
 			self.refreshControl?.endRefreshing()
+			#if DEBUG
 			debugPrint(error)
 			debugPrint(result)
+			#endif
 		}
 		
 		self.request = HDZApi.friend(completion, errorBlock: error)

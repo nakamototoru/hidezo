@@ -44,7 +44,9 @@ extension HDZOrder {
         do {
             order = try HDZOrder.queries(supplierId, itemId: itemId, dynamic: dynamic)
         } catch let error as NSError {
+			#if DEBUG
             debugPrint(error)
+			#endif
         }
         
         if order == nil {

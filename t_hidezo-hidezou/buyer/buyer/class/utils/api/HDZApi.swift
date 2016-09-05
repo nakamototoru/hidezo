@@ -70,12 +70,10 @@ extension HDZApi {
         
         for item in items {
             if item.dynamic {
-                //dynamic_item.append("\(item.itemId),\(item.size)")
 				
 				dynamic_item.append(String(item.itemId) + "," + item.size)
             }
 			else {
-                //static_item.append("\(item.itemId),\(item.size)")
 				
 				static_item.append(String(item.itemId) + "," + item.size)
             }
@@ -247,18 +245,20 @@ extension HDZApi {
         }
 
         let handler: (UIAlertAction) -> Void = { (alert: UIAlertAction) in
-            
+			
+			// ログアウト実行
             HDZUserDefaults.login = false
 
+			// カートを空に
+			
+			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
             UIApplication.setRootViewController(controller)
             
             let navigationController: UINavigationController = HDZLoginViewController.createViewController()
             viewController.presentViewController(navigationController, animated: true, completion: nil)
         }
-        
         let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: handler)
-        
         let comment: String = "他の端末でお客様のアカウントにログインしたか、サーバーの不具合でログアウトされました。"
         let controller: UIAlertController = UIAlertController(title: message, message: comment, preferredStyle: .Alert)
 

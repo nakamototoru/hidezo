@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -130,9 +130,6 @@
                     <state key="normal" title="注文内容を変更する">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="didSelectedEdit:" destination="iN0-l3-epB" eventType="touchUpInside" id="xGj-4f-uWf"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,7 +178,6 @@
                 <outlet property="deliveredLabel" destination="y3I-zv-ovR" id="iJF-pZ-wPS"/>
                 <outlet property="deliveredPlaceLabel" destination="5lK-Vs-2Oa" id="b4q-eC-VWA"/>
                 <outlet property="postageLabel" destination="KzS-bx-eUh" id="G5O-Fk-6IS"/>
-                <outlet property="submitButton" destination="Ysk-G5-ghk" id="ejX-GV-Bg5"/>
                 <outlet property="subtotalLabel" destination="sS0-bZ-pKk" id="bth-ha-o2r"/>
                 <outlet property="totalLabel" destination="A1k-mA-SXE" id="UGN-Ts-36c"/>
             </connections>

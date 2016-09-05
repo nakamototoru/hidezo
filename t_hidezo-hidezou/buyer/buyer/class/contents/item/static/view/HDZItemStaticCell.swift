@@ -170,7 +170,9 @@ extension HDZItemStaticCell {
         do {
             try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
         } catch let error as NSError {
+			#if DEBUG
             debugPrint(error)
+			#endif
         }
     }
 }

@@ -25,12 +25,12 @@ class HDZOrderDetailFooter: UIView {
     @IBOutlet weak var chargeLabel: UILabel!
     @IBOutlet weak var deliveredLabel: UILabel!
     @IBOutlet weak var deliveredPlaceLabel: UILabel!
-    @IBOutlet weak var submitButton: UIButton!
-    
+//    @IBOutlet weak var submitButton: UIButton!
+	
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
-        self.submitButton.layer.cornerRadius = 5.0
+//        self.submitButton.layer.cornerRadius = 5.0
     }
 }
 
@@ -48,10 +48,9 @@ extension HDZOrderDetailFooter {
 }
 
 // MARK: - action
-extension HDZOrderDetailFooter {
-
-    @IBAction func didSelectedEdit(sender: UIButton) {
-        debugPrint("--------------------")
-    }
-}
-
+//extension HDZOrderDetailFooter {
+//
+//    @IBAction func didSelectedEdit(sender: UIButton) {
+//        debugPrint("--------------------")
+//    }
+//}

@@ -80,9 +80,7 @@ extension HDZItemCheckFractionCell {
 
 	@IBAction func onChangeOrder(sender: AnyObject) {
 		
-		// TODO: 分数変更ダイアログ
-//		NSLog("TODO: 分数変更ダイアログ")
-		
+		// 分数変更ダイアログ
 		let numScale:[String] = self.order.numScaleStr.componentsSeparatedByString("|")
 		
 		let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: numScale, itemsize: self.order.size)

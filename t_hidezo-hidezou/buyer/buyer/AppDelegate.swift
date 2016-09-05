@@ -66,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		/// タイトルテキストカラーの設定
 		UITabBarItem.appearance().setTitleTextAttributes(nomalAttributes, forState: UIControlState.Normal)
 		
-		
 		// !!!:dezami
 		// プッシュ通知
 		// バッジ、サウンド、アラートをリモート通知対象として登録する
@@ -81,8 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 		}
 		
+		// デバイストークン送信
+		if HDZUserDefaults.login && HDZUserDefaults.devicetoken != "" {
+			HDZApi.postDeviceTokenByLogin()
+		}
+		
 		// !!!:deploygate
-		// [[DeployGateSDK sharedInstance] launchApplicationWithAuthor:@"dezamisystem" key:@"[target_application_api_key]"];
 		DeployGateSDK.sharedInstance().launchApplicationWithAuthor("dezamisystem", key: "ab3219a7cb8eefbc04bc0ebe0af036b97d82ae4f")
 		
         return true
@@ -99,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			.stringByTrimmingCharactersInSet( characterSet )
 			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
 
-//		NSLog(">>>> deviceToken: " + deviceTokenString)
+//		print(">>>> deviceToken: " + deviceTokenString)
 		DeployGateExtra.DGSLog("<deviceToken>: " + deviceTokenString)
 
 		// デバイスに保存
@@ -118,26 +121,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	// Push通知が利用不可であればerrorが返ってくる
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-		NSLog("error: " + "\(error)")
+		DeployGateExtra.DGSLog("error: " + "\(error)")
 	}
 	
 	// Push通知受信時とPush通知をタッチして起動したときに呼ばれる
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 		
-		NSLog("**** didReceiveRemoteNotification ****")
+		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
 		
 		switch application.applicationState {
 		case .Inactive:
 			// アプリがバックグラウンドにいる状態で、Push通知から起動したとき
-			NSLog("> applicationState.Inactive")
+			print("> applicationState.Inactive")
 			break
 		case .Active:
 			// アプリ起動時にPush通知を受信したとき
-			NSLog("> applicationState.Active")
+			print("> applicationState.Active")
 			break
 		case .Background:
 			// アプリがバックグラウンドにいる状態でPush通知を受信したとき
-			NSLog("> applicationState.Background")
+			print("> applicationState.Background")
 			break
 		}
 		//全ての通知を削除
@@ -167,7 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				do {
 					let supplierList: SupplierUpListResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
-					//debugPrint(supplierList)
 					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
 					
 					//NSNotificationのインスタンスを作成
@@ -190,7 +192,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				do {
 					let messageList: MessageUpListResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
-					//debugPrint(supplierList)
 					HDZPushNotificationManager.shared.setMessageUpList( messageList )
 					
 					//NSNotificationのインスタンスを作成
@@ -239,10 +240,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let host: String = url.host else {
             return true
         }
-		HDZUserDefaults.id = host
 		
-//        if let id: String = Int(host) {
-//        }
+		// ログイン状態記録
+		HDZUserDefaults.id = host
 		
         return true
     }

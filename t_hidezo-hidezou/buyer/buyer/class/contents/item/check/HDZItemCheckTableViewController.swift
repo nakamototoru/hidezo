@@ -311,12 +311,12 @@ extension HDZItemCheckTableViewController {
 			
 			// APIメッセージ送信
 			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
-				//self.dismissViewControllerAnimated(true, completion: nil)
 				HDZItemOrderManager.shared.clearAllData()
 			}
 			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
-				//self.dismissViewControllerAnimated(true, completion: nil)
-				debugPrint(error)
+				#if DEBUG
+					debugPrint(error)
+				#endif
 				HDZItemOrderManager.shared.clearAllData()
 			}
 			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
