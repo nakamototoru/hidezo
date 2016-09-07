@@ -149,9 +149,14 @@ extension HDZOrderDetailTableViewController {
         let controller: HDZOrderItemTableViewController = HDZOrderItemTableViewController.createViewController(orderDetailItem)
         self.navigationController?.pushViewController(controller, animated: true) // true
     }
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+				
+		return HDZOrderDetailCell.getHeight()
+	}
 }
 
-// MARK: - static
+// MARK: - Create
 extension HDZOrderDetailTableViewController {
     
     internal class func createViewController(orderInfo: OrderInfo) -> HDZOrderDetailTableViewController {

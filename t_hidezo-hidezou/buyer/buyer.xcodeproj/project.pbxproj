@@ -98,6 +98,10 @@
 		37CA46C31D644C8A006ED62E /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CA46C11D644C8A006ED62E /* UIViewController+MJPopupViewController.m */; };
 		37D59D631D76E29E006A9818 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D59D621D76E29E006A9818 /* SystemConfiguration.framework */; };
 		37D59D651D76E2B0006A9818 /* DeployGateSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D59D641D76E2B0006A9818 /* DeployGateSDK.framework */; };
+		37DF195F1D7FDC420021D466 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37DF195E1D7FDC420021D466 /* MessageUI.framework */; };
+		37DF19611D7FE2EF0021D466 /* HDZAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DF19601D7FE2EF0021D466 /* HDZAgreementViewController.swift */; };
+		37DF19631D7FE3040021D466 /* HDZAgreementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DF19621D7FE3040021D466 /* HDZAgreementViewController.storyboard */; };
+		37DF19691D801FE60021D466 /* kiyaku.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 37DF19681D801FE60021D466 /* kiyaku.rtf */; };
 		37E669701D6D3016007B2468 /* HDZItemDynamicFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6696F1D6D3016007B2468 /* HDZItemDynamicFooterView.swift */; };
 		37E669721D6D303C007B2468 /* HDZItemDynamicFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E669711D6D303C007B2468 /* HDZItemDynamicFooterView.xib */; };
 		37E669761D6D34E0007B2468 /* HDZItemDynamicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E669751D6D34E0007B2468 /* HDZItemDynamicHeaderView.swift */; };
@@ -251,6 +255,10 @@
 		37CA46C11D644C8A006ED62E /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MJPopupViewController.m"; path = "class/objective-c/MJPopupSource/UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		37D59D621D76E29E006A9818 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		37D59D641D76E2B0006A9818 /* DeployGateSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DeployGateSDK.framework; sourceTree = "<group>"; };
+		37DF195E1D7FDC420021D466 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		37DF19601D7FE2EF0021D466 /* HDZAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZAgreementViewController.swift; path = class/contents/login/HDZAgreementViewController.swift; sourceTree = "<group>"; };
+		37DF19621D7FE3040021D466 /* HDZAgreementViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZAgreementViewController.storyboard; path = class/contents/login/HDZAgreementViewController.storyboard; sourceTree = "<group>"; };
+		37DF19681D801FE60021D466 /* kiyaku.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = kiyaku.rtf; path = class/contents/login/kiyaku.rtf; sourceTree = "<group>"; };
 		37E6696F1D6D3016007B2468 /* HDZItemDynamicFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemDynamicFooterView.swift; path = class/contents/item/dynamic/view/HDZItemDynamicFooterView.swift; sourceTree = "<group>"; };
 		37E669711D6D303C007B2468 /* HDZItemDynamicFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemDynamicFooterView.xib; path = class/contents/item/dynamic/view/HDZItemDynamicFooterView.xib; sourceTree = "<group>"; };
 		37E669751D6D34E0007B2468 /* HDZItemDynamicHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemDynamicHeaderView.swift; path = class/contents/item/dynamic/view/HDZItemDynamicHeaderView.swift; sourceTree = "<group>"; };
@@ -316,6 +324,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DF195F1D7FDC420021D466 /* MessageUI.framework in Frameworks */,
 				37D59D651D76E2B0006A9818 /* DeployGateSDK.framework in Frameworks */,
 				37D59D631D76E29E006A9818 /* SystemConfiguration.framework in Frameworks */,
 				F74189891D4DA5B8000C49F0 /* Realm.framework in Frameworks */,
@@ -376,6 +385,7 @@
 		35255C581D176F4600A8D627 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37DF195E1D7FDC420021D466 /* MessageUI.framework */,
 				37D59D641D76E2B0006A9818 /* DeployGateSDK.framework */,
 				37D59D621D76E29E006A9818 /* SystemConfiguration.framework */,
 				F74189871D4DA5B8000C49F0 /* Realm.framework */,
@@ -643,8 +653,11 @@
 		35899BB11D16EC2100D2AA45 /* login */ = {
 			isa = PBXGroup;
 			children = (
+				37DF19681D801FE60021D466 /* kiyaku.rtf */,
 				35899BB21D16EC8A00D2AA45 /* HDZLoginViewController.swift */,
 				35899BB41D16EC9C00D2AA45 /* HDZLoginViewController.storyboard */,
+				37DF19601D7FE2EF0021D466 /* HDZAgreementViewController.swift */,
+				37DF19621D7FE3040021D466 /* HDZAgreementViewController.storyboard */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -976,6 +989,7 @@
 				37E718741D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib in Resources */,
 				F7C4C0151D4F6B4000021BD3 /* HDZItemCheckCell.xib in Resources */,
 				3752B8CF1D66D4F80080E0AE /* HDZItemOrderDialogViewController.storyboard in Resources */,
+				37DF19691D801FE60021D466 /* kiyaku.rtf in Resources */,
 				3511A0871D3B029000FC4AF9 /* HDZItemCategoryTableViewController.storyboard in Resources */,
 				35899B9B1D16D7C300D2AA45 /* LaunchScreen.storyboard in Resources */,
 				35AEB6681D3B183800AAFD06 /* HDZItemDynamicTableViewController.storyboard in Resources */,
@@ -987,6 +1001,7 @@
 				3515C5451D1AD5F40074B38E /* HDZOrderDetailCell.xib in Resources */,
 				35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */,
 				37E669721D6D303C007B2468 /* HDZItemDynamicFooterView.xib in Resources */,
+				37DF19631D7FE3040021D466 /* HDZAgreementViewController.storyboard in Resources */,
 				35899BAB1D16E20C00D2AA45 /* HDZTopViewController.storyboard in Resources */,
 				35899BB51D16EC9C00D2AA45 /* HDZLoginViewController.storyboard in Resources */,
 				37E669811D6DCC14007B2468 /* HDZItemCheckFractionCell.xib in Resources */,
@@ -1097,6 +1112,7 @@
 				37584BF01D781C9C00C879DE /* HDZItemStaticDetailFooterView.swift in Sources */,
 				37E669761D6D34E0007B2468 /* HDZItemDynamicHeaderView.swift in Sources */,
 				37E718781D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift in Sources */,
+				37DF19611D7FE2EF0021D466 /* HDZAgreementViewController.swift in Sources */,
 				3752B8D11D66D6320080E0AE /* HDZItemOrderNavigationController.swift in Sources */,
 				35255C7E1D1791DA00A8D627 /* HDZCustomerCell.swift in Sources */,
 				37E6697F1D6DCBDD007B2468 /* HDZItemCheckFractionCell.swift in Sources */,

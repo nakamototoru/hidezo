@@ -18,34 +18,26 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem width="29" style="plain" systemItem="fixedSpace" id="LRm-vV-9gb"/>
                         <barButtonItem title="ホーム" id="2bz-ZA-2VO">
                             <connections>
                                 <action selector="onBackHome:" destination="7JB-sV-3m0" id="1c9-ub-1Ai"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="F7i-ME-AEB"/>
-                        <barButtonItem title="注文確定" style="done" id="UuX-VH-CWf">
+                        <barButtonItem title="注文へ" style="done" id="UuX-VH-CWf">
                             <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onConfirmOrder:" destination="7JB-sV-3m0" id="q0H-P1-FVn"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="0f5-pa-8FU"/>
-                        <barButtonItem systemItem="compose" id="5rC-qO-6HX">
-                            <connections>
-                                <action selector="onCommentDialog:" destination="7JB-sV-3m0" id="O0m-SM-HHE"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="　" id="S8h-1g-YQt"/>
-                        <barButtonItem width="8" style="plain" systemItem="fixedSpace" id="cGB-lS-rXz"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="zfw-bM-tk0"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hKw-HE-VpR"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barbuttonitemConfirm" destination="UuX-VH-CWf" id="NX8-q7-vYJ"/>
                         <outlet property="barbuttonitemHome" destination="2bz-ZA-2VO" id="WAi-7z-DaY"/>
-                        <outlet property="barbuttonitemNote" destination="5rC-qO-6HX" id="oIm-Fc-Xql"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9eJ-mN-dPK" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -13,7 +13,7 @@ import RealmSwift
 class HDZItemCheckTableViewController: UITableViewController {
 
 	@IBOutlet weak var barbuttonitemConfirm: UIBarButtonItem!
-	@IBOutlet weak var barbuttonitemNote: UIBarButtonItem!
+//	@IBOutlet weak var barbuttonitemNote: UIBarButtonItem!
 	@IBOutlet weak var barbuttonitemHome: UIBarButtonItem!
 	
     private var supplierId: String = ""
@@ -46,7 +46,6 @@ class HDZItemCheckTableViewController: UITableViewController {
 		
 		// ボタン無効
 		self.updateButtonEnabled(false)
-//		self.barbuttonitemConfirm.enabled = false
     }
 
 	override func viewDidAppear(animated: Bool) {
@@ -76,7 +75,7 @@ class HDZItemCheckTableViewController: UITableViewController {
 	// ボタン状態
 	private func updateButtonEnabled(enabled:Bool) {
 		self.barbuttonitemConfirm.enabled = enabled
-		self.barbuttonitemNote.enabled = enabled
+//		self.barbuttonitemNote.enabled = enabled
 		self.barbuttonitemHome.enabled = enabled
 	}
 }
@@ -371,6 +370,14 @@ extension HDZItemCheckTableViewController {
 	
 	@IBAction func onConfirmOrder(sender: AnyObject) {
 
+		// 入力画面
+		let controller:HDZItemOrderDialogViewController = HDZItemOrderDialogViewController.createViewController(self.supplierId)
+		controller.supplierId = self.supplierId
+//		self.navigationController?.presentViewController(controller, animated: true, completion: {
+//		})
+		self.navigationController?.pushViewController(controller, animated: true)
+
+		/*
 		// 配送情報
 		// 担当者
 		if HDZItemOrderManager.shared.charge == "" {
@@ -389,13 +396,11 @@ extension HDZItemCheckTableViewController {
 		
 		// ボタン無効
 		self.updateButtonEnabled(false)
-//		self.barbuttonitemConfirm.enabled = false
 		
 		// 「注文しますか？」
 		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel) { (action:UIAlertAction!) in
 			// キャンセル
 			// ボタン有効
-//			self.barbuttonitemConfirm.enabled = true;
 			self.updateButtonEnabled(true)
 		}
 		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .Default) { (action:UIAlertAction!) in
@@ -408,6 +413,7 @@ extension HDZItemCheckTableViewController {
 		alert.addAction(cancelaction)
 		alert.addAction(confirmaction)
 		self.presentViewController(alert, animated: false, completion: nil)
+		*/
 	}
 	
 	@IBAction func onBackHome(sender: AnyObject) {
@@ -416,13 +422,14 @@ extension HDZItemCheckTableViewController {
 		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
 	}
 	
-	@IBAction func onCommentDialog(sender: AnyObject) {
-		
-		// モーダルで開く
-		let controller:HDZItemOrderNavigationController = HDZItemOrderNavigationController.createViewController()
-		controller.supplierId = self.supplierId
-		self.navigationController?.presentViewController(controller, animated: true, completion: {
-		})
+//	@IBAction func onCommentDialog(sender: AnyObject) {
+//		
+//		// モーダルで開く
+//		let controller:HDZItemOrderNavigationController = HDZItemOrderNavigationController.createViewController()
+//		controller.supplierId = self.supplierId
+//		self.navigationController?.presentViewController(controller, animated: true, completion: {
+//		})
+//
+//	}
 
-	}
 }

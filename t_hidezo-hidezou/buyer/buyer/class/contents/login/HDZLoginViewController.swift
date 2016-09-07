@@ -8,12 +8,14 @@
 
 import UIKit
 import Alamofire
+import MessageUI
 
-class HDZLoginViewController: UIViewController {
+class HDZLoginViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+	@IBOutlet weak var buttonSignup: UIButton!
     
     private var loginRequest: Alamofire.Request? = nil
     private var loginCheckRequest: Alamofire.Request? = nil
@@ -27,6 +29,9 @@ class HDZLoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.loginButton.layer.cornerRadius = 5.0
+		
+		self.buttonSignup.layer.borderColor = UIColor.redColor().CGColor
+		self.buttonSignup.layer.borderWidth = 1.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,9 +59,33 @@ class HDZLoginViewController: UIViewController {
         self.loginRequest?.cancel()
         self.loginCheckRequest?.cancel()
     }
+	
+	// !!!: MFMailComposeViewControllerDelegate
+	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+		switch result.rawValue {
+		case MFMailComposeResultCancelled.rawValue:
+			print("Email Send Cancelled")
+			break
+		case MFMailComposeResultSaved.rawValue:
+			print("Email Saved as a Draft")
+			break
+		case MFMailComposeResultSent.rawValue:
+			print("Email Sent Successfully")
+			break
+		case MFMailComposeResultFailed.rawValue:
+			print("Email Send Failed")
+			UIWarning.Warning("送信に失敗しました")
+			break
+		default:
+			break
+		}
+		
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+
 }
 
-// MARK: - static
+// MARK: - Create
 extension HDZLoginViewController {
     
     internal class func createViewController() -> UINavigationController {
@@ -64,7 +93,7 @@ extension HDZLoginViewController {
     }
 }
 
-// MARK: - action
+// MARK: - Action
 extension HDZLoginViewController {
     
     @IBAction func didSelectedLogin(button: UIButton) {
@@ -72,31 +101,62 @@ extension HDZLoginViewController {
         guard let idString: String = self.idTextField.text else {
 			
 			UIWarning.Warning("IDが入力されていません")
-			
             return
         }
-        
-//        guard let id: Int = Int(idString) else {
-//
-//			UIWarning.Warning("IDフォーマットに誤りがあります。")
-//
-//			return
-//        }
 		
         guard let password: String = self.passwordTextField.text else {
 			
 			UIWarning.Warning("パスワードが入力されていません")
-
             return
         }
         
         self.loginCheck(idString, password: password)
     }
+	
+	@IBAction func onRecoverPassword(sender: AnyObject) {
+		
+		self.openMailForRequest()
+	}
+	
+	@IBAction func onSignup(sender: AnyObject) {
+		
+		self.openMailForRequest()
+	}
+	
+	private func openMailForRequest() {
+
+		if MFMailComposeViewController.canSendMail() {
+			let mailPicker:MFMailComposeViewController = MFMailComposeViewController()
+			mailPicker.mailComposeDelegate = self
+	
+			// 1.件名
+			mailPicker.setSubject("問い合わせ")
+			// 2.本文
+			mailPicker.setMessageBody("■会社名（お名前）：\n■お電話番号：\n■メールアドレス：\n■お問い合わせ内容：", isHTML: false)
+			// 3.送信先アドレス
+			let toRecipients = ["info@beyondfoods.jp"] //Toのアドレス指定
+			mailPicker.setToRecipients(toRecipients)
+			// 開く
+			self .presentViewController(mailPicker, animated: true, completion: { 
+				
+			})
+		}
+		else {
+			UIWarning.Warning("メーラーが使用できません")
+		}
+	}
+	
+	@IBAction func onOpenAgreement(sender: AnyObject) {
+		
+		let controller:HDZAgreementViewController = HDZAgreementViewController.createViewController()
+		self.navigationController?.pushViewController(controller, animated: true)
+	}
+	
 }
 
-// MARK: - private
+// MARK: - API
 extension HDZLoginViewController {
-    
+	
     private func loginCheck(id: String, password: String) {
         
         let completion: (unboxable: LoginCheckResult?) -> Void = { (unboxable) in
@@ -126,7 +186,8 @@ extension HDZLoginViewController {
     private func login(id: String, password: String) {
      
         let completion: (unboxable: LoginResult?) -> Void = { (unboxable) in
-            
+			
+			// ログイン完了
             guard let result: LoginResult = unboxable else {
                 return
             }
@@ -155,9 +216,12 @@ extension HDZLoginViewController {
 					debugPrint(error)
 				}
 				self.deviceTokenRequest = HDZApi.postDeviceToken(id, completionBlock: completionToken, errorBlock: errorToken)
+					
+				DeployGateExtra.DGSLog("HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 				#endif
 				
-            } else {
+            }
+			else {
                 // login error
                 HDZUserDefaults.login = false
 

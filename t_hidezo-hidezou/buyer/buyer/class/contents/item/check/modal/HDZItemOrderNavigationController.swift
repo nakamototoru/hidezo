@@ -17,11 +17,11 @@ class HDZItemOrderNavigationController: UINavigationController {
 
         // Do any additional setup after loading the view.
 		// ルートビューに値を渡す
-		let rootviewcontroller = self.viewControllers.first;
-		if ((rootviewcontroller) != nil) {
-			let vc = rootviewcontroller as! HDZItemOrderDialogViewController
-			vc.supplierId = self.supplierId
-		}
+//		let rootviewcontroller = self.viewControllers.first;
+//		if ((rootviewcontroller) != nil) {
+//			let vc = rootviewcontroller as! HDZItemOrderDialogViewController
+//			vc.supplierId = self.supplierId
+//		}
 
     }
 
@@ -43,11 +43,11 @@ class HDZItemOrderNavigationController: UINavigationController {
 
 }
 
-extension HDZItemOrderNavigationController {
-	
-	internal class func createViewController() -> HDZItemOrderNavigationController {
-		let controller: HDZItemOrderNavigationController = UIViewController.createViewController("HDZItemOrderDialogViewController", withIdentifier: "HDZItemOrderNavigationController")
-		//controller.friendInfo = friendInfo
-		return controller
-	}
-}
+//extension HDZItemOrderNavigationController {
+//	
+//	internal class func createViewController() -> HDZItemOrderNavigationController {
+//		let controller: HDZItemOrderNavigationController = UIViewController.createViewController("HDZItemOrderDialogViewController", withIdentifier: "HDZItemOrderNavigationController")
+//		//controller.friendInfo = friendInfo
+//		return controller
+//	}
+//}

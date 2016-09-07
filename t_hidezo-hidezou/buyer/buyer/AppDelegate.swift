@@ -83,6 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// デバイストークン送信
 		if HDZUserDefaults.login && HDZUserDefaults.devicetoken != "" {
 			HDZApi.postDeviceTokenByLogin()
+			
+			DeployGateExtra.DGSLog("didFinishLaunchingWithOptions\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 		}
 		
 		// !!!:deploygate
@@ -103,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
 
 //		print(">>>> deviceToken: " + deviceTokenString)
-		DeployGateExtra.DGSLog("<deviceToken>: " + deviceTokenString)
+		DeployGateExtra.DGSLog("didRegisterForRemoteNotificationsWithDeviceToken\n <deviceToken>: " + deviceTokenString)
 
 		// デバイスに保存
 		HDZUserDefaults.devicetoken = deviceTokenString

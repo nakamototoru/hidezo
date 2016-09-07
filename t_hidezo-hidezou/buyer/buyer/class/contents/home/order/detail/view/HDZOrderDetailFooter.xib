@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HDZOrderDetailFooter" customModule="buyer" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="204"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIu-Qm-0TD">
@@ -120,25 +120,21 @@
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysk-G5-ghk">
-                    <rect key="frame" x="16" y="166" width="343" height="30"/>
-                    <color key="backgroundColor" red="0.17254901959999999" green="0.65098039220000004" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※整数注文以外の計算は全て0円で行っています" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPC-76-SZv">
+                    <rect key="frame" x="13" y="154" width="348" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="gWm-uf-KQB"/>
+                        <constraint firstAttribute="height" constant="21" id="7l5-3Q-nQX"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="注文内容を変更する">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Ysk-G5-ghk" secondAttribute="trailing" constant="16" id="21z-bx-kBV"/>
                 <constraint firstItem="qdj-Qo-zc1" firstAttribute="top" secondItem="E0W-hZ-dcC" secondAttribute="bottom" constant="8" id="2LF-3w-Ivs"/>
                 <constraint firstItem="qdj-Qo-zc1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="4Lv-pm-JiT"/>
                 <constraint firstItem="rIu-Qm-0TD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4Vn-K4-BEy"/>
-                <constraint firstAttribute="bottom" secondItem="Ysk-G5-ghk" secondAttribute="bottom" constant="8" id="7wK-GH-2wm"/>
                 <constraint firstItem="KzS-bx-eUh" firstAttribute="top" secondItem="sS0-bZ-pKk" secondAttribute="bottom" constant="8" id="8S9-k4-tZw"/>
                 <constraint firstItem="y3I-zv-ovR" firstAttribute="top" secondItem="YFT-s1-v5U" secondAttribute="bottom" constant="8" id="BOP-No-MDI"/>
                 <constraint firstItem="MuP-Na-mA0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="CuR-tG-74G"/>
@@ -146,14 +142,18 @@
                 <constraint firstItem="MuP-Na-mA0" firstAttribute="top" secondItem="qDh-F7-glY" secondAttribute="bottom" constant="8" id="HkE-br-LjS"/>
                 <constraint firstItem="YFT-s1-v5U" firstAttribute="leading" secondItem="ffu-r5-F6G" secondAttribute="trailing" constant="8" id="Hle-60-sue"/>
                 <constraint firstItem="tIr-Xz-lxT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="J9I-IB-sRi"/>
+                <constraint firstItem="UPC-76-SZv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="NLg-Qg-zGw"/>
                 <constraint firstItem="YFT-s1-v5U" firstAttribute="top" secondItem="A1k-mA-SXE" secondAttribute="bottom" constant="8" id="NfG-nz-Bl8"/>
                 <constraint firstAttribute="trailing" secondItem="YFT-s1-v5U" secondAttribute="trailing" constant="16" id="Q4L-Wa-ZbY"/>
                 <constraint firstItem="5lK-Vs-2Oa" firstAttribute="top" secondItem="y3I-zv-ovR" secondAttribute="bottom" constant="8" id="R6S-Gg-SC1"/>
                 <constraint firstItem="tIr-Xz-lxT" firstAttribute="top" secondItem="qdj-Qo-zc1" secondAttribute="bottom" constant="8" id="Slj-yn-l5v"/>
                 <constraint firstItem="KzS-bx-eUh" firstAttribute="leading" secondItem="qdj-Qo-zc1" secondAttribute="trailing" constant="8" id="Xbw-Qi-WkG"/>
+                <constraint firstAttribute="trailing" secondItem="UPC-76-SZv" secondAttribute="trailing" constant="14" id="Zya-Bv-CmO"/>
+                <constraint firstAttribute="bottom" secondItem="UPC-76-SZv" secondAttribute="bottom" constant="9" id="aCp-SD-qAC"/>
                 <constraint firstItem="A1k-mA-SXE" firstAttribute="leading" secondItem="tIr-Xz-lxT" secondAttribute="trailing" constant="8" id="cvQ-9g-qkI"/>
                 <constraint firstAttribute="trailing" secondItem="KzS-bx-eUh" secondAttribute="trailing" constant="16" id="eM8-jw-HuH"/>
                 <constraint firstAttribute="trailing" secondItem="y3I-zv-ovR" secondAttribute="trailing" constant="16" id="eQD-NZ-k5X"/>
+                <constraint firstItem="UPC-76-SZv" firstAttribute="top" secondItem="5lK-Vs-2Oa" secondAttribute="bottom" constant="8" id="iL6-Gm-nYA"/>
                 <constraint firstItem="sS0-bZ-pKk" firstAttribute="leading" secondItem="E0W-hZ-dcC" secondAttribute="trailing" constant="8" id="iN6-9b-CUY"/>
                 <constraint firstItem="A1k-mA-SXE" firstAttribute="top" secondItem="KzS-bx-eUh" secondAttribute="bottom" constant="8" id="kB8-3e-5Za"/>
                 <constraint firstItem="qDh-F7-glY" firstAttribute="top" secondItem="ffu-r5-F6G" secondAttribute="bottom" constant="8" id="kgm-Jv-WhS"/>
@@ -166,13 +166,17 @@
                 <constraint firstItem="ffu-r5-F6G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ozn-oL-FBT"/>
                 <constraint firstItem="sS0-bZ-pKk" firstAttribute="top" secondItem="rIu-Qm-0TD" secondAttribute="bottom" constant="8" id="pWz-u2-NBc"/>
                 <constraint firstItem="y3I-zv-ovR" firstAttribute="leading" secondItem="qDh-F7-glY" secondAttribute="trailing" constant="8" id="rJd-ps-abu"/>
-                <constraint firstItem="Ysk-G5-ghk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="sRt-2e-sFf"/>
                 <constraint firstAttribute="trailing" secondItem="5lK-Vs-2Oa" secondAttribute="trailing" constant="16" id="vPe-p0-bWP"/>
                 <constraint firstItem="ffu-r5-F6G" firstAttribute="top" secondItem="tIr-Xz-lxT" secondAttribute="bottom" constant="8" id="y3j-ZQ-Y0e"/>
                 <constraint firstItem="rIu-Qm-0TD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zko-8J-Gek"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="aCp-SD-qAC"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="chargeLabel" destination="YFT-s1-v5U" id="60j-Tr-5LM"/>
                 <outlet property="deliveredLabel" destination="y3I-zv-ovR" id="iJF-pZ-wPS"/>
@@ -181,7 +185,7 @@
                 <outlet property="subtotalLabel" destination="sS0-bZ-pKk" id="bth-ha-o2r"/>
                 <outlet property="totalLabel" destination="A1k-mA-SXE" id="UGN-Ts-36c"/>
             </connections>
-            <point key="canvasLocation" x="-115.5" y="-58"/>
+            <point key="canvasLocation" x="-115.5" y="-68"/>
         </view>
     </objects>
 </document>

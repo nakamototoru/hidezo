@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="J87-F6-7Sb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="J87-F6-7Sb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -57,22 +58,69 @@
                                     <action selector="didSelectedLogin:" destination="V0W-cz-Eg4" eventType="touchUpInside" id="h1X-H1-m4y"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZm-9o-mNn">
+                                <rect key="frame" x="210" y="214" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="dHf-5I-JIf"/>
+                                    <constraint firstAttribute="height" constant="30" id="uxo-Sb-WIj"/>
+                                </constraints>
+                                <state key="normal" title="パスワードを忘れた方">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRecoverPassword:" destination="V0W-cz-Eg4" eventType="touchUpInside" id="Vn8-5P-KxN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mks-p1-BpW">
+                                <rect key="frame" x="16" y="264" width="568" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="EKo-yr-uAb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="新規登録">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSignup:" destination="V0W-cz-Eg4" eventType="touchUpInside" id="n98-2o-urZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as8-Od-vFf">
+                                <rect key="frame" x="250" y="314" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="JRg-vB-PPK"/>
+                                    <constraint firstAttribute="height" constant="30" id="tzx-bj-cxb"/>
+                                </constraints>
+                                <state key="normal" title="利用規約">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onOpenAgreement:" destination="V0W-cz-Eg4" eventType="touchUpInside" id="iNM-aX-QsR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="xeW-5P-Bxw" secondAttribute="trailing" constant="16" id="0E9-St-TtT"/>
                             <constraint firstAttribute="trailing" secondItem="5Eg-6A-uMw" secondAttribute="trailing" constant="16" id="3UF-35-Y0R"/>
                             <constraint firstAttribute="trailing" secondItem="WeS-hD-WYo" secondAttribute="trailing" constant="16" id="5xT-HW-h2G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mks-p1-BpW" secondAttribute="trailing" constant="-4" id="7MJ-cN-0N6"/>
+                            <constraint firstItem="Mks-p1-BpW" firstAttribute="top" secondItem="QZm-9o-mNn" secondAttribute="bottom" constant="20" id="7oU-dI-41C"/>
+                            <constraint firstItem="Mks-p1-BpW" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leadingMargin" constant="-4" id="G3C-t7-fxf"/>
                             <constraint firstItem="WeS-hD-WYo" firstAttribute="top" secondItem="xeW-5P-Bxw" secondAttribute="bottom" constant="8" id="J1j-pI-TN7"/>
                             <constraint firstItem="5Eg-6A-uMw" firstAttribute="top" secondItem="eao-AQ-vGK" secondAttribute="bottom" constant="8" id="QyX-PY-1Ei"/>
                             <constraint firstItem="WeS-hD-WYo" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leading" constant="16" id="Wex-Iv-pvh"/>
+                            <constraint firstItem="QZm-9o-mNn" firstAttribute="centerX" secondItem="xJ8-ah-Os3" secondAttribute="centerX" id="XxG-Ir-OWU"/>
                             <constraint firstItem="xeW-5P-Bxw" firstAttribute="top" secondItem="5Eg-6A-uMw" secondAttribute="bottom" constant="8" id="cLi-zZ-JuI"/>
                             <constraint firstItem="xeW-5P-Bxw" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leading" constant="16" id="izA-ru-4n0"/>
                             <constraint firstItem="5Eg-6A-uMw" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leading" constant="16" id="nYk-ug-vju"/>
+                            <constraint firstItem="QZm-9o-mNn" firstAttribute="top" secondItem="WeS-hD-WYo" secondAttribute="bottom" constant="26" id="pQS-zu-6Of"/>
+                            <constraint firstItem="as8-Od-vFf" firstAttribute="top" secondItem="Mks-p1-BpW" secondAttribute="bottom" constant="20" id="qx9-Sr-dl4"/>
+                            <constraint firstItem="as8-Od-vFf" firstAttribute="centerX" secondItem="xJ8-ah-Os3" secondAttribute="centerX" id="scd-r8-UdU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ログイン" id="FZv-yv-DQP"/>
                     <connections>
+                        <outlet property="buttonSignup" destination="Mks-p1-BpW" id="Ccq-eo-t4Z"/>
                         <outlet property="idTextField" destination="5Eg-6A-uMw" id="csW-Px-m5d"/>
                         <outlet property="loginButton" destination="WeS-hD-WYo" id="I7u-jh-PMh"/>
                         <outlet property="passwordTextField" destination="xeW-5P-Bxw" id="wUr-Lx-p1D"/>
@@ -80,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9jm-7I-jQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414.375" y="45"/>
+            <point key="canvasLocation" x="414" y="45"/>
         </scene>
     </scenes>
 </document>

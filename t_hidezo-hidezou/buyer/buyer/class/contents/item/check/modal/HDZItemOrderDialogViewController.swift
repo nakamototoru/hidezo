@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class HDZItemOrderDialogViewController: UIViewController {
 
@@ -17,6 +18,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 	@IBOutlet weak var pickerviewCharge: UIPickerView!
 	@IBOutlet weak var pickerviewPlace: UIPickerView!
 	@IBOutlet weak var textviewComment: UIPlaceHolderTextView!
+	@IBOutlet weak var barbuttonitemOrder: UIBarButtonItem!
 
 	private var arrayDate:NSMutableArray!
 	private var arrayCharge:NSMutableArray!
@@ -24,10 +26,12 @@ class HDZItemOrderDialogViewController: UIViewController {
 	
 	private var itemResult: ItemResult! = nil
 	private var request: Alamofire.Request? = nil
+	private var orderResult: Results<HDZOrder>? = nil
+	private var indicatorView:CustomIndicatorView!
 
-	private var ddate:String! = ""
-	private var charge:String! = ""
-	private var place:String! = ""
+//	private var ddate:String! = ""
+//	private var charge:String! = ""
+//	private var place:String! = ""
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +39,7 @@ class HDZItemOrderDialogViewController: UIViewController {
         // Do any additional setup after loading the view.
 		self.arrayDate = NSMutableArray()
 		self.arrayDate.addObjectsFromArray(HDZItemOrderManager.shared.getListDate())
-		
 		self.arrayCharge = NSMutableArray()
-		
 		self.arrayPlace = NSMutableArray()
 		
 		self.textviewComment.text = HDZItemOrderManager.shared.comment
@@ -46,14 +48,49 @@ class HDZItemOrderDialogViewController: UIViewController {
 		self.textviewComment.layer.borderColor = UIColor.grayColor().CGColor
 		self.textviewComment.placeHolder = "コメント"
 
+		// キーボード閉じる
+		// 仮のサイズでツールバー生成
+		let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+		kbToolBar.barStyle = UIBarStyle.Default  // スタイルを設定
+		kbToolBar.sizeToFit()  // 画面幅に合わせてサイズを変更
+		// スペーサー
+		let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+		// 閉じるボタン
+		let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: #selector(HDZItemOrderDialogViewController.commitButtonTapped))
+		kbToolBar.items = [spacer, commitButton]
+		self.textviewComment.inputAccessoryView = kbToolBar
+		
+		//インジケーター
+		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+		self.view.addSubview(self.indicatorView)
+
 		// APi
 		self.getItem(self.supplierId)
     }
 
+	func commitButtonTapped (){
+		self.view.endEditing(true)
+	}
+	
+	func updateButtonEnabled(enabled:Bool) {
+		barbuttonitemOrder.enabled = enabled
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+}
+
+// MARK: - Create
+extension HDZItemOrderDialogViewController {
+	
+	internal class func createViewController(supplierId: String) -> HDZItemOrderDialogViewController {
+		let controller: HDZItemOrderDialogViewController = UIViewController.createViewController("HDZItemOrderDialogViewController")
+		controller.supplierId = supplierId
+		return controller
+	}
 
 }
 
@@ -83,101 +120,250 @@ extension HDZItemOrderDialogViewController {
 			let charges:NSArray = self.itemResult.charge_list
 			self.arrayCharge.removeAllObjects()
 			self.arrayCharge.addObjectsFromArray(charges as! [String])
-			self.charge = self.arrayCharge[0] as! String
-			
+//			self.charge = self.arrayCharge[0] as! String
+			// オフセット値
+			if HDZItemOrderManager.shared.charge == "" {
+				HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
+			}
+
 			// 配達先一覧（任意）
 			let places:NSArray = self.itemResult.deliver_to_list
 			self.arrayPlace.removeAllObjects()
 			self.arrayPlace.addObject("選択なし")
 			self.arrayPlace.addObjectsFromArray(places as! [String])
-			self.place = self.arrayPlace[0] as! String
+//			self.place = self.arrayPlace[0] as! String
 			
 			// ピッカー更新
 			self.pickerviewCharge.reloadAllComponents()
 			self.pickerviewPlace.reloadAllComponents()
 			
 			//ピッカー位置
-			var count:Int = 0;
-			self.ddate = self.arrayDate[0] as! String
-			self.pickerviewDate.selectRow(0, inComponent: 0, animated: false)
+			var count:Int = 0
+			var pickerposition:Int = 0
+//			self.ddate = self.arrayDate[0] as! String
+//			self.pickerviewDate.selectRow(0, inComponent: 0, animated: false)
 			for str in self.arrayDate {
 				if HDZItemOrderManager.shared.deliverdate == str as! String {
-					self.ddate = str as! String
-					self.pickerviewDate.selectRow(count, inComponent: 0, animated: false)
+//					self.ddate = str as! String
+					pickerposition = count
 					break;
 				}
 				count += 1
 			}
+			self.pickerviewDate.selectRow(pickerposition, inComponent: 0, animated: false)
 			
 			count = 0
-			self.charge = self.arrayCharge[0] as! String
-			self.pickerviewCharge.selectRow(0, inComponent: 0, animated: false)
+			pickerposition = 0
+//			self.charge = self.arrayCharge[0] as! String
+//			self.pickerviewCharge.selectRow(0, inComponent: 0, animated: false)
 			for str in self.arrayCharge {
 				if HDZItemOrderManager.shared.charge == str as! String {
-					self.charge = str as! String
-					self.pickerviewCharge.selectRow(count, inComponent: 0, animated: false)
+//					self.charge = str as! String
+					pickerposition = count
 					break;
 				}
 				count += 1
 			}
+			self.pickerviewCharge.selectRow(pickerposition, inComponent: 0, animated: false)
 			
 			count = 0
-			self.place = self.arrayPlace[0] as! String
-			self.pickerviewPlace.selectRow(0, inComponent: 0, animated: false)
+			pickerposition = 0
+//			self.place = self.arrayPlace[0] as! String
+//			self.pickerviewPlace.selectRow(0, inComponent: 0, animated: false)
 			for str in self.arrayPlace {
 				if HDZItemOrderManager.shared.deliverto == str as! String {
-					self.place = str as! String
-					self.pickerviewPlace.selectRow(count, inComponent: 0, animated: false)
+//					self.place = str as! String
+					pickerposition = count
 					break;
 				}
 				count += 1
 			}
+			self.pickerviewPlace.selectRow(pickerposition, inComponent: 0, animated: false)
 			// end
 		}
 		
+		// API
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 
 			self.request = nil
 		}
-
 		self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
 	}
 }
 
+// MARK: - Order
+extension HDZItemOrderDialogViewController {
+	
+//	private func openAlertNoCart() {
+//		
+//		// アラートビュー
+//		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+//			// 画面戻る
+//			self.navigationController?.popViewControllerAnimated(false)
+//		})
+//		let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
+//		controller.addAction(action2)
+//		self.presentViewController(controller, animated: false, completion: nil)
+//	}
+	
+	// 注文実行
+	internal func didSelectedOrder() {
+		self.orderResult = try! HDZOrder.queries(self.supplierId)
+		
+		guard let items: Results<HDZOrder> = self.orderResult else {
+			
+			// アイテム無し
+			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+			let controller: UIAlertController = UIAlertController(title: "アイテム無し", message: nil, preferredStyle: .Alert)
+			controller.addAction(action)
+			self.presentViewController(controller, animated: true, completion: nil)
+			
+			return
+		}
+		
+		//インジケータ
+		self.indicatorView.startAnimating()
+		
+		let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
+			
+			// 注文確定
+			self.indicatorView.stopAnimating()
+			
+			//履歴を全て消す
+			for object in self.orderResult! {
+				try! HDZOrder.deleteObject(object)
+			}
+			
+			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+				// ホームに戻る
+				self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+			}
+			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
+			controller.addAction(action)
+			self.presentViewController(controller, animated: true, completion: nil)
+			
+			
+			// メッセージ送信チェック
+			guard let result: OrderResult = unboxable else {
+				HDZItemOrderManager.shared.clearAllData()
+				return
+			}
+			if HDZItemOrderManager.shared.comment == "" {
+				HDZItemOrderManager.shared.clearAllData()
+				return
+			}
+			
+			// APIメッセージ送信
+			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
+				HDZItemOrderManager.shared.clearAllData()
+			}
+			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
+				#if DEBUG
+					debugPrint(error)
+				#endif
+				HDZItemOrderManager.shared.clearAllData()
+			}
+			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
+			
+		}
+		
+		let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
+			
+			// 注文エラー
+			self.indicatorView.stopAnimating()
+			
+			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
+			controller.addAction(action)
+			self.presentViewController(controller, animated: true, completion: nil)
+			
+			// ボタン有効
+			//			self.barbuttonitemConfirm.enabled = true;
+			self.updateButtonEnabled(true)
+		}
+		
+		// Request
+		HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
+		
+	}
+
+}
+
+// MARK: - Action
 extension HDZItemOrderDialogViewController {
 	
 	@IBAction func onCloseDialog(sender: AnyObject) {
 		
-		self.dismissViewControllerAnimated(true) {
-		}
+//		self.dismissViewControllerAnimated(true) {
+//		}
 	}
 	
 	@IBAction func onSaveDialog(sender: AnyObject) {
 		
-		if self.place != "" {
-			HDZItemOrderManager.shared.deliverto = self.place
-		}
-		else {
-			HDZItemOrderManager.shared.deliverto = self.arrayPlace[0] as! String
-		}
+//		if self.place != "" {
+//			HDZItemOrderManager.shared.deliverto = self.place
+//		}
+//		else {
+//			HDZItemOrderManager.shared.deliverto = self.arrayPlace[0] as! String
+//		}
+//		
+//		if self.charge != "" {
+//			HDZItemOrderManager.shared.charge = self.charge
+//		}
+//		else {
+//			HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
+//		}
+//		
+//		if self.ddate != "" {
+////			HDZItemOrderManager.shared.deliverdate = self.ddate
+//		}
+//		else {
+//			HDZItemOrderManager.shared.deliverdate = self.arrayDate[0] as! String
+//		}
+//		HDZItemOrderManager.shared.comment = self.textviewComment.text
+//		
+//		self.dismissViewControllerAnimated(true) {
+//		}
+	}
+	
+	@IBAction func onSendOrder(sender: AnyObject) {
 		
-		if self.charge != "" {
-			HDZItemOrderManager.shared.charge = self.charge
+		// TODO:注文実行
+		// 配送情報
+		// 担当者
+		if HDZItemOrderManager.shared.charge == "" {
+			// 担当者一覧
+			let charges:[String] = self.itemResult.charge_list
+			HDZItemOrderManager.shared.charge = charges[0]
 		}
-		else {
-			HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
+		// 配送日
+		if HDZItemOrderManager.shared.deliverdate == "" {
+			// 配送日一覧
+			let dates:[String] = HDZItemOrderManager.shared.getListDate()
+			HDZItemOrderManager.shared.deliverdate = dates[0]
 		}
+		// 配送先は空白ありなのでそのまま
+		//		let place:String = HDZItemOrderManager.shared.deliverto
 		
-		if self.ddate != "" {
-			HDZItemOrderManager.shared.deliverdate = self.ddate
-		}
-		else {
-			HDZItemOrderManager.shared.deliverdate = self.arrayDate[0] as! String
-		}
-		HDZItemOrderManager.shared.comment = self.textviewComment.text
+		// ボタン無効
+		self.updateButtonEnabled(false)
 		
-		self.dismissViewControllerAnimated(true) {
+		// 「注文しますか？」
+		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel) { (action:UIAlertAction!) in
+			// キャンセル
+			// ボタン有効
+			self.updateButtonEnabled(true)
 		}
+		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .Default) { (action:UIAlertAction!) in
+			// 確定
+			self.didSelectedOrder()
+		}
+		let alert:UIAlertController = UIAlertController(title:"注文",
+		                                                message: "確定しますか？",
+		                                                preferredStyle: UIAlertControllerStyle.Alert)
+		alert.addAction(cancelaction)
+		alert.addAction(confirmaction)
+		self.presentViewController(alert, animated: false, completion: nil)
 	}
 	
 }
@@ -190,6 +376,10 @@ extension HDZItemOrderDialogViewController: UITextViewDelegate {
 		self.textviewComment.textChanged(nil)
 	}
 	
+	func textViewDidEndEditing(textView: UITextView) {
+		HDZItemOrderManager.shared.comment = self.textviewComment.text
+	}
+
 }
 
 // MARK: - UIPickerViewDataSource
@@ -222,20 +412,20 @@ extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 		
 		if pickerView == self.pickerviewDate {
 			// 必須
-			self.ddate = self.arrayDate[row] as! String
+			HDZItemOrderManager.shared.deliverdate = self.arrayDate[row] as! String
 		}
 		else if pickerView == self.pickerviewCharge {
 			// 必須
-			self.charge = self.arrayCharge[row] as! String
+			HDZItemOrderManager.shared.charge = self.arrayCharge[row] as! String
 		}
 		else if pickerView == self.pickerviewPlace {
 			if row >= 1 {
 				// 任意
-				self.place = self.arrayPlace[row] as! String
+				HDZItemOrderManager.shared.deliverto = self.arrayPlace[row] as! String
 			}
 			else {
 				// 空白
-				self.place = ""
+				HDZItemOrderManager.shared.deliverto = ""
 			}
 		}
 	}
