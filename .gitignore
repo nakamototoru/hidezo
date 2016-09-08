@@ -3,19 +3,18 @@
 # 外部ライブラリ
 # フォルダまるごと無視したい
 Carthage/
-# Carthage/
-# Carthage/
-# Carthage/
+fastlane/
 
 # ツール＆ライブラリ
 
-# 生成フォルダ
+# 生成ファイル
+*.ipa
+*.DSYM.zip
 
 # SSL
 *.pem
 *.pkey
 *.p12
-fastlane/
 
 # 中間ファイル
 *.bcsymbolmap
