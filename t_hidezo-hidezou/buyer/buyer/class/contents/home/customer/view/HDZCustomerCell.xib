@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,7 +17,8 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTs-Vs-Hmh">
                         <rect key="frame" x="8" y="25" width="24" height="14.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="DuA-A0-oZK"/>
+                            <constraint firstAttribute="width" constant="24" id="h5A-8Z-RcV"/>
+                            <constraint firstAttribute="height" constant="14.5" id="ypE-HM-3Ua"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
@@ -26,8 +27,7 @@
                         <rect key="frame" x="184" y="8.5" width="128" height="48"/>
                         <color key="backgroundColor" red="0.17254901959999999" green="0.65098039220000004" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="128" id="L3O-xj-PHg"/>
-                            <constraint firstAttribute="height" constant="48" id="vu9-2F-I7y"/>
+                            <constraint firstAttribute="width" constant="128" id="oEi-48-Rdp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
                         <state key="normal" title="注文する">
@@ -39,23 +39,20 @@
                     </button>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop Name" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fna-DP-WWJ">
                         <rect key="frame" x="40" y="8" width="136" height="48.5"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="o8I-AI-utp"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4eK-NH-Nje"/>
-                    <constraint firstItem="fna-DP-WWJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="E5N-4Y-yVU"/>
-                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="leading" secondItem="fna-DP-WWJ" secondAttribute="trailing" constant="8" id="HqS-qw-WpO"/>
-                    <constraint firstItem="zTs-Vs-Hmh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="LVG-D3-evp"/>
-                    <constraint firstAttribute="bottom" secondItem="fna-DP-WWJ" secondAttribute="bottom" constant="8" id="ZSX-r2-U7A"/>
-                    <constraint firstAttribute="trailing" secondItem="AVL-Bg-LLq" secondAttribute="trailing" constant="8" id="eoH-VD-j3c"/>
-                    <constraint firstItem="fna-DP-WWJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pUY-NQ-GsV"/>
-                    <constraint firstItem="fna-DP-WWJ" firstAttribute="leading" secondItem="zTs-Vs-Hmh" secondAttribute="trailing" constant="8" id="ric-Y4-ppf"/>
-                    <constraint firstItem="zTs-Vs-Hmh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zDc-6W-Jxi"/>
+                    <constraint firstItem="fna-DP-WWJ" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="75J-3N-6pE"/>
+                    <constraint firstItem="fna-DP-WWJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="GOB-eo-2fI"/>
+                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="OyA-Ze-lr9"/>
+                    <constraint firstItem="zTs-Vs-Hmh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TnE-49-cc1"/>
+                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="0.5" id="WGC-nS-RWB"/>
+                    <constraint firstItem="zTs-Vs-Hmh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="YIs-zQ-Bai"/>
+                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Z1o-BV-xad"/>
+                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="leading" secondItem="fna-DP-WWJ" secondAttribute="trailing" constant="8" id="rHf-AT-ctB"/>
+                    <constraint firstItem="fna-DP-WWJ" firstAttribute="leading" secondItem="zTs-Vs-Hmh" secondAttribute="trailing" constant="8" id="tin-gC-nWn"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

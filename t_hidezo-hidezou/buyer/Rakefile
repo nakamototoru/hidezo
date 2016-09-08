@@ -11,7 +11,7 @@ task :push_notification do
   APN.certificate = File.read("./development_com.hidezo.app.buyer.pem")
   # An example of the token sent back when a device registers for notifications
   # token = "<588ea7da e6f2accb 387c5f01 9f2832c7 5eb8c014 6474783d fab7dce3 6d71e1aa>"
-  token = "24f715532e9bb80e52f23cf3b4c5e0094b82ffbf1962069f8556ebcb2cb0f6d3"
+  token = "3e705bdbb72327a4c57c6730154e8b31af55d707785b6a4eefbd8b8ff64d791d"
 
   # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
   notification = Houston::Notification.new(device: token)

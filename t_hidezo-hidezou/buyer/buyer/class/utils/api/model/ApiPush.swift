@@ -72,13 +72,12 @@ internal struct MessageUpListResult: Unboxable {
 	}
 }
 
-//internal struct NotificationDataResult:Unboxable {
-//	
-//	let supplierList: [SupplierId]
-//	let messageUpList: [MessageUp]
-//
-//	init(unboxer: Unboxer) {
-//		self.supplierList = unboxer.unbox("supplierList")
-//		self.messageUpList = unboxer.unbox("messageUpList")
-//	}
-//}
+internal struct PushApsResult: Unboxable {
+
+	let alert:String
+	
+	init(unboxer:Unboxer) {
+		self.alert = unboxer.unbox("alert")
+	}
+	
+}

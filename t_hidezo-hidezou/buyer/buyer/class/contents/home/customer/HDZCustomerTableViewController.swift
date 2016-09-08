@@ -145,6 +145,7 @@ extension HDZCustomerTableViewController {
         let cell: HDZCustomerCell = HDZCustomerCell.dequeueReusableCell(self, tableView: tableView, for: indexPath, friendInfo: friendInfo)
 		cell.delegate = self
 		cell.rowOfCell = indexPath.row
+//		cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight|UIViewAutoresizing.FlexibleWidth
 		
         return cell
     }
@@ -173,6 +174,10 @@ extension HDZCustomerTableViewController {
 
 	}
 	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+		return HDZCustomerCell.getHeight()
+	}
 }
 
 // MARK: - HDZCustomerCellDelegate

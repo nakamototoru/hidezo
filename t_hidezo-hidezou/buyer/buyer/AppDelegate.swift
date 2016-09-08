@@ -145,6 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			print("> applicationState.Background")
 			break
 		}
+		
 		//全ての通知を削除
 		UIApplication.sharedApplication().cancelAllLocalNotifications()
 		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
@@ -162,6 +163,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 			let strkey:String = key as! String
 			if strkey == "aps" {
+				// TODO:ダイアログ表示
+				#if DEBUG
+					debugPrint(strkey)
+					debugPrint(value)
+				#endif
+				
+				do {
+					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
+					//... パース成功...
+					UIWarning.Warning(pushAps.alert)
+
+				} catch {
+					//... パース失敗...
+					debugPrint("... パース失敗...")
+				}
 			}
 			else if strkey == "supplierUp" {
 				#if DEBUG
