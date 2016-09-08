@@ -2,7 +2,7 @@
 
 # 外部ライブラリ
 # フォルダまるごと無視したい
-Carthage/
+# Carthage/
 fastlane/
 
 # ツール＆ライブラリ

@@ -1,0 +1,3 @@
+framework module Wrap {
+    header "Wrap-Swift.h"
+}

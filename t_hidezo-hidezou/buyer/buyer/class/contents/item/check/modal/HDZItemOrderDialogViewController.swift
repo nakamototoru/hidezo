@@ -294,36 +294,10 @@ extension HDZItemOrderDialogViewController {
 	
 	@IBAction func onCloseDialog(sender: AnyObject) {
 		
-//		self.dismissViewControllerAnimated(true) {
-//		}
 	}
 	
 	@IBAction func onSaveDialog(sender: AnyObject) {
 		
-//		if self.place != "" {
-//			HDZItemOrderManager.shared.deliverto = self.place
-//		}
-//		else {
-//			HDZItemOrderManager.shared.deliverto = self.arrayPlace[0] as! String
-//		}
-//		
-//		if self.charge != "" {
-//			HDZItemOrderManager.shared.charge = self.charge
-//		}
-//		else {
-//			HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
-//		}
-//		
-//		if self.ddate != "" {
-////			HDZItemOrderManager.shared.deliverdate = self.ddate
-//		}
-//		else {
-//			HDZItemOrderManager.shared.deliverdate = self.arrayDate[0] as! String
-//		}
-//		HDZItemOrderManager.shared.comment = self.textviewComment.text
-//		
-//		self.dismissViewControllerAnimated(true) {
-//		}
 	}
 	
 	@IBAction func onSendOrder(sender: AnyObject) {

@@ -59,7 +59,7 @@ extension HDZApi {
 // MARK: - order
 extension HDZApi {
 	
-	// 注文
+	// 注文実行
     internal class func order(supplier_id: String, deliver_to: String, delivery_day: String, charge: String, items: Results<HDZOrder>, completionBlock: (unboxable: OrderResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderError?) -> Void) {
 		
 		//

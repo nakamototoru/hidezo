@@ -185,7 +185,8 @@ struct OrderResult: Unboxable {
 
 struct OrderError: Unboxable {
     
+	let message: String
     init(unboxer: Unboxer) {
-        
+		self.message = unboxer.unbox("message")
     }
 }
