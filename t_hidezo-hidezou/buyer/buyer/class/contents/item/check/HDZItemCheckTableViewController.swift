@@ -373,47 +373,8 @@ extension HDZItemCheckTableViewController {
 		// 入力画面
 		let controller:HDZItemOrderDialogViewController = HDZItemOrderDialogViewController.createViewController(self.supplierId)
 		controller.supplierId = self.supplierId
-//		self.navigationController?.presentViewController(controller, animated: true, completion: {
-//		})
 		self.navigationController?.pushViewController(controller, animated: true)
 
-		/*
-		// 配送情報
-		// 担当者
-		if HDZItemOrderManager.shared.charge == "" {
-			// 担当者一覧
-			let charges:[String] = self.itemResult.charge_list
-			HDZItemOrderManager.shared.charge = charges[0]
-		}
-		// 配送日
-		if HDZItemOrderManager.shared.deliverdate == "" {
-			// 配送日一覧
-			let dates:[String] = HDZItemOrderManager.shared.getListDate()
-			HDZItemOrderManager.shared.deliverdate = dates[0]
-		}
-		// 配送先は空白ありなのでそのまま
-		//		let place:String = HDZItemOrderManager.shared.deliverto
-		
-		// ボタン無効
-		self.updateButtonEnabled(false)
-		
-		// 「注文しますか？」
-		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel) { (action:UIAlertAction!) in
-			// キャンセル
-			// ボタン有効
-			self.updateButtonEnabled(true)
-		}
-		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .Default) { (action:UIAlertAction!) in
-			// 確定
-			self.didSelectedOrder()
-		}
-		let alert:UIAlertController = UIAlertController(title:"注文",
-		                                                message: "確定しますか？",
-		                                                preferredStyle: UIAlertControllerStyle.Alert)
-		alert.addAction(cancelaction)
-		alert.addAction(confirmaction)
-		self.presentViewController(alert, animated: false, completion: nil)
-		*/
 	}
 	
 	@IBAction func onBackHome(sender: AnyObject) {
@@ -421,15 +382,5 @@ extension HDZItemCheckTableViewController {
 		// ホームに戻る
 		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
 	}
-	
-//	@IBAction func onCommentDialog(sender: AnyObject) {
-//		
-//		// モーダルで開く
-//		let controller:HDZItemOrderNavigationController = HDZItemOrderNavigationController.createViewController()
-//		controller.supplierId = self.supplierId
-//		self.navigationController?.presentViewController(controller, animated: true, completion: {
-//		})
-//
-//	}
 
 }

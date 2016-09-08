@@ -193,19 +193,7 @@ extension HDZItemOrderDialogViewController {
 
 // MARK: - Order
 extension HDZItemOrderDialogViewController {
-	
-//	private func openAlertNoCart() {
-//		
-//		// アラートビュー
-//		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
-//			// 画面戻る
-//			self.navigationController?.popViewControllerAnimated(false)
-//		})
-//		let controller: UIAlertController = UIAlertController(title: "商品が選択されていません", message: "", preferredStyle: .Alert)
-//		controller.addAction(action2)
-//		self.presentViewController(controller, animated: false, completion: nil)
-//	}
-	
+
 	// 注文実行
 	internal func didSelectedOrder() {
 		self.orderResult = try! HDZOrder.queries(self.supplierId)
@@ -235,12 +223,27 @@ extension HDZItemOrderDialogViewController {
 			}
 			
 			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-				// ホームに戻る
-				self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+				
+				// タブ画面に戻る＝モーダルを閉じる
+				self.navigationController?.viewControllers[1].dismissViewControllerAnimated(true) {
+					// 注文履歴タブへ遷移
+					// 1.ルートビュー取得
+					if let rootvc:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)! {
+						//debugPrint(rootvc.title)
+						// 2.タブバーコントローラーチェック
+						if rootvc.title == "HDZHomeViewController" {
+							// 3.タブバータイテム選択
+							let tabbarctrl:UITabBarController = rootvc as! UITabBarController
+							tabbarctrl.selectedIndex = 1
+						}						
+					}
+				}
 			}
 			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
 			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
+			let basevc:UIViewController = UIWarning.getBaseViewController(0)
+			basevc.presentViewController(controller, animated: false) {
+			}
 			
 			
 			// メッセージ送信チェック

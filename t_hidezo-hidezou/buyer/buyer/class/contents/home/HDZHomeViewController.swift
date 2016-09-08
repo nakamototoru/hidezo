@@ -15,6 +15,9 @@ class HDZHomeViewController: UITabBarController {
 
         // Do any additional setup after loading the view.
 		
+		// 型チェック用に設定
+		self.title = "HDZHomeViewController"
+		
 		// !!!:・デザミシステム
 		// アイコンカラー（画像）の設定
 		var assets :Array<String> = ["profile_white", "order_white"]

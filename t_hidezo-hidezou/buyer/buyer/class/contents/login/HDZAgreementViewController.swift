@@ -21,7 +21,7 @@ class HDZAgreementViewController: UIViewController, UIWebViewDelegate {
 		/*
 		規約ファイル読込
 		*/
-		let path_rich:String = NSBundle.mainBundle().pathForResource("kiyaku", ofType: "rtf")!
+		let path_rich:String = NSBundle.mainBundle().pathForResource("kiyaku-4", ofType: "rtf")!
 		let url_rich:NSURL = NSURL(fileURLWithPath: path_rich)
 		let request:NSURLRequest = NSURLRequest(URL: url_rich)
 		webviewAgreement.loadRequest(request)

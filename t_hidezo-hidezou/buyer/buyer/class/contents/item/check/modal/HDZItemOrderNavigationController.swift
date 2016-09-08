@@ -16,12 +16,6 @@ class HDZItemOrderNavigationController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		// ルートビューに値を渡す
-//		let rootviewcontroller = self.viewControllers.first;
-//		if ((rootviewcontroller) != nil) {
-//			let vc = rootviewcontroller as! HDZItemOrderDialogViewController
-//			vc.supplierId = self.supplierId
-//		}
 
     }
 
