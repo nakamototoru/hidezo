@@ -29,9 +29,6 @@ class HDZItemOrderDialogViewController: UIViewController {
 	private var orderResult: Results<HDZOrder>? = nil
 	private var indicatorView:CustomIndicatorView!
 
-//	private var ddate:String! = ""
-//	private var charge:String! = ""
-//	private var place:String! = ""
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +117,6 @@ extension HDZItemOrderDialogViewController {
 			let charges:NSArray = self.itemResult.charge_list
 			self.arrayCharge.removeAllObjects()
 			self.arrayCharge.addObjectsFromArray(charges as! [String])
-//			self.charge = self.arrayCharge[0] as! String
 			// オフセット値
 			if HDZItemOrderManager.shared.charge == "" {
 				HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
@@ -131,7 +127,6 @@ extension HDZItemOrderDialogViewController {
 			self.arrayPlace.removeAllObjects()
 			self.arrayPlace.addObject("選択なし")
 			self.arrayPlace.addObjectsFromArray(places as! [String])
-//			self.place = self.arrayPlace[0] as! String
 			
 			// ピッカー更新
 			self.pickerviewCharge.reloadAllComponents()
@@ -140,11 +135,8 @@ extension HDZItemOrderDialogViewController {
 			//ピッカー位置
 			var count:Int = 0
 			var pickerposition:Int = 0
-//			self.ddate = self.arrayDate[0] as! String
-//			self.pickerviewDate.selectRow(0, inComponent: 0, animated: false)
 			for str in self.arrayDate {
 				if HDZItemOrderManager.shared.deliverdate == str as! String {
-//					self.ddate = str as! String
 					pickerposition = count
 					break;
 				}
@@ -154,11 +146,8 @@ extension HDZItemOrderDialogViewController {
 			
 			count = 0
 			pickerposition = 0
-//			self.charge = self.arrayCharge[0] as! String
-//			self.pickerviewCharge.selectRow(0, inComponent: 0, animated: false)
 			for str in self.arrayCharge {
 				if HDZItemOrderManager.shared.charge == str as! String {
-//					self.charge = str as! String
 					pickerposition = count
 					break;
 				}
@@ -168,11 +157,8 @@ extension HDZItemOrderDialogViewController {
 			
 			count = 0
 			pickerposition = 0
-//			self.place = self.arrayPlace[0] as! String
-//			self.pickerviewPlace.selectRow(0, inComponent: 0, animated: false)
 			for str in self.arrayPlace {
 				if HDZItemOrderManager.shared.deliverto == str as! String {
-//					self.place = str as! String
 					pickerposition = count
 					break;
 				}

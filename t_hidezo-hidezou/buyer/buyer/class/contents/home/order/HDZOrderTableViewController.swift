@@ -115,8 +115,11 @@ extension HDZOrderTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		
+		// テーブル更新の判定
         if !self.stopLoading && self.orderList.count <= indexPath.row + 1 {
-            self.orderList(false)
+			//　ページ継続読込
+            self.getOrderList(false)
         }
         
         let cell: HDZOrderCell = HDZOrderCell.dequeueReusableCell(tableView, for: indexPath, orderInfo: self.orderList[indexPath.row])
@@ -161,16 +164,16 @@ extension HDZOrderTableViewController {
 // MARK: - API
 extension HDZOrderTableViewController {
     
-    @IBAction func reloadRequest() {
+    func reloadRequest() {
         self.page = 0
         self.stopLoading = false
-        self.orderList(true)
+        self.getOrderList(true)
     }
 }
 
 extension HDZOrderTableViewController {
     
-    private func orderList(reset: Bool) {
+    private func getOrderList(reset: Bool) {
 		
 		// インジケータ
 		self.indicatorView.startAnimating()
@@ -218,13 +221,13 @@ extension HDZOrderTableViewController {
         
         let error: (error: ErrorType?, result: OrderListError?) -> Void = { (error, result) in
             self.refreshControl?.endRefreshing()
-            //self.page -= 1
+			
+			self.page -= 1
 			
 			//インジケータ
 			self.indicatorView.stopAnimating()
 
 			#if DEBUG
-				
 				debugPrint(error.debugDescription)
 				
 				let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
@@ -237,7 +240,7 @@ extension HDZOrderTableViewController {
         }
 
 		// Request
-        self.request = HDZApi.orderList(page, completionBlock: completion, errorBlock: error)
+        self.request = HDZApi.orderList(self.page, completionBlock: completion, errorBlock: error)
 		
     }
 }

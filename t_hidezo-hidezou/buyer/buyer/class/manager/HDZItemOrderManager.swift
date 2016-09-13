@@ -12,20 +12,20 @@ class HDZItemOrderManager: NSObject {
 	
 	var deliverto:String = ""
 	var charge:String = ""
-	var deliverdate:String = ""
+	var deliverdate:String = "最短納品日"
 	var comment:String = ""
 	
 	private var listDate:[String] = ["最短納品日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日","日曜日"]
 	
 	static let shared = HDZItemOrderManager()
-	private override init() {
-		self.deliverdate = listDate[0]
-	}
+//	private override init() {
+//		//self.deliverdate = listDate[0]
+//	}
 	
 	func clearAllData() {
 		self.deliverto = ""
 		self.charge = ""
-		self.deliverdate = listDate[0]
+		self.deliverdate = "最短納品日"
 		self.comment = ""
 	}
 	
