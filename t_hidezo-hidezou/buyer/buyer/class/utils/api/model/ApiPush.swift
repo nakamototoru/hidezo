@@ -72,12 +72,25 @@ internal struct MessageUpListResult: Unboxable {
 	}
 }
 
+internal struct CustomDataResult: Unboxable {
+	
+	let supplierUpList: [SupplierId]
+	let messageUpList: [MessageUp]
+	
+	init(unboxer: Unboxer) {
+		self.supplierUpList = unboxer.unbox("supplierUpList")
+		self.messageUpList = unboxer.unbox("messageUpList")
+	}
+}
+
 internal struct PushApsResult: Unboxable {
 
 	let alert:String
+//	let custom_data:CustomDataResult
 	
 	init(unboxer:Unboxer) {
 		self.alert = unboxer.unbox("alert")
+//		self.custom_data = unboxer.unbox("cunstom_data") // , isKeyPath: false, context: nil, allowInvalidElements: true
 	}
 	
 }

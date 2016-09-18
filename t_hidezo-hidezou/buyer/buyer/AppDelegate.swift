@@ -126,7 +126,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		DeployGateExtra.DGSLog("error: " + "\(error)")
 	}
 	
-	// Push通知受信時とPush通知をタッチして起動したときに呼ばれる
+	/**
+	 * Push通知受信時とPush通知をタッチして起動したときに呼ばれる
+	 * アクティブ時のみ呼び出される
+	 */
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 		
 		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
@@ -146,33 +149,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			break
 		}
 		
-		//全ての通知を削除
-		UIApplication.sharedApplication().cancelAllLocalNotifications()
-		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
-
-		
 		// カスタムデータ
 		guard let dict:[NSObject : AnyObject] = userInfo else {
 			print(">> No userInfo found in RemoteNotification")
+			// TODO:デバグ用
+			UIWarning.WarningWithTitle("プッシュ通知エラー", message: "カスタムデータが見つからない")
 			return
 		}
 		#if DEBUG
-		debugPrint("> Remote UserInfo")
+//		debugPrint("> Remote UserInfo")
 		#endif
+		
+		var strPushApsAlert:String = ""
+		
+		// custom_dataチェック用
+		var str_custom_data:String = "\n"
+//		let debugdict:UnboxableDictionary = dict as! UnboxableDictionary
+		let description:String = dict.description
+		str_custom_data += description
+		
+		// JSONパーサー
 		for (key, value) in dict {
 			
 			let strkey:String = key as! String
 			if strkey == "aps" {
-				// TODO:ダイアログ表示
 				#if DEBUG
-					debugPrint(strkey)
-					debugPrint(value)
+//					debugPrint(strkey)
+//					debugPrint(value)
 				#endif
 				
 				do {
 					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
-					UIWarning.Warning(pushAps.alert)
+					strPushApsAlert = pushAps.alert;
+					
+					// DEBUG
+//					let custom_data:CustomDataResult = pushAps.custom_data
+					
+					// カスタムデータ
 
 				} catch {
 					//... パース失敗...
@@ -181,8 +195,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			else if strkey == "supplierUp" {
 				#if DEBUG
-					debugPrint(strkey)
-					debugPrint(value)
+//					debugPrint(strkey)
+//					debugPrint(value)
 				#endif
 
 				do {
@@ -203,8 +217,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			else if strkey == "messageUp" {
 				#if DEBUG
-					debugPrint(strkey)
-					debugPrint(value)
+//					debugPrint(strkey)
+//					debugPrint(value)
 				#endif
 				
 				do {
@@ -223,10 +237,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				}
 			}
 			#if DEBUG
-				debugPrint("/")
+//				debugPrint("/")
 			#endif
 		}
 		
+		// ダイアログ
+		UIWarning.Warning(strPushApsAlert + str_custom_data)
+		
+
+		//全ての通知を削除
+		UIApplication.sharedApplication().cancelAllLocalNotifications()
+		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 	}
 	
     func applicationWillResignActive(application: UIApplication) {
@@ -248,6 +269,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 		
+		// TODO:プッシュ通知のcustom_dataをサーバーAPIから受け取る
+		if HDZUserDefaults.login {
+			NSLog("applicationDidBecomeActive : Now is Login");
+		}
     }
 
     func applicationWillTerminate(application: UIApplication) {

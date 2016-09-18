@@ -12,8 +12,11 @@ import RealmSwift
 
 internal class HDZApi {
 	
-	// !!!:dezami SSL対応アドレス
-    private static let BASE_URL: String = "https://api.hidezo.co"
+	// SSL対応アドレス
+	// TODO:開発用アドレスなので申請前には本番に変更しておく
+    private static let BASE_URL: String = "https://dev-api.hidezo.co"
+
+	// "*ttps://api.hidezo.co/"
 }
 
 // MARK: - Login
