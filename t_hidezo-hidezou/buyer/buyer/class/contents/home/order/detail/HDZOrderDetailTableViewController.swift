@@ -113,7 +113,7 @@ extension HDZOrderDetailTableViewController {
 		for obj:MessageUp in list {
 			let order_no:String = obj.order_no
 			if order_no == orderInfo.order_no {
-				badgeValue = Int( obj.messageCount )!
+				badgeValue = obj.messageCount
 				break
 			}
 		}

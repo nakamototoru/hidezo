@@ -189,10 +189,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				}
 								
 				do {
+					DeployGateExtra.DGSLog("custom_data")
+					
 					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
 					let customData:CustomDataResult = pushCustomData.custom_data
-					
+
 					// 商品更新
 					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
 					let supplierList:[SupplierId] = supplierUp.supplierUpList!
@@ -200,10 +202,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					//NSNotification
 					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
 					NSNotificationCenter.defaultCenter().postNotification(n)
-					
+
 					// メッセージ更新
 					let messageUp:CustomDataMessageUpResult = customData.messageUp
-					debugPrint(messageUp)
 					let messageUpList: [MessageUp] = messageUp.messageUpList!
 					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
 					//NSNotification
@@ -211,7 +212,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					NSNotificationCenter.defaultCenter().postNotification(nMes)
 					
 				} catch {
-					str_custom_data += "\nパース失敗：custom_data"
+					str_custom_data += "\nパース失敗：" +  String(error)
+					
+					DeployGateExtra.DGSLog("パース失敗：" + String(error))
 				}
 				
 			}
@@ -220,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					debugPrint(strkey)
 					debugPrint(value)
 				#endif
-
+				
 				do {
 					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
@@ -244,7 +247,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					NSNotificationCenter.defaultCenter().postNotification(nMes)
 					
 				} catch {
-					debugPrint("... パース失敗...")
+					debugPrint("...パース失敗..." + String(error))
 				}
 				
 			}

@@ -72,14 +72,13 @@ class HDZHomeViewController: UITabBarController {
 		var count:Int = 0
 		for obje:MessageUp in list {
 			
-			if Int( obje.messageCount ) != nil {
-				let num:Int = Int( obje.messageCount )!
-				count += num
-			}
-//			if obje.messageCount != "" {
+//			if Int( obje.messageCount ) != nil {
 //				let num:Int = Int( obje.messageCount )!
 //				count += num
-//			}		
+//			}
+
+			let num:Int = obje.messageCount
+			count += num
 			
 		}
 		if count > 0 {

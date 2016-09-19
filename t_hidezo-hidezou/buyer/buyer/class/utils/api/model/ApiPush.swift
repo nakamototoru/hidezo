@@ -38,18 +38,31 @@ internal struct SupplierId:Unboxable {
 	let supplierId: String
 	
 	init(unboxer: Unboxer) {
+		
+		DeployGateExtra.DGSLog("SupplierId:Unboxable")
+
 		self.supplierId = unboxer.unbox("supplierId")
+		
+		DeployGateExtra.DGSLog("supplierId = pass")
 	}
 }
 
 internal struct MessageUp:Unboxable {
 	
 	let order_no:String
-	let messageCount:String
+	let messageCount:Int
 	
 	init(unboxer: Unboxer) {
+		
+		DeployGateExtra.DGSLog("MessageUp:Unboxable")
+		
 		self.order_no = unboxer.unbox("order_no")
+		
+		DeployGateExtra.DGSLog("order_no = pass")
+		
 		self.messageCount = unboxer.unbox("messageCount")
+		
+		DeployGateExtra.DGSLog("messageCount = pass")
 	}
 }
 
@@ -58,7 +71,12 @@ internal struct CustomDataSupplierUpResult: Unboxable {
 	let supplierUpList: [SupplierId]?
 
 	init(unboxer: Unboxer) {
+		
+		DeployGateExtra.DGSLog("CustomDataSupplierUpResult: Unboxable")
+
 		self.supplierUpList = unboxer.unbox("supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
+		
+		DeployGateExtra.DGSLog("supplierUpList = pass")
 	}
 }
 
@@ -67,7 +85,12 @@ internal struct CustomDataMessageUpResult: Unboxable {
 	let messageUpList: [MessageUp]?
 	
 	init(unboxer: Unboxer) {
+		
+		DeployGateExtra.DGSLog("CustomDataMessageUpResult: Unboxable")
+
 		self.messageUpList = unboxer.unbox("messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
+		
+		DeployGateExtra.DGSLog("messageUpList = pass")
 	}
 }
 
@@ -77,8 +100,16 @@ internal struct CustomDataResult: Unboxable {
 	let messageUp: CustomDataMessageUpResult
 	
 	init(unboxer: Unboxer) {
+		
+		DeployGateExtra.DGSLog("CustomDataResult: Unboxable")
+
 		self.supplierUp = unboxer.unbox("supplierUp")
+		
+		DeployGateExtra.DGSLog("supplierUp = pass")
+
 		self.messageUp = unboxer.unbox("messageUp")
+		
+		DeployGateExtra.DGSLog("messageUp = pass")
 	}
 }
 
@@ -87,7 +118,12 @@ internal struct PushCustomDataResult: Unboxable {
 	let custom_data:CustomDataResult
 	
 	init(unboxer:Unboxer) {
+		
+		DeployGateExtra.DGSLog("PushCustomDataResult: Unboxable")
+
 		self.custom_data = unboxer.unbox("custom_data") // , isKeyPath: false, context: nil, allowInvalidElements: true
+		
+		DeployGateExtra.DGSLog("custom_data = pass")
 	}
 }
 
