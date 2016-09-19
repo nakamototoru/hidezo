@@ -128,6 +128,35 @@ extension HDZItemStaticTableViewController {
 		
 	}
 
+	// 画像取得
+	private func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
+		
+		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
+			if response.result.error != nil {
+				
+				#if DEBUG
+					debugPrint(response.result.error)
+				#endif
+				
+				let sakanaimage:UIImage = UIImage(named: "sakana")!
+				completion(image: sakanaimage)
+			}
+			else {
+				if let data: NSData = response.result.value {
+					if let resultImage: UIImage = UIImage(data: data) {
+						// 画像返す
+						completion(image: resultImage)
+					}
+				}
+				else {
+					let sakanaimage:UIImage = UIImage(named: "sakana")!
+					completion(image: sakanaimage)
+				}
+			}
+		}
+		let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
+	}
+
 }
 
 // MARK: - Table view data source
@@ -158,6 +187,11 @@ extension HDZItemStaticTableViewController {
 			let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
 			cell.parent = self
 			
+			// 画像
+			self.requestImage(self.staticItems[indexPath.row].image) { (image) in
+				cell.iconImageView.image = image
+			}
+			
 			return cell
 		}
 		else {
@@ -165,6 +199,11 @@ extension HDZItemStaticTableViewController {
 			let cell = HDZItemStaticFractionCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
 			cell.parent = self
 			
+			// 画像
+			self.requestImage(self.staticItems[indexPath.row].image) { (image) in
+				cell.iconImageView.image = image
+			}
+
 			return cell
 		}
 	}

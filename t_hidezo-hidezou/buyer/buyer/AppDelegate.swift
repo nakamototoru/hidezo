@@ -164,7 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// custom_dataチェック用
 		var str_custom_data:String = "\n"
-//		let debugdict:UnboxableDictionary = dict as! UnboxableDictionary
 		let description:String = dict.description
 		str_custom_data += description
 		
@@ -173,72 +172,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 			let strkey:String = key as! String
 			if strkey == "aps" {
-				#if DEBUG
+//				#if DEBUG
 //					debugPrint(strkey)
 //					debugPrint(value)
-				#endif
+//				#endif
 				
 				do {
+					#if DEBUG
+					debugPrint("パーサー：APS")
+					#endif
 					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
 					strPushApsAlert = pushAps.alert;
-					
-					// DEBUG
-//					let custom_data:CustomDataResult = pushAps.custom_data
-					
-					// カスタムデータ
-
 				} catch {
-					//... パース失敗...
 					debugPrint("... パース失敗...")
 				}
-			}
-			else if strkey == "supplierUp" {
-				#if DEBUG
-//					debugPrint(strkey)
-//					debugPrint(value)
-				#endif
-
+								
 				do {
-					let supplierList: SupplierUpListResult = try Unbox(value as! UnboxableDictionary)
+					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
+					let customData:CustomDataResult = pushCustomData.custom_data
+					
+					// 商品更新
+					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
+					let supplierList:[SupplierId] = supplierUp.supplierUpList!
 					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
-					
-					//NSNotificationのインスタンスを作成
+					//NSNotification
 					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
-					//通知を送る
 					NSNotificationCenter.defaultCenter().postNotification(n)
-
+					
+					// メッセージ更新
+					let messageUp:CustomDataMessageUpResult = customData.messageUp
+					debugPrint(messageUp)
+					let messageUpList: [MessageUp] = messageUp.messageUpList!
+					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
+					//NSNotification
+					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+					NSNotificationCenter.defaultCenter().postNotification(nMes)
+					
 				} catch {
-					//... パース失敗...
-					debugPrint("... パース失敗...")
+					str_custom_data += "\nパース失敗：custom_data"
 				}
-
-			}
-			else if strkey == "messageUp" {
-				#if DEBUG
-//					debugPrint(strkey)
-//					debugPrint(value)
-				#endif
 				
+			}
+			else if strkey == "custom_data" {
+				#if DEBUG
+					debugPrint(strkey)
+					debugPrint(value)
+				#endif
+
 				do {
-					let messageList: MessageUpListResult = try Unbox(value as! UnboxableDictionary)
+					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
-					HDZPushNotificationManager.shared.setMessageUpList( messageList )
+					let customData:CustomDataResult = pushCustomData.custom_data
 					
-					//NSNotificationのインスタンスを作成
-					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
-					//通知を送る
+					// 商品更新
+					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
+					let supplierList:[SupplierId] = supplierUp.supplierUpList!
+					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
+					//NSNotification
+					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
 					NSNotificationCenter.defaultCenter().postNotification(n)
 					
+					// メッセージ更新
+					let messageUp:CustomDataMessageUpResult = customData.messageUp
+					debugPrint(messageUp)
+					let messageUpList: [MessageUp] = messageUp.messageUpList!
+					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
+					//NSNotification
+					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+					NSNotificationCenter.defaultCenter().postNotification(nMes)
+					
 				} catch {
-					//... パース失敗...
 					debugPrint("... パース失敗...")
 				}
+				
 			}
-			#if DEBUG
-//				debugPrint("/")
-			#endif
 		}
 		
 		// ダイアログ

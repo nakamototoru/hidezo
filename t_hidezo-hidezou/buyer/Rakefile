@@ -22,7 +22,15 @@ task :push_notification do
   notification.sound = "sosumi.aiff"
   notification.category = "INVITE_CATEGORY"
   notification.content_available = true
-  notification.custom_data = {"supplierUp": {"supplierUpList": [ {"supplierId": "6170513005638324225"}, {"supplierId": "6147666687253549057"} ]}, "messageUp": {"messageUpList": [ {"order_no": "6170512017103785986-00028", "messageCount": "21"},{"order_no": "6170512017103785986-00027", "messageCount": "9"} ] }}
+#  notification.custom_data = {"custom_data": {"custom_data": {"supplierUp": {"supplierUpList": [ {"supplierId": "6170513005638324225"}, {"supplierId": "6147666687253549057"} ]}, "messageUp": {"messageUpList": [ {"order_no": "6170512017103785986-00028", "messageCount": "21"},{"order_no": "6170512017103785986-00027", "messageCount": "9"} ] }}}}
+
+#  notification.custom_data = {"custom_data": {"custom_data": {"supplierUp": {"supplierUpList": [ {"supplierId": ""} ]}, "messageUp": {"messageUpList": [ {"order_no": "6170512017103785986-00028", "messageCount": "21"},{"order_no": "6170512017103785986-00027", "messageCount": "9"} ] }}}}
+
+#  notification.custom_data = {"custom_data": {"custom_data": {"supplierUp": {"supplierUpList": [ {"supplierId": "6170513005638324225"}, {"supplierId": "6147666687253549057"} ]}, "messageUp": {"messageUpList": [ {"order_no": "", "messageCount": ""} ] }}}}
+
+#  notification.custom_data = {"custom_data": {"custom_data": {"messageUp": {"messageUpList": [{"messageCount": "", "order_no": ""}]}, "supplierUp": {"supplierUpList": [{ "supplierId": "6147666687253549057" } ] }}}}
+
+  notification.custom_data = {"custom_data": {"custom_data": {"supplierUp": {"supplierUpList": [ {"supplierId": ""} ]}, "messageUp": {"messageUpList": [ {"order_no": "6170512017103785986-00028", "messageCount": "21"},{"order_no": "6170512017103785986-00027", "messageCount": "9"} ] }}}}
 
   # And... sent! That's all it takes.
   APN.push(notification)

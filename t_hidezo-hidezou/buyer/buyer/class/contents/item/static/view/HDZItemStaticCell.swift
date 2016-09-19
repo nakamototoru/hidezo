@@ -72,11 +72,12 @@ extension HDZItemStaticCell {
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemName.text = staticItem.name
 		
-        requestImage(staticItem.image) { (image) in
-            cell.iconImageView.image = image
-			
-        }
+//		// 画像
+//        requestImage(staticItem.image) { (image) in
+//            cell.iconImageView.image = image
+//        }
 
+		// アイテム数
 		cell.itemsize = "0"
         if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
 			if let _: Int = Int(item.size) {
@@ -142,20 +143,20 @@ extension HDZItemStaticCell {
 				debugPrint(response.result.error)
 				#endif
 				
-				let sakanaimage:UIImage = UIImage(named: "sakana")!
-				completion(image: sakanaimage)
+//				let sakanaimage:UIImage = UIImage(named: "sakana")!
+//				completion(image: sakanaimage)
             }
 			else {
                 if let data: NSData = response.result.value {
                     if let resultImage: UIImage = UIImage(data: data) {
-						
+						// 画像返す
                         completion(image: resultImage)
                     }
                 }
-				else {
-					let sakanaimage:UIImage = UIImage(named: "sakana")!
-					completion(image: sakanaimage)
-				}
+//				else {
+//					let sakanaimage:UIImage = UIImage(named: "sakana")!
+//					completion(image: sakanaimage)
+//				}
             }
         }
         let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)

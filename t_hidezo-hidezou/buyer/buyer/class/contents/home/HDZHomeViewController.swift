@@ -57,7 +57,10 @@ class HDZHomeViewController: UITabBarController {
 		let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
 		let count:Int = list.count
 		if count > 0 {
-			self.tabBar.items![0].badgeValue = String(count)
+			let supplierId:String = list[0].supplierId
+			if supplierId != "" {
+				self.tabBar.items![0].badgeValue = String(count)
+			}
 		}
 		
 	}
@@ -68,15 +71,20 @@ class HDZHomeViewController: UITabBarController {
 		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
 		var count:Int = 0
 		for obje:MessageUp in list {
-			let num:Int = Int( obje.messageCount )!
-			count += num
+			
+			if Int( obje.messageCount ) != nil {
+				let num:Int = Int( obje.messageCount )!
+				count += num
+			}
+//			if obje.messageCount != "" {
+//				let num:Int = Int( obje.messageCount )!
+//				count += num
+//			}		
+			
 		}
 		if count > 0 {
 			self.tabBar.items![1].badgeValue = String(count)
 		}
-//		else {
-//			self.tabBar.items![1].badgeValue = String(-1)
-//		}
 	}
 
 	deinit {

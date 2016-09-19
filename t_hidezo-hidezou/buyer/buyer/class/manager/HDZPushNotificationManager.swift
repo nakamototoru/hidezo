@@ -10,8 +10,8 @@ import UIKit
 
 class HDZPushNotificationManager: NSObject {
 
-	private var supplierUpList:SupplierUpListResult! = nil
-	private var messageUpList:MessageUpListResult! = nil
+	private var supplierUpList:[SupplierId] = []
+	private var messageUpList:[MessageUp] = []
 	
 	var strNotificationSupplier:String = "notofication_supplier"
 	var strNotificationMessage:String = "notofication_message"
@@ -20,31 +20,19 @@ class HDZPushNotificationManager: NSObject {
 	private override init() {
 	}
 
-	func setSupplierUpList(suppliers:SupplierUpListResult) {
+	func setSupplierUpList(suppliers:[SupplierId]) {
 		self.supplierUpList = suppliers
 	}
 	func getSupplierUpList() -> [SupplierId] {
 		
-		guard let result:SupplierUpListResult = self.supplierUpList else {
-			return []
-		}
-		guard let list:[SupplierId] = result.supplierUpList else {
-			return []
-		}
-		return list
+		return supplierUpList
 	}
 	
-	func setMessageUpList(messages:MessageUpListResult) {
+	func setMessageUpList(messages:[MessageUp]) {
 		self.messageUpList = messages
 	}
 	func getMessageUpList() -> [MessageUp] {
 		
-		guard let result:MessageUpListResult = self.messageUpList else {
-			return []
-		}
-		guard let list:[MessageUp] = result.messageUpList else {
-			return []
-		}
-		return list
+		return messageUpList
 	}
 }

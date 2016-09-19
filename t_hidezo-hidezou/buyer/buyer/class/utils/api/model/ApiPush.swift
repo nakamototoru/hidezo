@@ -33,7 +33,6 @@ internal struct DeviceTokenResult: Unboxable {
 }
 
 // MARK: - CustomData
-
 internal struct SupplierId:Unboxable {
 	
 	let supplierId: String
@@ -54,43 +53,49 @@ internal struct MessageUp:Unboxable {
 	}
 }
 
-internal struct SupplierUpListResult: Unboxable {
+internal struct CustomDataSupplierUpResult: Unboxable {
 	
-	let supplierUpList: [SupplierId]
-	
+	let supplierUpList: [SupplierId]?
+
 	init(unboxer: Unboxer) {
-		self.supplierUpList = unboxer.unbox("supplierUpList")
+		self.supplierUpList = unboxer.unbox("supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
 	}
 }
 
-internal struct MessageUpListResult: Unboxable {
+internal struct CustomDataMessageUpResult: Unboxable {
 	
-	let messageUpList: [MessageUp]
+	let messageUpList: [MessageUp]?
 	
 	init(unboxer: Unboxer) {
-		self.messageUpList = unboxer.unbox("messageUpList")
+		self.messageUpList = unboxer.unbox("messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
 	}
 }
 
 internal struct CustomDataResult: Unboxable {
 	
-	let supplierUpList: [SupplierId]
-	let messageUpList: [MessageUp]
+	let supplierUp: CustomDataSupplierUpResult
+	let messageUp: CustomDataMessageUpResult
 	
 	init(unboxer: Unboxer) {
-		self.supplierUpList = unboxer.unbox("supplierUpList")
-		self.messageUpList = unboxer.unbox("messageUpList")
+		self.supplierUp = unboxer.unbox("supplierUp")
+		self.messageUp = unboxer.unbox("messageUp")
+	}
+}
+
+internal struct PushCustomDataResult: Unboxable {
+	
+	let custom_data:CustomDataResult
+	
+	init(unboxer:Unboxer) {
+		self.custom_data = unboxer.unbox("custom_data") // , isKeyPath: false, context: nil, allowInvalidElements: true
 	}
 }
 
 internal struct PushApsResult: Unboxable {
 
 	let alert:String
-//	let custom_data:CustomDataResult
 	
 	init(unboxer:Unboxer) {
 		self.alert = unboxer.unbox("alert")
-//		self.custom_data = unboxer.unbox("cunstom_data") // , isKeyPath: false, context: nil, allowInvalidElements: true
 	}
-	
 }

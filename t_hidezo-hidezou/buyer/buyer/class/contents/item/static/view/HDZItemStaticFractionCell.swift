@@ -70,10 +70,12 @@ extension HDZItemStaticFractionCell {
 		cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
 		cell.itemName.text = staticItem.name
 		
-		request(staticItem.image) { (image) in
-			cell.iconImageView.image = image
-		}
+		//画像
+//		request(staticItem.image) { (image) in
+//			cell.iconImageView.image = image
+//		}
 		
+		// アイテム数
 		if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
 			cell.itemsize = item.size
 		} else {
