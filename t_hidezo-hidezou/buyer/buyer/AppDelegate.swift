@@ -134,26 +134,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
 		
-		switch application.applicationState {
-		case .Inactive:
-			// アプリがバックグラウンドにいる状態で、Push通知から起動したとき
-			print("> applicationState.Inactive")
-			break
-		case .Active:
-			// アプリ起動時にPush通知を受信したとき
-			print("> applicationState.Active")
-			break
-		case .Background:
-			// アプリがバックグラウンドにいる状態でPush通知を受信したとき
-			print("> applicationState.Background")
-			break
-		}
+//		switch application.applicationState {
+//		case .Inactive:
+//			// アプリがバックグラウンドにいる状態で、Push通知から起動したとき
+//			print("> applicationState.Inactive")
+//			break
+//		case .Active:
+//			// アプリ起動時にPush通知を受信したとき
+//			print("> applicationState.Active")
+//			break
+//		case .Background:
+//			// アプリがバックグラウンドにいる状態でPush通知を受信したとき
+//			print("> applicationState.Background")
+//			break
+//		}
 		
 		// カスタムデータ
 		guard let dict:[NSObject : AnyObject] = userInfo else {
 			print(">> No userInfo found in RemoteNotification")
 			// TODO:デバグ用
-			UIWarning.WarningWithTitle("プッシュ通知エラー", message: "カスタムデータが見つからない")
+//			UIWarning.WarningWithTitle("プッシュ通知エラー", message: "カスタムデータが見つからない")
 			return
 		}
 		#if DEBUG
@@ -163,19 +163,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		var strPushApsAlert:String = ""
 		
 		// custom_dataチェック用
-		var str_custom_data:String = "\n"
-		let description:String = dict.description
-		str_custom_data += description
+//		var str_custom_data:String = ""
+//		let description:String = dict.description
+//		str_custom_data += description
 		
 		// JSONパーサー
 		for (key, value) in dict {
 			
 			let strkey:String = key as! String
 			if strkey == "aps" {
-//				#if DEBUG
-//					debugPrint(strkey)
-//					debugPrint(value)
-//				#endif
+				#if DEBUG
+					debugPrint(strkey)
+					debugPrint(value)
+				#endif
 				
 				do {
 					#if DEBUG
@@ -184,77 +184,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
 					strPushApsAlert = pushAps.alert;
+					
+					// ダイアログ
+					UIWarning.Warning(strPushApsAlert)
+
 				} catch {
 					debugPrint("... パース失敗...")
 				}
 								
-				do {
-					DeployGateExtra.DGSLog("custom_data")
-					
-					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
-					//... パース成功...
-					let customData:CustomDataResult = pushCustomData.custom_data
-
-					// 商品更新
-					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
-					let supplierList:[SupplierId] = supplierUp.supplierUpList!
-					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
-					//NSNotification
-					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
-					NSNotificationCenter.defaultCenter().postNotification(n)
-
-					// メッセージ更新
-					let messageUp:CustomDataMessageUpResult = customData.messageUp
-					let messageUpList: [MessageUp] = messageUp.messageUpList!
-					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
-					//NSNotification
-					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
-					NSNotificationCenter.defaultCenter().postNotification(nMes)
-					
-				} catch {
-					str_custom_data += "\nパース失敗：" +  String(error)
-					
-					DeployGateExtra.DGSLog("パース失敗：" + String(error))
-				}
+//				do {
+//					DeployGateExtra.DGSLog("custom_data")
+//					
+//					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
+//					//... パース成功...
+//					let customData:CustomDataResult = pushCustomData.custom_data
+//
+//					// 商品更新
+//					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
+//					let supplierList:[SupplierId] = supplierUp.supplierUpList!
+//					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
+//					//NSNotification
+//					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
+//					NSNotificationCenter.defaultCenter().postNotification(n)
+//
+//					// メッセージ更新
+//					let messageUp:CustomDataMessageUpResult = customData.messageUp
+//					let messageUpList: [MessageUp] = messageUp.messageUpList!
+//					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
+//					//NSNotification
+//					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+//					NSNotificationCenter.defaultCenter().postNotification(nMes)
+//					
+//				} catch {
+//					str_custom_data += "\nパース失敗：" +  String(error)
+//					
+//					DeployGateExtra.DGSLog("パース失敗：" + String(error))
+//				}
 				
 			}
-			else if strkey == "custom_data" {
-				#if DEBUG
-					debugPrint(strkey)
-					debugPrint(value)
-				#endif
-				
-				do {
-					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
-					//... パース成功...
-					let customData:CustomDataResult = pushCustomData.custom_data
-					
-					// 商品更新
-					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
-					let supplierList:[SupplierId] = supplierUp.supplierUpList!
-					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
-					//NSNotification
-					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
-					NSNotificationCenter.defaultCenter().postNotification(n)
-					
-					// メッセージ更新
-					let messageUp:CustomDataMessageUpResult = customData.messageUp
-					debugPrint(messageUp)
-					let messageUpList: [MessageUp] = messageUp.messageUpList!
-					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
-					//NSNotification
-					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
-					NSNotificationCenter.defaultCenter().postNotification(nMes)
-					
-				} catch {
-					debugPrint("...パース失敗..." + String(error))
-				}
-				
-			}
+//			else if strkey == "custom_data" {
+//				#if DEBUG
+//					debugPrint(strkey)
+//					debugPrint(value)
+//				#endif
+//				
+//				do {
+//					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
+//					//... パース成功...
+//					let customData:CustomDataResult = pushCustomData.custom_data
+//					
+//					// 商品更新
+//					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
+//					let supplierList:[SupplierId] = supplierUp.supplierUpList!
+//					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
+//					//NSNotification
+//					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
+//					NSNotificationCenter.defaultCenter().postNotification(n)
+//					
+//					// メッセージ更新
+//					let messageUp:CustomDataMessageUpResult = customData.messageUp
+//					debugPrint(messageUp)
+//					let messageUpList: [MessageUp] = messageUp.messageUpList!
+//					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
+//					//NSNotification
+//					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+//					NSNotificationCenter.defaultCenter().postNotification(nMes)
+//					
+//				} catch {
+//					debugPrint("...パース失敗..." + String(error))
+//				}
+//			}
 		}
 		
-		// ダイアログ
-		UIWarning.Warning(strPushApsAlert + str_custom_data)
+//		// ダイアログ
+//		UIWarning.Warning(strPushApsAlert)
 		
 
 		//全ての通知を削除

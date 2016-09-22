@@ -210,6 +210,7 @@ extension HDZApi {
 extension HDZApi {
     
     internal class func item(supplierId: String, completionBlock: (unboxable: ItemResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: ItemError?) -> Void) -> Alamofire.Request? {
+		
         let requestUrl: String = BASE_URL + "/store/item"
         let parameters: Item = Item(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplierId)
         
@@ -252,8 +253,7 @@ extension HDZApi {
 			// ログアウト実行
             HDZUserDefaults.login = false
 
-			// カートを空に
-			
+			// TODO:カートを空に
 			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
             UIApplication.setRootViewController(controller)
@@ -295,4 +295,27 @@ extension HDZApi {
 
 	}
 
+}
+
+// MARK: - CheckDynamicItems
+extension HDZApi {
+	
+	internal class func postCheckDynamicItems(id: String, supplier_id: String, completionBlock: (unboxable: CheckDynamicItemsResultComplete?) -> Void, errorBlock: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void) -> Alamofire.Request? {
+		
+		let requestUrl: String = BASE_URL + "/store/check_dynamic_items"
+		let parameters: CheckDynamicItemsRequest = CheckDynamicItemsRequest(id: id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id )
+		
+//		let error: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void = { (error, unboxable) in
+//			guard let failure: CheckDynamicItemsResultError = unboxable else {
+//				errorBlock(error: error, unboxable: unboxable)
+//				return
+//			}
+////			if self.checkLogOut(failure.result, message: failure.message) {
+////				return
+////			}
+//			errorBlock(error: error, unboxable: unboxable)
+//		}
+
+		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+	}
 }
