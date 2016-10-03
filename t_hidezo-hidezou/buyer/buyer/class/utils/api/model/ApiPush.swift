@@ -66,13 +66,13 @@ internal struct MessageUp:Unboxable {
 	}
 }
 
-internal struct CustomDataSupplierUpResult: Unboxable {
+internal struct SupplierUpResult: Unboxable {
 	
 	let supplierUpList: [SupplierId]?
 
 	init(unboxer: Unboxer) {
 		
-		DeployGateExtra.DGSLog("CustomDataSupplierUpResult: Unboxable")
+		DeployGateExtra.DGSLog("SupplierUpListResult: Unboxable")
 
 		self.supplierUpList = unboxer.unbox("supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
 		
@@ -80,13 +80,13 @@ internal struct CustomDataSupplierUpResult: Unboxable {
 	}
 }
 
-internal struct CustomDataMessageUpResult: Unboxable {
+internal struct MessageUpResult: Unboxable {
 	
 	let messageUpList: [MessageUp]?
 	
 	init(unboxer: Unboxer) {
 		
-		DeployGateExtra.DGSLog("CustomDataMessageUpResult: Unboxable")
+		DeployGateExtra.DGSLog("MessageUpListResult: Unboxable")
 
 		self.messageUpList = unboxer.unbox("messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
 		
@@ -94,39 +94,40 @@ internal struct CustomDataMessageUpResult: Unboxable {
 	}
 }
 
-internal struct CustomDataResult: Unboxable {
+struct BadgeResult: Unboxable {
 	
-	let supplierUp: CustomDataSupplierUpResult
-	let messageUp: CustomDataMessageUpResult
+	let message: String
+	let result: Int
+	let supplierUp: SupplierUpResult
+	let messageUp: MessageUpResult
+
+	init(unboxer: Unboxer) {
+		self.result = unboxer.unbox("result")
+		self.message = unboxer.unbox("message")
+
+		self.supplierUp = unboxer.unbox("supplierUp");
+		self.messageUp = unboxer.unbox("messageUp");
+	}
+}
+
+struct BadgeError: Unboxable {
+	
+	let message: String
+	let result: Bool
 	
 	init(unboxer: Unboxer) {
-		
-		DeployGateExtra.DGSLog("CustomDataResult: Unboxable")
-
-		self.supplierUp = unboxer.unbox("supplierUp")
-		
-		DeployGateExtra.DGSLog("supplierUp = pass")
-
-		self.messageUp = unboxer.unbox("messageUp")
-		
-		DeployGateExtra.DGSLog("messageUp = pass")
+		self.message = unboxer.unbox("message")
+		self.result = unboxer.unbox("result")
 	}
 }
 
-internal struct PushCustomDataResult: Unboxable {
-	
-	let custom_data:CustomDataResult
-	
-	init(unboxer:Unboxer) {
-		
-		DeployGateExtra.DGSLog("PushCustomDataResult: Unboxable")
-
-		self.custom_data = unboxer.unbox("custom_data") // , isKeyPath: false, context: nil, allowInvalidElements: true
-		
-		DeployGateExtra.DGSLog("custom_data = pass")
-	}
+// リクエスト用
+struct ParamsBadge: WrapCustomizable {
+	let id: String
+	let uuid: String
 }
 
+// PUSH通知のパラメータ取得
 internal struct PushApsResult: Unboxable {
 
 	let alert:String

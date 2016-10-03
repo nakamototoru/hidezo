@@ -52,6 +52,8 @@ class HDZCustomerTableViewController: UITableViewController {
         super.viewDidDisappear(animated)
         
         self.request?.suspend()
+		
+		// TODO:通知バッジのリセット
     }
     
     deinit {

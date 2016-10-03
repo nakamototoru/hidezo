@@ -36,3 +36,37 @@ class HDZPushNotificationManager: NSObject {
 		return messageUpList
 	}
 }
+
+extension HDZPushNotificationManager {
+	
+	internal class func checkBadge() {
+		
+		let completion: (unboxable: BadgeResult?) -> Void = { (unboxable) in
+			#if DEBUG
+				debugPrint(unboxable)
+			#endif
+			
+			// 商品更新
+			let supplierList: [SupplierId] = (unboxable?.supplierUp.supplierUpList)!
+			HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
+			//NSNotification
+			let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
+			NSNotificationCenter.defaultCenter().postNotification(n)
+			
+			// メッセージ更新
+			//					let messageUp:CustomDataMessageUpResult = customData.messageUp
+			let messageList: [MessageUp] = (unboxable?.messageUp.messageUpList)!
+			HDZPushNotificationManager.shared.setMessageUpList( messageList )
+			//NSNotification
+			let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+			NSNotificationCenter.defaultCenter().postNotification(nMes)
+		}
+		let error: (error: ErrorType?, result: BadgeError?) -> Void = { (error, result) in
+			// エラー処理
+			debugPrint(error)
+			debugPrint(result)
+		}
+		HDZApi.badge(completion, errorBlock: error);
+	}
+	
+}

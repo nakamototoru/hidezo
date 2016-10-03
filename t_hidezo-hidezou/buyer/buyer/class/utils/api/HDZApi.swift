@@ -297,25 +297,38 @@ extension HDZApi {
 
 }
 
-// MARK: - CheckDynamicItems
+// MARK: - Badge
 extension HDZApi {
 	
+	// バッジ取得
+	internal class func badge(completionBlock: (unboxable: BadgeResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: BadgeError?) -> Void) -> Alamofire.Request? {
+		
+		let requestUrl: String = BASE_URL + "/store/badge"
+		let parameters: ParamsBadge = ParamsBadge(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
+		
+//		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+//			guard let failure: ItemError = unboxable else {
+//				errorBlock(error: error, unboxable: unboxable)
+//				return
+//			}
+//			
+//			if self.checkLogOut(failure.result, message: failure.message) {
+//				return
+//			}
+//			
+//			errorBlock(error: error, unboxable: unboxable)
+//		}
+		
+		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+	}
+	
+	
+	// バッジリセット
 	internal class func postCheckDynamicItems(id: String, supplier_id: String, completionBlock: (unboxable: CheckDynamicItemsResultComplete?) -> Void, errorBlock: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void) -> Alamofire.Request? {
 		
 		let requestUrl: String = BASE_URL + "/store/check_dynamic_items"
 		let parameters: CheckDynamicItemsRequest = CheckDynamicItemsRequest(id: id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id )
 		
-//		let error: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void = { (error, unboxable) in
-//			guard let failure: CheckDynamicItemsResultError = unboxable else {
-//				errorBlock(error: error, unboxable: unboxable)
-//				return
-//			}
-////			if self.checkLogOut(failure.result, message: failure.message) {
-////				return
-////			}
-//			errorBlock(error: error, unboxable: unboxable)
-//		}
-
 		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
 	}
 }

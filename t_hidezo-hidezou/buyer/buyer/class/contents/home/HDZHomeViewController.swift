@@ -35,6 +35,14 @@ class HDZHomeViewController: UITabBarController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		// !!!:バッジチェック
+		NSLog("HDZHomeViewController.viewDidAppear : Check Badge");
+		HDZPushNotificationManager.checkBadge()
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

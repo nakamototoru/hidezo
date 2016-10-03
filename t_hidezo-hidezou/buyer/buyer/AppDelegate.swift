@@ -152,20 +152,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// カスタムデータ
 		guard let dict:[NSObject : AnyObject] = userInfo else {
 			print(">> No userInfo found in RemoteNotification")
-			// TODO:デバグ用
-//			UIWarning.WarningWithTitle("プッシュ通知エラー", message: "カスタムデータが見つからない")
 			return
 		}
-		#if DEBUG
-//		debugPrint("> Remote UserInfo")
-		#endif
-		
-		var strPushApsAlert:String = ""
-		
-		// custom_dataチェック用
-//		var str_custom_data:String = ""
-//		let description:String = dict.description
-//		str_custom_data += description
 		
 		// JSONパーサー
 		for (key, value) in dict {
@@ -183,83 +171,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					#endif
 					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
-					strPushApsAlert = pushAps.alert;
-					
 					// ダイアログ
-					UIWarning.Warning(strPushApsAlert)
+					UIWarning.Warning(pushAps.alert)
 
 				} catch {
 					debugPrint("... パース失敗...")
-				}
-								
-//				do {
-//					DeployGateExtra.DGSLog("custom_data")
-//					
-//					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
-//					//... パース成功...
-//					let customData:CustomDataResult = pushCustomData.custom_data
-//
-//					// 商品更新
-//					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
-//					let supplierList:[SupplierId] = supplierUp.supplierUpList!
-//					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
-//					//NSNotification
-//					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
-//					NSNotificationCenter.defaultCenter().postNotification(n)
-//
-//					// メッセージ更新
-//					let messageUp:CustomDataMessageUpResult = customData.messageUp
-//					let messageUpList: [MessageUp] = messageUp.messageUpList!
-//					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
-//					//NSNotification
-//					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
-//					NSNotificationCenter.defaultCenter().postNotification(nMes)
-//					
-//				} catch {
-//					str_custom_data += "\nパース失敗：" +  String(error)
-//					
-//					DeployGateExtra.DGSLog("パース失敗：" + String(error))
-//				}
-				
+				}				
 			}
-//			else if strkey == "custom_data" {
-//				#if DEBUG
-//					debugPrint(strkey)
-//					debugPrint(value)
-//				#endif
-//				
-//				do {
-//					let pushCustomData:PushCustomDataResult = try Unbox(value as! UnboxableDictionary)
-//					//... パース成功...
-//					let customData:CustomDataResult = pushCustomData.custom_data
-//					
-//					// 商品更新
-//					let supplierUp:CustomDataSupplierUpResult = customData.supplierUp
-//					let supplierList:[SupplierId] = supplierUp.supplierUpList!
-//					HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
-//					//NSNotification
-//					let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
-//					NSNotificationCenter.defaultCenter().postNotification(n)
-//					
-//					// メッセージ更新
-//					let messageUp:CustomDataMessageUpResult = customData.messageUp
-//					debugPrint(messageUp)
-//					let messageUpList: [MessageUp] = messageUp.messageUpList!
-//					HDZPushNotificationManager.shared.setMessageUpList( messageUpList )
-//					//NSNotification
-//					let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
-//					NSNotificationCenter.defaultCenter().postNotification(nMes)
-//					
-//				} catch {
-//					debugPrint("...パース失敗..." + String(error))
-//				}
-//			}
 		}
 		
-//		// ダイアログ
-//		UIWarning.Warning(strPushApsAlert)
+		// バッジチェック
+		if HDZUserDefaults.login {
+			NSLog("AppDelegate.didReceiveRemoteNotification : Check Badge");
+			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
+			HDZPushNotificationManager.checkBadge()
+		}
 		
-
 		//全ての通知を削除
 		UIApplication.sharedApplication().cancelAllLocalNotifications()
 		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
@@ -283,11 +210,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-		
-		// TODO:プッシュ通知のcustom_dataをサーバーAPIから受け取る
-		if HDZUserDefaults.login {
-			NSLog("applicationDidBecomeActive : Now is Login");
-		}
     }
 
     func applicationWillTerminate(application: UIApplication) {
