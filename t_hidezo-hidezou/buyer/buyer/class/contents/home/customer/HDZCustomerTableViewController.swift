@@ -51,9 +51,7 @@ class HDZCustomerTableViewController: UITableViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.request?.suspend()
-		
-		// TODO:通知バッジのリセット
+        self.request?.suspend()		
     }
     
     deinit {

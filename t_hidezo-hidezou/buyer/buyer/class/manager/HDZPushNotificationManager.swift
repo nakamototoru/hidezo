@@ -60,6 +60,9 @@ extension HDZPushNotificationManager {
 			//NSNotification
 			let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
 			NSNotificationCenter.defaultCenter().postNotification(nMes)
+			
+			// TODO:通知バッジのリセット
+
 		}
 		let error: (error: ErrorType?, result: BadgeError?) -> Void = { (error, result) in
 			// エラー処理
