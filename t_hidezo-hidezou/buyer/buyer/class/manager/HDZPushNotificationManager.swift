@@ -24,16 +24,34 @@ class HDZPushNotificationManager: NSObject {
 		self.supplierUpList = suppliers
 	}
 	func getSupplierUpList() -> [SupplierId] {
-		
 		return supplierUpList
+	}
+	func removeSupplierUp(supplier_id:String) {
+		var count:Int = 0;
+		for item:SupplierId in supplierUpList {
+			if item.supplierId == supplier_id {
+				supplierUpList.removeAtIndex(count)
+				break
+			}
+			count += 1;
+		}
 	}
 	
 	func setMessageUpList(messages:[MessageUp]) {
 		self.messageUpList = messages
 	}
 	func getMessageUpList() -> [MessageUp] {
-		
 		return messageUpList
+	}
+	func removeMessageUp(order_no:String) {
+		var count:Int = 0;
+		for item:MessageUp in messageUpList {
+			if item.order_no == order_no {
+				messageUpList.removeAtIndex(count)
+				break;
+			}
+			count += 1
+		}
 	}
 }
 

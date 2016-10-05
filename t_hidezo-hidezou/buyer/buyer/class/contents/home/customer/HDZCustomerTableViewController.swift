@@ -41,10 +41,24 @@ class HDZCustomerTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		let supplierList:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
+		if supplierList.count > 0 {
+			self.tabBarController?.tabBar.items![0].badgeValue = String(supplierList.count) // 下階層から呼ぶ場合
+		}
+		else {
+			self.tabBarController?.tabBar.items![0].badgeValue = nil // 下階層から呼ぶ場合
+		}
+	}
+	
     override func viewDidAppear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
+        super.viewDidAppear(animated)
+		
+		self.tableView.reloadData()
+		
         self.request?.resume()
     }
     

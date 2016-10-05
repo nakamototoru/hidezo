@@ -27,20 +27,28 @@ class HDZHomeViewController: UITabBarController {
 		
 		// !!!:タブバーへバッジ表示
 		//self.tabBarController?.tabBar.items![0].badgeValue = "3" // 下階層から呼ぶ場合
-		self.updateBadgeSupplier()
-		self.updateBadgeMessage()
+//		self.updateBadgeSupplier()
+//		self.updateBadgeMessage()
 
 		// !!!:バッジ通知
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		// !!!:タブバーへバッジ表示
+		self.updateBadgeSupplier()
+		self.updateBadgeMessage()
+	}
+	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
 		// !!!:バッジチェック
-		NSLog("HDZHomeViewController.viewDidAppear : Check Badge");
-		HDZPushNotificationManager.checkBadge()
+//		NSLog("HDZHomeViewController.viewDidAppear : Check Badge");
+//		HDZPushNotificationManager.checkBadge()
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -70,7 +78,6 @@ class HDZHomeViewController: UITabBarController {
 				self.tabBar.items![0].badgeValue = String(count)
 			}
 		}
-		
 	}
 	
 	func updateBadgeMessage() {
@@ -79,15 +86,9 @@ class HDZHomeViewController: UITabBarController {
 		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
 		var count:Int = 0
 		for obje:MessageUp in list {
-			
-//			if Int( obje.messageCount ) != nil {
-//				let num:Int = Int( obje.messageCount )!
-//				count += num
-//			}
 
 			let num:Int = obje.messageCount
 			count += num
-			
 		}
 		if count > 0 {
 			self.tabBar.items![1].badgeValue = String(count)

@@ -50,7 +50,8 @@ class HDZOrderDetailTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+	
+	
     override func viewDidAppear(animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -107,7 +108,7 @@ extension HDZOrderDetailTableViewController {
 	
 	func updateBadgeMessage() {
 		
-		// メッセージ更新
+		// バッジ・メッセージ更新
 		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
 		var badgeValue:Int = 0
 		for obj:MessageUp in list {
@@ -256,6 +257,17 @@ extension HDZOrderDetailTableViewController {
 extension HDZOrderDetailTableViewController {
 	
     @IBAction func didSelectedMessage(button: UIBarButtonItem) {
+		
+		// バッジ消去
+		HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
+		let messageList:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+		if messageList.count > 0 {
+			self.tabBarController?.tabBar.items![1].badgeValue = String(messageList.count) // 下階層から呼ぶ場合
+		}
+		else {
+			self.tabBarController?.tabBar.items![1].badgeValue = nil // 下階層から呼ぶ場合
+		}
+		
         let controller: HDZCommentTableViewController = HDZCommentTableViewController.createViewController(self.orderInfo)
         self.navigationController?.pushViewController(controller, animated: true)
     }

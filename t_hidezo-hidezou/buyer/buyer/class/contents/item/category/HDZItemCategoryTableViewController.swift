@@ -164,10 +164,12 @@ extension HDZItemCategoryTableViewController {
 		switch indexPath.section {
         case 0:
 			//動的商品
-//            let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.dynamicItemInfo![0], dynamicItem: self.itemResult.dynamicItem!, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
 			
+			// バッジ情報を消す
+			HDZPushNotificationManager.shared.removeSupplierUp(self.itemResult.supplier.supplier_id)
+			
+			// 遷移
 			let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.supplier.supplier_id, attr_flg: self.itemResult.attr_flg)
-			
             self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
@@ -176,13 +178,6 @@ extension HDZItemCategoryTableViewController {
                 guard let category_name: String = self.categoryName[keys[indexPath.row]] else {
                     return
                 }
-                
-//                guard let categoryItem: [StaticItem] = self.categoryItem[keys[indexPath.row]] else {
-//                    return
-//                }
-				
-//                let controller: HDZItemStaticTableViewController = HDZItemStaticTableViewController.createViewController(categoryName, categoryItems: categoryItem, attr_flg: self.itemResult.attr_flg, supplierId: self.itemResult.supplier.supplier_id)
-				
 				let controller:HDZItemStaticTableViewController = HDZItemStaticTableViewController.createViewController(self.itemResult.supplier.supplier_id,
 				                                                                                                        attr_flg: self.itemResult.attr_flg,
 				                                                                                                        categoryKey: keys[indexPath.row],
