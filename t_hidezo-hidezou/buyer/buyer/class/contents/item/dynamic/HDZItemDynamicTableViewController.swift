@@ -108,6 +108,16 @@ extension HDZItemDynamicTableViewController {
 			self.tableView.reloadData()
 			self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
 			self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
+			
+			// バッジ情報を消す
+			HDZPushNotificationManager.shared.removeSupplierUp(supplierId)
+			let completion2:(unboxable: CheckDynamicItemsResultComplete?) -> Void = { (unboxable) in
+			}
+			let error2:(error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void = { (error,unboxable) in
+				debugPrint(error)
+			}
+			HDZApi.postCheckDynamicItems(supplierId, completionBlock: completion2, errorBlock: error2)
+
 		}
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			

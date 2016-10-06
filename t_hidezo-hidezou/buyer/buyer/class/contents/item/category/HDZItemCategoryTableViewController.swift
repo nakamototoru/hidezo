@@ -165,8 +165,8 @@ extension HDZItemCategoryTableViewController {
         case 0:
 			//動的商品
 			
-			// バッジ情報を消す
-			HDZPushNotificationManager.shared.removeSupplierUp(self.itemResult.supplier.supplier_id)
+//			// バッジ情報を消す
+//			HDZPushNotificationManager.shared.removeSupplierUp(self.itemResult.supplier.supplier_id)
 			
 			// 遷移
 			let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.supplier.supplier_id, attr_flg: self.itemResult.attr_flg)

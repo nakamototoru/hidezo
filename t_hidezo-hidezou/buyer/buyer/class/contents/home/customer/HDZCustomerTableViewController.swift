@@ -45,6 +45,7 @@ class HDZCustomerTableViewController: UITableViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		// !!!:バッジ表示
 		let supplierList:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
 		if supplierList.count > 0 {
 			self.tabBarController?.tabBar.items![0].badgeValue = String(supplierList.count) // 下階層から呼ぶ場合

@@ -116,18 +116,6 @@ extension HDZCommentTableViewController {
     
     @IBAction func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
 		
-		// !!!:デザミ
-		// 担当者チェック
-//		if self.messageResult.chargeList.count == 0 {
-//			
-//			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//			let controller: UIAlertController = UIAlertController(title: "担当者が登録されていません。", message: nil, preferredStyle: .Alert)
-//			controller.addAction(action)
-//			self.presentViewController(controller, animated: true, completion: nil)
-//			
-//			return;
-//		}
-		
         let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
         self.presentViewController(controller, animated: true, completion: nil)
     }
@@ -158,6 +146,16 @@ extension HDZCommentTableViewController {
             self.messageList = result.messageList.reverse()
             
             self.tableView.reloadData()
+			
+			// !!!:dezami・バッジ消去
+			HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
+			let messageList:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+			if messageList.count > 0 {
+				self.tabBarController?.tabBar.items![1].badgeValue = String(messageList.count) // 下階層から呼ぶ場合
+			}
+			else {
+				self.tabBarController?.tabBar.items![1].badgeValue = nil // 下階層から呼ぶ場合
+			}
         }
         
         let error: (error: ErrorType?, result: MessageError?) -> Void = { (error, unboxable) in

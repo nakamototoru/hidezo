@@ -27,8 +27,8 @@ class HDZHomeViewController: UITabBarController {
 		
 		// !!!:タブバーへバッジ表示
 		//self.tabBarController?.tabBar.items![0].badgeValue = "3" // 下階層から呼ぶ場合
-//		self.updateBadgeSupplier()
-//		self.updateBadgeMessage()
+		self.updateBadgeSupplier()
+		self.updateBadgeMessage()
 
 		// !!!:バッジ通知
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
@@ -39,8 +39,8 @@ class HDZHomeViewController: UITabBarController {
 		super.viewWillAppear(animated)
 		
 		// !!!:タブバーへバッジ表示
-		self.updateBadgeSupplier()
-		self.updateBadgeMessage()
+//		self.updateBadgeSupplier()
+//		self.updateBadgeMessage()
 	}
 	
 	override func viewDidAppear(animated: Bool) {

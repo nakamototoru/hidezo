@@ -324,10 +324,10 @@ extension HDZApi {
 	
 	
 	// バッジリセット
-	internal class func postCheckDynamicItems(id: String, supplier_id: String, completionBlock: (unboxable: CheckDynamicItemsResultComplete?) -> Void, errorBlock: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void) -> Alamofire.Request? {
+	internal class func postCheckDynamicItems(supplier_id: String, completionBlock: (unboxable: CheckDynamicItemsResultComplete?) -> Void, errorBlock: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void) -> Alamofire.Request? {
 		
 		let requestUrl: String = BASE_URL + "/store/check_dynamic_items"
-		let parameters: CheckDynamicItemsRequest = CheckDynamicItemsRequest(id: id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id )
+		let parameters: CheckDynamicItemsRequest = CheckDynamicItemsRequest(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id )
 		
 		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
 	}

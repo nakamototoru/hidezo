@@ -36,6 +36,9 @@ class HDZPushNotificationManager: NSObject {
 			count += 1;
 		}
 	}
+	func removeSupplierUpAll() {
+		supplierUpList.removeAll()
+	}
 	
 	func setMessageUpList(messages:[MessageUp]) {
 		self.messageUpList = messages
@@ -52,6 +55,9 @@ class HDZPushNotificationManager: NSObject {
 			}
 			count += 1
 		}
+	}
+	func removeMessageUpAll() {
+		messageUpList.removeAll()
 	}
 }
 

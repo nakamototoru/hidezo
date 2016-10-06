@@ -42,27 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
-            timestampString = "494664391.470765"
+            timestampString = "497488934.004435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
-            timestampString = "494664391.470765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -182,16 +166,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/utils/api/HDZApi.swift"
-            timestampString = "497365498.689497"
+            filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
+            timestampString = "497488579.674582"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
-            landmarkName = "postCheckDynamicItems(_:supplier_id:completionBlock:errorBlock:)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "getItem(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
