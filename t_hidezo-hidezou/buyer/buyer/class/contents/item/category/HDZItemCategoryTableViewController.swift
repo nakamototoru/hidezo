@@ -133,7 +133,6 @@ extension HDZItemCategoryTableViewController {
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		if indexPath.section == 0 {
-			#if true
 			// 動的商品
 			let customcell:HDZItemCategoryTableViewCell = cell as! HDZItemCategoryTableViewCell
 			
@@ -149,7 +148,6 @@ extension HDZItemCategoryTableViewController {
 			}
 			// !!!:バッジ表示
 			customcell.putBadge( badgeValue )
-			#endif
 		}
 		
 	}
@@ -164,9 +162,6 @@ extension HDZItemCategoryTableViewController {
 		switch indexPath.section {
         case 0:
 			//動的商品
-			
-//			// バッジ情報を消す
-//			HDZPushNotificationManager.shared.removeSupplierUp(self.itemResult.supplier.supplier_id)
 			
 			// 遷移
 			let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.supplier.supplier_id, attr_flg: self.itemResult.attr_flg)

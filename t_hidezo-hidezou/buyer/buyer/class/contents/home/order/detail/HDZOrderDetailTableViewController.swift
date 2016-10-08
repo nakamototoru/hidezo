@@ -59,7 +59,8 @@ class HDZOrderDetailTableViewController: UITableViewController {
 
 		// !!!:バッジ表示
 		self.updateBadgeMessage()
-
+		// バッジ更新
+		HDZPushNotificationManager.updateMessageBadgeWithController(self)
     }
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -85,7 +86,6 @@ class HDZOrderDetailTableViewController: UITableViewController {
 	// !!!:通知受け取り時
 	func getNotification(notification: NSNotification)  {
 		
-		//self.tableView.reloadData()
 		self.updateBadgeMessage()
 	}
 }

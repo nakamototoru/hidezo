@@ -39,6 +39,15 @@ class HDZPushNotificationManager: NSObject {
 	func removeSupplierUpAll() {
 		supplierUpList.removeAll()
 	}
+	func getSupplierUpCount() -> Int {
+		var count:Int = 0;
+		for item:SupplierId in supplierUpList {
+			if item.supplierId != "" {
+				count += 1;
+			}
+		}
+		return count
+	}
 	
 	func setMessageUpList(messages:[MessageUp]) {
 		self.messageUpList = messages
@@ -58,6 +67,15 @@ class HDZPushNotificationManager: NSObject {
 	}
 	func removeMessageUpAll() {
 		messageUpList.removeAll()
+	}
+	func getMessageUpCount() -> Int {
+		var count:Int = 0
+		for obje:MessageUp in messageUpList {
+			
+			let num:Int = obje.messageCount
+			count += num
+		}
+		return count
 	}
 }
 
@@ -85,8 +103,6 @@ extension HDZPushNotificationManager {
 			let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
 			NSNotificationCenter.defaultCenter().postNotification(nMes)
 			
-			// TODO:通知バッジのリセット
-
 		}
 		let error: (error: ErrorType?, result: BadgeError?) -> Void = { (error, result) in
 			// エラー処理
@@ -96,4 +112,36 @@ extension HDZPushNotificationManager {
 		HDZApi.badge(completion, errorBlock: error);
 	}
 	
+	// タブバー更新
+	// 商品
+	internal class func updateSupplierBadgeWithTabBar(tabBar:UITabBar) {
+		
+		let count:Int = HDZPushNotificationManager.shared.getSupplierUpCount()
+		if count > 0 {
+			tabBar.items![0].badgeValue = String(count)
+		}
+		else {
+			tabBar.items![0].badgeValue = nil
+		}
+	}
+	internal class func updateSupplierBadge(controller:UIViewController) {
+		
+		updateSupplierBadgeWithTabBar(controller.tabBarController!.tabBar)
+	}
+	
+	// メッセージ
+	internal class func updateMessageBadgeWithTabBar(tabBar:UITabBar) {
+		
+		let count:Int = HDZPushNotificationManager.shared.getMessageUpCount()
+		if count > 0 {
+			tabBar.items![1].badgeValue = String(count)
+		}
+		else {
+			tabBar.items![1].badgeValue = nil
+		}
+	}
+	internal class func updateMessageBadgeWithController(controller:UIViewController) {
+		
+		updateMessageBadgeWithTabBar(controller.tabBarController!.tabBar)
+	}
 }

@@ -126,31 +126,31 @@ extension HDZItemStaticFractionCell {
 }
 
 // MARK: - API
-extension HDZItemStaticFractionCell {
-	
-	private class func request(url: NSURL, completion: (image: UIImage?) -> Void) {
-		
-		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
-			if response.result.error != nil {
-				let sakanaimage:UIImage = UIImage(named: "sakana")!
-				completion(image: sakanaimage)
-			}
-			else {
-				if let data: NSData = response.result.value {
-					
-					if let resultImage: UIImage = UIImage(data: data) {
-						completion(image: resultImage)
-					}
-				}
-				else {
-					let sakanaimage:UIImage = UIImage(named: "sakana")!
-					completion(image: sakanaimage)
-				}
-			}
-		}
-		let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
-	}
-}
+//extension HDZItemStaticFractionCell {
+//	
+//	private class func request(url: NSURL, completion: (image: UIImage?) -> Void) {
+//		
+//		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
+//			if response.result.error != nil {
+//				let sakanaimage:UIImage = UIImage(named: "sakana")!
+//				completion(image: sakanaimage)
+//			}
+//			else {
+//				if let data: NSData = response.result.value {
+//					
+//					if let resultImage: UIImage = UIImage(data: data) {
+//						completion(image: resultImage)
+//					}
+//				}
+//				else {
+//					let sakanaimage:UIImage = UIImage(named: "sakana")!
+//					completion(image: sakanaimage)
+//				}
+//			}
+//		}
+//		let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
+//	}
+//}
 
 // MARK: - BuyCart
 extension HDZItemStaticFractionCell {

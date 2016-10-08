@@ -132,36 +132,36 @@ extension HDZItemStaticCell {
 }
 
 // MARK: - API
-extension HDZItemStaticCell {
-    
-    private class func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
-		
-        let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
-            if response.result.error != nil {
-				
-				#if DEBUG
-				debugPrint(response.result.error)
-				#endif
-				
-//				let sakanaimage:UIImage = UIImage(named: "sakana")!
-//				completion(image: sakanaimage)
-            }
-			else {
-                if let data: NSData = response.result.value {
-                    if let resultImage: UIImage = UIImage(data: data) {
-						// 画像返す
-                        completion(image: resultImage)
-                    }
-                }
-//				else {
-//					let sakanaimage:UIImage = UIImage(named: "sakana")!
-//					completion(image: sakanaimage)
-//				}
-            }
-        }
-        let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
-    }
-}
+//extension HDZItemStaticCell {
+//    
+//    private class func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
+//		
+//        let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
+//            if response.result.error != nil {
+//				
+//				#if DEBUG
+//				debugPrint(response.result.error)
+//				#endif
+//				
+////				let sakanaimage:UIImage = UIImage(named: "sakana")!
+////				completion(image: sakanaimage)
+//            }
+//			else {
+//                if let data: NSData = response.result.value {
+//                    if let resultImage: UIImage = UIImage(data: data) {
+//						// 画像返す
+//                        completion(image: resultImage)
+//                    }
+//                }
+////				else {
+////					let sakanaimage:UIImage = UIImage(named: "sakana")!
+////					completion(image: sakanaimage)
+////				}
+//            }
+//        }
+//        let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
+//    }
+//}
 
 // MARK: - BuyCart
 extension HDZItemStaticCell {

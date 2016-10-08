@@ -46,6 +46,9 @@ class HDZCommentTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         self.request?.resume()
+		
+		// バッジ更新
+		HDZPushNotificationManager.updateMessageBadgeWithController(self)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -149,13 +152,14 @@ extension HDZCommentTableViewController {
 			
 			// !!!:dezami・バッジ消去
 			HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
-			let messageList:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-			if messageList.count > 0 {
-				self.tabBarController?.tabBar.items![1].badgeValue = String(messageList.count) // 下階層から呼ぶ場合
-			}
-			else {
-				self.tabBarController?.tabBar.items![1].badgeValue = nil // 下階層から呼ぶ場合
-			}
+//			let messageList:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+//			if messageList.count > 0 {
+//				self.tabBarController?.tabBar.items![1].badgeValue = String(messageList.count) // 下階層から呼ぶ場合
+//			}
+//			else {
+//				self.tabBarController?.tabBar.items![1].badgeValue = nil // 下階層から呼ぶ場合
+//			}
+			HDZPushNotificationManager.updateMessageBadgeWithController(self)
         }
         
         let error: (error: ErrorType?, result: MessageError?) -> Void = { (error, unboxable) in

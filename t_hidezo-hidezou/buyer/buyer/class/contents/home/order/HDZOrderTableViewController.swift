@@ -43,7 +43,6 @@ class HDZOrderTableViewController: UITableViewController {
 		
 		// !!!:バッジ通知
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZOrderTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,6 +75,9 @@ class HDZOrderTableViewController: UITableViewController {
 	func getNotification(notification: NSNotification)  {
 		
 		self.tableView.reloadData()
+		
+		// バッジ更新
+		HDZPushNotificationManager.updateMessageBadgeWithController(self)
 	}
 
 	// !!!:ログアウト実行
@@ -217,6 +219,9 @@ extension HDZOrderTableViewController {
 			self.indicatorView.stopAnimating()
 			
             self.tableView.reloadData()
+			
+			// バッジ更新
+			HDZPushNotificationManager.updateMessageBadgeWithController(self)
         }
         
         let error: (error: ErrorType?, result: OrderListError?) -> Void = { (error, result) in

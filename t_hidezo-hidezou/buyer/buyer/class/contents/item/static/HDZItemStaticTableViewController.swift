@@ -94,12 +94,10 @@ extension HDZItemStaticTableViewController {
 			self.itemResult = result
 			
 			// 静的商品の登録
-//			self.categoryName = [:]
 			self.categoryItems = [:]
 			if let staticItems: [StaticItem] = result.staticItem {
 				for staticItem in staticItems {
 					let index:Int = Int(staticItem.category.id)!
-//					self.categoryName[ index ] = staticItem.category.name
 					
 					if self.categoryItems[ index ] == nil {
 						self.categoryItems[ index ] = [staticItem]
@@ -125,11 +123,14 @@ extension HDZItemStaticTableViewController {
 		
 		// Request
 		self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
-		
 	}
 
 	// 画像取得
 	private func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
+		
+		#if DEBUG
+			debugPrint(url)
+		#endif
 		
 		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
 			if response.result.error != nil {
@@ -149,6 +150,11 @@ extension HDZItemStaticTableViewController {
 					}
 				}
 				else {
+					
+//					#if DEBUG
+//						debugPrint("取得失敗" + String(url))
+//					#endif
+					
 					let sakanaimage:UIImage = UIImage(named: "sakana")!
 					completion(image: sakanaimage)
 				}
@@ -187,6 +193,10 @@ extension HDZItemStaticTableViewController {
 			let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
 			cell.parent = self
 			
+//			#if DEBUG
+//				debugPrint("ROW:" + String(indexPath.row) )
+//			#endif
+
 			// 画像
 			self.requestImage(self.staticItems[indexPath.row].image) { (image) in
 				cell.iconImageView.image = image
@@ -199,6 +209,10 @@ extension HDZItemStaticTableViewController {
 			let cell = HDZItemStaticFractionCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
 			cell.parent = self
 			
+//			#if DEBUG
+//				debugPrint("ROW:" + String(indexPath.row) )
+//			#endif
+
 			// 画像
 			self.requestImage(self.staticItems[indexPath.row].image) { (image) in
 				cell.iconImageView.image = image
@@ -213,6 +227,31 @@ extension HDZItemStaticTableViewController {
 		return HDZItemStaticCell.getHeight()
 	}
 
+	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		// 整数かどうかチェック
+		var isInt: Bool = true
+		for numScale: String in self.staticItems[indexPath.row].num_scale {
+			if let _: Int = Int(numScale) {
+				//整数
+			} else {
+				//分数
+				isInt = false
+			}
+		}
+
+		let sakanaimage:UIImage = UIImage(named: "sakana")!
+
+		if isInt {
+			let customcell:HDZItemStaticCell = cell as! HDZItemStaticCell
+			customcell.iconImageView.image = sakanaimage
+		}
+		else {
+			let customcell:HDZItemStaticFractionCell = cell as! HDZItemStaticFractionCell
+			customcell.iconImageView.image = sakanaimage
+		}
+		
+	}
 }
 
 // MARK: - Action

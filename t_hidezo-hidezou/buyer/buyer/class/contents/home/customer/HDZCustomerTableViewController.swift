@@ -46,13 +46,14 @@ class HDZCustomerTableViewController: UITableViewController {
 		super.viewWillAppear(animated)
 		
 		// !!!:バッジ表示
-		let supplierList:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
-		if supplierList.count > 0 {
-			self.tabBarController?.tabBar.items![0].badgeValue = String(supplierList.count) // 下階層から呼ぶ場合
-		}
-		else {
-			self.tabBarController?.tabBar.items![0].badgeValue = nil // 下階層から呼ぶ場合
-		}
+//		let supplierList:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
+//		let count:Int = HDZPushNotificationManager.shared.
+//		if supplierList.count > 0 {
+//			self.tabBarController?.tabBar.items![0].badgeValue = String(supplierList.count) // 下階層から呼ぶ場合
+//		}
+//		else {
+//			self.tabBarController?.tabBar.items![0].badgeValue = nil // 下階層から呼ぶ場合
+//		}
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -61,6 +62,9 @@ class HDZCustomerTableViewController: UITableViewController {
 		self.tableView.reloadData()
 		
         self.request?.resume()
+		
+		// バッジ表示
+		HDZPushNotificationManager.updateSupplierBadge(self)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -81,6 +85,9 @@ class HDZCustomerTableViewController: UITableViewController {
 	func getNotification(notification: NSNotification)  {
 		
 		self.tableView.reloadData()
+		
+		// バッジ表示
+		HDZPushNotificationManager.updateSupplierBadge(self)
 	}
 	
 	// !!!:ログアウト実行
@@ -132,6 +139,9 @@ extension HDZCustomerTableViewController {
 			self.friendList = result.friendList
 			
 			self.tableView.reloadData()
+			
+			// !!!:バッジチェック
+			HDZPushNotificationManager.checkBadge()
 		}
 		
 		let error: (error: ErrorType?, result: FriendError?) -> Void = { (error, result) in
@@ -167,7 +177,6 @@ extension HDZCustomerTableViewController {
 
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
-		#if true
 		let customcell:HDZCustomerCell = cell as! HDZCustomerCell
 		
 		// !!!:バッジ表示判定
@@ -185,7 +194,6 @@ extension HDZCustomerTableViewController {
 			}
 		}
 		customcell.putBadge( badgeValue )
-		#endif
 
 	}
 	

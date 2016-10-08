@@ -30,7 +30,7 @@ class HDZHomeViewController: UITabBarController {
 		self.updateBadgeSupplier()
 		self.updateBadgeMessage()
 
-		// !!!:バッジ通知
+		// !!!:バッジ通知の受取
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
@@ -46,9 +46,6 @@ class HDZHomeViewController: UITabBarController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		// !!!:バッジチェック
-//		NSLog("HDZHomeViewController.viewDidAppear : Check Badge");
-//		HDZPushNotificationManager.checkBadge()
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -69,30 +66,28 @@ class HDZHomeViewController: UITabBarController {
 	
 	func updateBadgeSupplier() {
 		
-		// 商品更新
-		let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
-		let count:Int = list.count
-		if count > 0 {
-			let supplierId:String = list[0].supplierId
-			if supplierId != "" {
-				self.tabBar.items![0].badgeValue = String(count)
-			}
-		}
+		// 商品更新バッジ
+//		let count:Int = HDZPushNotificationManager.shared.getSupplierUpCount()
+//		if count > 0 {
+//			self.tabBar.items![0].badgeValue = String(count)
+//		}
+		HDZPushNotificationManager.updateSupplierBadgeWithTabBar(self.tabBar)
 	}
 	
 	func updateBadgeMessage() {
 		
-		// メッセージ更新
-		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-		var count:Int = 0
-		for obje:MessageUp in list {
-
-			let num:Int = obje.messageCount
-			count += num
-		}
-		if count > 0 {
-			self.tabBar.items![1].badgeValue = String(count)
-		}
+		// メッセージ更新バッジ
+//		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+//		var count:Int = 0
+//		for obje:MessageUp in list {
+//
+//			let num:Int = obje.messageCount
+//			count += num
+//		}
+//		if count > 0 {
+//			self.tabBar.items![1].badgeValue = String(count)
+//		}
+		HDZPushNotificationManager.updateMessageBadgeWithTabBar(self.tabBar)
 	}
 
 	deinit {
