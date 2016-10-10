@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 protocol HDZItemStaticFractionCellDelegate {
 	func staticfractionReloadCell()

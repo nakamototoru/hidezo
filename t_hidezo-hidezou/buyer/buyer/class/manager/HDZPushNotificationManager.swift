@@ -88,12 +88,22 @@ extension HDZPushNotificationManager {
 				debugPrint(unboxable)
 			#endif
 			
+			var strResult:String = ""
+			
 			// 商品更新
 			let supplierList: [SupplierId] = (unboxable?.supplierUp.supplierUpList)!
 			HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
 			//NSNotification
 			let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
 			NSNotificationCenter.defaultCenter().postNotification(n)
+			
+			strResult += "supplierUpList {\n"
+			for object:SupplierId in (unboxable?.supplierUp.supplierUpList)! {
+				strResult += "    supplierId : "
+				strResult += object.supplierId
+				strResult += "\n"
+			}
+			strResult += "}\n"
 			
 			// メッセージ更新
 			//					let messageUp:CustomDataMessageUpResult = customData.messageUp
@@ -103,6 +113,23 @@ extension HDZPushNotificationManager {
 			let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
 			NSNotificationCenter.defaultCenter().postNotification(nMes)
 			
+			strResult += "messageUpList {\n"
+			for object:MessageUp in (unboxable?.messageUp.messageUpList)! {
+				strResult += "{\n"
+				
+				strResult += "order_no : "
+				strResult += object.order_no
+				strResult += "\n"
+				
+				strResult += "messageCount : "
+				strResult += String( object.messageCount )
+				strResult += "\n"
+				
+				strResult += "}\n"
+			}
+			strResult += "}\n"
+			
+			UIWarning.WarningWithTitle("開発・バッジ情報", message: strResult)
 		}
 		let error: (error: ErrorType?, result: BadgeError?) -> Void = { (error, result) in
 			// エラー処理

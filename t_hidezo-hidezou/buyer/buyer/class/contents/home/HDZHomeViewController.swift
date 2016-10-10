@@ -31,8 +31,8 @@ class HDZHomeViewController: UITabBarController {
 		self.updateBadgeMessage()
 
 		// !!!:バッジ通知の受取
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZHomeViewController.getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
 	override func viewWillAppear(animated: Bool) {
@@ -67,26 +67,12 @@ class HDZHomeViewController: UITabBarController {
 	func updateBadgeSupplier() {
 		
 		// 商品更新バッジ
-//		let count:Int = HDZPushNotificationManager.shared.getSupplierUpCount()
-//		if count > 0 {
-//			self.tabBar.items![0].badgeValue = String(count)
-//		}
 		HDZPushNotificationManager.updateSupplierBadgeWithTabBar(self.tabBar)
 	}
 	
 	func updateBadgeMessage() {
 		
 		// メッセージ更新バッジ
-//		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-//		var count:Int = 0
-//		for obje:MessageUp in list {
-//
-//			let num:Int = obje.messageCount
-//			count += num
-//		}
-//		if count > 0 {
-//			self.tabBar.items![1].badgeValue = String(count)
-//		}
 		HDZPushNotificationManager.updateMessageBadgeWithTabBar(self.tabBar)
 	}
 

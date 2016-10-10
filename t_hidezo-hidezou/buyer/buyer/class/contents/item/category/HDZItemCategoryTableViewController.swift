@@ -47,7 +47,7 @@ class HDZItemCategoryTableViewController: UITableViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-//		self.request?.resume()
+		self.request?.resume()
 		
 		// API
 		self.getItem(self.friendInfo.id)
@@ -56,11 +56,11 @@ class HDZItemCategoryTableViewController: UITableViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-//        self.request?.suspend()
+        self.request?.suspend()
     }
 	
     deinit {
-//        self.request?.cancel()
+        self.request?.cancel()
 		
 		//イベントリスナーの削除
 		NSNotificationCenter.defaultCenter().removeObserver(self)

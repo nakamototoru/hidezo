@@ -20,10 +20,11 @@ class HDZCustomerTableViewController: UITableViewController {
         self.deleteBackButtonTitle()
 
 		// ナビゲーション右ボタン
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .Done, target: self, action: #selector(HDZCustomerTableViewController.didSelectedLogout(_:)))
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .Done, target: self, action: #selector(didSelectedLogout(_:)))
 		
+		// 再読込イベント
         let refreshControl: UIRefreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(HDZCustomerTableViewController.reloadRequest), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(reloadRequest), forControlEvents: .ValueChanged)
         self.refreshControl = refreshControl
 
         
@@ -34,7 +35,7 @@ class HDZCustomerTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 64.0
 		
 		// !!!:バッジ通知
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZCustomerTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,19 +43,10 @@ class HDZCustomerTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 	
-	override func viewWillAppear(animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		// !!!:バッジ表示
-//		let supplierList:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
-//		let count:Int = HDZPushNotificationManager.shared.
-//		if supplierList.count > 0 {
-//			self.tabBarController?.tabBar.items![0].badgeValue = String(supplierList.count) // 下階層から呼ぶ場合
-//		}
-//		else {
-//			self.tabBarController?.tabBar.items![0].badgeValue = nil // 下階層から呼ぶ場合
-//		}
-	}
+//	override func viewWillAppear(animated: Bool) {
+//		super.viewWillAppear(animated)
+//		
+//	}
 	
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -80,6 +72,11 @@ class HDZCustomerTableViewController: UITableViewController {
 		//イベントリスナーの削除
 		NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+
+	// 再読込
+	func reloadRequest() {
+		self.friend()
+	}
 
 	// !!!:通知受け取り時
 	func getNotification(notification: NSNotification)  {
@@ -213,12 +210,3 @@ extension HDZCustomerTableViewController : HDZCustomerCellDelegate {
 		self.navigationController?.pushViewController(controller, animated: true)
 	}
 }
-
-// MARK: - Action
-extension HDZCustomerTableViewController {
-    
-    @IBAction func reloadRequest() {
-        self.friend()
-    }
-}
-

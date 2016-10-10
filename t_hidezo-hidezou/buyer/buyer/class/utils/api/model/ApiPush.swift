@@ -39,11 +39,11 @@ internal struct SupplierId:Unboxable {
 	
 	init(unboxer: Unboxer) {
 		
-		DeployGateExtra.DGSLog("SupplierId:Unboxable")
+//		DeployGateExtra.DGSLog("SupplierId:Unboxable")
 
 		self.supplierId = unboxer.unbox("supplierId")
 		
-		DeployGateExtra.DGSLog("supplierId = pass")
+//		DeployGateExtra.DGSLog("supplierId = pass")
 	}
 }
 
@@ -54,15 +54,15 @@ internal struct MessageUp:Unboxable {
 	
 	init(unboxer: Unboxer) {
 		
-		DeployGateExtra.DGSLog("MessageUp:Unboxable")
+//		DeployGateExtra.DGSLog("MessageUp:Unboxable")
 		
 		self.order_no = unboxer.unbox("order_no")
 		
-		DeployGateExtra.DGSLog("order_no = pass")
+//		DeployGateExtra.DGSLog("order_no = pass")
 		
 		self.messageCount = unboxer.unbox("messageCount")
 		
-		DeployGateExtra.DGSLog("messageCount = pass")
+//		DeployGateExtra.DGSLog("messageCount = pass")
 	}
 }
 
@@ -72,11 +72,11 @@ internal struct SupplierUpResult: Unboxable {
 
 	init(unboxer: Unboxer) {
 		
-		DeployGateExtra.DGSLog("SupplierUpListResult: Unboxable")
+//		DeployGateExtra.DGSLog("SupplierUpListResult: Unboxable")
 
 		self.supplierUpList = unboxer.unbox("supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
 		
-		DeployGateExtra.DGSLog("supplierUpList = pass")
+//		DeployGateExtra.DGSLog("supplierUpList = pass")
 	}
 }
 
@@ -86,11 +86,11 @@ internal struct MessageUpResult: Unboxable {
 	
 	init(unboxer: Unboxer) {
 		
-		DeployGateExtra.DGSLog("MessageUpListResult: Unboxable")
+//		DeployGateExtra.DGSLog("MessageUpListResult: Unboxable")
 
 		self.messageUpList = unboxer.unbox("messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
 		
-		DeployGateExtra.DGSLog("messageUpList = pass")
+//		DeployGateExtra.DGSLog("messageUpList = pass")
 	}
 }
 

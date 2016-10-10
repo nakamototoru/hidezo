@@ -65,6 +65,18 @@ class HDZItemOrderDialogViewController: UIViewController {
 		self.getItem(self.supplierId)
     }
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.request?.resume()
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.request?.suspend()
+	}
+	
 	func commitButtonTapped (){
 		self.view.endEditing(true)
 	}

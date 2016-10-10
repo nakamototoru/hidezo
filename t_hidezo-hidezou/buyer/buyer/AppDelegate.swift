@@ -10,7 +10,7 @@ import UIKit
 //import Fabric
 //import Crashlytics
 
-import Alamofire
+//import Alamofire
 import Unbox
 
 

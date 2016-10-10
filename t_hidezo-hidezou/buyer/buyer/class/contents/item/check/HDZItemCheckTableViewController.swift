@@ -51,6 +51,8 @@ class HDZItemCheckTableViewController: UITableViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
+		self.request?.resume()
+		
 		// Realm（ローカルSQL）
 		self.orderResult = try! HDZOrder.queries(self.supplierId)
 
@@ -65,6 +67,16 @@ class HDZItemCheckTableViewController: UITableViewController {
 
 		// API
 		self.getItem(self.supplierId)
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.request?.suspend()
+	}
+	
+	deinit {
+		self.request?.cancel()
 	}
 	
     override func didReceiveMemoryWarning() {

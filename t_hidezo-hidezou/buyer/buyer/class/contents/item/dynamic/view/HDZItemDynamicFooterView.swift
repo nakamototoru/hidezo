@@ -62,7 +62,7 @@ class HDZItemDynamicFooterView: UIView {
 			}
 			
 			if let url: NSURL = NSURL(string: imagePath.element) {
-				HDZItemDynamicFooterView.request(url) { (image) in
+				HDZItemDynamicFooterView.requestImage(url) { (image) in
 					imageView?.image = image
 				}
 			}
@@ -110,7 +110,7 @@ extension HDZItemDynamicFooterView {
 // MARK: - API
 extension HDZItemDynamicFooterView {
 	
-	private class func request(url: NSURL, completion: (image: UIImage?) -> Void) {
+	private class func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
 		
 		// 画像ローカル保存したかった。。。
 		//        if let image: HDZImage = try! HDZImage.queries(url.absoluteString) {

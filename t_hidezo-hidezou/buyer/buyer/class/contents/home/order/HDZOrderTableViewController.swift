@@ -27,7 +27,7 @@ class HDZOrderTableViewController: UITableViewController {
         self.deleteBackButtonTitle()
 
 		// ナビゲーション右ボタン
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .Done, target: self, action: #selector(HDZOrderTableViewController.didSelectedLogout(_:)))
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .Done, target: self, action: #selector(didSelectedLogout(_:)))
 
 		// テーブルセル
         HDZOrderCell.register(self.tableView)
@@ -42,7 +42,7 @@ class HDZOrderTableViewController: UITableViewController {
 		self.view.addSubview(self.indicatorView)
 		
 		// !!!:バッジ通知
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZOrderTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +77,7 @@ class HDZOrderTableViewController: UITableViewController {
 		self.tableView.reloadData()
 		
 		// バッジ更新
-		HDZPushNotificationManager.updateMessageBadgeWithController(self)
+//		HDZPushNotificationManager.updateMessageBadgeWithController(self)
 	}
 
 	// !!!:ログアウト実行
@@ -131,10 +131,7 @@ extension HDZOrderTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let orderIndo: OrderInfo = self.orderList[indexPath.row]
         let controller: HDZOrderDetailTableViewController = HDZOrderDetailTableViewController.createViewController(orderIndo)
-		
-		// !!!:デザミシステム
-		//controller.view.layoutIfNeeded()
-		
+				
         self.navigationController?.pushViewController(controller, animated: true) // true
     }
 	
@@ -192,8 +189,8 @@ extension HDZOrderTableViewController {
             return
         }
         
-        self.page += 1
-        
+//        self.page += 1
+		
         let completion: (unboxable: OrderListResult?) -> Void = { (unboxable) in
             
             self.refreshControl?.endRefreshing()
@@ -209,7 +206,7 @@ extension HDZOrderTableViewController {
             
             if result.orderList.count <= 0 {
                 self.stopLoading = true
-                self.page -= 1
+//                self.page -= 1
                 return
             }
             
@@ -220,23 +217,24 @@ extension HDZOrderTableViewController {
 			
             self.tableView.reloadData()
 			
+			self.page += 1
+			
 			// バッジ更新
-			HDZPushNotificationManager.updateMessageBadgeWithController(self)
+//			HDZPushNotificationManager.updateMessageBadgeWithController(self)
         }
         
         let error: (error: ErrorType?, result: OrderListError?) -> Void = { (error, result) in
             self.refreshControl?.endRefreshing()
 			
-			self.page -= 1
+//			self.page -= 1
 			
 			//インジケータ
 			self.indicatorView.stopAnimating()
 
 			#if DEBUG
 				debugPrint(error.debugDescription)
-				
+				// エラーダイアログ
 				let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
-					
 				})
 				let controller: UIAlertController = UIAlertController(title: "ERROR", message: error.debugDescription, preferredStyle: .Alert)
 				controller.addAction(action)

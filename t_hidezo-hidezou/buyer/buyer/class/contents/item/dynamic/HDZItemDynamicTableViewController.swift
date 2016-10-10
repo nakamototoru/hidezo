@@ -31,30 +31,49 @@ class HDZItemDynamicTableViewController: UITableViewController {
         HDZItemDynamicCell.register(self.tableView)
 		HDZItemDynamicFractionCell.register(self.tableView)
 		
+		// 再読込イベント
+		let refreshControl: UIRefreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(reloadRequest), forControlEvents: .ValueChanged)
+		self.refreshControl = refreshControl
+
 		//インジケータ
 		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
 
     }
 
-	override func viewWillAppear(animated: Bool) {
-		super.viewWillAppear(animated)
-		
-//		self.tableView.tableHeaderView = HDZItemDynamicHeaderView.createView(self.dynamicItemInfo)
-//		self.tableView.tableFooterView = HDZItemDynamicFooterView.createView(self.dynamicItemInfo, parent: self)
-	}
+//	override func viewWillAppear(animated: Bool) {
+//		super.viewWillAppear(animated)
+//		
+//	}
 	
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+		
+		self.request?.resume()
 		
 //		self.tableView.reloadData()
 		self.getItem(self.supplierId)
     }
 	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.request?.suspend()
+	}
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	deinit {
+		self.request?.cancel()
+	}
+
+	func reloadRequest() {
+		self.getItem(self.supplierId)
+	}
 }
 
 // MARK: - Create
@@ -82,6 +101,8 @@ extension HDZItemDynamicTableViewController {
 	
 	private func getItem(supplierId: String) {
 		
+		self.refreshControl?.beginRefreshing()
+
 		// インジケーター開始
 		self.indicatorView.startAnimating()
 		
@@ -101,6 +122,8 @@ extension HDZItemDynamicTableViewController {
 				self.dynamicItem = result.dynamicItem!
 			}
 			
+			self.refreshControl?.endRefreshing()
+
 			// インジケーター停止
 			self.indicatorView.stopAnimating()
 			
@@ -121,6 +144,8 @@ extension HDZItemDynamicTableViewController {
 		}
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			
+			self.refreshControl?.endRefreshing()
+
 			self.indicatorView.stopAnimating()
 			
 			self.request = nil

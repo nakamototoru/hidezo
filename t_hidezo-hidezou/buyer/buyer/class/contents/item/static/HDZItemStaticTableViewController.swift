@@ -31,6 +31,12 @@ class HDZItemStaticTableViewController: UITableViewController {
         HDZItemStaticCell.register(self.tableView)
 		HDZItemStaticFractionCell.register(self.tableView)
 		
+		// 再読込イベント
+		let refreshControl: UIRefreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(reloadRequest), forControlEvents: .ValueChanged)
+		self.refreshControl = refreshControl
+		
+		
 		//インジケータ
 		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
@@ -40,30 +46,37 @@ class HDZItemStaticTableViewController: UITableViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
+		self.request?.resume()
+
 		// API
 		self.getItem(self.supplierId)
 		
 //		self.tableView.reloadData()
 	}
 	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.request?.suspend()
+	}
+
+	deinit {
+		self.request?.cancel()
+	}
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+	func reloadRequest() {
+		self.getItem(self.supplierId)
+	}
+
 }
 
 // MARK: - Create
 extension HDZItemStaticTableViewController {
-    
-//    internal class func createViewController(categoryName: String, categoryItems: [StaticItem], attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticTableViewController {
-//        let controller: HDZItemStaticTableViewController = UIViewController.createViewController("HDZItemStaticTableViewController")
-//        controller.categoryName = categoryName
-//        controller.staticItems = categoryItems
-//        controller.attr_flg = attr_flg
-//        controller.supplierId = supplierId
-//        return controller
-//    }
 	
 	internal class func createViewController(supplierId:String, attr_flg:AttrFlg, categoryKey:Int, categoryName:String) -> HDZItemStaticTableViewController {
 		let controller: HDZItemStaticTableViewController = UIViewController.createViewController("HDZItemStaticTableViewController")
@@ -82,6 +95,8 @@ extension HDZItemStaticTableViewController {
 	
 	private func getItem(supplierId: String) {
 		
+		self.refreshControl?.beginRefreshing()
+
 		// インジケーター開始
 		self.indicatorView.startAnimating()
 		
@@ -111,12 +126,16 @@ extension HDZItemStaticTableViewController {
 			
 			self.indicatorView.stopAnimating()
 			
+			self.refreshControl?.endRefreshing()
+			
 			self.tableView.reloadData()
 		}
 		
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			
 			self.indicatorView.stopAnimating()
+			
+			self.refreshControl?.endRefreshing()
 			
 			self.request = nil
 		}
@@ -128,15 +147,12 @@ extension HDZItemStaticTableViewController {
 	// 画像取得
 	private func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
 		
-		#if DEBUG
-			debugPrint(url)
-		#endif
-		
 		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
 			if response.result.error != nil {
 				
 				#if DEBUG
 					debugPrint(response.result.error)
+					debugPrint(url)
 				#endif
 				
 				let sakanaimage:UIImage = UIImage(named: "sakana")!
@@ -162,7 +178,6 @@ extension HDZItemStaticTableViewController {
 		}
 		let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
 	}
-
 }
 
 // MARK: - Table view data source

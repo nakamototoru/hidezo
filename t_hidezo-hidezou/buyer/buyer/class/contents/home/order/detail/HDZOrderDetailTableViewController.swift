@@ -29,7 +29,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		self.title = self.orderInfo.supplier_name + "様宛"
 		
 		// ナビゲーション右ボタン
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(HDZOrderDetailTableViewController.didSelectedMessage(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(didSelectedMessage(_:)))
 		
 		// セル登録
         HDZOrderDetailCell.register(self.tableView)
@@ -40,7 +40,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 //        self.tableView.estimatedRowHeight = 113.0
 
 		// !!!:バッジ通知
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZOrderDetailTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
 		
 		// API
         self.orderDetail()
@@ -60,7 +60,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		// !!!:バッジ表示
 		self.updateBadgeMessage()
 		// バッジ更新
-		HDZPushNotificationManager.updateMessageBadgeWithController(self)
+//		HDZPushNotificationManager.updateMessageBadgeWithController(self)
     }
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -88,6 +88,13 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		
 		self.updateBadgeMessage()
 	}
+	
+	func didSelectedMessage(button: UIBarButtonItem) {
+		
+		let controller: HDZCommentTableViewController = HDZCommentTableViewController.createViewController(self.orderInfo)
+		self.navigationController?.pushViewController(controller, animated: true)
+	}
+
 }
 
 extension HDZOrderDetailTableViewController {
@@ -251,26 +258,6 @@ extension HDZOrderDetailTableViewController {
 		}
 	}
 
-}
-
-// MARK: - action
-extension HDZOrderDetailTableViewController {
-	
-    @IBAction func didSelectedMessage(button: UIBarButtonItem) {
-		
-//		// バッジ消去
-//		HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
-//		let messageList:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-//		if messageList.count > 0 {
-//			self.tabBarController?.tabBar.items![1].badgeValue = String(messageList.count) // 下階層から呼ぶ場合
-//		}
-//		else {
-//			self.tabBarController?.tabBar.items![1].badgeValue = nil // 下階層から呼ぶ場合
-//		}
-		
-        let controller: HDZCommentTableViewController = HDZCommentTableViewController.createViewController(self.orderInfo)
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
 }
 
 // MARK: - UIPopoverPresentationControllerDelegate

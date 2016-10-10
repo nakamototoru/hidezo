@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 class HDZItemStaticCell: UITableViewCell {
 

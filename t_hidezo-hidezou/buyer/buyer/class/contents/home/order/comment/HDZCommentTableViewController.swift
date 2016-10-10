@@ -23,10 +23,10 @@ class HDZCommentTableViewController: UITableViewController {
         //self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
 		self.title = self.orderInfo.supplier_name + "様宛"
 		
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(HDZCommentTableViewController.didSelectedCommentCreate(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(didSelectedCommentCreate(_:)))
         
         let refreshControl: UIRefreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(HDZCommentTableViewController.reloadRequest), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(reloadRequest), forControlEvents: .ValueChanged)
         self.refreshControl = refreshControl
         
         HDZCommentCell.register(self.tableView)
@@ -60,6 +60,17 @@ class HDZCommentTableViewController: UITableViewController {
     deinit {
         self.request?.cancel()
     }
+	
+	func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
+		
+		let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
+		self.presentViewController(controller, animated: true, completion: nil)
+	}
+
+	func reloadRequest() {
+		self.requestMessage()
+	}
+
 }
 
 // MARK: - Table view data source
@@ -115,18 +126,18 @@ extension HDZCommentTableViewController: HDZCommentCreateViewControllerDelegate 
 }
 
 // MARK: - action
-extension HDZCommentTableViewController {
-    
-    @IBAction func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
-		
-        let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
-    
-    @IBAction func reloadRequest() {
-        self.requestMessage()
-    }
-}
+//extension HDZCommentTableViewController {
+//    
+////    @IBAction func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
+////		
+////        let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
+////        self.presentViewController(controller, animated: true, completion: nil)
+////    }
+//	
+////    @IBAction func reloadRequest() {
+////        self.requestMessage()
+////    }
+//}
 
 // MARK: - api
 extension HDZCommentTableViewController {
