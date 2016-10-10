@@ -125,20 +125,6 @@ extension HDZCommentTableViewController: HDZCommentCreateViewControllerDelegate 
     }
 }
 
-// MARK: - action
-//extension HDZCommentTableViewController {
-//    
-////    @IBAction func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
-////		
-////        let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
-////        self.presentViewController(controller, animated: true, completion: nil)
-////    }
-//	
-////    @IBAction func reloadRequest() {
-////        self.requestMessage()
-////    }
-//}
-
 // MARK: - api
 extension HDZCommentTableViewController {
     
@@ -163,14 +149,9 @@ extension HDZCommentTableViewController {
 			
 			// !!!:dezami・バッジ消去
 			HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
-//			let messageList:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-//			if messageList.count > 0 {
-//				self.tabBarController?.tabBar.items![1].badgeValue = String(messageList.count) // 下階層から呼ぶ場合
-//			}
-//			else {
-//				self.tabBarController?.tabBar.items![1].badgeValue = nil // 下階層から呼ぶ場合
-//			}
+//			HDZPushNotificationManager.decApplicationBadge(countMessage)
 			HDZPushNotificationManager.updateMessageBadgeWithController(self)
+			HDZPushNotificationManager.updateBadgeInHomeIcon()
         }
         
         let error: (error: ErrorType?, result: MessageError?) -> Void = { (error, unboxable) in

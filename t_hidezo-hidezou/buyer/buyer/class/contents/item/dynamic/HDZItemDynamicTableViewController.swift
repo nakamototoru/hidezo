@@ -141,6 +141,9 @@ extension HDZItemDynamicTableViewController {
 			}
 			HDZApi.postCheckDynamicItems(supplierId, completionBlock: completion2, errorBlock: error2)
 
+			// OSバッジ
+//			HDZPushNotificationManager.decApplicationBadge(1)
+			HDZPushNotificationManager.updateBadgeInHomeIcon()
 		}
 		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			

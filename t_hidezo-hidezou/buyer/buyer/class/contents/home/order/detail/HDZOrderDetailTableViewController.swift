@@ -40,7 +40,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 //        self.tableView.estimatedRowHeight = 113.0
 
 		// !!!:バッジ通知
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+//		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
 		
 		// API
         self.orderDetail()
@@ -51,6 +51,12 @@ class HDZOrderDetailTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		// !!!:バッジ通知
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+	}
 	
     override func viewDidAppear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -58,16 +64,18 @@ class HDZOrderDetailTableViewController: UITableViewController {
         self.orderDetailRequest?.resume()
 
 		// !!!:バッジ表示
-		self.updateBadgeMessage()
-		// バッジ更新
-//		HDZPushNotificationManager.updateMessageBadgeWithController(self)
+		updateBadgeMessage()
     }
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-		// !!!:バッジ隠す
-		self.putBadge(-1)
+		// !!!:バッジ消す
+		self.viewBadge.removeFromSuperview()
+		self.viewBadge = nil
+		
+		//イベントリスナーの削除
+		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 	
     override func viewDidDisappear(animated: Bool) {
@@ -86,7 +94,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 	// !!!:通知受け取り時
 	func getNotification(notification: NSNotification)  {
 		
-		self.updateBadgeMessage()
+		updateBadgeMessage()
 	}
 	
 	func didSelectedMessage(button: UIBarButtonItem) {
@@ -95,16 +103,12 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		self.navigationController?.pushViewController(controller, animated: true)
 	}
 
-}
-
-extension HDZOrderDetailTableViewController {
-	
 	func putBadge(value: Int) {
 		
 		// !!!バッジビュー
 		if self.viewBadge == nil {
 			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
-
+			
 			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
 			let anchor:CGPoint = CGPointMake(1, 0)
 			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
@@ -125,10 +129,43 @@ extension HDZOrderDetailTableViewController {
 				break
 			}
 		}
-		self.putBadge(badgeValue)
+		putBadge(badgeValue)
 	}
 
 }
+
+//extension HDZOrderDetailTableViewController {
+//	
+//	func putBadge(value: Int) {
+//		
+//		// !!!バッジビュー
+//		if self.viewBadge == nil {
+//			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
+//
+//			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
+//			let anchor:CGPoint = CGPointMake(1, 0)
+//			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+//			self.navigationController?.view.addSubview(self.viewBadge)
+//		}
+//		self.viewBadge.updateBadge(value)
+//	}
+//	
+//	func updateBadgeMessage() {
+//		
+//		// バッジ・メッセージ更新
+//		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+//		var badgeValue:Int = 0
+//		for obj:MessageUp in list {
+//			let order_no:String = obj.order_no
+//			if order_no == orderInfo.order_no {
+//				badgeValue = obj.messageCount
+//				break
+//			}
+//		}
+//		self.putBadge(badgeValue)
+//	}
+//
+//}
 
 // MARK: - Table view data source
 extension HDZOrderDetailTableViewController {

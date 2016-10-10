@@ -211,13 +211,14 @@ extension HDZLoginViewController {
 				#else
 				let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
 					//debugPrint("****** completionToken ******")
+					DeployGateExtra.DGSLog("HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 				}
 				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
-					debugPrint(error)
+//					debugPrint(error)
+					DeployGateExtra.DGSLog("HDZLoginViewController.login\n Failed send DeviceToken")
 				}
 				self.deviceTokenRequest = HDZApi.postDeviceToken(id, completionBlock: completionToken, errorBlock: errorToken)
 					
-				DeployGateExtra.DGSLog("HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 				#endif
 				
             }

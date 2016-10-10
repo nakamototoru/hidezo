@@ -27,13 +27,13 @@ class HDZPushNotificationManager: NSObject {
 		return supplierUpList
 	}
 	func removeSupplierUp(supplier_id:String) {
-		var count:Int = 0;
+		var loop:Int = 0;
 		for item:SupplierId in supplierUpList {
 			if item.supplierId == supplier_id {
-				supplierUpList.removeAtIndex(count)
+				supplierUpList.removeAtIndex(loop)
 				break
 			}
-			count += 1;
+			loop += 1;
 		}
 	}
 	func removeSupplierUpAll() {
@@ -55,15 +55,18 @@ class HDZPushNotificationManager: NSObject {
 	func getMessageUpList() -> [MessageUp] {
 		return messageUpList
 	}
-	func removeMessageUp(order_no:String) {
-		var count:Int = 0;
+	func removeMessageUp(order_no:String) -> Int {
+		var result:Int = 0;
+		var loop:Int = 0;
 		for item:MessageUp in messageUpList {
 			if item.order_no == order_no {
-				messageUpList.removeAtIndex(count)
+				messageUpList.removeAtIndex(loop)
+				result = item.messageCount
 				break;
 			}
-			count += 1
+			loop += 1
 		}
+		return result
 	}
 	func removeMessageUpAll() {
 		messageUpList.removeAll()
@@ -129,7 +132,7 @@ extension HDZPushNotificationManager {
 			}
 			strResult += "}\n"
 			
-			UIWarning.WarningWithTitle("開発・バッジ情報", message: strResult)
+//			UIWarning.WarningWithTitle("開発・バッジ情報", message: strResult)
 		}
 		let error: (error: ErrorType?, result: BadgeError?) -> Void = { (error, result) in
 			// エラー処理
@@ -170,5 +173,28 @@ extension HDZPushNotificationManager {
 	internal class func updateMessageBadgeWithController(controller:UIViewController) {
 		
 		updateMessageBadgeWithTabBar(controller.tabBarController!.tabBar)
+	}
+	
+	// OSバッジ数
+	internal class func updateApplicationBadge(count:Int) {
+		
+		UIApplication.sharedApplication().applicationIconBadgeNumber = count
+		if count <= 0 {
+			UIApplication.sharedApplication().cancelAllLocalNotifications()
+			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+		}
+	}
+//	internal class func decApplicationBadge(delta:Int) {
+//		var count:Int = UIApplication.sharedApplication().applicationIconBadgeNumber
+//		count -= delta
+//		updateApplicationBadge(count)
+//	}
+	
+	internal class func updateBadgeInHomeIcon() {
+		
+		var count:Int = 0
+		count += HDZPushNotificationManager.shared.getSupplierUpCount()
+		count += HDZPushNotificationManager.shared.getMessageUpCount()
+		updateApplicationBadge(count)
 	}
 }

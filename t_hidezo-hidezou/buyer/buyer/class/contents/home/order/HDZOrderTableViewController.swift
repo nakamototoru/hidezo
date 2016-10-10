@@ -15,7 +15,8 @@ class HDZOrderTableViewController: UITableViewController {
     private var request: Alamofire.Request? = nil
     private var page: Int = 0
     
-    private var stopLoading: Bool = false
+//    private var stopLoading: Bool = false
+	var isLoading: Bool = false
 	
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
@@ -107,6 +108,20 @@ class HDZOrderTableViewController: UITableViewController {
 		self.presentViewController(controller, animated: true, completion: nil)
 	}
 
+	// 1番したまでスクロールしたらデータ取得
+	override func scrollViewDidScroll(scrollView: UIScrollView)
+	{
+		let contentOffsetWidthWindow = self.tableView.contentOffset.y + self.tableView.bounds.size.height
+		let eachToBottom = contentOffsetWidthWindow >= self.tableView.contentSize.height
+		if (!eachToBottom || self.isLoading) {
+			return;
+		}
+		
+		self.isLoading = true
+		
+		//　ページ継続読込
+		self.getOrderList(false)		
+	}
 }
 
 // MARK: - Tableview datasource
@@ -119,11 +134,11 @@ extension HDZOrderTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		// テーブル更新の判定
-        if !self.stopLoading && self.orderList.count <= indexPath.row + 1 {
-			//　ページ継続読込
-            self.getOrderList(false)
-        }
-        
+//        if !self.stopLoading && self.orderList.count <= indexPath.row + 1 {
+//			//　ページ継続読込
+//            self.getOrderList(false)
+//        }
+		
         let cell: HDZOrderCell = HDZOrderCell.dequeueReusableCell(tableView, for: indexPath, orderInfo: self.orderList[indexPath.row])
         return cell
     }
@@ -165,7 +180,8 @@ extension HDZOrderTableViewController {
     
     func reloadRequest() {
         self.page = 0
-        self.stopLoading = false
+//        self.stopLoading = false
+		self.isLoading = true
         self.getOrderList(true)
     }
 }
@@ -179,20 +195,22 @@ extension HDZOrderTableViewController {
 
         self.refreshControl?.beginRefreshing()
 
-        if self.stopLoading {
-            self.refreshControl?.endRefreshing()
-            self.request = nil
-			
-			//インジケータ
-			self.indicatorView.stopAnimating()
-			
-            return
-        }
-        
+//        if self.stopLoading {
+//            self.refreshControl?.endRefreshing()
+//            self.request = nil
+//			
+//			//インジケータ
+//			self.indicatorView.stopAnimating()
+//			
+//            return
+//        }
+		
 //        self.page += 1
 		
         let completion: (unboxable: OrderListResult?) -> Void = { (unboxable) in
-            
+			
+			self.isLoading = false
+
             self.refreshControl?.endRefreshing()
             guard let result: OrderListResult = unboxable else {
                 return
@@ -204,9 +222,9 @@ extension HDZOrderTableViewController {
                 self.orderList.removeAll()
             }
             
-            if result.orderList.count <= 0 {
-                self.stopLoading = true
-//                self.page -= 1
+            if result.orderList.count == 0 {
+//                self.stopLoading = true
+				
                 return
             }
             
@@ -224,9 +242,10 @@ extension HDZOrderTableViewController {
         }
         
         let error: (error: ErrorType?, result: OrderListError?) -> Void = { (error, result) in
-            self.refreshControl?.endRefreshing()
 			
-//			self.page -= 1
+			self.isLoading = false
+
+            self.refreshControl?.endRefreshing()
 			
 			//インジケータ
 			self.indicatorView.stopAnimating()
