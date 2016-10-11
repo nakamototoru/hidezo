@@ -204,21 +204,20 @@ extension HDZLoginViewController {
                     UIApplication.setRootViewController(controller)
                 })
 				
+				DeployGateExtra.DGSLog("ログイン：" + HDZUserDefaults.id)
+
 				// !!!:dezami
 				// Device Token Post
 				#if TARGET_OS_SIMULATOR
 					//トークンは送れない
 				#else
 				let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
-					//debugPrint("****** completionToken ******")
-					DeployGateExtra.DGSLog("HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
+					DeployGateExtra.DGSLog("ログイン時：HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 				}
 				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
-//					debugPrint(error)
 					DeployGateExtra.DGSLog("HDZLoginViewController.login\n Failed send DeviceToken")
 				}
 				self.deviceTokenRequest = HDZApi.postDeviceToken(id, completionBlock: completionToken, errorBlock: errorToken)
-					
 				#endif
 				
             }

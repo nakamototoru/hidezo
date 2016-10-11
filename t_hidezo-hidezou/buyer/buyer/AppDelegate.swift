@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
 
 //		print(">>>> deviceToken: " + deviceTokenString)
-		DeployGateExtra.DGSLog("didRegisterForRemoteNotificationsWithDeviceToken\n <deviceToken>: " + deviceTokenString)
+		DeployGateExtra.DGSLog("デバイス通知許可：didRegisterForRemoteNotificationsWithDeviceToken\n <deviceToken>: " + deviceTokenString)
 
 		// デバイスに保存
 		HDZUserDefaults.devicetoken = deviceTokenString
@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	// Push通知が利用不可であればerrorが返ってくる
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-		DeployGateExtra.DGSLog("error: " + "\(error)")
+		DeployGateExtra.DGSLog("didFailToRegisterForRemoteNotificationsWithError: " + "\(error)")
 	}
 	
 	/**
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	 */
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 		
-		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
+//		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
 		
 //		switch application.applicationState {
 //		case .Inactive:

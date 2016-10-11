@@ -87,7 +87,9 @@ class HDZOrderTableViewController: UITableViewController {
 		// ログアウト実行
 		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
 			HDZUserDefaults.login = false
-			//            HDZUserDefaults.id = 0
+
+			// TODO:ログアウトAPI
+			DeployGateExtra.DGSLog("ログアウト：" + HDZUserDefaults.id)
 			
 			let controller: HDZTopViewController = HDZTopViewController.createViewController()
 			UIApplication.setRootViewController(controller)
