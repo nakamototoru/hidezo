@@ -81,14 +81,17 @@ class HDZOrderTableViewController: UITableViewController {
 //		HDZPushNotificationManager.updateMessageBadgeWithController(self)
 	}
 
-	// !!!:ログアウト実行
+	// !!!:ログアウト
 	func didSelectedLogout(sender: UIBarButtonItem) {
 		
-		// ログアウト実行
+		// ログアウト確認
 		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
-			HDZUserDefaults.login = false
+			// ログアウト実行
+//			HDZUserDefaults.login = false
+			HDZApi.logOut({ (unboxable) in
+				}, errorBlock: { (error, unboxable) in
+			})
 
-			// TODO:ログアウトAPI
 			DeployGateExtra.DGSLog("ログアウト：" + HDZUserDefaults.id)
 			
 			let controller: HDZTopViewController = HDZTopViewController.createViewController()

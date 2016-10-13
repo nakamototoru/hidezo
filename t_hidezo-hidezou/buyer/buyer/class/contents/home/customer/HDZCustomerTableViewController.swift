@@ -87,19 +87,39 @@ class HDZCustomerTableViewController: UITableViewController {
 		HDZPushNotificationManager.updateSupplierBadge(self)
 	}
 	
-	// !!!:ログアウト実行
+	// !!!:ログアウト
 	func didSelectedLogout(sender: UIBarButtonItem) {
-		
-		// ログアウト実行
-		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
-			HDZUserDefaults.login = false
 
-			// TODO:ログアウトAPI
+		// ログアウト確認
+		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
+			
 			DeployGateExtra.DGSLog("ログアウト：" + HDZUserDefaults.id)
+
+			// ログアウト実行
+//			HDZUserDefaults.login = false
+			HDZApi.logOut({ (unboxable) in
+				
+//				let controller: HDZTopViewController = HDZTopViewController.createViewController()
+//				UIApplication.setRootViewController(controller)
+//				let navigationController: UINavigationController = HDZLoginViewController.createViewController()
+//				self.presentViewController(navigationController, animated: true, completion: {
+//					self.tabBarController?.selectedIndex = 0
+//				})
+
+				}, errorBlock: { (error, unboxable) in
+					
+//					let controller: HDZTopViewController = HDZTopViewController.createViewController()
+//					UIApplication.setRootViewController(controller)
+//					let navigationController: UINavigationController = HDZLoginViewController.createViewController()
+//					self.presentViewController(navigationController, animated: true, completion: {
+//						self.tabBarController?.selectedIndex = 0
+//					})
+			})
+
+			// TODO:カートを空に
 			
 			let controller: HDZTopViewController = HDZTopViewController.createViewController()
 			UIApplication.setRootViewController(controller)
-			
 			let navigationController: UINavigationController = HDZLoginViewController.createViewController()
 			self.presentViewController(navigationController, animated: true, completion: {
 				self.tabBarController?.selectedIndex = 0

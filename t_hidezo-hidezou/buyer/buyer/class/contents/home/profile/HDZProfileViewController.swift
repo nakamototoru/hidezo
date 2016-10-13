@@ -59,10 +59,13 @@ extension HDZProfileViewController {
     
     @IBAction func didSelectedLogout(sender: UIBarButtonItem) {
 		
-		// ログアウト実行
+		// ログアウト
         let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
-            HDZUserDefaults.login = false
-//            HDZUserDefaults.id = 0
+			// ログアウト実行
+//            HDZUserDefaults.login = false
+			HDZApi.logOut({ (unboxable) in
+				}, errorBlock: { (error, unboxable) in
+			})
 			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
             UIApplication.setRootViewController(controller)

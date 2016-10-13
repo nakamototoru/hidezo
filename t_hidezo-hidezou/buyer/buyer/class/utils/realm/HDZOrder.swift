@@ -133,6 +133,14 @@ extension HDZOrder {
         try Realm().delete(result)
     }
 	
+	// !!!:dezami
+	internal class func deleteAll() throws {
+		let realm: Realm = try Realm()
+		try realm.write({
+			realm.deleteAll()
+		})
+	}
+	
 	// !!!: dezami
 	internal class func updateSize(supplierId: String, itemId: String, dynamic: Bool, newsize: String) throws {
 

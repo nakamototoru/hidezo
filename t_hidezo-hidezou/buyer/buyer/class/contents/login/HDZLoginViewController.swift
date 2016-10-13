@@ -235,7 +235,7 @@ extension HDZLoginViewController {
         }
         
         let error: (error: ErrorType?, result: LoginResult?) -> Void = { (error, result) in
-
+			// login error
             HDZUserDefaults.login = false
             
             let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)

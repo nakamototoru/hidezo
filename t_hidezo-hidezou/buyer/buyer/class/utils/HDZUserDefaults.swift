@@ -9,7 +9,6 @@
 import Foundation
 
 
-
 internal class HDZUserDefaults {
 
     // MARK: - UUID
@@ -105,5 +104,5 @@ internal class HDZUserDefaults {
 			userDefaults.setObject(newValue, forKey: KEY_USER_DEFAULTS_DEVICETOKEN)
 			userDefaults.synchronize()
 		}
-	}
+	}	
 }

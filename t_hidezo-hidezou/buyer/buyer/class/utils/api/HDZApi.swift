@@ -251,9 +251,9 @@ extension HDZApi {
         let handler: (UIAlertAction) -> Void = { (alert: UIAlertAction) in
 			
 			// ログアウト実行
-            HDZUserDefaults.login = false
-
-			// TODO:カートを空に
+			HDZApi.logOut({ (unboxable) in
+				}, errorBlock: { (error, unboxable) in
+			})
 			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
             UIApplication.setRootViewController(controller)
@@ -270,6 +270,23 @@ extension HDZApi {
         
         return true
     }
+	
+	internal class func logOut(completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginCheckError?) -> Void) -> Alamofire.Request? {
+
+		HDZUserDefaults.login = false
+		
+		let requestUrl: String = BASE_URL + "/store/logout"
+		let parameters: ParamsBadge = ParamsBadge(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
+		let completion:(unboxable:LoginResult?) ->Void = { (unboxable) in
+			// カートを空に
+			try! HDZOrder.deleteAll()
+		}
+		let error:(error:ErrorType?, unboxable:LoginCheckError?) -> Void = { (error,unboxable) in
+			// カートを空に
+			try! HDZOrder.deleteAll()
+		}
+		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completion, errorBlock: error)
+	}
 }
 
 // MARK: - PushNotification
