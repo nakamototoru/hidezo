@@ -2,8 +2,11 @@
 
 # 外部ライブラリ
 # フォルダまるごと無視したい
-# Carthage/
 fastlane/
+Checkouts/
+Mac/
+tvOS/
+watchOS/
 
 # ツール＆ライブラリ
 
@@ -18,5 +21,6 @@ fastlane/
 
 # 中間ファイル
 *.bcsymbolmap
+*.dSYM
 
 # 古いバージョン

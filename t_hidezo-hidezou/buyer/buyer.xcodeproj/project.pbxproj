@@ -295,8 +295,6 @@
 		37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerSwipeToDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerSwipeToDismissTransition.swift; sourceTree = "<group>"; };
 		37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentDetailViewController.swift; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.swift; sourceTree = "<group>"; };
 		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
-		F741897F1D4D97E2000C49F0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		F74189801D4D97E2000C49F0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateFormatter_Extension.swift; path = class/extension/NSDateFormatter_Extension.swift; sourceTree = "<group>"; };
 		F74189851D4D9E6C000C49F0 /* NSDate_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate_Extension.swift; path = class/extension/NSDate_Extension.swift; sourceTree = "<group>"; };
 		F74189871D4DA5B8000C49F0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -386,8 +384,6 @@
 				37D59D621D76E29E006A9818 /* SystemConfiguration.framework */,
 				F74189871D4DA5B8000C49F0 /* Realm.framework */,
 				F74189881D4DA5B8000C49F0 /* RealmSwift.framework */,
-				F741897F1D4D97E2000C49F0 /* Fabric.framework */,
-				F74189801D4D97E2000C49F0 /* Crashlytics.framework */,
 				35255C591D176F4600A8D627 /* Alamofire.framework */,
 				35255C5A1D176F4600A8D627 /* Unbox.framework */,
 				35255C5B1D176F4600A8D627 /* Wrap.framework */,
@@ -1281,7 +1277,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "buyer/buyer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1306,7 +1302,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "buyer/buyer-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

@@ -90,7 +90,7 @@ extension HDZItemDynamicFractionCell {
 		
 		//return [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil][0];
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemDynamicCell", owner: self, options: nil)
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemDynamicCell", owner: self, options: nil)!
 		let cell: HDZItemDynamicFractionCell = views.firstObject as! HDZItemDynamicFractionCell;
 		let height :CGFloat = cell.frame.size.height;
 		

@@ -70,7 +70,7 @@ extension HDZCustomerCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZCustomerCell", owner: self, options: nil)
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZCustomerCell", owner: self, options: nil)!
 		let cell: HDZCustomerCell = views.firstObject as! HDZCustomerCell;
 		let height :CGFloat = cell.frame.size.height;
 		

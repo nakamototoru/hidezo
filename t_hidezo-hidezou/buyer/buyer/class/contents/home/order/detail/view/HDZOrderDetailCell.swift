@@ -113,7 +113,7 @@ extension HDZOrderDetailCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZOrderDetailCell", owner: self, options: nil)
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZOrderDetailCell", owner: self, options: nil)!
 		let cell: HDZOrderDetailCell = views.firstObject as! HDZOrderDetailCell;
 		let height :CGFloat = cell.frame.size.height;
 		

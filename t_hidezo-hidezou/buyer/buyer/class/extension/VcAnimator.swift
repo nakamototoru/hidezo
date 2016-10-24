@@ -44,10 +44,10 @@ class VcAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	// 遷移するときのアニメーション
 	func presentTransition(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView) {
 		let containerView = transitionContext.containerView()
-		containerView!.insertSubview(toView, aboveSubview: fromView) // toViewの下にfromView
+		containerView.insertSubview(toView, aboveSubview: fromView) // toViewの下にfromView
 		
 		// 遷移先のviewを画面の右側に移動させておく。
-		toView.frame = CGRectOffset(toView.frame, containerView!.frame.size.width, 0)
+		toView.frame = CGRectOffset(toView.frame, containerView.frame.size.width, 0)
 		
 		UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.05, options: .CurveEaseInOut, animations: { () -> Void in
 			// 遷移元のviewを少し左へずらし、alpha値を下げて少し暗くする。
@@ -55,7 +55,7 @@ class VcAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 			fromView.alpha = 0.7
 			
 			// 遷移先のviewを画面全体にはまるように移動させる。
-			toView.frame = containerView!.frame
+			toView.frame = containerView.frame
 		}) { (finished) -> Void in
 			fromView.frame = CGRectOffset(fromView.frame, self.kMovedDistance, 0) // 元の位置に戻す
 			transitionContext.completeTransition(true)
@@ -65,13 +65,13 @@ class VcAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	// 戻るときのアニメーション
 	func dismissTransition(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView) {
 		let containerView = transitionContext.containerView()
-		containerView!.insertSubview(toView, belowSubview: fromView) // fromViewの下にtoView
+		containerView.insertSubview(toView, belowSubview: fromView) // fromViewの下にtoView
 		
 		// 上と逆のことをする。
 		toView.frame = CGRectOffset(toView.frame, -kMovedDistance, 0)
 		
 		UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: .CurveEaseInOut, animations: { () -> Void in
-			fromView.frame = CGRectOffset(fromView.frame, containerView!.frame.size.width, 0)
+			fromView.frame = CGRectOffset(fromView.frame, containerView.frame.size.width, 0)
 			toView.frame = CGRectOffset(toView.frame, self.kMovedDistance, 0)
 			toView.alpha = 1.0
 		}) { (finished) -> Void in

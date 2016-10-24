@@ -107,7 +107,7 @@ extension HDZItemStaticCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticCell", owner: self, options: nil)
+		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticCell", owner: self, options: nil)!
 		let cell: HDZItemStaticCell = views.firstObject as! HDZItemStaticCell;
 		let height :CGFloat = cell.frame.size.height;
 		
