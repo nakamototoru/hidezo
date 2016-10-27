@@ -4,6 +4,8 @@
 # フォルダまるごと無視したい
 fastlane/
 Checkouts/
+Tests/
+Source/
 Mac/
 tvOS/
 watchOS/

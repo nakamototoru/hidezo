@@ -11,7 +11,7 @@ import Alamofire
 
 internal class HDZApi {
     
-    private static let BASE_URL: String = "http://api.hidezo.co"
+    private static let BASE_URL: String = "https://dev-api.hidezo.co"
 }
 
 // MARK: - Login
