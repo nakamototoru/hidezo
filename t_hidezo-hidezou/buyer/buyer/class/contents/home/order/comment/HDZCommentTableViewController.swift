@@ -20,9 +20,7 @@ class HDZCommentTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.navigationItem.prompt = self.orderInfo.supplier_name + "様宛"
 		self.title = self.orderInfo.supplier_name + "様宛"
-		
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(didSelectedCommentCreate(_:)))
         
         let refreshControl: UIRefreshControl = UIRefreshControl()
@@ -63,7 +61,7 @@ class HDZCommentTableViewController: UITableViewController {
 	
 	func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
 		
-		let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no)
+        let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no, parent: self, popOver:self)
 		self.presentViewController(controller, animated: true, completion: nil)
 	}
 

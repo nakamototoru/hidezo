@@ -137,6 +137,11 @@
 		37F15E401D654076008B469E /* ImageViewerSwipeToDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */; };
 		37FBC3DB1D7985BE009F9C41 /* HDZCommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */; };
 		37FBC3DC1D7985BE009F9C41 /* HDZCommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */; };
+		D4D9D7521DC826F800462E9A /* HDZOrderDetailResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D9D7501DC826F800462E9A /* HDZOrderDetailResultCell.swift */; };
+		D4D9D7531DC826F800462E9A /* HDZOrderDetailResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D9D7511DC826F800462E9A /* HDZOrderDetailResultCell.xib */; };
+		D4D9D7581DC8C04B00462E9A /* HDZCommentForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D9D7571DC8C04B00462E9A /* HDZCommentForm.storyboard */; };
+		D4D9D75A1DC8C15700462E9A /* HDZCommentFormNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D9D7591DC8C15700462E9A /* HDZCommentFormNavigation.swift */; };
+		D4D9D75C1DC8C19700462E9A /* HDZCommentFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D9D75B1DC8C19700462E9A /* HDZCommentFormViewController.swift */; };
 		F74189841D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */; };
 		F74189861D4D9E6C000C49F0 /* NSDate_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74189851D4D9E6C000C49F0 /* NSDate_Extension.swift */; };
 		F74189891D4DA5B8000C49F0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74189871D4DA5B8000C49F0 /* Realm.framework */; };
@@ -295,6 +300,11 @@
 		37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerSwipeToDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerSwipeToDismissTransition.swift; sourceTree = "<group>"; };
 		37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentDetailViewController.swift; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.swift; sourceTree = "<group>"; };
 		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
+		D4D9D7501DC826F800462E9A /* HDZOrderDetailResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailResultCell.swift; path = class/contents/home/order/detail/view/HDZOrderDetailResultCell.swift; sourceTree = "<group>"; };
+		D4D9D7511DC826F800462E9A /* HDZOrderDetailResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZOrderDetailResultCell.xib; path = class/contents/home/order/detail/view/HDZOrderDetailResultCell.xib; sourceTree = "<group>"; };
+		D4D9D7571DC8C04B00462E9A /* HDZCommentForm.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZCommentForm.storyboard; path = class/contents/home/order/comment/form/HDZCommentForm.storyboard; sourceTree = "<group>"; };
+		D4D9D7591DC8C15700462E9A /* HDZCommentFormNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentFormNavigation.swift; path = class/contents/home/order/comment/form/HDZCommentFormNavigation.swift; sourceTree = "<group>"; };
+		D4D9D75B1DC8C19700462E9A /* HDZCommentFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentFormViewController.swift; path = class/contents/home/order/comment/form/HDZCommentFormViewController.swift; sourceTree = "<group>"; };
 		F74189831D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateFormatter_Extension.swift; path = class/extension/NSDateFormatter_Extension.swift; sourceTree = "<group>"; };
 		F74189851D4D9E6C000C49F0 /* NSDate_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate_Extension.swift; path = class/extension/NSDate_Extension.swift; sourceTree = "<group>"; };
 		F74189871D4DA5B8000C49F0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -356,10 +366,11 @@
 		3515C5411D1AD5C20074B38E /* view */ = {
 			isa = PBXGroup;
 			children = (
+				D4D9D7541DC8BC5500462E9A /* unuse */,
 				3515C5421D1AD5F40074B38E /* HDZOrderDetailCell.swift */,
 				3515C5431D1AD5F40074B38E /* HDZOrderDetailCell.xib */,
-				354FFDAE1D1E872E00D70976 /* HDZOrderDetailFooter.swift */,
-				354FFDB01D1E895700D70976 /* HDZOrderDetailFooter.xib */,
+				D4D9D7501DC826F800462E9A /* HDZOrderDetailResultCell.swift */,
+				D4D9D7511DC826F800462E9A /* HDZOrderDetailResultCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -367,11 +378,11 @@
 		35226E8C1D185924008777C5 /* comment */ = {
 			isa = PBXGroup;
 			children = (
-				37FBC3D81D79858A009F9C41 /* detail */,
 				35F193431D1EECED0027E50F /* create */,
+				37FBC3D81D79858A009F9C41 /* detail */,
+				D4D9D7561DC8BFD500462E9A /* form */,
+				D4D9D7551DC8BF7700462E9A /* unuse */,
 				357D6AC11D1EC6AD000CBAF2 /* view */,
-				358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */,
-				358829CF1D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard */,
 			);
 			name = comment;
 			sourceTree = "<group>";
@@ -851,6 +862,34 @@
 			name = detail;
 			sourceTree = "<group>";
 		};
+		D4D9D7541DC8BC5500462E9A /* unuse */ = {
+			isa = PBXGroup;
+			children = (
+				354FFDAE1D1E872E00D70976 /* HDZOrderDetailFooter.swift */,
+				354FFDB01D1E895700D70976 /* HDZOrderDetailFooter.xib */,
+			);
+			name = unuse;
+			sourceTree = "<group>";
+		};
+		D4D9D7551DC8BF7700462E9A /* unuse */ = {
+			isa = PBXGroup;
+			children = (
+				358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */,
+				358829CF1D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard */,
+			);
+			name = unuse;
+			sourceTree = "<group>";
+		};
+		D4D9D7561DC8BFD500462E9A /* form */ = {
+			isa = PBXGroup;
+			children = (
+				D4D9D7591DC8C15700462E9A /* HDZCommentFormNavigation.swift */,
+				D4D9D7571DC8C04B00462E9A /* HDZCommentForm.storyboard */,
+				D4D9D75B1DC8C19700462E9A /* HDZCommentFormViewController.swift */,
+			);
+			name = form;
+			sourceTree = "<group>";
+		};
 		F741898B1D4DA605000C49F0 /* realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -930,7 +969,7 @@
 			attributes = {
 				CLASSPREFIX = HDZ;
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Shun Nakahara";
 				TargetAttributes = {
 					35899B8C1D16D7C300D2AA45 = {
@@ -976,6 +1015,7 @@
 				358829D01D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard in Resources */,
 				354FFDAD1D1E793700D70976 /* HDZOrderScaleViewController.storyboard in Resources */,
 				37E718741D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib in Resources */,
+				D4D9D7531DC826F800462E9A /* HDZOrderDetailResultCell.xib in Resources */,
 				F7C4C0151D4F6B4000021BD3 /* HDZItemCheckCell.xib in Resources */,
 				3752B8CF1D66D4F80080E0AE /* HDZItemOrderDialogViewController.storyboard in Resources */,
 				3511A0871D3B029000FC4AF9 /* HDZItemCategoryTableViewController.storyboard in Resources */,
@@ -997,6 +1037,7 @@
 				354FFDB11D1E895700D70976 /* HDZOrderDetailFooter.xib in Resources */,
 				371DF41C1D6EFEEC00D70D7F /* HDZItemStaticDetailHeaderView.xib in Resources */,
 				37E34BCD1D81F94B0000675A /* kiyaku-4.rtf in Resources */,
+				D4D9D7581DC8C04B00462E9A /* HDZCommentForm.storyboard in Resources */,
 				356D7CDB1D1821B400867F91 /* HDZCustomerDetailTableViewController.storyboard in Resources */,
 				35F193471D1EED370027E50F /* HDZCommentCreateViewController.storyboard in Resources */,
 				35255C7F1D1791DA00A8D627 /* HDZCustomerCell.xib in Resources */,
@@ -1109,8 +1150,10 @@
 				35255C6A1D177E0D00A8D627 /* String_Extension.swift in Sources */,
 				35899B931D16D7C300D2AA45 /* ViewController.swift in Sources */,
 				35255C681D17793400A8D627 /* ApiLogin.swift in Sources */,
+				D4D9D75A1DC8C15700462E9A /* HDZCommentFormNavigation.swift in Sources */,
 				37F15E241D65400D008B469E /* ImageViewControllerFactory.swift in Sources */,
 				F7ADD97E1D4E1889001E126E /* HDZItemStaticTableViewController.swift in Sources */,
+				D4D9D75C1DC8C19700462E9A /* HDZCommentFormViewController.swift in Sources */,
 				37F15E401D654076008B469E /* ImageViewerSwipeToDismissTransition.swift in Sources */,
 				F7C4C00F1D4F60F900021BD3 /* HDZItemCheckTableViewController.swift in Sources */,
 				371DF4131D6E96E600D70D7F /* CustomIndicatorView.swift in Sources */,
@@ -1126,6 +1169,7 @@
 				3752B8CD1D66D4BE0080E0AE /* HDZItemOrderDialogViewController.swift in Sources */,
 				356997661D3270F700BA0ECF /* ApiItem.swift in Sources */,
 				F74189861D4D9E6C000C49F0 /* NSDate_Extension.swift in Sources */,
+				D4D9D7521DC826F800462E9A /* HDZOrderDetailResultCell.swift in Sources */,
 				35899BB31D16EC8A00D2AA45 /* HDZLoginViewController.swift in Sources */,
 				371300F91D6AE684001DF093 /* HDZItemFractionViewController.swift in Sources */,
 				3515C5441D1AD5F40074B38E /* HDZOrderDetailCell.swift in Sources */,
@@ -1180,8 +1224,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1229,8 +1275,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

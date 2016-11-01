@@ -70,7 +70,7 @@ class HDZCommentCreateViewController: UIViewController {
 // MARK: - staic
 extension HDZCommentCreateViewController {
     
-    internal class func createViewController(viewController: HDZCommentTableViewController, messageResult: MessageResult, order_no: String) -> HDZCommentCreateViewController {
+    internal class func createViewController(viewController: protocol<HDZCommentCreateViewControllerDelegate>, messageResult: MessageResult, order_no: String, parent:UIViewController, popOver:protocol<UIPopoverPresentationControllerDelegate>) -> HDZCommentCreateViewController {
         let controller: HDZCommentCreateViewController = UIViewController.createViewController("HDZCommentCreateViewController")
         
         controller.order_no = order_no
@@ -79,24 +79,23 @@ extension HDZCommentCreateViewController {
 		
 		// !!!:dezami
 		controller.listCharger = NSMutableArray()
-//		controller.listCharger.addObject("選択しない")
 		controller.listCharger.addObjectsFromArray(messageResult.chargeList)
 		
         let size: CGSize = UIScreen.mainScreen().bounds.size
-        controller.preferredContentSize = CGSize(width: size.width, height: 266.0)
+        controller.preferredContentSize = CGSize(width: size.width, height: size.height/2) // 266.0
         controller.modalPresentationStyle = .Popover
         
         if let presentationController = controller.popoverPresentationController {
             presentationController.permittedArrowDirections = [.Up]
             
-            if let bar: UINavigationBar = viewController.navigationController?.navigationBar {
+            if let bar: UINavigationBar = parent.navigationController?.navigationBar {
                 presentationController.sourceView = bar
             }
             
-            if let bounds: CGRect = viewController.navigationController?.navigationBar.bounds {
+            if let bounds: CGRect = parent.navigationController?.navigationBar.bounds {
                 presentationController.sourceRect = bounds
             }
-            presentationController.delegate = viewController
+            presentationController.delegate = popOver
             presentationController.backgroundColor = UIColor.lightGrayColor()
         }
         
@@ -109,17 +108,9 @@ extension HDZCommentCreateViewController: UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.charge = self.listCharger[row] as! String
-		
-//		if (row == 0) {
-//			self.charge = ""
-//		}
-//		else {
-//			self.charge = self.listCharger[row] as! String
-//		}
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return self.chargeList[row]
 		return self.listCharger[row] as? String
     }
 
@@ -174,4 +165,6 @@ extension HDZCommentCreateViewController {
 		
 		self.sendCommentButton.enabled = false
     }
+    
+    
 }

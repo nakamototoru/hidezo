@@ -119,7 +119,6 @@ extension HDZOrderDetailCell {
 		
 		return height;
 	}
-
 	
 }
 

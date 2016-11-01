@@ -452,7 +452,6 @@
 				35899B8A1D16D7C300D2AA45 /* Frameworks */,
 				35899B8B1D16D7C300D2AA45 /* Resources */,
 				35255C5F1D176F9600A8D627 /* Run Script - Carthage */,
-				35F193371D1ECF4E0027E50F /* Run Script - Fabric */,
 			);
 			buildRules = (
 			);
@@ -546,20 +545,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		35F193371D1ECF4E0027E50F /* Run Script - Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script - Fabric";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run 5d2ce6c5e79f7fe62709289e7c2da73da463542e 96254a53c204359ab2f8576901aba0d5660b9ad8ca5808993730e499e3712d1a";
 		};
 /* End PBXShellScriptBuildPhase section */
 
