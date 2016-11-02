@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,13 +29,13 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVL-Bg-LLq">
                         <rect key="frame" x="184" y="8.5" width="128" height="48"/>
-                        <color key="backgroundColor" red="0.17254901959999999" green="0.65098039220000004" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.17254901959999999" green="0.65098039220000004" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="128" id="oEi-48-Rdp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
                         <state key="normal" title="注文する">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
                             <action selector="didSelectedOrder:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="khA-4e-aDq"/>
@@ -42,16 +46,25 @@
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cp-RN-092">
+                        <rect key="frame" x="164" y="8.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="BV2-bP-cJt"/>
+                            <constraint firstAttribute="height" constant="20" id="dBz-uY-0Bs"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fna-DP-WWJ" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="75J-3N-6pE"/>
                     <constraint firstItem="fna-DP-WWJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="GOB-eo-2fI"/>
                     <constraint firstItem="AVL-Bg-LLq" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="OyA-Ze-lr9"/>
                     <constraint firstItem="zTs-Vs-Hmh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TnE-49-cc1"/>
+                    <constraint firstItem="AVL-Bg-LLq" firstAttribute="leading" secondItem="1Cp-RN-092" secondAttribute="trailing" id="UnW-yS-RTE"/>
                     <constraint firstItem="AVL-Bg-LLq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="0.5" id="WGC-nS-RWB"/>
                     <constraint firstItem="zTs-Vs-Hmh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="YIs-zQ-Bai"/>
                     <constraint firstItem="AVL-Bg-LLq" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Z1o-BV-xad"/>
                     <constraint firstItem="AVL-Bg-LLq" firstAttribute="leading" secondItem="fna-DP-WWJ" secondAttribute="trailing" constant="8" id="rHf-AT-ctB"/>
+                    <constraint firstItem="1Cp-RN-092" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="0.5" id="t6J-pa-p6X"/>
                     <constraint firstItem="fna-DP-WWJ" firstAttribute="leading" secondItem="zTs-Vs-Hmh" secondAttribute="trailing" constant="8" id="tin-gC-nWn"/>
                 </constraints>
             </tableViewCellContentView>
@@ -59,6 +72,7 @@
                 <outlet property="indexLabel" destination="zTs-Vs-Hmh" id="Jsc-3o-xla"/>
                 <outlet property="orderButton" destination="AVL-Bg-LLq" id="VxG-Tj-Y4N"/>
                 <outlet property="shopNameLabel" destination="fna-DP-WWJ" id="G0I-Iz-RCF"/>
+                <outlet property="viewBaseBadge" destination="1Cp-RN-092" id="4v0-9R-7OJ"/>
             </connections>
             <point key="canvasLocation" x="-523" y="-252.5"/>
         </tableViewCell>

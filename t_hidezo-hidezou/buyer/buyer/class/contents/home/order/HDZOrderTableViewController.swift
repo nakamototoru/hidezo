@@ -199,18 +199,6 @@ extension HDZOrderTableViewController {
 		self.indicatorView.startAnimating()
 
         self.refreshControl?.beginRefreshing()
-
-//        if self.stopLoading {
-//            self.refreshControl?.endRefreshing()
-//            self.request = nil
-//			
-//			//インジケータ
-//			self.indicatorView.stopAnimating()
-//			
-//            return
-//        }
-		
-//        self.page += 1
 		
         let completion: (unboxable: OrderListResult?) -> Void = { (unboxable) in
 			

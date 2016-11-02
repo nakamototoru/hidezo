@@ -378,7 +378,6 @@
 		35226E8C1D185924008777C5 /* comment */ = {
 			isa = PBXGroup;
 			children = (
-				35F193431D1EECED0027E50F /* create */,
 				37FBC3D81D79858A009F9C41 /* detail */,
 				D4D9D7561DC8BFD500462E9A /* form */,
 				D4D9D7551DC8BF7700462E9A /* unuse */,
@@ -663,15 +662,6 @@
 			name = login;
 			sourceTree = "<group>";
 		};
-		35F193431D1EECED0027E50F /* create */ = {
-			isa = PBXGroup;
-			children = (
-				35F193441D1EED190027E50F /* HDZCommentCreateViewController.swift */,
-				35F193461D1EED370027E50F /* HDZCommentCreateViewController.storyboard */,
-			);
-			name = create;
-			sourceTree = "<group>";
-		};
 		35F525081D1FAAA60035A940 /* item */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,6 +864,8 @@
 		D4D9D7551DC8BF7700462E9A /* unuse */ = {
 			isa = PBXGroup;
 			children = (
+				35F193441D1EED190027E50F /* HDZCommentCreateViewController.swift */,
+				35F193461D1EED370027E50F /* HDZCommentCreateViewController.storyboard */,
 				358829CD1D1A1C5100A0BDF3 /* HDZCommentTableViewController.swift */,
 				358829CF1D1A1D9900A0BDF3 /* HDZCommentTableViewController.storyboard */,
 			);

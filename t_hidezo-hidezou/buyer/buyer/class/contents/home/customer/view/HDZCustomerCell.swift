@@ -17,6 +17,7 @@ class HDZCustomerCell: UITableViewCell {
     @IBOutlet weak var indexLabel: UILabel!
     @IBOutlet weak var shopNameLabel: UILabel!
     @IBOutlet weak var orderButton: UIButton!
+    @IBOutlet weak var viewBaseBadge: UIView!
 	
 	var viewBadge:HDZBadgeView! = nil
 	
@@ -109,10 +110,13 @@ extension HDZCustomerCell {
 		
 		// !!!バッジビュー
 		if self.viewBadge == nil {
-			let badgepos: CGPoint = CGPointMake(self.orderButton.frame.origin.x , 0)
-			let anchor:CGPoint = CGPointMake(0.5, 0)
-			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
-			self.addSubview(self.viewBadge)
+//			let badgepos: CGPoint = CGPointMake(self.orderButton.frame.origin.x , 0)
+//			let anchor:CGPoint = CGPointMake(0.5, 0)
+//			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+//			self.addSubview(self.viewBadge)
+            
+            self.viewBadge = HDZBadgeView.createWithSize(self.viewBaseBadge.bounds.size)
+            self.viewBaseBadge.addSubview(self.viewBadge)
 		}
 		self.viewBadge.updateBadge(value)
 	}

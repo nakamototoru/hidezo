@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Unbox
 
 class HDZOrderDetailTableViewController: UITableViewController {
 
@@ -17,7 +18,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
     private var attr_flg: AttrFlg = .other
     private lazy var orderDetailItems: [OrderDetailItem] = []
 	
-	var viewBadge:HDZBadgeView! = nil
+//	var viewBadge:HDZBadgeView! = nil
 
     private var textSubTotal:String = ""
     private var textPostage:String = ""
@@ -30,7 +31,9 @@ class HDZOrderDetailTableViewController: UITableViewController {
     private var messageResult: MessageResult! = nil
     private lazy var messageList: [MessageInfo] = []
 
-    
+    // インジケータ
+    private var indicatorView:CustomIndicatorView! = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +44,6 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		// ナビゲーション右ボタン
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(didSelectedMessage(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(didSelectedCommentCreate(_:)))
-
 		
 		// セル登録
         HDZOrderDetailCell.register(self.tableView)
@@ -59,6 +61,10 @@ class HDZOrderDetailTableViewController: UITableViewController {
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //        self.tableView.estimatedRowHeight = 113.0
 		
+        //インジケータ生成
+        self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+        self.view.addSubview(self.indicatorView)
+
 		// API
         self.apiOrderDetail()
     }
@@ -94,15 +100,18 @@ class HDZOrderDetailTableViewController: UITableViewController {
         self.requestMessage?.resume()
 
 		// !!!:バッジ表示
-		updateBadgeMessage()
+//		updateBadgeMessage()
+        
+        // メッセージだけ
+        self.apiRequestMessage()
     }
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
 		// !!!:バッジ消す
-		self.viewBadge.removeFromSuperview()
-		self.viewBadge = nil
+//		self.viewBadge.removeFromSuperview()
+//		self.viewBadge = nil
 		
 		//イベントリスナーの削除
 		NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -126,7 +135,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 	// !!!:通知受け取り時
 	func getNotification(notification: NSNotification)  {
 		
-		updateBadgeMessage()
+//		updateBadgeMessage()
 	}
 	
 	func didSelectedMessage(button: UIBarButtonItem) {
@@ -138,30 +147,30 @@ class HDZOrderDetailTableViewController: UITableViewController {
 	func putBadge(value: Int) {
 		
 		// !!!バッジビュー
-		if self.viewBadge == nil {
-			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
-			
-			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
-			let anchor:CGPoint = CGPointMake(1, 0)
-			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
-			self.navigationController?.view.addSubview(self.viewBadge)
-		}
-		self.viewBadge.updateBadge(value)
+//		if self.viewBadge == nil {
+//			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
+//			
+//			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
+//			let anchor:CGPoint = CGPointMake(1, 0)
+//			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+//			self.navigationController?.view.addSubview(self.viewBadge)
+//		}
+//		self.viewBadge.updateBadge(value)
 	}
 	
 	func updateBadgeMessage() {
 		
 		// バッジ・メッセージ更新
-		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-		var badgeValue:Int = 0
-		for obj:MessageUp in list {
-			let order_no:String = obj.order_no
-			if order_no == orderInfo.order_no {
-				badgeValue = obj.messageCount
-				break
-			}
-		}
-		putBadge(badgeValue)
+//		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+//		var badgeValue:Int = 0
+//		for obj:MessageUp in list {
+//			let order_no:String = obj.order_no
+//			if order_no == orderInfo.order_no {
+//				badgeValue = obj.messageCount
+//				break
+//			}
+//		}
+//		putBadge(badgeValue)
 	}
 
 }
@@ -267,6 +276,10 @@ extension HDZOrderDetailTableViewController {
     private func apiOrderDetail() {
         
         let completion: (unboxable: OrderDetailResult?) -> Void = { (unboxable) in
+            
+            //インジケーター停止
+            self.indicatorView.stopAnimating()
+
             guard let result: OrderDetailResult = unboxable else {
                 return
             }
@@ -279,7 +292,6 @@ extension HDZOrderDetailTableViewController {
 			
 			// !!!:デザミ
             // 注文情報
-//			let footer: HDZOrderDetailFooter = self.tableView.tableFooterView as! HDZOrderDetailFooter
 			self.textSubTotal = String(result.subtotal) + "円"
 			self.textPostage = String(result.deliveryFee) + "円"
 			self.textTotal = String(result.total) + "円"
@@ -287,63 +299,66 @@ extension HDZOrderDetailTableViewController {
 			self.textDeliverdDay = result.delivery_day
 			self.textDeliverdPlace = result.deliver_to
 			
-//            self.tableView.reloadData()
-            self.apiRequestMessage()
+            // Api
+//            self.apiRequestMessage()
         }
         
         let error: (error: ErrorType?, result: OrderDetailError?) -> Void = { (error, result) in
-            
+            //インジケーター停止
+            self.indicatorView.stopAnimating()
         }
         
+        // インジケーター開始
+        self.indicatorView.startAnimating()
+
         self.orderDetailRequest = HDZApi.orderDitail(self.orderInfo.order_no, completionBlock: completion, errorBlock: error)
     }
 	
-	private func priceValue(price: String, order_num: String, attr_flg: AttrFlg) -> Int {
-		
-		let prices: [String] = price.componentsSeparatedByString(",")
-		if prices.count < 1 {
-			return 0
-		}
-		
-		
-		if prices.count == 1 {
-			guard let price: Int = Int(prices[0]) else {
-				return 0
-			}
-			
-			guard let orderNum: Int = Int(order_num) else {
-				return 0
-			}
-			
-			return price * orderNum
-		} else {
-			guard let orderNum: Int = Int(order_num) else {
-				return 0
-			}
-			
-			switch attr_flg {
-			case .direct:
-				guard let price: Int = Int(prices[2]) else {
-					return 0
-				}
-				
-				return price * orderNum
-			case .group:
-				guard let price: Int = Int(prices[1]) else {
-					return 0
-				}
-				
-				return price * orderNum
-			case .other:
-				
-				guard let price: Int = Int(prices[0]) else {
-					return 0
-				}
-				
-				return price * orderNum
-			}
-		}
-	}
+//	private func priceValue(price: String, order_num: String, attr_flg: AttrFlg) -> Int {
+//		
+//		let prices: [String] = price.componentsSeparatedByString(",")
+//		if prices.count < 1 {
+//			return 0
+//		}
+//		
+//		if prices.count == 1 {
+//			guard let price: Int = Int(prices[0]) else {
+//				return 0
+//			}
+//			
+//			guard let orderNum: Int = Int(order_num) else {
+//				return 0
+//			}
+//			
+//			return price * orderNum
+//		} else {
+//			guard let orderNum: Int = Int(order_num) else {
+//				return 0
+//			}
+//			
+//			switch attr_flg {
+//			case .direct:
+//				guard let price: Int = Int(prices[2]) else {
+//					return 0
+//				}
+//				
+//				return price * orderNum
+//			case .group:
+//				guard let price: Int = Int(prices[1]) else {
+//					return 0
+//				}
+//				
+//				return price * orderNum
+//			case .other:
+//				
+//				guard let price: Int = Int(prices[0]) else {
+//					return 0
+//				}
+//				
+//				return price * orderNum
+//			}
+//		}
+//	}
 
     private func apiRequestMessage() {
         
@@ -351,6 +366,9 @@ extension HDZOrderDetailTableViewController {
         
         let completion: (unboxable: MessageResult?) -> Void = { (unboxable) in
             
+            //インジケーター停止
+            self.indicatorView.stopAnimating()
+
             self.refreshControl?.endRefreshing()
             
             guard let result: MessageResult = unboxable else {
@@ -371,9 +389,15 @@ extension HDZOrderDetailTableViewController {
         }
         
         let error: (error: ErrorType?, result: MessageError?) -> Void = { (error, unboxable) in
+            //インジケーター停止
+            self.indicatorView.stopAnimating()
+
             self.refreshControl?.endRefreshing()
         }
         
+        // インジケーター開始
+        self.indicatorView.startAnimating()
+
         self.requestMessage = HDZApi.message(self.orderInfo.order_no, completionBlock: completion, errorBlock: error)
     }
 
@@ -397,16 +421,3 @@ extension HDZOrderDetailTableViewController: HDZCommentCreateViewControllerDeleg
         self.apiRequestMessage()
     }
 }
-
-// MARK: - UIPopoverPresentationControllerDelegate
-//extension HDZOrderDetailTableViewController: UIPopoverPresentationControllerDelegate {
-//    
-//    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-//        return .None
-//    }
-//    
-//    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-//        return .None
-//    }
-//}
-

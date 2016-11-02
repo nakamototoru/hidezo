@@ -27,6 +27,27 @@ class HDZBadgeView: UIView {
 // MARK: - Create
 extension HDZBadgeView {
 
+    internal class func createWithSize(mysize:CGSize) -> HDZBadgeView {
+        
+        let rect:CGRect = CGRectMake(0, 0, mysize.width, mysize.height)
+        let view:HDZBadgeView = HDZBadgeView(frame: rect )
+        
+        view.backgroundColor = UIColor.redColor()
+        view.layer.cornerRadius = rect.width / 2;
+        
+        view.labelBadge = UILabel(frame: rect)
+        view.labelBadge.textColor = UIColor.whiteColor()
+        view.labelBadge.textAlignment = NSTextAlignment.Center
+        view.labelBadge.font = UIFont.systemFontOfSize(rect.height * 0.8)
+        
+        view.addSubview(view.labelBadge)
+
+        // 自分を隠す
+        view.hidden = true
+        
+        return view;
+    }
+    
 	internal class func createWithPosition(position:CGPoint, anchor:CGPoint) -> HDZBadgeView {
 		
 		let width:CGFloat = 20

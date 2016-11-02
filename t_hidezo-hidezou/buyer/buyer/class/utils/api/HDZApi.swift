@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import RealmSwift
+import Unbox
 
 internal class HDZApi {
 	
@@ -16,8 +17,13 @@ internal class HDZApi {
 	// TODO:開発用アドレスなので申請前には本番に変更しておく
 //    private static let BASE_URL: String = "https://dev-api.hidezo.co"
 	
-	// 本番サーバー
-	private static let BASE_URL: String = "https://api.hidezo.co"
+    #if (arch(i386) || arch(x86_64)) && os(iOS)
+    // 開発サーバー
+    private static let BASE_URL: String = "https://dev-api.hidezo.co"
+    #else
+    // 本番サーバー
+    private static let BASE_URL: String = "https://api.hidezo.co"
+    #endif
 }
 
 // MARK: - Login
