@@ -22,7 +22,9 @@ internal class HDZApi {
     private static let BASE_URL: String = "https://dev-api.hidezo.co"
     #else
     // 本番サーバー
-    private static let BASE_URL: String = "https://api.hidezo.co"
+//    private static let BASE_URL: String = "https://api.hidezo.co"
+    // 開発サーバー
+    private static let BASE_URL: String = "https://dev-api.hidezo.co"
     #endif
 }
 

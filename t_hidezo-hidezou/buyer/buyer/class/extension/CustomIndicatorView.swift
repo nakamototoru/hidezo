@@ -28,7 +28,7 @@ extension CustomIndicatorView {
 		let indicatorView:CustomIndicatorView = CustomIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
 		indicatorView.color = UIColor.blackColor()
 		indicatorView.frame = CGRectMake(0, 0, 160, 160)
-		indicatorView.center = CGPointMake(framesize.width/2, framesize.height/6)
+		indicatorView.center = CGPointMake(framesize.width/2, framesize.height/8)
 
 		return indicatorView
 	}

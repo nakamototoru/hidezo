@@ -117,10 +117,13 @@ struct Category: Unboxable {
     
     let id: String
     let name: String
+    let image_flg:Int
     
     init(unboxer: Unboxer) {
         self.id = unboxer.unbox("id")
         self.name = unboxer.unbox("name")
+        
+        self.image_flg = unboxer.unbox("image_flg")
     }
 }
 

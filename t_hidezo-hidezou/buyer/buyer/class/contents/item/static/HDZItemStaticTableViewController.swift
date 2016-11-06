@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Unbox
 
 class HDZItemStaticTableViewController: UITableViewController {
 
@@ -28,8 +29,11 @@ class HDZItemStaticTableViewController: UITableViewController {
         
         self.title = self.categoryName
 		
+        // セル登録
         HDZItemStaticCell.register(self.tableView)
 		HDZItemStaticFractionCell.register(self.tableView)
+        HDZItemStaticNoimageCell.register(self.tableView)
+        HDZItemStaticFractionNoimageCell.register(self.tableView)
 		
 		// 再読込イベント
 		let refreshControl: UIRefreshControl = UIRefreshControl()
@@ -203,43 +207,77 @@ extension HDZItemStaticTableViewController {
 			}
 		}
 		
+        // 画像無しチェック
+        let category:Category = self.staticItems[indexPath.row].category
+        let isNoimage:Int = category.image_flg
+        
 		if isInt {
 			// 整数セル
-			let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
-			cell.parent = self
-			
-//			#if DEBUG
-//				debugPrint("ROW:" + String(indexPath.row) )
-//			#endif
-
-			// 画像
-			self.requestImage(self.staticItems[indexPath.row].image) { (image) in
-				cell.iconImageView.image = image
-			}
-			
-			return cell
+            if isNoimage == 0 {
+                let cell = HDZItemStaticCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+                cell.parent = self
+                // 画像
+                self.requestImage(self.staticItems[indexPath.row].image) { (image) in
+                    cell.iconImageView.image = image
+                }
+                
+                return cell
+            }
+            // 画像無しセル
+            let cell = HDZItemStaticNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+            cell.parent = self
+            return cell
 		}
 		else {
 			// 分数セル
-			let cell = HDZItemStaticFractionCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
-			cell.parent = self
-			
-//			#if DEBUG
-//				debugPrint("ROW:" + String(indexPath.row) )
-//			#endif
-
-			// 画像
-			self.requestImage(self.staticItems[indexPath.row].image) { (image) in
-				cell.iconImageView.image = image
-			}
-
-			return cell
+            if isNoimage == 0 {
+                let cell = HDZItemStaticFractionCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+                cell.parent = self
+                // 画像
+                self.requestImage(self.staticItems[indexPath.row].image) { (image) in
+                    cell.iconImageView.image = image
+                }
+                return cell
+            }
+            // 画像無しセル
+            let cell = HDZItemStaticFractionNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+            cell.parent = self
+            return cell
 		}
 	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
-		return HDZItemStaticCell.getHeight()
+        // 整数かどうかチェック
+        var isInt: Bool = true
+        for numScale: String in self.staticItems[indexPath.row].num_scale {
+            if let _: Int = Int(numScale) {
+                //整数
+            } else {
+                //分数
+                isInt = false
+            }
+        }
+        
+        // 画像無しチェック
+        let category:Category = self.staticItems[indexPath.row].category
+        let isNoimage:Int = category.image_flg
+
+        if isInt {
+            // 整数セル
+            if isNoimage == 0 {
+                return HDZItemStaticCell.getHeight()
+            }
+            
+            return HDZItemStaticNoimageCell.getHeight()
+        }
+        else {
+            // 分数セル
+            if isNoimage == 0 {
+                return HDZItemStaticFractionCell.getHeight()
+            }
+        }
+		return HDZItemStaticFractionNoimageCell.getHeight()
 	}
 
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -255,16 +293,22 @@ extension HDZItemStaticTableViewController {
 			}
 		}
 
-		let sakanaimage:UIImage = UIImage(named: "sakana")!
-
-		if isInt {
-			let customcell:HDZItemStaticCell = cell as! HDZItemStaticCell
-			customcell.iconImageView.image = sakanaimage
-		}
-		else {
-			let customcell:HDZItemStaticFractionCell = cell as! HDZItemStaticFractionCell
-			customcell.iconImageView.image = sakanaimage
-		}
+        // 画像無しチェック
+        let category:Category = self.staticItems[indexPath.row].category
+        let isNoimage:Int = category.image_flg
+        
+        if isNoimage == 0 {
+            // 画像の初期化
+            let sakanaimage:UIImage = UIImage(named: "sakana")!
+            if isInt {
+                let customcell:HDZItemStaticCell = cell as! HDZItemStaticCell
+                customcell.iconImageView.image = sakanaimage
+            }
+            else {
+                let customcell:HDZItemStaticFractionCell = cell as! HDZItemStaticFractionCell
+                customcell.iconImageView.image = sakanaimage
+            }
+        }
 		
 	}
 }

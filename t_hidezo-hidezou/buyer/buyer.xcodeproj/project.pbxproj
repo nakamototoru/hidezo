@@ -137,6 +137,10 @@
 		37F15E401D654076008B469E /* ImageViewerSwipeToDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */; };
 		37FBC3DB1D7985BE009F9C41 /* HDZCommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */; };
 		37FBC3DC1D7985BE009F9C41 /* HDZCommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */; };
+		D4A9CE681DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */; };
+		D4A9CE691DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */; };
+		D4A9CE6C1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */; };
+		D4A9CE6D1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A9CE6B1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib */; };
 		D4D9D7521DC826F800462E9A /* HDZOrderDetailResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D9D7501DC826F800462E9A /* HDZOrderDetailResultCell.swift */; };
 		D4D9D7531DC826F800462E9A /* HDZOrderDetailResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D9D7511DC826F800462E9A /* HDZOrderDetailResultCell.xib */; };
 		D4D9D7581DC8C04B00462E9A /* HDZCommentForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D9D7571DC8C04B00462E9A /* HDZCommentForm.storyboard */; };
@@ -300,6 +304,10 @@
 		37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerSwipeToDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerSwipeToDismissTransition.swift; sourceTree = "<group>"; };
 		37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentDetailViewController.swift; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.swift; sourceTree = "<group>"; };
 		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
+		D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticNoimageCell.swift; sourceTree = "<group>"; };
+		D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemStaticNoimageCell.xib; path = class/contents/item/static/view/HDZItemStaticNoimageCell.xib; sourceTree = "<group>"; };
+		D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticFractionNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticFractionNoimageCell.swift; sourceTree = "<group>"; };
+		D4A9CE6B1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemStaticFractionNoimageCell.xib; path = class/contents/item/static/view/HDZItemStaticFractionNoimageCell.xib; sourceTree = "<group>"; };
 		D4D9D7501DC826F800462E9A /* HDZOrderDetailResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailResultCell.swift; path = class/contents/home/order/detail/view/HDZOrderDetailResultCell.swift; sourceTree = "<group>"; };
 		D4D9D7511DC826F800462E9A /* HDZOrderDetailResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZOrderDetailResultCell.xib; path = class/contents/home/order/detail/view/HDZOrderDetailResultCell.xib; sourceTree = "<group>"; };
 		D4D9D7571DC8C04B00462E9A /* HDZCommentForm.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZCommentForm.storyboard; path = class/contents/home/order/comment/form/HDZCommentForm.storyboard; sourceTree = "<group>"; };
@@ -915,8 +923,12 @@
 			children = (
 				F7ADD9821D4E1971001E126E /* HDZItemStaticCell.swift */,
 				F7ADD9831D4E1971001E126E /* HDZItemStaticCell.xib */,
+				D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */,
+				D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */,
 				371300FF1D6BE2DE001DF093 /* HDZItemStaticFractionCell.swift */,
 				371301011D6BE2EE001DF093 /* HDZItemStaticFractionCell.xib */,
+				D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */,
+				D4A9CE6B1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1020,6 +1032,7 @@
 				F7ADD9851D4E1971001E126E /* HDZItemStaticCell.xib in Resources */,
 				3515C5451D1AD5F40074B38E /* HDZOrderDetailCell.xib in Resources */,
 				35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */,
+				D4A9CE6D1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib in Resources */,
 				37E669721D6D303C007B2468 /* HDZItemDynamicFooterView.xib in Resources */,
 				37DF19631D7FE3040021D466 /* HDZAgreementViewController.storyboard in Resources */,
 				35899BAB1D16E20C00D2AA45 /* HDZTopViewController.storyboard in Resources */,
@@ -1035,6 +1048,7 @@
 				35255C7F1D1791DA00A8D627 /* HDZCustomerCell.xib in Resources */,
 				370273C81D658D0200C187A5 /* HDZItemCategoryTableViewCell.xib in Resources */,
 				35899B961D16D7C300D2AA45 /* Main.storyboard in Resources */,
+				D4A9CE691DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib in Resources */,
 				F7ADD9801D4E189E001E126E /* HDZItemStaticTableViewController.storyboard in Resources */,
 				371DF4181D6EF08600D70D7F /* HDZItemStaticDetailViewController.storyboard in Resources */,
 				371300F41D6AB887001DF093 /* HDZItemDynamicFractionCell.xib in Resources */,
@@ -1078,6 +1092,7 @@
 				35255C731D178F1A00A8D627 /* HDZOrderTableViewController.swift in Sources */,
 				3540C33B1D3F89BD0048D148 /* HDZItemDynamicHeaderView.xib in Sources */,
 				37F15E211D65400D008B469E /* ImageProvider.swift in Sources */,
+				D4A9CE681DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift in Sources */,
 				37F15E251D65400D008B469E /* ThumbnailsCell.swift in Sources */,
 				35255C651D17787500A8D627 /* HDZApi.swift in Sources */,
 				354FFDB31D1EAE4500D70976 /* UIView_Extension.swift in Sources */,
@@ -1138,6 +1153,7 @@
 				35255C7E1D1791DA00A8D627 /* HDZCustomerCell.swift in Sources */,
 				37E6697F1D6DCBDD007B2468 /* HDZItemCheckFractionCell.swift in Sources */,
 				37F15E3B1D654076008B469E /* GalleryPresentTransition.swift in Sources */,
+				D4A9CE6C1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift in Sources */,
 				37C6E58A1D75AB0000D8E7C6 /* HDZItemOrderManager.swift in Sources */,
 				35255C6A1D177E0D00A8D627 /* String_Extension.swift in Sources */,
 				35899B931D16D7C300D2AA45 /* ViewController.swift in Sources */,
