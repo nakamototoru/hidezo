@@ -137,6 +137,8 @@
 		37F15E401D654076008B469E /* ImageViewerSwipeToDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */; };
 		37FBC3DB1D7985BE009F9C41 /* HDZCommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */; };
 		37FBC3DC1D7985BE009F9C41 /* HDZCommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */; };
+		D432EE4C1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D432EE4B1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift */; };
+		D432EE4E1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D432EE4D1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard */; };
 		D4A9CE681DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */; };
 		D4A9CE691DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */; };
 		D4A9CE6C1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */; };
@@ -304,6 +306,8 @@
 		37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerSwipeToDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerSwipeToDismissTransition.swift; sourceTree = "<group>"; };
 		37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentDetailViewController.swift; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.swift; sourceTree = "<group>"; };
 		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
+		D432EE4B1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderdHistoryTableViewController.swift; path = class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.swift; sourceTree = "<group>"; };
+		D432EE4D1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZItemOrderdHistoryTableViewController.storyboard; path = class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.storyboard; sourceTree = "<group>"; };
 		D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticNoimageCell.swift; sourceTree = "<group>"; };
 		D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemStaticNoimageCell.xib; path = class/contents/item/static/view/HDZItemStaticNoimageCell.xib; sourceTree = "<group>"; };
 		D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticFractionNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticFractionNoimageCell.swift; sourceTree = "<group>"; };
@@ -535,6 +539,7 @@
 				3511A0831D3AF1F500FC4AF9 /* category */,
 				3511A0881D3B0B6A00FC4AF9 /* dynamicItem */,
 				F7ADD97C1D4E180F001E126E /* staticItem */,
+				D432EE4A1DD1D1440078C4CD /* orderdItem */,
 				F7ADD98A1D4EB8AA001E126E /* check */,
 			);
 			name = item;
@@ -860,6 +865,15 @@
 			name = detail;
 			sourceTree = "<group>";
 		};
+		D432EE4A1DD1D1440078C4CD /* orderdItem */ = {
+			isa = PBXGroup;
+			children = (
+				D432EE4B1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift */,
+				D432EE4D1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard */,
+			);
+			name = orderdItem;
+			sourceTree = "<group>";
+		};
 		D4D9D7541DC8BC5500462E9A /* unuse */ = {
 			isa = PBXGroup;
 			children = (
@@ -1031,6 +1045,7 @@
 				35255C6F1D178CC400A8D627 /* HDZHomeViewController.storyboard in Resources */,
 				F7ADD9851D4E1971001E126E /* HDZItemStaticCell.xib in Resources */,
 				3515C5451D1AD5F40074B38E /* HDZOrderDetailCell.xib in Resources */,
+				D432EE4E1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard in Resources */,
 				35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */,
 				D4A9CE6D1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib in Resources */,
 				37E669721D6D303C007B2468 /* HDZItemDynamicFooterView.xib in Resources */,
@@ -1152,6 +1167,7 @@
 				3752B8D11D66D6320080E0AE /* HDZItemOrderNavigationController.swift in Sources */,
 				35255C7E1D1791DA00A8D627 /* HDZCustomerCell.swift in Sources */,
 				37E6697F1D6DCBDD007B2468 /* HDZItemCheckFractionCell.swift in Sources */,
+				D432EE4C1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift in Sources */,
 				37F15E3B1D654076008B469E /* GalleryPresentTransition.swift in Sources */,
 				D4A9CE6C1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift in Sources */,
 				37C6E58A1D75AB0000D8E7C6 /* HDZItemOrderManager.swift in Sources */,

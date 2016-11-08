@@ -24,6 +24,12 @@ class HDZItemCategoryTableViewController: UITableViewController {
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
 	
+    private var countHistoryCategory:Int = 0
+    
+    // TODO:test
+    private var orderdItemRequest:Alamofire.Request? = nil
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,9 +42,6 @@ class HDZItemCategoryTableViewController: UITableViewController {
 		//インジケータ
 		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
-		
-		// API
-//		self.getItem(self.friendInfo.id)
 		
 		// !!!:バッジ通知
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HDZItemCategoryTableViewController.getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
@@ -91,25 +94,33 @@ extension HDZItemCategoryTableViewController {
 // MARK: - Table view data source
 extension HDZItemCategoryTableViewController {
 
+    // セクション数
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
+    // セクション内行数
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
+            // 新着（動的商品）
             if self.itemResult == nil || self.itemResult.dynamicItem == nil || self.itemResult.dynamicItem!.count <= 0 {
                 return 0
             } else {
                 return 1
             }
         case 1:
+            // 静的商品カテゴリ
             return self.categoryName.count
+        case 2:
+            // 履歴から注文
+            return countHistoryCategory
         default:
             return 0
         }
     }
     
+    // セル作成
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         switch indexPath.section {
@@ -117,9 +128,12 @@ extension HDZItemCategoryTableViewController {
 			// 新着（動的商品）
 			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
 			customcell.labelName.text = self.dynamicTitle
-            
 			return customcell
-			
+        case 2:
+            // 履歴から注文
+            let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
+            customcell.labelName.text = "履歴から注文"
+            return customcell
         default:
 			// 静的商品
 			let customcell:HDZItemCategoryTableViewCell = HDZItemCategoryTableViewCell.dequeueReusableCell(tableView, forIndexPath: indexPath)
@@ -130,6 +144,7 @@ extension HDZItemCategoryTableViewController {
         }
     }
 	
+    // 描画前
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		if indexPath.section == 0 {
@@ -149,20 +164,20 @@ extension HDZItemCategoryTableViewController {
 			// !!!:バッジ表示
 			customcell.putBadge( badgeValue )
 		}
-		
 	}
-
 }
 
 // MARK: - Tableview delegate
 extension HDZItemCategoryTableViewController {
 
+    // 行選択
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
 		switch indexPath.section {
         case 0:
 			//動的商品
-			
 			// 遷移
 			let controller: HDZItemDynamicTableViewController = HDZItemDynamicTableViewController.createViewController(self.itemResult.supplier.supplier_id, attr_flg: self.itemResult.attr_flg)
             self.navigationController?.pushViewController(controller, animated: true)
@@ -173,6 +188,7 @@ extension HDZItemCategoryTableViewController {
                 guard let category_name: String = self.categoryName[keys[indexPath.row]] else {
                     return
                 }
+                // 遷移
 				let controller:HDZItemStaticTableViewController = HDZItemStaticTableViewController.createViewController(self.itemResult.supplier.supplier_id,
 				                                                                                                        attr_flg: self.itemResult.attr_flg,
 				                                                                                                        categoryKey: keys[indexPath.row],
@@ -181,11 +197,71 @@ extension HDZItemCategoryTableViewController {
                 self.navigationController?.pushViewController(controller, animated: true)                
             }
             break
+        case 2:
+            // 履歴から注文
+            // TODO:画面遷移
+//            getOrderdItem(self.itemResult.supplier.supplier_id)
+            
+            let controller:HDZItemOrderdHistoryTableViewController = HDZItemOrderdHistoryTableViewController.createViewController(self.itemResult.supplier.supplier_id, attr_flg: self.itemResult.attr_flg)
+            self.navigationController?.pushViewController(controller, animated: true)
+            break
         default:
             break
         }
     }
 	
+    // TODO:test
+    private func getOrderdItem(supplierId: String) {
+        
+        self.refreshControl?.beginRefreshing()
+        
+        // インジケーター開始
+//        self.indicatorView.startAnimating()
+        
+        let completion: (unboxable: OrderdItemResult?) -> Void = { (unboxable) in
+            
+//            self.request = nil
+//            guard let result: ItemResult = unboxable else {
+//                return
+//            }
+//            self.itemResult = result
+            
+            // 静的商品の登録
+//            self.categoryItems = [:]
+//            if let staticItems: [StaticItem] = result.staticItem {
+//                for staticItem in staticItems {
+//                    let index:Int = Int(staticItem.category.id)!
+//                    
+//                    if self.categoryItems[ index ] == nil {
+//                        self.categoryItems[ index ] = [staticItem]
+//                    } else {
+//                        self.categoryItems[ index ]?.append(staticItem)
+//                    }
+//                }
+//            }
+//            self.staticItems = self.categoryItems[ self.categoryKey ]!
+            // End
+            
+//            self.indicatorView.stopAnimating()
+//            
+//            self.refreshControl?.endRefreshing()
+//            
+//            self.tableView.reloadData()
+        }
+        
+        let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+            
+//            self.indicatorView.stopAnimating()
+//            
+//            self.refreshControl?.endRefreshing()
+//            
+//            self.request = nil
+        }
+        
+        // Request
+        self.orderdItemRequest = HDZApi.orderd_item(supplierId, completionBlock: completion, errorBlock: error)
+    }
+
 }
 
 // MARK: - API
@@ -227,12 +303,16 @@ extension HDZItemCategoryTableViewController {
 			
 			self.indicatorView.stopAnimating()
 			
+            self.countHistoryCategory = 1
+            
             self.tableView.reloadData()
         }
         
         let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
 			
 			self.indicatorView.stopAnimating()
+
+            self.countHistoryCategory = 1
 
             self.request = nil
         }

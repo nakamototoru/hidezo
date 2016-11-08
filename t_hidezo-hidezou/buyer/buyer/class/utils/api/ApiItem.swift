@@ -63,7 +63,49 @@ struct StaticItem: Unboxable {
         self.code = unboxer.unbox("code")
         self.detail = unboxer.unbox("detail")
         self.id = unboxer.unbox("id")
-        self.image = unboxer.unbox("image")
+        self.loading = unboxer.unbox("loading")
+        self.min_order_count = unboxer.unbox("min_order_count")
+        self.name = unboxer.unbox("name")
+        self.standard = unboxer.unbox("standard")
+        self.price = unboxer.unbox("price")
+        self.scale = unboxer.unbox("scale")
+        self.num_scale = unboxer.unbox("num_scale")
+		self.image = unboxer.unbox("image")
+    }
+}
+
+struct OrderdItemResult:Unboxable {
+    
+    let message: String
+    let result: Int
+    let orderdStaticItems: [OrderdStaticItem]?
+    
+    init(unboxer: Unboxer) {
+        self.result = unboxer.unbox("result")
+        self.message = unboxer.unbox("message")
+        self.orderdStaticItems = unboxer.unbox("ordredStaticItem" , isKeyPath: false, context: nil, allowInvalidElements: true)
+		
+//		debugPrint(self.orderdStaticItems)
+    }
+}
+struct OrderdStaticItem: Unboxable {
+    let category: Category
+    let code: String
+    let detail: String
+    let id: String
+    let loading: Int
+    let min_order_count: String
+    let name: String
+    let standard: String
+    let price: String
+    let scale: String
+    let num_scale: [String]
+    
+    init(unboxer: Unboxer) {
+        self.category = unboxer.unbox("category")
+        self.code = unboxer.unbox("code")
+        self.detail = unboxer.unbox("detail")
+        self.id = unboxer.unbox("id")
         self.loading = unboxer.unbox("loading")
         self.min_order_count = unboxer.unbox("min_order_count")
         self.name = unboxer.unbox("name")
@@ -72,6 +114,19 @@ struct StaticItem: Unboxable {
         self.scale = unboxer.unbox("scale")
         self.num_scale = unboxer.unbox("num_scale")
     }
+}
+
+struct DisplayStaticItem {
+	internal var code: String = ""
+	internal var detail: String = ""
+	internal var id: String = ""
+	internal var loading: Int = 0
+	internal var min_order_count: String = ""
+	internal var name: String = ""
+	internal var num_scale: [String] = []
+	internal var price: String = ""
+	internal var scale: String = ""
+	internal var standard: String = ""
 }
 
 struct DynamicItemInfo: Unboxable {

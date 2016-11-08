@@ -18,7 +18,8 @@ class HDZItemStaticNoimageCell: UITableViewCell {
     
     var parent:UITableViewController!
     
-    private var staticItem: StaticItem!
+//    private var staticItem: StaticItem!
+	private var displayItem:DisplayStaticItem! = nil
     private var attr_flg: AttrFlg = AttrFlg.direct
     private var supplierId: String = ""
     var itemsize:String = "0" {
@@ -42,7 +43,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
     func updateItem() {
     
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
+            try HDZOrder.add(self.supplierId, itemId: self.displayItem.id, size: self.itemsize, name: self.displayItem.name, price: self.displayItem.price, scale: self.displayItem.scale, standard: self.displayItem.standard, imageURL: "", dynamic: false, numScale: self.displayItem.num_scale)
         } catch let error as NSError {
             #if DEBUG
                 debugPrint(error)
@@ -76,7 +77,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
             value = 0
             self.itemsize = String(value)
             //削除
-            try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
+            try! HDZOrder.deleteItem(self.supplierId, itemId: self.displayItem.id, dynamic: false)
         }
     }
 
@@ -91,10 +92,10 @@ extension HDZItemStaticNoimageCell {
         tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticNoimageCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticNoimageCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: DisplayStaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticNoimageCell {
         
         let cell: HDZItemStaticNoimageCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticNoimageCell", forIndexPath: indexPath) as! HDZItemStaticNoimageCell
-        cell.staticItem = staticItem
+        cell.displayItem = staticItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
         

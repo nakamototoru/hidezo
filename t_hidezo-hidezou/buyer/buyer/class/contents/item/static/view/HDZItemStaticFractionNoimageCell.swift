@@ -23,7 +23,8 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
     var parent:UITableViewController!
     var delegate:HDZItemFractionViewControllerDelegate?
     
-    private var staticItem: StaticItem!
+//    private var staticItem: StaticItem!
+	private var displayItem:DisplayStaticItem! = nil
     private var attr_flg: AttrFlg = AttrFlg.direct
     private var supplierId: String = ""
     private var itemsize:String = "0" {
@@ -46,7 +47,7 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
     // Cart
     func updateItem() {
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
+            try HDZOrder.add(self.supplierId, itemId: self.displayItem.id, size: self.itemsize, name: self.displayItem.name, price: self.displayItem.price, scale: self.displayItem.scale, standard: self.displayItem.standard, imageURL: "", dynamic: false, numScale: self.displayItem.num_scale)
         } catch let error as NSError {
             #if DEBUG
                 debugPrint(error)
@@ -56,9 +57,9 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
 
     @IBAction func onFractionSelect(sender: AnyObject) {
         
-        if self.staticItem.num_scale.count > 0 {
+        if self.displayItem.num_scale.count > 0 {
             // 分数選択ダイアログ
-            let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: self.staticItem.num_scale, itemsize: self.itemsize)
+            let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: self.displayItem.num_scale, itemsize: self.itemsize)
             vc.delegate = self
             self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
         }
@@ -79,7 +80,7 @@ extension HDZItemStaticFractionNoimageCell: HDZItemFractionViewControllerDelegat
         else {
             self.itemsize = "0"
             // 注文削除処理
-            try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
+            try! HDZOrder.deleteItem(self.supplierId, itemId: self.displayItem.id, dynamic: false)
         }
         
     }
@@ -94,10 +95,10 @@ extension HDZItemStaticFractionNoimageCell {
         tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticFractionNoimageCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticFractionNoimageCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: DisplayStaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticFractionNoimageCell {
         
         let cell: HDZItemStaticFractionNoimageCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticFractionNoimageCell", forIndexPath: indexPath) as! HDZItemStaticFractionNoimageCell
-        cell.staticItem = staticItem
+        cell.displayItem = staticItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
         

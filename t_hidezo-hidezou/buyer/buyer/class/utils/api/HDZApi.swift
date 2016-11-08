@@ -238,6 +238,24 @@ extension HDZApi {
         
         return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
     }
+    
+    // 注文履歴からの一覧
+    internal class func orderd_item(supplierId:String, completionBlock:(unboxable:OrderdItemResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:ItemError?) -> Void) -> Alamofire.Request? {
+        
+        let requestUrl: String = BASE_URL + "/store/orderd_item"
+        let parameters: Item = Item(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplierId)
+        let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+            guard let failure: ItemError = unboxable else {
+                errorBlock(error: error, unboxable: unboxable)
+                return
+            }
+            if self.checkLogOut(failure.result, message: failure.message) {
+                return
+            }
+            errorBlock(error: error, unboxable: unboxable)
+        }
+        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+    }
 }
 
 // MARK: - logout check

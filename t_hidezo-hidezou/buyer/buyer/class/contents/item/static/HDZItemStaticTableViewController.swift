@@ -23,7 +23,9 @@ class HDZItemStaticTableViewController: UITableViewController {
     private var categoryName: String = ""
     private var staticItems: [StaticItem] = []
 	
+	private var displayItemList:[DisplayStaticItem] = []
 
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,6 +106,8 @@ extension HDZItemStaticTableViewController {
 		// インジケーター開始
 		self.indicatorView.startAnimating()
 		
+		self.displayItemList.removeAll()
+
 		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
 			
 			self.request = nil
@@ -127,6 +131,22 @@ extension HDZItemStaticTableViewController {
 			}
 			self.staticItems = self.categoryItems[ self.categoryKey ]!
 			// End
+			
+			// 表示用
+			for staticItem in self.staticItems {
+				var item:DisplayStaticItem = DisplayStaticItem()
+				item.code = staticItem.code
+				item.detail = staticItem.detail
+				item.id = staticItem.id
+				item.loading = staticItem.loading
+				item.min_order_count = staticItem.min_order_count
+				item.name = staticItem.name
+				item.num_scale = staticItem.num_scale
+				item.price = staticItem.price
+				item.scale = staticItem.scale
+				item.standard = staticItem.standard
+				self.displayItemList.append(item)
+			}
 			
 			self.indicatorView.stopAnimating()
 			
@@ -224,7 +244,7 @@ extension HDZItemStaticTableViewController {
                 return cell
             }
             // 画像無しセル
-            let cell = HDZItemStaticNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+            let cell = HDZItemStaticNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
             cell.parent = self
             return cell
 		}
@@ -240,7 +260,7 @@ extension HDZItemStaticTableViewController {
                 return cell
             }
             // 画像無しセル
-            let cell = HDZItemStaticFractionNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.staticItems[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+            let cell = HDZItemStaticFractionNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
             cell.parent = self
             return cell
 		}
