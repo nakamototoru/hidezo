@@ -73,9 +73,6 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
             
             // JSON解析
             if let items: [OrderdStaticItem] = result.orderdStaticItems {
-
-				debugPrint(items[0])
-				
 				// 表示用
 				for staticItem in items {
 					var item:DisplayStaticItem = DisplayStaticItem()
@@ -93,39 +90,42 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
 				}
             }
 			
-            // 静的商品の登録
-            //            self.categoryItems = [:]
-            //            if let staticItems: [StaticItem] = result.staticItem {
-            //                for staticItem in staticItems {
-            //                    let index:Int = Int(staticItem.category.id)!
-            //
-            //                    if self.categoryItems[ index ] == nil {
-            //                        self.categoryItems[ index ] = [staticItem]
-            //                    } else {
-            //                        self.categoryItems[ index ]?.append(staticItem)
-            //                    }
-            //                }
-            //            }
-            //            self.staticItems = self.categoryItems[ self.categoryKey ]!
-            // End
-            
             //            
             self.indicatorView.stopAnimating()
             self.refreshControl?.endRefreshing()
-            // 再描画
-            self.tableView.reloadData()
+			
+			if self.displayItemList.count == 0 {
+				self.openAlertNoHistory()
+			}
+			else {
+				// 再描画
+				self.tableView.reloadData()
+			}
         }
-        
+		
         let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
             
             self.indicatorView.stopAnimating()
             self.refreshControl?.endRefreshing()
             self.request = nil
+			
+			self.openAlertNoHistory()
         }
         
         // Request
         self.request = HDZApi.orderd_item(supplierId, completionBlock: completion, errorBlock: error)
     }
+
+	func openAlertNoHistory() {
+		// アラートビュー
+		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+			// 画面戻る
+			self.navigationController?.popViewControllerAnimated(false)
+		})
+		let controller: UIAlertController = UIAlertController(title: "注文履歴がありません。", message: "", preferredStyle: .Alert)
+		controller.addAction(action2)
+		self.presentViewController(controller, animated: false, completion: nil)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
