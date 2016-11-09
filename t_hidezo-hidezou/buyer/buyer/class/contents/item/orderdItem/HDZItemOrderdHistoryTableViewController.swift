@@ -34,8 +34,6 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
         self.title = "履歴から注文"
         
         // セル登録
-//        HDZItemStaticCell.register(self.tableView)
-//        HDZItemStaticFractionCell.register(self.tableView)
         HDZItemStaticNoimageCell.register(self.tableView)
         HDZItemStaticFractionNoimageCell.register(self.tableView)
 
@@ -255,6 +253,18 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+	
+	@IBAction func onCheckOrder(sender: AnyObject) {
+		
+		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.supplierId)
+		self.navigationController?.pushViewController(controller, animated: true)
+		
+	}
+	
+	@IBAction func onBackHome(sender: AnyObject) {
+		
+		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+	}
 
 }
 

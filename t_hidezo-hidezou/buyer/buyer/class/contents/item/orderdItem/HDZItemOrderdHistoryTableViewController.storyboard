@@ -21,6 +21,21 @@
                             <outlet property="delegate" destination="sy1-jx-e7v" id="Qis-QE-Ih3"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="ホーム" id="hiV-vJ-Mir">
+                            <connections>
+                                <action selector="onBackHome:" destination="sy1-jx-e7v" id="Tfg-0C-AtY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="c9C-ap-Cpz"/>
+                        <barButtonItem title="注文確認" style="done" id="gCu-Rs-haI">
+                            <connections>
+                                <action selector="onCheckOrder:" destination="sy1-jx-e7v" id="aTQ-Hh-xwv"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="B55-rv-j2u"/>
+                        <barButtonItem width="49" style="plain" systemItem="fixedSpace" id="2np-c7-DOe"/>
+                    </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAk-yL-Y3s" userLabel="First Responder" sceneMemberID="firstResponder"/>
