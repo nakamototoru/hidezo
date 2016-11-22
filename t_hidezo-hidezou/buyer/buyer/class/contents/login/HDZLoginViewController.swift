@@ -110,7 +110,8 @@ extension HDZLoginViewController {
             return
         }
         
-        self.loginCheck(idString, password: password)
+//        self.loginCheck(idString, password: password)
+		self.login(idString, password: password)
     }
 	
 	@IBAction func onRecoverPassword(sender: AnyObject) {

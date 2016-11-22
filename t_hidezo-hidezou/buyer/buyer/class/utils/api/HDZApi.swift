@@ -37,9 +37,9 @@ extension HDZApi {
         return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
     }
 
-    internal class func login(id: String, password: String, completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginResult?) -> Void) -> Alamofire.Request? {
-        let requestUrl: String = BASE_URL + "/login/store"
-        let parameters: Login = Login(id: id, uuid: HDZUserDefaults.uuid, password: password)
+    internal class func login(login_id: String, password: String, completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginResult?) -> Void) -> Alamofire.Request? {
+        let requestUrl: String = BASE_URL + "/store/login/attempt" //"/login/store"
+		let parameters: Login = Login(login_id: login_id, uuid: HDZUserDefaults.uuid, pass: password, device_div:"1") // <-iOS
         return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
     }
 }
@@ -302,7 +302,7 @@ extension HDZApi {
 
 		HDZUserDefaults.login = false
 		
-		let requestUrl: String = BASE_URL + "/store/logout"
+		let requestUrl: String = BASE_URL + "/logout" //"/store/logout"
 		let parameters: ParamsBadge = ParamsBadge(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
 		let completion:(unboxable:LoginResult?) ->Void = { (unboxable) in
 			// カートを空に
