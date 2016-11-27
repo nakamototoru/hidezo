@@ -20,7 +20,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 	@IBOutlet weak var textviewComment: UIPlaceHolderTextView!
 	@IBOutlet weak var barbuttonitemOrder: UIBarButtonItem!
 
-	private var arrayDate:NSMutableArray!
+	private var arrayDate:[String] = [] //NSMutableArray!
 	private var arrayCharge:NSMutableArray!
 	private var arrayPlace:NSMutableArray!
 	
@@ -34,8 +34,8 @@ class HDZItemOrderDialogViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		self.arrayDate = NSMutableArray()
-		self.arrayDate.addObjectsFromArray(HDZItemOrderManager.shared.getListDate())
+//		self.arrayDate = NSMutableArray()
+//		self.arrayDate.addObjectsFromArray(HDZItemOrderManager.shared.getListDate())
 		self.arrayCharge = NSMutableArray()
 		self.arrayPlace = NSMutableArray()
 		
@@ -125,6 +125,11 @@ extension HDZItemOrderDialogViewController {
 			#endif
 			
 			// Picekr init
+			// 納品日一覧
+//			let deliverDays:[String] = self.itemResult.delivery_day_list
+//			self.arrayDate.removeAll()
+			self.arrayDate = self.itemResult.delivery_day_list
+			
 			// 担当者一覧
 			let charges:NSArray = self.itemResult.charge_list
 			self.arrayCharge.removeAllObjects()
@@ -143,12 +148,13 @@ extension HDZItemOrderDialogViewController {
 			// ピッカー更新
 			self.pickerviewCharge.reloadAllComponents()
 			self.pickerviewPlace.reloadAllComponents()
+			self.pickerviewDate.reloadAllComponents()
 			
 			//ピッカー位置
 			var count:Int = 0
 			var pickerposition:Int = 0
 			for str in self.arrayDate {
-				if HDZItemOrderManager.shared.deliverdate == str as! String {
+				if HDZItemOrderManager.shared.deliverdate == str {
 					pickerposition = count
 					break;
 				}
@@ -387,7 +393,7 @@ extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 		
 		if pickerView == self.pickerviewDate {
 			// 必須
-			HDZItemOrderManager.shared.deliverdate = self.arrayDate[row] as! String
+			HDZItemOrderManager.shared.deliverdate = self.arrayDate[row] 
 		}
 		else if pickerView == self.pickerviewCharge {
 			// 必須
@@ -408,7 +414,7 @@ extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 	func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		
 		if pickerView == self.pickerviewDate {
-			return self.arrayDate[row] as? String
+			return self.arrayDate[row]
 		}
 		if pickerView == self.pickerviewCharge {
 			return self.arrayCharge[row] as? String

@@ -28,6 +28,7 @@ struct ItemResult: Unboxable {
 	let staticItem: [StaticItem]?
     let dynamicItem: [DynamicItem]?
 	let dynamicItemInfo: [DynamicItemInfo]?
+	let delivery_day_list:[String]
 	
     init(unboxer: Unboxer) {
 		self.result = unboxer.unbox("result")
@@ -40,6 +41,8 @@ struct ItemResult: Unboxable {
 		self.dynamicItem = unboxer.unbox("dynamicItem", isKeyPath: false, context: nil, allowInvalidElements: true) //
 		self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo", isKeyPath: false, context: nil, allowInvalidElements: true) //
 		self.staticItem = unboxer.unbox("staticItem" , isKeyPath: false, context: nil, allowInvalidElements: true) //
+		
+		self.delivery_day_list = unboxer.unbox("delivery_day_list")
     }
 }
 
