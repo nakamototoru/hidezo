@@ -67,9 +67,11 @@ internal struct LoginResult: Unboxable {
     
     let message: String
     let result: Bool
+	let id:String
     
     init(unboxer: Unboxer) {
         self.message = unboxer.unbox("message")
         self.result = unboxer.unbox("result")
+		self.id = unboxer.unbox("id")
     }
 }

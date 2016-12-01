@@ -330,7 +330,7 @@ extension HDZApi {
 	internal class func postDeviceTokenByLogin() {
 		
 		let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
-			//debugPrint("****** completionToken ******")
+			debugPrint("****** completionToken ******")
 		}
 		let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
 			debugPrint(error)

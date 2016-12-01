@@ -52,6 +52,24 @@ internal class HDZUserDefaults {
             userDefaults.synchronize()
         }
     }
+	
+	// MARK: - LOGIN_ID
+	private static let KEY_USER_DEFAULTS_LOGIN_ID:String = "key_user_defaults_login_id"
+	
+	internal class var login_id: String {
+		get {
+			let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+			if let response:String = userDefaults.stringForKey( KEY_USER_DEFAULTS_LOGIN_ID ) {
+				return response
+			}
+			return ""
+		}
+		set {
+			let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+			userDefaults.setValue(newValue, forKey: KEY_USER_DEFAULTS_LOGIN_ID)
+			userDefaults.synchronize()
+		}
+	}
 
     // MARK: - Initialization
     private static let KEY_USER_DEFAULTS_INITIALIZATION: String = "key_user_defaults_initialization"

@@ -184,7 +184,7 @@ extension HDZLoginViewController {
         self.loginCheckRequest = HDZApi.loginCheck(id, password: password, completionBlock: completion, errorBlock: error)
     }
     
-    private func login(id: String, password: String) {
+    private func login(login_id: String, password: String) {
      
         let completion: (unboxable: LoginResult?) -> Void = { (unboxable) in
 			
@@ -198,7 +198,8 @@ extension HDZLoginViewController {
             if result.result {
                 // login success
                 HDZUserDefaults.login = true
-                HDZUserDefaults.id = id
+                HDZUserDefaults.login_id = login_id
+				HDZUserDefaults.id = result.id
 				
                 self.dismissViewControllerAnimated(true, completion: { 
                     let controller: HDZHomeViewController = HDZHomeViewController.createViewController()
@@ -218,7 +219,7 @@ extension HDZLoginViewController {
 				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
 					DeployGateExtra.DGSLog("HDZLoginViewController.login\n Failed send DeviceToken")
 				}
-				self.deviceTokenRequest = HDZApi.postDeviceToken(id, completionBlock: completionToken, errorBlock: errorToken)
+				self.deviceTokenRequest = HDZApi.postDeviceToken(result.id, completionBlock: completionToken, errorBlock: errorToken)
 				#endif
 				
             }
@@ -246,12 +247,12 @@ extension HDZLoginViewController {
             self.presentViewController(controller, animated: true, completion: nil)
         }
         
-        self.loginRequest = HDZApi.login(id, password: password, completionBlock: completion, errorBlock: error)
+        self.loginRequest = HDZApi.login(login_id, password: password, completionBlock: completion, errorBlock: error)
     }
     
     private func settingIdText(notification: NSNotification!) {
 		
-		self.idTextField.text = HDZUserDefaults.id
+		self.idTextField.text = HDZUserDefaults.login_id
 		
 //        let id: Int = Int( HDZUserDefaults.id )!
 //        if id > 0 {
