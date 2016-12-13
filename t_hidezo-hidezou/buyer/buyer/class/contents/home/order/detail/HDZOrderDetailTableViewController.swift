@@ -74,9 +74,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
         self.apiRequestMessage()
     }
     func didSelectedCommentCreate(barButtonItem: UIBarButtonItem) {
-        // メッセージ作成画面
-//        let controller: HDZCommentCreateViewController = HDZCommentCreateViewController.createViewController(self, messageResult: self.messageResult, order_no: self.orderInfo.order_no, parent: self, popOver:self)
-        
+        // メッセージ作成画面        
         let controller:HDZCommentFormNavigation = HDZCommentFormNavigation.createViewController(self.messageResult, order_no: self.orderInfo.order_no)
         self.presentViewController(controller, animated: true, completion: nil)
     }
