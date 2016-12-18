@@ -308,11 +308,12 @@
 		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
 		D432EE4B1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderdHistoryTableViewController.swift; path = class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.swift; sourceTree = "<group>"; };
 		D432EE4D1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZItemOrderdHistoryTableViewController.storyboard; path = class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.storyboard; sourceTree = "<group>"; };
+		D45650C21E06529100D96C3C /* buyer.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = buyer.entitlements; sourceTree = "<group>"; };
+		D45650C31E0652B500D96C3C /* buyerproduction.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = buyerproduction.entitlements; sourceTree = "<group>"; };
 		D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticNoimageCell.swift; sourceTree = "<group>"; };
 		D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemStaticNoimageCell.xib; path = class/contents/item/static/view/HDZItemStaticNoimageCell.xib; sourceTree = "<group>"; };
 		D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticFractionNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticFractionNoimageCell.swift; sourceTree = "<group>"; };
 		D4A9CE6B1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemStaticFractionNoimageCell.xib; path = class/contents/item/static/view/HDZItemStaticFractionNoimageCell.xib; sourceTree = "<group>"; };
-		D4C704B11DFEFF3C00B4ABB6 /* buyer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = buyer.entitlements; sourceTree = "<group>"; };
 		D4D9D7501DC826F800462E9A /* HDZOrderDetailResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZOrderDetailResultCell.swift; path = class/contents/home/order/detail/view/HDZOrderDetailResultCell.swift; sourceTree = "<group>"; };
 		D4D9D7511DC826F800462E9A /* HDZOrderDetailResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZOrderDetailResultCell.xib; path = class/contents/home/order/detail/view/HDZOrderDetailResultCell.xib; sourceTree = "<group>"; };
 		D4D9D7571DC8C04B00462E9A /* HDZCommentForm.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZCommentForm.storyboard; path = class/contents/home/order/comment/form/HDZCommentForm.storyboard; sourceTree = "<group>"; };
@@ -593,7 +594,8 @@
 		35899B8F1D16D7C300D2AA45 /* buyer */ = {
 			isa = PBXGroup;
 			children = (
-				D4C704B11DFEFF3C00B4ABB6 /* buyer.entitlements */,
+				D45650C31E0652B500D96C3C /* buyerproduction.entitlements */,
+				D45650C21E06529100D96C3C /* buyer.entitlements */,
 				35899BA21D16D86100D2AA45 /* class */,
 				35899B901D16D7C300D2AA45 /* AppDelegate.swift */,
 				35899B921D16D7C300D2AA45 /* ViewController.swift */,
@@ -1361,7 +1363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = buyer/buyer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = buyer/buyerproduction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

@@ -96,32 +96,29 @@ class HDZOrderDetailTableViewController: UITableViewController {
         
         self.orderDetailRequest?.resume()
         self.requestMessage?.resume()
-
-		// !!!:バッジ表示
-//		updateBadgeMessage()
-        
+		
         // メッセージだけ
         self.apiRequestMessage()
     }
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
-		
-		// !!!:バッジ消す
-//		self.viewBadge.removeFromSuperview()
-//		self.viewBadge = nil
-		
+
+		// API中断
+		self.orderDetailRequest?.suspend()
+		self.requestMessage?.suspend()
+
 		//イベントリスナーの削除
 		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 	
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        self.orderDetailRequest?.suspend()
-        self.requestMessage?.suspend()
-    }
-    
+//    override func viewDidDisappear(animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        
+////        self.orderDetailRequest?.suspend()
+////        self.requestMessage?.suspend()
+//    }
+	
     deinit {
         self.orderDetailRequest?.cancel()
         self.requestMessage?.cancel()

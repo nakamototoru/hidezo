@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "buyer/class/contents/home/order/detail/HDZOrderDetailTableViewController.swift"
-            timestampString = "503330657.387494"
+            timestampString = "503541399.749117"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "didSelectedCommentCreate(_:)"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "apiRequestMessage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
