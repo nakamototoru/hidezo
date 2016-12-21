@@ -118,7 +118,7 @@ extension HDZItemStaticTableViewController {
 			
 			// 静的商品の登録
 			self.categoryItems = [:]
-			if let staticItems: [StaticItem] = result.staticItem {
+			if let staticItems: [StaticItem] = result.staticItems {
 				for staticItem in staticItems {
 					let index:Int = Int(staticItem.category.id)!
 					

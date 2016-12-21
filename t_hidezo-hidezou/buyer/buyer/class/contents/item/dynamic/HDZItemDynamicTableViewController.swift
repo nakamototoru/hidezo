@@ -118,8 +118,8 @@ extension HDZItemDynamicTableViewController {
 			if result.dynamicItemInfo != nil && result.dynamicItemInfo?.count > 0 {
 				self.dynamicItemInfo = result.dynamicItemInfo![0]
 			}
-			if result.dynamicItem != nil {
-				self.dynamicItem = result.dynamicItem!
+			if result.dynamicItems != nil {
+				self.dynamicItem = result.dynamicItems!
 			}
 			
 			self.refreshControl?.endRefreshing()

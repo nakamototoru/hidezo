@@ -10,7 +10,6 @@ import UIKit
 //import Fabric
 //import Crashlytics
 
-//import Alamofire
 import Unbox
 
 
@@ -93,7 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-	// デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
+	// 
+	// MARK: - デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
 		
 //		print(">>>> deviceToken: \(deviceToken.description)")
@@ -104,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			.stringByTrimmingCharactersInSet( characterSet )
 			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
 
-//		print(">>>> deviceToken: " + deviceTokenString)
 		DeployGateExtra.DGSLog("デバイス通知許可：didRegisterForRemoteNotificationsWithDeviceToken\n <deviceToken>: " + deviceTokenString)
 
 		// デバイスに保存
@@ -121,18 +120,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	}
 
-	// Push通知が利用不可であればerrorが返ってくる
+	// MARK: - Push通知が利用不可であればerrorが返ってくる
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 		DeployGateExtra.DGSLog("didFailToRegisterForRemoteNotificationsWithError: " + "\(error)")
 	}
 	
-	/**
-	 * Push通知受信時とPush通知をタッチして起動したときに呼ばれる
-	 * アクティブ時のみ呼び出される
-	 */
+	// MARK: - Push通知受信時とPush通知をタッチして起動したときに呼ばれる
+	//アクティブ時のみ呼び出される
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 		
-//		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
+		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification ****")
 		
 //		switch application.applicationState {
 //		case .Inactive:
@@ -192,6 +189,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 	}
 	
+	// バックグラウンドでPush通知
+	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+		
+		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification fetchCompletionHandler****")
+
+		completionHandler(.NoData)
+	}
+	
+	// MARK: -
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

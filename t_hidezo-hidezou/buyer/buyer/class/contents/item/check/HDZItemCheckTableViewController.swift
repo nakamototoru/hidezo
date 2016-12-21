@@ -122,12 +122,12 @@ extension HDZItemCheckTableViewController {
 			}
 			self.itemResult = result
 			// 動的アイテム登録
-			if result.dynamicItem != nil {
-				self.dynamicItems = result.dynamicItem!
+			if result.dynamicItems != nil {
+				self.dynamicItems = result.dynamicItems!
 			}
 			// 静的商品登録
-			if result.staticItem != nil {
-				self.staticItems = result.staticItem!
+			if result.staticItems != nil {
+				self.staticItems = result.staticItems!
 			}
 			
 			// カートチェック

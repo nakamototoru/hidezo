@@ -25,12 +25,13 @@ struct ItemResult: Unboxable {
     let charge_list: [String]
     let deliver_to_list: [String]
     let supplier: Supplier
-	let staticItem: [StaticItem]?
-    let dynamicItem: [DynamicItem]?
+	let staticItems: [StaticItem]?
+    let dynamicItems: [DynamicItem]?
 	let dynamicItemInfo: [DynamicItemInfo]?
 	let delivery_day_list:[String]
 	
     init(unboxer: Unboxer) {
+		
 		self.result = unboxer.unbox("result")
 		self.message = unboxer.unbox("message")
 		self.supplier = unboxer.unbox("supplier")
@@ -38,9 +39,9 @@ struct ItemResult: Unboxable {
 		self.charge_list = unboxer.unbox("charge_list")
 		self.attr_flg = unboxer.unbox("attr_flg")
 //        self.badge_total = unboxer.unbox("badge_total")
-		self.dynamicItem = unboxer.unbox("dynamicItem", isKeyPath: false, context: nil, allowInvalidElements: true) //
+		self.dynamicItems = unboxer.unbox("dynamicItem", isKeyPath: false, context: nil, allowInvalidElements: true) //
 		self.dynamicItemInfo = unboxer.unbox("dynamicItemInfo", isKeyPath: false, context: nil, allowInvalidElements: true) //
-		self.staticItem = unboxer.unbox("staticItem" , isKeyPath: false, context: nil, allowInvalidElements: true) //
+		self.staticItems = unboxer.unbox("staticItem" , isKeyPath: false, context: nil, allowInvalidElements: true) //
 		
 		self.delivery_day_list = unboxer.unbox("delivery_day_list")
     }
@@ -53,7 +54,7 @@ struct StaticItem: Unboxable {
     let detail: String
     let id: String
     let image: NSURL
-    let loading: Int
+    let loading: String // Int
     let min_order_count: String
     let name: String
     let standard: String
@@ -62,6 +63,9 @@ struct StaticItem: Unboxable {
     let num_scale: [String]
     
     init(unboxer: Unboxer) {
+		
+//		debugPrint("StaticItem:BEGIN")
+
         self.category = unboxer.unbox("category")
         self.code = unboxer.unbox("code")
         self.detail = unboxer.unbox("detail")
@@ -74,6 +78,8 @@ struct StaticItem: Unboxable {
         self.scale = unboxer.unbox("scale")
         self.num_scale = unboxer.unbox("num_scale")
 		self.image = unboxer.unbox("image")
+		
+//		debugPrint("StaticItem:END")
     }
 }
 
@@ -96,7 +102,7 @@ struct OrderdStaticItem: Unboxable {
     let code: String
     let detail: String
     let id: String
-    let loading: Int
+    let loading: String // Int
     let min_order_count: String
     let name: String
     let standard: String
@@ -123,7 +129,7 @@ struct DisplayStaticItem {
 	internal var code: String = ""
 	internal var detail: String = ""
 	internal var id: String = ""
-	internal var loading: Int = 0
+	internal var loading: String = "" // Int = 0
 	internal var min_order_count: String = ""
 	internal var name: String = ""
 	internal var num_scale: [String] = []

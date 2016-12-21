@@ -69,19 +69,21 @@ extension AlamofireUtils {
             
             let result: Result<AnyObject, NSError> = response.result
 			
-			#if DEBUG
-				debugPrint("<<<<<<<<<<<< Response <<<<<<<<<<<<<<<<<<")
-				debugPrint(result)
-				debugPrint(">>>>>>>>>>>> Response End >>>>>>>>>>>>>>>>>>")
-			#endif
+//			#if DEBUG
+//				debugPrint("<<<<<<<<<<<< Response <<<<<<<<<<<<<<<<<<")
+//				debugPrint(result)
+//				debugPrint(">>>>>>>>>>>> Response End >>>>>>>>>>>>>>>>>>")
+//			#endif
 			
             if (result.isSuccess) {
                 if (result.value is [String: AnyObject]) {
 					
-//					let unboxvalue:UnboxableDictionary = result.value as! UnboxableDictionary
-//					#if DEBUG
-//					debugPrint(unboxvalue)
-//					#endif
+					let unboxvalue:UnboxableDictionary = result.value as! UnboxableDictionary
+					#if DEBUG
+						debugPrint("<<<<<<<<<<<< Colum <<<<<<<<<<<<<<<<<<")
+						debugPrint(unboxvalue)
+						debugPrint("<<<<<<<<<<<< Colum End <<<<<<<<<<<<<<<<<<")
+					#endif
 					
                     do {
                        let value: T = try Unbox(result.value as! UnboxableDictionary)

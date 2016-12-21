@@ -104,7 +104,7 @@ extension HDZItemCategoryTableViewController {
         switch section {
         case 0:
             // 新着（動的商品）
-            if self.itemResult == nil || self.itemResult.dynamicItem == nil || self.itemResult.dynamicItem!.count <= 0 {
+            if self.itemResult == nil || self.itemResult.dynamicItems == nil || self.itemResult.dynamicItems!.count <= 0 {
                 return 0
             } else {
                 return 1
@@ -285,7 +285,7 @@ extension HDZItemCategoryTableViewController {
 			// 静的商品の登録
 			self.categoryName = [:]
 			self.categoryItem = [:]
-            if let staticItems: [StaticItem] = result.staticItem {
+            if let staticItems: [StaticItem] = result.staticItems {
 				
                 for staticItem in staticItems {
 					
