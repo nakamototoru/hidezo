@@ -69,11 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// プッシュ通知
 		// バッジ、サウンド、アラートをリモート通知対象として登録する
 		let settings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories:nil)
-		UIApplication.sharedApplication().registerForRemoteNotifications()
 		UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+		UIApplication.sharedApplication().registerForRemoteNotifications()
 		
+		// アプリが起動していない時にpush通知が届き、push通知から起動した場合
 		if (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]) != nil {
-			// アプリが起動していない時にpush通知が届き、push通知から起動した場合
 			//全ての通知を削除
 //			UIApplication.sharedApplication().cancelAllLocalNotifications()
 //			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
@@ -82,8 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// デバイストークン送信
 		if HDZUserDefaults.login && HDZUserDefaults.devicetoken != "" {
 			HDZApi.postDeviceTokenByLogin()
-			
-//			DeployGateExtra.DGSLog("didFinishLaunchingWithOptions\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 		}
 		
 		// !!!:deploygate
@@ -104,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			.stringByTrimmingCharactersInSet( characterSet )
 			.stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
 
-		DeployGateExtra.DGSLog("デバイス通知許可：didRegisterForRemoteNotificationsWithDeviceToken\n <deviceToken>: " + deviceTokenString)
+		DeployGateExtra.DGSLog("デバイス通知許可\n didRegisterForRemoteNotificationsWithDeviceToken\n <deviceToken>: " + deviceTokenString)
 
 		// デバイスに保存
 		HDZUserDefaults.devicetoken = deviceTokenString
@@ -123,6 +121,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// MARK: - Push通知が利用不可であればerrorが返ってくる
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 		DeployGateExtra.DGSLog("didFailToRegisterForRemoteNotificationsWithError: " + "\(error)")
+	}
+	
+	// リモート通知で受け取ったデータの解析
+	private func receiveRemoteNotification(userInfo:[NSObject:AnyObject]) {
+		// カスタムデータ
+		guard let dict:[NSObject : AnyObject] = userInfo else {
+			DeployGateExtra.DGSLog(">> No userInfo found in RemoteNotification")
+			return
+		}
+		
+		// JSONパーサー
+		for (key, value) in dict {
+			
+			let strkey:String = key as! String
+			if strkey == "aps" {
+				#if DEBUG
+					debugPrint(strkey)
+					debugPrint(value)
+				#endif
+				
+				do {
+					#if DEBUG
+						debugPrint("パーサー：APS")
+					#endif
+					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
+					//... パース成功...
+					// ダイアログ
+					MyWarning.Warning(pushAps.alert)
+					
+					// TODO:最後の通知のみダイアログ表示
+					// スタックに保存
+//					HDZPushNotificationManager.appendPushAps(pushAps)
+					
+				} catch {
+					DeployGateExtra.DGSLog("... パース失敗...")
+				}
+			}
+		}
+		
+		// バッジチェック
+		if HDZUserDefaults.login {
+			DeployGateExtra.DGSLog("AppDelegate.didReceiveRemoteNotification : Check Badge");
+			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
+			HDZPushNotificationManager.checkBadge()
+		}
 	}
 	
 	// MARK: - Push通知受信時とPush通知をタッチして起動したときに呼ばれる
@@ -147,43 +190,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //		}
 		
 		// カスタムデータ
-		guard let dict:[NSObject : AnyObject] = userInfo else {
-			print(">> No userInfo found in RemoteNotification")
-			return
-		}
-		
-		// JSONパーサー
-		for (key, value) in dict {
-			
-			let strkey:String = key as! String
-			if strkey == "aps" {
-				#if DEBUG
-					debugPrint(strkey)
-					debugPrint(value)
-				#endif
-				
-				do {
-					#if DEBUG
-					debugPrint("パーサー：APS")
-					#endif
-					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
-					//... パース成功...
-					// ダイアログ
-					UIWarning.Warning(pushAps.alert)
+		receiveRemoteNotification(userInfo)
 
-				} catch {
-					debugPrint("... パース失敗...")
-				}				
-			}
-		}
-		
-		// バッジチェック
-		if HDZUserDefaults.login {
-			NSLog("AppDelegate.didReceiveRemoteNotification : Check Badge");
-			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
-			HDZPushNotificationManager.checkBadge()
-		}
-		
 		//全ての通知を削除
 //		UIApplication.sharedApplication().cancelAllLocalNotifications()
 //		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
@@ -194,6 +202,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		DeployGateExtra.DGSLog("**** didReceiveRemoteNotification fetchCompletionHandler****")
 
+		// カスタムデータ
+		receiveRemoteNotification(userInfo)
+		
 		completionHandler(.NoData)
 	}
 	
@@ -218,11 +229,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 		
 		// バッジチェック
-		if HDZUserDefaults.login {
-			NSLog("AppDelegate.didReceiveRemoteNotification : Check Badge");
-			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
-			HDZPushNotificationManager.checkBadge()
-		}
+//		if HDZUserDefaults.login {
+//			NSLog("AppDelegate.didReceiveRemoteNotification : Check Badge");
+//			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
+//			HDZPushNotificationManager.checkBadge()
+//		}
     }
 
     func applicationWillTerminate(application: UIApplication) {

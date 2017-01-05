@@ -106,7 +106,6 @@
 		37E6697D1D6D4DB8007B2468 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E6697B1D6D4DB8007B2468 /* UIViewController+JASidePanel.m */; };
 		37E6697F1D6DCBDD007B2468 /* HDZItemCheckFractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6697E1D6DCBDD007B2468 /* HDZItemCheckFractionCell.swift */; };
 		37E669811D6DCC14007B2468 /* HDZItemCheckFractionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E669801D6DCC14007B2468 /* HDZItemCheckFractionCell.xib */; };
-		37E669851D6DE20A007B2468 /* UIWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E669841D6DE20A007B2468 /* UIWarning.m */; };
 		37E718721D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */; };
 		37E718741D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */; };
 		37E718781D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */; };
@@ -137,6 +136,7 @@
 		37F15E401D654076008B469E /* ImageViewerSwipeToDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */; };
 		37FBC3DB1D7985BE009F9C41 /* HDZCommentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */; };
 		37FBC3DC1D7985BE009F9C41 /* HDZCommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */; };
+		D40B89DC1E1DFE5700379568 /* MyWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B89DB1E1DFE5700379568 /* MyWarning.swift */; };
 		D432EE4C1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D432EE4B1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift */; };
 		D432EE4E1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D432EE4D1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard */; };
 		D4A9CE681DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */; };
@@ -274,8 +274,6 @@
 		37E6697B1D6D4DB8007B2468 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+JASidePanel.m"; path = "class/objective-c/JASlidePanels/UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		37E6697E1D6DCBDD007B2468 /* HDZItemCheckFractionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemCheckFractionCell.swift; path = class/contents/item/check/view/HDZItemCheckFractionCell.swift; sourceTree = "<group>"; };
 		37E669801D6DCC14007B2468 /* HDZItemCheckFractionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemCheckFractionCell.xib; path = class/contents/item/check/view/HDZItemCheckFractionCell.xib; sourceTree = "<group>"; };
-		37E669831D6DE20A007B2468 /* UIWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWarning.h; path = "class/objective-c/UI/UIWarning.h"; sourceTree = "<group>"; };
-		37E669841D6DE20A007B2468 /* UIWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWarning.m; path = "class/objective-c/UI/UIWarning.m"; sourceTree = "<group>"; };
 		37E718711D6199470035D4F1 /* HDZItemOrderConfirmFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderConfirmFooter.swift; path = class/contents/item/check/view/HDZItemOrderConfirmFooter.swift; sourceTree = "<group>"; };
 		37E718731D6199700035D4F1 /* HDZItemOrderConfirmFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZItemOrderConfirmFooter.xib; path = class/contents/item/check/view/HDZItemOrderConfirmFooter.xib; sourceTree = "<group>"; };
 		37E718771D61A7340035D4F1 /* HDZItemCategoryNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemCategoryNavigationController.swift; path = class/contents/item/category/HDZItemCategoryNavigationController.swift; sourceTree = "<group>"; };
@@ -306,6 +304,7 @@
 		37F15E3A1D654076008B469E /* ImageViewerSwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewerSwipeToDismissTransition.swift; path = class/ImageViewer/Source/ImageViewer/ImageViewerSwipeToDismissTransition.swift; sourceTree = "<group>"; };
 		37FBC3D91D7985BE009F9C41 /* HDZCommentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZCommentDetailViewController.swift; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.swift; sourceTree = "<group>"; };
 		37FBC3DA1D7985BE009F9C41 /* HDZCommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HDZCommentDetailViewController.xib; path = class/contents/home/order/comment/detail/HDZCommentDetailViewController.xib; sourceTree = "<group>"; };
+		D40B89DB1E1DFE5700379568 /* MyWarning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWarning.swift; path = class/extension/MyWarning.swift; sourceTree = "<group>"; };
 		D432EE4B1DD1D1990078C4CD /* HDZItemOrderdHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemOrderdHistoryTableViewController.swift; path = class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.swift; sourceTree = "<group>"; };
 		D432EE4D1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HDZItemOrderdHistoryTableViewController.storyboard; path = class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.storyboard; sourceTree = "<group>"; };
 		D49811BD1E066F1F007744C3 /* development.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = development.entitlements; sourceTree = "<group>"; };
@@ -663,6 +662,7 @@
 				35899BAD1D16E25600D2AA45 /* UIViewController_Extension.swift */,
 				371DF4101D6E7B7200D70D7F /* VcAnimator.swift */,
 				37584BED1D77E73100C879DE /* UIPlaceHolderTextView.swift */,
+				D40B89DB1E1DFE5700379568 /* MyWarning.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -788,8 +788,6 @@
 		37E669821D6DE1FC007B2468 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				37E669831D6DE20A007B2468 /* UIWarning.h */,
-				37E669841D6DE20A007B2468 /* UIWarning.m */,
 				37695F461D7DB432004E79B0 /* DeployGateExtra.h */,
 				37695F471D7DB432004E79B0 /* DeployGateExtra.m */,
 			);
@@ -1110,7 +1108,6 @@
 			files = (
 				370273BF1D654A4500C187A5 /* SomeImageProvider.swift in Sources */,
 				37F15E331D654057008B469E /* UIViewController.swift in Sources */,
-				37E669851D6DE20A007B2468 /* UIWarning.m in Sources */,
 				35255C731D178F1A00A8D627 /* HDZOrderTableViewController.swift in Sources */,
 				3540C33B1D3F89BD0048D148 /* HDZItemDynamicHeaderView.xib in Sources */,
 				37F15E211D65400D008B469E /* ImageProvider.swift in Sources */,
@@ -1151,6 +1148,7 @@
 				F74189841D4D9AD7000C49F0 /* NSDateFormatter_Extension.swift in Sources */,
 				37EAC1731D935FEF00D3F6D2 /* ApiCheckDynamicItems.swift in Sources */,
 				35255C831D1793CE00A8D627 /* HDZOrderCell.swift in Sources */,
+				D40B89DC1E1DFE5700379568 /* MyWarning.swift in Sources */,
 				37E669701D6D3016007B2468 /* HDZItemDynamicFooterView.swift in Sources */,
 				37584BEE1D77E73100C879DE /* UIPlaceHolderTextView.swift in Sources */,
 				37CA46BA1D6406D1006ED62E /* HDZOrderNavigationController.swift in Sources */,
@@ -1288,6 +1286,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1332,6 +1331,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

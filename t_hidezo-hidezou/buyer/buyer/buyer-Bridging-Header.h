@@ -8,7 +8,7 @@
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
 
-#import "UIWarning.h"
+//#import "UIWarning.h"
 
 #import "DeployGateExtra.h"
 

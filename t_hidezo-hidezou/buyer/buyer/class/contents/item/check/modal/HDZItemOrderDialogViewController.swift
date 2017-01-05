@@ -246,7 +246,7 @@ extension HDZItemOrderDialogViewController {
 			}
 			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
 			controller.addAction(action)
-			let basevc:UIViewController = UIWarning.getBaseViewController(0)
+			let basevc:UIViewController = MyWarning.getBaseViewController()
 			basevc.presentViewController(controller, animated: false) {
 			}
 			

@@ -46,6 +46,9 @@ class HDZHomeViewController: UITabBarController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
+		// ダイアログ
+		// アプリがバックグラウンドから復帰した時に処理
+//		HDZPushNotificationManager.openDialog()
 	}
 	
     override func didReceiveMemoryWarning() {

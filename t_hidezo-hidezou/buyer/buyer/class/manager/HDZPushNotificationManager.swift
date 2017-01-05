@@ -16,6 +16,9 @@ class HDZPushNotificationManager: NSObject {
 	var strNotificationSupplier:String = "notofication_supplier"
 	var strNotificationMessage:String = "notofication_message"
 	
+//	static var arrayPushAps:[PushApsResult] = []
+//	static var isDialogOpened:Bool = false
+	
 	static let shared = HDZPushNotificationManager()
 	private override init() {
 	}
@@ -80,6 +83,7 @@ class HDZPushNotificationManager: NSObject {
 		}
 		return count
 	}
+	
 }
 
 extension HDZPushNotificationManager {
@@ -96,7 +100,7 @@ extension HDZPushNotificationManager {
 			// 商品更新
 			let supplierList: [SupplierId] = (unboxable?.supplierUp.supplierUpList)!
 			HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
-			//NSNotification
+			// ローカル通知
 			let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
 			NSNotificationCenter.defaultCenter().postNotification(n)
 			
@@ -112,7 +116,7 @@ extension HDZPushNotificationManager {
 			//					let messageUp:CustomDataMessageUpResult = customData.messageUp
 			let messageList: [MessageUp] = (unboxable?.messageUp.messageUpList)!
 			HDZPushNotificationManager.shared.setMessageUpList( messageList )
-			//NSNotification
+			// ローカル通知
 			let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
 			NSNotificationCenter.defaultCenter().postNotification(nMes)
 			
@@ -153,6 +157,11 @@ extension HDZPushNotificationManager {
 		else {
 			tabBar.items![0].badgeValue = nil
 		}
+		
+		// OSバッジ
+		updateBadgeInHomeIcon()
+
+//		openDialog()
 	}
 	internal class func updateSupplierBadge(controller:UIViewController) {
 		
@@ -169,6 +178,11 @@ extension HDZPushNotificationManager {
 		else {
 			tabBar.items![1].badgeValue = nil
 		}
+
+		// OSバッジ
+		updateBadgeInHomeIcon()
+
+//		openDialog()
 	}
 	internal class func updateMessageBadgeWithController(controller:UIViewController) {
 		
@@ -197,4 +211,19 @@ extension HDZPushNotificationManager {
 		count += HDZPushNotificationManager.shared.getMessageUpCount()
 		updateApplicationBadge(count)
 	}
+	
+	// スタック追加
+//	internal class func appendPushAps(pushAps:PushApsResult) {
+//		if arrayPushAps.count < 1000 {
+//			arrayPushAps.append(pushAps)
+//		}
+//	}
+	
+	// 通知ダイアログ開く
+//	internal class func openDialog() {
+//		if let pushAps:PushApsResult = arrayPushAps.first {
+//			UIWarning.Warning(pushAps.alert)
+//			arrayPushAps.removeAll()
+//		}
+//	}
 }

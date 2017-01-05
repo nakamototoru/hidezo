@@ -74,7 +74,7 @@ class HDZLoginViewController: UIViewController, MFMailComposeViewControllerDeleg
 			break
 		case MFMailComposeResult.Failed.rawValue:
 			print("Email Send Failed")
-			UIWarning.Warning("送信に失敗しました")
+			MyWarning.Warning("送信に失敗しました")
 			break
 		default:
 			break
@@ -99,18 +99,23 @@ extension HDZLoginViewController {
     @IBAction func didSelectedLogin(button: UIButton) {
         
         guard let idString: String = self.idTextField.text else {
-			
-			UIWarning.Warning("IDが入力されていません")
+			MyWarning.Warning("IDが入力されていません")
             return
         }
+		if idString == "" {
+			MyWarning.Warning("IDが入力されていません")
+			return
+		}
 		
         guard let password: String = self.passwordTextField.text else {
-			
-			UIWarning.Warning("パスワードが入力されていません")
+			MyWarning.Warning("パスワードが入力されていません")
             return
         }
-        
-//        self.loginCheck(idString, password: password)
+		if password == "" {
+			MyWarning.Warning("パスワードが入力されていません")
+			return
+		}
+		
 		self.login(idString, password: password)
     }
 	
@@ -143,7 +148,7 @@ extension HDZLoginViewController {
 			})
 		}
 		else {
-			UIWarning.Warning("メーラーが使用できません")
+			MyWarning.Warning("メーラーが使用できません")
 		}
 	}
 	
@@ -214,10 +219,10 @@ extension HDZLoginViewController {
 					//トークンは送れない
 				#else
 				let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
-					DeployGateExtra.DGSLog("ログイン時：HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
+					DeployGateExtra.DGSLog("ログイン時トークン送信\n HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 				}
 				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
-					DeployGateExtra.DGSLog("HDZLoginViewController.login\n Failed send DeviceToken")
+					DeployGateExtra.DGSLog("HDZLoginViewController.login -> Failed send DeviceToken")
 				}
 				self.deviceTokenRequest = HDZApi.postDeviceToken(result.id, completionBlock: completionToken, errorBlock: errorToken)
 				#endif

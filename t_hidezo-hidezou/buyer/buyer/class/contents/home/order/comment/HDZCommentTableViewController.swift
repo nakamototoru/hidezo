@@ -147,7 +147,6 @@ extension HDZCommentTableViewController {
 			
 			// !!!:dezami・バッジ消去
 			HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
-//			HDZPushNotificationManager.decApplicationBadge(countMessage)
 			HDZPushNotificationManager.updateMessageBadgeWithController(self)
 			HDZPushNotificationManager.updateBadgeInHomeIcon()
         }
