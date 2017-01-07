@@ -19,9 +19,10 @@ internal class HDZUserDefaults {
             // Old UUID
             let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
             if let oldUUID: String = userDefaults.stringForKey(KEY_USER_DEFAULTS_UUID) {
-                if self.initialization {
-                    return oldUUID
-                }
+				return oldUUID
+//                if self.initialization {
+//                    return oldUUID
+//                }
             }
             
             // New UUID
@@ -29,8 +30,8 @@ internal class HDZUserDefaults {
             let uuidString: String = newUUID.UUIDString
             userDefaults.setValue(uuidString, forKey: KEY_USER_DEFAULTS_UUID)
             userDefaults.synchronize()
-            self.initialization = true
-            
+//            self.initialization = true
+			
             return uuidString
         }
     }
@@ -85,7 +86,7 @@ internal class HDZUserDefaults {
             userDefaults.synchronize()
         }
     }
-    
+	
     // MARK: - Login
     private static let KEY_USER_DEFAULTS_LOGIN: String = "key_user_defaults_login"
     
@@ -95,7 +96,6 @@ internal class HDZUserDefaults {
             return userDefaults.boolForKey(KEY_USER_DEFAULTS_LOGIN)
         }
         set {
-            
             if !newValue {
                 self.initialization = false
             }
