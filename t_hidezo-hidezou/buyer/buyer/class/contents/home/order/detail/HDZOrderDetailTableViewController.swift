@@ -42,7 +42,6 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		self.title = self.orderInfo.supplier_name + "様宛"
 		
 		// ナビゲーション右ボタン
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "コメント", style: .Done, target: self, action: #selector(didSelectedMessage(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(didSelectedCommentCreate(_:)))
 		
 		// セル登録
@@ -88,7 +87,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
 		super.viewWillAppear(animated)
 		
 		// !!!:バッジ通知
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+//		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -128,45 +127,45 @@ class HDZOrderDetailTableViewController: UITableViewController {
     }
 
 	// !!!:通知受け取り時
-	func getNotification(notification: NSNotification)  {
-		
-//		updateBadgeMessage()
-	}
+//	func getNotification(notification: NSNotification)  {
+//		
+////		updateBadgeMessage()
+//	}
 	
-	func didSelectedMessage(button: UIBarButtonItem) {
-		
-		let controller: HDZCommentTableViewController = HDZCommentTableViewController.createViewController(self.orderInfo)
-		self.navigationController?.pushViewController(controller, animated: true)
-	}
+//	func didSelectedMessage(button: UIBarButtonItem) {
+//		
+//		let controller: HDZCommentTableViewController = HDZCommentTableViewController.createViewController(self.orderInfo)
+//		self.navigationController?.pushViewController(controller, animated: true)
+//	}
 
-	func putBadge(value: Int) {
-		
-		// !!!バッジビュー
-//		if self.viewBadge == nil {
-//			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
-//			
-//			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
-//			let anchor:CGPoint = CGPointMake(1, 0)
-//			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
-//			self.navigationController?.view.addSubview(self.viewBadge)
-//		}
-//		self.viewBadge.updateBadge(value)
-	}
-	
-	func updateBadgeMessage() {
-		
-		// バッジ・メッセージ更新
-//		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
-//		var badgeValue:Int = 0
-//		for obj:MessageUp in list {
-//			let order_no:String = obj.order_no
-//			if order_no == orderInfo.order_no {
-//				badgeValue = obj.messageCount
-//				break
-//			}
-//		}
-//		putBadge(badgeValue)
-	}
+//	func putBadge(value: Int) {
+//		
+//		// !!!バッジビュー
+////		if self.viewBadge == nil {
+////			let statusBarHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.height	// ステータスバーの高さを取得
+////			
+////			let badgepos: CGPoint = CGPointMake(self.view.frame.size.width, statusBarHeight)
+////			let anchor:CGPoint = CGPointMake(1, 0)
+////			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+////			self.navigationController?.view.addSubview(self.viewBadge)
+////		}
+////		self.viewBadge.updateBadge(value)
+//	}
+//	
+//	func updateBadgeMessage() {
+//		
+//		// バッジ・メッセージ更新
+////		let list:[MessageUp] = HDZPushNotificationManager.shared.getMessageUpList()
+////		var badgeValue:Int = 0
+////		for obj:MessageUp in list {
+////			let order_no:String = obj.order_no
+////			if order_no == orderInfo.order_no {
+////				badgeValue = obj.messageCount
+////				break
+////			}
+////		}
+////		putBadge(badgeValue)
+//	}
 
 }
 
@@ -379,6 +378,7 @@ extension HDZOrderDetailTableViewController {
             
             // !!!:dezami・バッジ消去
             HDZPushNotificationManager.shared.removeMessageUp(self.orderInfo.order_no)
+			// TODO:クラッシュ発生
             HDZPushNotificationManager.updateMessageBadgeWithController(self)
             HDZPushNotificationManager.updateBadgeInHomeIcon()
         }
@@ -411,8 +411,8 @@ extension HDZOrderDetailTableViewController: UIPopoverPresentationControllerDele
 }
 
 // MARK: - HDZCommentCreateViewControllerDelegate
-extension HDZOrderDetailTableViewController: HDZCommentCreateViewControllerDelegate {
-    func requestUpdate() {
-        self.apiRequestMessage()
-    }
-}
+//extension HDZOrderDetailTableViewController: HDZCommentCreateViewControllerDelegate {
+//    func requestUpdate() {
+//        self.apiRequestMessage()
+//    }
+//}

@@ -13,9 +13,8 @@ class HDZOrderTableViewController: UITableViewController {
 
     private lazy var orderList: [OrderInfo] = []
     private var request: Alamofire.Request? = nil
-    private var page: Int = 0
+    private var pageOfRead: Int = 1
     
-//    private var stopLoading: Bool = false
 	var isLoading: Bool = false
 	
 	// !!!: dezami
@@ -76,9 +75,6 @@ class HDZOrderTableViewController: UITableViewController {
 	func getNotification(notification: NSNotification)  {
 		
 		self.tableView.reloadData()
-		
-		// バッジ更新
-//		HDZPushNotificationManager.updateMessageBadgeWithController(self)
 	}
 
 	// !!!:ログアウト
@@ -87,7 +83,6 @@ class HDZOrderTableViewController: UITableViewController {
 		// ログアウト確認
 		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
 			// ログアウト実行
-//			HDZUserDefaults.login = false
 			HDZApi.logOut({ (unboxable) in
 				}, errorBlock: { (error, unboxable) in
 			})
@@ -137,13 +132,7 @@ extension HDZOrderTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		
-		// テーブル更新の判定
-//        if !self.stopLoading && self.orderList.count <= indexPath.row + 1 {
-//			//　ページ継続読込
-//            self.getOrderList(false)
-//        }
-		
+
         let cell: HDZOrderCell = HDZOrderCell.dequeueReusableCell(tableView, for: indexPath, orderInfo: self.orderList[indexPath.row])
         return cell
     }
@@ -176,7 +165,6 @@ extension HDZOrderTableViewController {
 		}
 		// !!!:バッジ表示
 		customcell.putBadge( badgeValue )
-		
 	}
 }
 
@@ -184,8 +172,7 @@ extension HDZOrderTableViewController {
 extension HDZOrderTableViewController {
     
     func reloadRequest() {
-        self.page = 0
-//        self.stopLoading = false
+        self.pageOfRead = 1
 		self.isLoading = true
         self.getOrderList(true)
     }
@@ -216,8 +203,6 @@ extension HDZOrderTableViewController {
             }
             
             if result.orderList.count == 0 {
-//                self.stopLoading = true
-				
                 return
             }
             
@@ -228,10 +213,7 @@ extension HDZOrderTableViewController {
 			
             self.tableView.reloadData()
 			
-			self.page += 1
-			
-			// バッジ更新
-//			HDZPushNotificationManager.updateMessageBadgeWithController(self)
+			self.pageOfRead += 1
         }
         
         let error: (error: ErrorType?, result: OrderListError?) -> Void = { (error, result) in
@@ -255,7 +237,7 @@ extension HDZOrderTableViewController {
         }
 
 		// Request
-        self.request = HDZApi.orderList(self.page, completionBlock: completion, errorBlock: error)
+        self.request = HDZApi.orderList(self.pageOfRead, completionBlock: completion, errorBlock: error)
 		
     }
 }
