@@ -94,7 +94,7 @@ class HDZOrderDetailTableViewController: UITableViewController {
         super.viewDidDisappear(animated)
         
         self.orderDetailRequest?.resume()
-        self.requestMessage?.resume()
+//        self.requestMessage?.resume()
 		
         // メッセージだけ
         self.apiRequestMessage()

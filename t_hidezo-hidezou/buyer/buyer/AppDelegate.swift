@@ -229,11 +229,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 		
 		// バッジチェック
-//		if HDZUserDefaults.login {
-//			NSLog("AppDelegate.didReceiveRemoteNotification : Check Badge");
-//			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
-//			HDZPushNotificationManager.checkBadge()
-//		}
+		if HDZUserDefaults.login {
+			DeployGateExtra.DGSLog("applicationDidBecomeActive : Check Badge");
+			// プッシュ通知のcustom_dataをサーバーAPIから受け取る
+			HDZPushNotificationManager.checkBadge()
+		}
     }
 
     func applicationWillTerminate(application: UIApplication) {

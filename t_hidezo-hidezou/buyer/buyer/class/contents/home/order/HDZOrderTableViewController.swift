@@ -19,6 +19,8 @@ class HDZOrderTableViewController: UITableViewController {
 	
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
+	
+	var scrollBeginingPoint: CGPoint = CGPoint.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,19 +110,36 @@ class HDZOrderTableViewController: UITableViewController {
 		self.presentViewController(controller, animated: true, completion: nil)
 	}
 
+	// MARK: - UIScrollView
+	// スクロール開始
+	override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+		scrollBeginingPoint = scrollView.contentOffset;
+	}
+	
 	// 1番したまでスクロールしたらデータ取得
-	override func scrollViewDidScroll(scrollView: UIScrollView)
-	{
-		let contentOffsetWidthWindow = self.tableView.contentOffset.y + self.tableView.bounds.size.height
-		let eachToBottom = contentOffsetWidthWindow >= self.tableView.contentSize.height
-		if (!eachToBottom || self.isLoading) {
-			return;
+//	override func scrollViewDidScroll(scrollView: UIScrollView)
+//	{
+//	}
+	
+	override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		let currentPoint = scrollView.contentOffset;
+		if scrollBeginingPoint.y < currentPoint.y {
+			// debugPrint("下へスクロール")
+			let contentOffsetY = currentPoint.y //self.tableView.contentOffset.y
+			let boundsSizeHeight = scrollView.bounds.size.height
+			let contentOffsetWidthWindow = contentOffsetY + boundsSizeHeight
+			let contentSizeHeight = scrollView.contentSize.height
+			if contentOffsetWidthWindow > contentSizeHeight {
+				if !self.isLoading {
+					self.isLoading = true
+					//　ページ継続読込
+					self.getOrderList(false)
+				}
+			}
 		}
-		
-		self.isLoading = true
-		
-		//　ページ継続読込
-		self.getOrderList(false)		
+//		else{
+//			debugPrint("上へスクロール")
+//		}
 	}
 }
 

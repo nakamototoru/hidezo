@@ -73,19 +73,19 @@ internal class HDZUserDefaults {
 	}
 
     // MARK: - Initialization
-    private static let KEY_USER_DEFAULTS_INITIALIZATION: String = "key_user_defaults_initialization"
-    
-    internal class var initialization: Bool {
-        get {
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            return userDefaults.boolForKey(KEY_USER_DEFAULTS_INITIALIZATION)
-        }
-        set {
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setBool(newValue, forKey: KEY_USER_DEFAULTS_INITIALIZATION)
-            userDefaults.synchronize()
-        }
-    }
+//    private static let KEY_USER_DEFAULTS_INITIALIZATION: String = "key_user_defaults_initialization"
+//    
+//    internal class var initialization: Bool {
+//        get {
+//            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//            return userDefaults.boolForKey(KEY_USER_DEFAULTS_INITIALIZATION)
+//        }
+//        set {
+//            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//            userDefaults.setBool(newValue, forKey: KEY_USER_DEFAULTS_INITIALIZATION)
+//            userDefaults.synchronize()
+//        }
+//    }
 	
     // MARK: - Login
     private static let KEY_USER_DEFAULTS_LOGIN: String = "key_user_defaults_login"
@@ -96,10 +96,10 @@ internal class HDZUserDefaults {
             return userDefaults.boolForKey(KEY_USER_DEFAULTS_LOGIN)
         }
         set {
-            if !newValue {
-                self.initialization = false
-            }
-            
+//            if !newValue {
+//                self.initialization = false
+//            }
+			
             let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
             userDefaults.setBool(newValue, forKey: KEY_USER_DEFAULTS_LOGIN)
             userDefaults.synchronize()
