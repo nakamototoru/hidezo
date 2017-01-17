@@ -10,8 +10,8 @@ import Foundation
 import Unbox
 import Wrap
 
-// MARK: - DeviceToken
-// MARK: Request
+// MARK: - デバイストークン
+// MARK: リクエスト
 internal struct DeviceToken: WrapCustomizable {
 	
 	let id: String
@@ -20,7 +20,7 @@ internal struct DeviceToken: WrapCustomizable {
 	let device_flg: String
 }
 
-// MARK: Response
+// MARK: レスポンス
 internal struct DeviceTokenResult: Unboxable {
 	
 	let message: String
@@ -32,18 +32,13 @@ internal struct DeviceTokenResult: Unboxable {
 	}
 }
 
-// MARK: - CustomData
+// MARK: - 更新情報
 internal struct SupplierId:Unboxable {
 	
 	let supplierId: String
 	
 	init(unboxer: Unboxer) {
-		
-//		DeployGateExtra.DGSLog("SupplierId:Unboxable")
-
 		self.supplierId = unboxer.unbox("supplierId")
-		
-//		DeployGateExtra.DGSLog("supplierId = pass")
 	}
 }
 
@@ -53,16 +48,8 @@ internal struct MessageUp:Unboxable {
 	let messageCount:Int
 	
 	init(unboxer: Unboxer) {
-		
-//		DeployGateExtra.DGSLog("MessageUp:Unboxable")
-		
 		self.order_no = unboxer.unbox("order_no")
-		
-//		DeployGateExtra.DGSLog("order_no = pass")
-		
 		self.messageCount = unboxer.unbox("messageCount")
-		
-//		DeployGateExtra.DGSLog("messageCount = pass")
 	}
 }
 
@@ -71,12 +58,7 @@ internal struct SupplierUpResult: Unboxable {
 	let supplierUpList: [SupplierId]?
 
 	init(unboxer: Unboxer) {
-		
-//		DeployGateExtra.DGSLog("SupplierUpListResult: Unboxable")
-
 		self.supplierUpList = unboxer.unbox("supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
-		
-//		DeployGateExtra.DGSLog("supplierUpList = pass")
 	}
 }
 
@@ -85,15 +67,11 @@ internal struct MessageUpResult: Unboxable {
 	let messageUpList: [MessageUp]?
 	
 	init(unboxer: Unboxer) {
-		
-//		DeployGateExtra.DGSLog("MessageUpListResult: Unboxable")
-
 		self.messageUpList = unboxer.unbox("messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
-		
-//		DeployGateExtra.DGSLog("messageUpList = pass")
 	}
 }
 
+// MARK: - バッジ用
 struct BadgeResult: Unboxable {
 	
 	let message: String
@@ -121,13 +99,13 @@ struct BadgeError: Unboxable {
 	}
 }
 
-// リクエスト用
+// MARK: - リクエスト用
 struct ParamsBadge: WrapCustomizable {
 	let id: String
 	let uuid: String
 }
 
-// PUSH通知のパラメータ取得
+// MARK: PUSH通知のパラメータ取得
 internal struct PushApsResult: Unboxable {
 
 	let alert:String

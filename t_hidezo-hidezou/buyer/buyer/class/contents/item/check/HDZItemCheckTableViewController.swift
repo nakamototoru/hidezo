@@ -13,7 +13,6 @@ import RealmSwift
 class HDZItemCheckTableViewController: UITableViewController {
 
 	@IBOutlet weak var barbuttonitemConfirm: UIBarButtonItem!
-//	@IBOutlet weak var barbuttonitemNote: UIBarButtonItem!
 	@IBOutlet weak var barbuttonitemHome: UIBarButtonItem!
 	
     private var supplierId: String = ""
@@ -23,7 +22,6 @@ class HDZItemCheckTableViewController: UITableViewController {
 	// !!!: dezami
 	private var indicatorView:CustomIndicatorView!
 	private var itemResult: ItemResult! = nil
-//	private var dynamicItemInfo: DynamicItemInfo!
 	private var dynamicItems: [DynamicItem] = []
 	private var attr_flg: AttrFlg = .other
 	private var staticItems:[StaticItem] = []
@@ -87,7 +85,6 @@ class HDZItemCheckTableViewController: UITableViewController {
 	// ボタン状態
 	private func updateButtonEnabled(enabled:Bool) {
 		self.barbuttonitemConfirm.enabled = enabled
-//		self.barbuttonitemNote.enabled = enabled
 		self.barbuttonitemHome.enabled = enabled
 	}
 }
@@ -254,13 +251,7 @@ extension HDZItemCheckTableViewController {
 
 // MARK: - Order
 extension HDZItemCheckTableViewController {
-    
-//    private func loadItem() {
-//        self.result = try! HDZOrder.queries(self.supplierId)
-//
-//        self.tableView.reloadData()
-//    }
- 
+	
 	private func openAlertNoCart() {
 		
 		// アラートビュー
@@ -274,85 +265,88 @@ extension HDZItemCheckTableViewController {
 	}
 	
 	// 注文実行
-    internal func didSelectedOrder() {
-        self.orderResult = try! HDZOrder.queries(self.supplierId)
-
-        guard let items: Results<HDZOrder> = self.orderResult else {
-			
-			// アイテム無し
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-			let controller: UIAlertController = UIAlertController(title: "アイテム無し", message: nil, preferredStyle: .Alert)
-			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
-			
-            return
-        }
-		
-		//インジケータ
-		self.indicatorView.startAnimating()
-
-        let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
-
-			// 注文確定
-			self.indicatorView.stopAnimating()
-			
-			//履歴を全て消す
-			for object in self.orderResult! {
-				try! HDZOrder.deleteObject(object)
-			}
-			
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-				// ホームに戻る
-				self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
-			}
-			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
-			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
-			
-			
-			// メッセージ送信チェック
-			guard let result: OrderResult = unboxable else {
-				HDZItemOrderManager.shared.clearAllData()
-				return
-			}
-			if HDZItemOrderManager.shared.comment == "" {
-				HDZItemOrderManager.shared.clearAllData()
-				return
-			}
-			
-			// APIメッセージ送信
-			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
-				HDZItemOrderManager.shared.clearAllData()
-			}
-			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
-				#if DEBUG
-					debugPrint(error)
-				#endif
-				HDZItemOrderManager.shared.clearAllData()
-			}
-			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
-
-        }
-		
-        let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
-			
-			// 注文エラー
-			self.indicatorView.stopAnimating()
-			
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
-			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
-			
-			// ボタン有効
-//			self.barbuttonitemConfirm.enabled = true;
-			self.updateButtonEnabled(true)
-        }
-
-		// Request
-        HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
-		
-    }
+//    internal func didSelectedOrder() {
+//        self.orderResult = try! HDZOrder.queries(self.supplierId)
+//
+//        guard let items: Results<HDZOrder> = self.orderResult else {
+//			
+//			// アイテム無し
+//			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//			let controller: UIAlertController = UIAlertController(title: "アイテム無し", message: nil, preferredStyle: .Alert)
+//			controller.addAction(action)
+//			self.presentViewController(controller, animated: true, completion: nil)
+//			
+//            return
+//        }
+//		
+//		//インジケータ
+//		self.indicatorView.startAnimating()
+//
+//        let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
+//
+//			// 注文確定
+//			self.indicatorView.stopAnimating()
+//			
+//			//履歴を全て消す
+//			for object in self.orderResult! {
+//				try! HDZOrder.deleteObject(object)
+//			}
+//			
+//			// 注文確定ダイアログ
+//			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+//				// ホームに戻る
+////				self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+//				
+//				let controller:HDZFaxDocumentViewController = HDZFaxDocumentViewController.createViewController()
+//				self.navigationController?.pushViewController(controller, animated: true)
+//			}
+//			let alert: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
+//			alert.addAction(action)
+//			self.presentViewController(alert, animated: true, completion: nil)
+//			
+//			
+//			// メッセージ送信チェック
+//			guard let result: OrderResult = unboxable else {
+//				HDZItemOrderManager.shared.clearAllData()
+//				return
+//			}
+//			if HDZItemOrderManager.shared.comment == "" {
+//				HDZItemOrderManager.shared.clearAllData()
+//				return
+//			}
+//			
+//			// APIメッセージ送信
+//			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
+//				HDZItemOrderManager.shared.clearAllData()
+//			}
+//			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
+//				#if DEBUG
+//					debugPrint(error)
+//				#endif
+//				HDZItemOrderManager.shared.clearAllData()
+//			}
+//			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
+//
+//        }
+//		
+//        let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
+//			
+//			// 注文エラー
+//			self.indicatorView.stopAnimating()
+//			
+//			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
+//			controller.addAction(action)
+//			self.presentViewController(controller, animated: true, completion: nil)
+//			
+//			// ボタン有効
+//			self.updateButtonEnabled(true)
+//        }
+//
+//		// Request
+//        HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
+//		
+//    }
 }
 
 // MARK: - HDZItemCheckCellDelegate

@@ -123,8 +123,7 @@ enum AttrFlg: String, UnboxableEnum {
 }
 
 struct OrderDetailItem: Unboxable {
-    
-    
+	
     // Dynamic
     let code: String
     let id: String
@@ -189,4 +188,83 @@ struct OrderError: Unboxable {
     init(unboxer: Unboxer) {
 		self.message = unboxer.unbox("message")
     }
+}
+
+// MARK: FAX用
+struct OrderMethod:WrapCustomizable {
+	
+	let id: String
+	let uuid: String
+	let supplier_id: String
+}
+
+struct OrderMethodResult:Unboxable {
+	
+	let message: String
+	let result: Int
+	let method:String
+	
+	init(unboxer: Unboxer) {
+		self.result = unboxer.unbox("result")
+		self.message = unboxer.unbox("message")
+		
+		self.method = unboxer.unbox("method")
+	}
+}
+
+struct FaxDoc:WrapCustomizable {
+	
+	let id: String
+	let uuid: String
+	let order_no:String
+}
+
+struct FaxDocItem:Unboxable {
+	
+	let id:String
+	let name:String
+	let size:String
+	init(unboxer:Unboxer) {
+		self.id = unboxer.unbox("id")
+		self.name = unboxer.unbox("name")
+		self.size = unboxer.unbox("size")
+	}
+}
+
+struct FaxDocInfo:Unboxable {
+	
+	let store_name:String
+	let store_code:String
+	let store_address:String
+	let order_at:String
+	let deliver_at:String
+	let faxdocitems:[FaxDocItem]
+	let comment:String
+	let supplier_name:String
+	let fax:String
+	
+	init(unboxer: Unboxer) {
+		self.store_name = unboxer.unbox("store_name")
+		self.store_code = unboxer.unbox("store_code")
+		self.store_address = unboxer.unbox("store_address")
+		self.order_at = unboxer.unbox("order_at")
+		self.deliver_at = unboxer.unbox("deliver_at")
+		self.faxdocitems = unboxer.unbox("item_list")
+		self.comment = unboxer.unbox("comment")
+		self.supplier_name = unboxer.unbox("supplier_name")
+		self.fax = unboxer.unbox("fax")
+	}
+	
+}
+
+struct FaxDocResult:Unboxable {
+	
+	let result: Int
+	let faxdoc:FaxDocInfo
+
+	init(unboxer: Unboxer) {
+		self.result = unboxer.unbox("result")
+
+		self.faxdoc = unboxer.unbox("faxdoc")
+	}
 }

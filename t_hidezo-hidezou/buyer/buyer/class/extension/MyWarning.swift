@@ -46,4 +46,31 @@ class MyWarning: NSObject {
 		Warning("", message: message)
 	}
 	
+	// 一択
+	internal class func Dialog(title:String, message:String, alertActionDone:UIAlertAction) {
+		
+		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+		alert.addAction(alertActionDone)
+
+		let baseView:UIViewController = getBaseViewController()
+		baseView.presentViewController(alert, animated: true) {
+			// 開いた後
+		}
+	}
+	
+	// 二択、実行時のみ登録
+	internal class func Alert(title:String, message:String, alertActionOkey:UIAlertAction) {
+		
+		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+		alert.addAction(alertActionOkey)
+
+		let alertActionCancel = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (UIAlertAction) in
+		}
+		alert.addAction(alertActionCancel)
+		
+		let baseView:UIViewController = getBaseViewController()
+		baseView.presentViewController(alert, animated: true) {
+			// 開いた後
+		}
+	}
 }

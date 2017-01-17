@@ -15,4 +15,7 @@
 
 #import <DeployGateSDK/DeployGateSDK.h>
 
+#import "AFNetworking.h"
+#import "XMLReader.h"
+
 #endif

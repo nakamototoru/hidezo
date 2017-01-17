@@ -353,20 +353,6 @@ extension HDZApi {
 		
 		let requestUrl: String = BASE_URL + "/store/badge"
 		let parameters: ParamsBadge = ParamsBadge(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
-		
-//		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
-//			guard let failure: ItemError = unboxable else {
-//				errorBlock(error: error, unboxable: unboxable)
-//				return
-//			}
-//			
-//			if self.checkLogOut(failure.result, message: failure.message) {
-//				return
-//			}
-//			
-//			errorBlock(error: error, unboxable: unboxable)
-//		}
-		
 		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
 	}
 	
@@ -376,7 +362,26 @@ extension HDZApi {
 		
 		let requestUrl: String = BASE_URL + "/store/check_dynamic_items"
 		let parameters: CheckDynamicItemsRequest = CheckDynamicItemsRequest(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id )
-		
 		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+	}
+}
+
+// MARK: - FAX
+extension HDZApi {
+	
+	// 注文送信方法取得
+	internal class func getOrderMethod(supplierId:String, completeBlock:(unboxable:OrderMethodResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
+		
+		let requestUrl = BASE_URL + "/store/order_method"
+		let parameters = OrderMethod(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id:supplierId)
+		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
+	}
+	
+	// 発注書情報取得
+	internal class func getFaxDoc(orderNo:String, completeBlock:(unboxable:FaxDocResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
+
+		let requestUrl = BASE_URL + "/store/faxdoc"
+		let parameters = FaxDoc(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: orderNo)
+		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
 	}
 }

@@ -36,12 +36,3 @@ class HDZItemOrderNavigationController: UINavigationController {
     */
 
 }
-
-//extension HDZItemOrderNavigationController {
-//	
-//	internal class func createViewController() -> HDZItemOrderNavigationController {
-//		let controller: HDZItemOrderNavigationController = UIViewController.createViewController("HDZItemOrderDialogViewController", withIdentifier: "HDZItemOrderNavigationController")
-//		//controller.friendInfo = friendInfo
-//		return controller
-//	}
-//}

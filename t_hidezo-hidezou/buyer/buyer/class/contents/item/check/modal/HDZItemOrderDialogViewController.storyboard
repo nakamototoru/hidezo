@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5t5-d1-g7Z">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5t5-d1-g7Z">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--入力画面-->
@@ -14,11 +18,11 @@
                         <viewControllerLayoutGuide type="bottom" id="z5n-UT-VtH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mJS-uh-iy7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvP-hG-tmv">
-                                <rect key="frame" x="0.0" y="290" width="600" height="100"/>
+                                <rect key="frame" x="-4" y="290" width="383" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="RzH-HI-ku2"/>
                                 </constraints>
@@ -28,7 +32,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdn-8P-uak">
-                                <rect key="frame" x="0.0" y="190" width="600" height="100"/>
+                                <rect key="frame" x="-4" y="190" width="383" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="yMP-oX-xjM"/>
                                 </constraints>
@@ -38,8 +42,8 @@
                                 </connections>
                             </pickerView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="コメント入力カッコ" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-7g-K5v" customClass="UIPlaceHolderTextView" customModule="buyer" customModuleProvider="target">
-                                <rect key="frame" x="8" y="68" width="584" height="114"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="4" y="68" width="367" height="114"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="114" id="myz-oU-9NM"/>
                                 </constraints>
@@ -50,7 +54,7 @@
                                 </connections>
                             </textView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJH-rG-OaG">
-                                <rect key="frame" x="0.0" y="390" width="600" height="100"/>
+                                <rect key="frame" x="-4" y="390" width="383" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="0tG-W3-aph"/>
                                 </constraints>
@@ -60,7 +64,7 @@
                                 </connections>
                             </pickerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6d4-7g-K5v" firstAttribute="top" secondItem="PrB-uW-8s1" secondAttribute="bottom" constant="4" id="0pN-ys-fMa"/>
                             <constraint firstItem="6d4-7g-K5v" firstAttribute="leading" secondItem="mJS-uh-iy7" secondAttribute="leadingMargin" constant="-12" id="6Qi-47-coG"/>
@@ -79,7 +83,7 @@
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="BOS-Mz-yEk"/>
                         <barButtonItem title="注文確定" style="done" id="YOp-PE-cww">
-                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="onSendOrder:" destination="5t5-d1-g7Z" id="Gbv-GT-VV7"/>
                             </connections>

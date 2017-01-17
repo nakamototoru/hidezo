@@ -32,8 +32,6 @@ extension HDZItemOrderConfirmFooter {
 	
 	internal class func createView(controller: UIViewController, supplierId: Int, delegate: HDZItemOrderConfirmFooterDelegate) -> HDZItemOrderConfirmFooter {
 		let view: HDZItemOrderConfirmFooter = UIView.createView("HDZItemOrderConfirmFooter")
-//		view.supplierId = supplierId
-//		view.viewController = controller
 		view.delegate = delegate;
 		return view
 	}
@@ -42,8 +40,6 @@ extension HDZItemOrderConfirmFooter {
 extension HDZItemOrderConfirmFooter {
 	
 	@IBAction func didSelectedConfirmOrder() {
-//		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.supplierId)
-//		self.viewController.navigationController?.pushViewController(controller, animated: true)
 		
 		self.delegate?.didConfirmOrder()
 	}

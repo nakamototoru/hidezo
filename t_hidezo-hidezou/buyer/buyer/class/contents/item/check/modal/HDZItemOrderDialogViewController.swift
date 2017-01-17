@@ -30,13 +30,14 @@ class HDZItemOrderDialogViewController: UIViewController {
 	private var orderResult: Results<HDZOrder>? = nil
 	private var indicatorView:CustomIndicatorView!
 
+	private var order_no = ""
+//	private var fax_flag = true
+	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//		self.arrayDate = NSMutableArray()
-//		self.arrayDate.addObjectsFromArray(HDZItemOrderManager.shared.getListDate())
 		self.arrayCharge = NSMutableArray()
 		self.arrayPlace = NSMutableArray()
 		
@@ -120,15 +121,13 @@ extension HDZItemOrderDialogViewController {
 			self.itemResult = result
 			
 			#if DEBUG
-			let supid:String = String(self.itemResult.supplier.supplier_id)
-			let supname:String = self.itemResult.supplier.supplier_name
-			debugPrint(supid + ":" + supname)
+				let supid:String = String(self.itemResult.supplier.supplier_id)
+				let supname:String = self.itemResult.supplier.supplier_name
+				debugPrint(supid + ":" + supname)
 			#endif
 			
 			// Picekr init
 			// 納品日一覧
-//			let deliverDays:[String] = self.itemResult.delivery_day_list
-//			self.arrayDate.removeAll()
 			self.arrayDate = self.itemResult.delivery_day_list
 			
 			// 担当者一覧
@@ -199,8 +198,69 @@ extension HDZItemOrderDialogViewController {
 // MARK: - Order
 extension HDZItemOrderDialogViewController {
 
+	func openCompleteDialog() {
+		// ダイアログアクション
+		let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+			
+			// タブ画面に戻る＝モーダルを閉じる
+			self.navigationController?.viewControllers[1].dismissViewControllerAnimated(true) {
+				
+				// FAX送信実行チェック
+				let completion: (unboxable: OrderMethodResult?) -> Void = { (unboxable) in
+//					debugPrint("**** getOrderMethod ****")
+//					debugPrint(unboxable)
+//					debugPrint("**** getOrderMethod END ****")
+					
+					guard let result:OrderMethodResult = unboxable else {
+						return
+					}
+					
+					if result.method == "fax" {
+						// FAX用発注書画面へ						
+						let controller:HDZFaxDocumentNavigationController = HDZFaxDocumentNavigationController.createViewController(self.order_no)
+						let basevc:UIViewController = MyWarning.getBaseViewController()
+						basevc.presentViewController(controller, animated: true, completion: nil)
+					}
+					else {
+						// 注文履歴タブへ遷移
+						// 1.ルートビュー取得
+						if let rootvc:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)! {
+							// 2.タブバーコントローラーチェック
+							if rootvc.title == "HDZHomeViewController" {
+								// 3.タブバータイテム選択
+								let tabbarctrl:UITabBarController = rootvc as! UITabBarController
+								tabbarctrl.selectedIndex = 1
+							}
+						}
+					}
+				}
+				let error: (error: ErrorType?, unboxable: OrderListError?) -> Void = { (error, unboxable) in
+					debugPrint(error)
+				}
+				HDZApi.getOrderMethod(self.supplierId, completeBlock: completion, errorBlock: error)
+			}
+		}
+		// ダイアログ開く
+		let alert: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
+		alert.addAction(action)
+		let basevc:UIViewController = MyWarning.getBaseViewController()
+		basevc.presentViewController(alert, animated: false, completion: nil)
+		
+	}
+	
+	func doAfterComplete() {
+		HDZItemOrderManager.shared.clearAllData()
+		
+		// カートを空にする
+		for object in self.orderResult! {
+			try! HDZOrder.deleteObject(object)
+		}
+
+		self.openCompleteDialog()
+	}
+	
 	// 注文実行
-	internal func didSelectedOrder() {
+	func didSelectedOrder() {
 		self.orderResult = try! HDZOrder.queries(self.supplierId)
 		
 		guard let items: Results<HDZOrder> = self.orderResult else {
@@ -222,57 +282,32 @@ extension HDZItemOrderDialogViewController {
 			// 注文確定
 			self.indicatorView.stopAnimating()
 			
-			//履歴を全て消す
-			for object in self.orderResult! {
-				try! HDZOrder.deleteObject(object)
-			}
-			
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-				
-				// タブ画面に戻る＝モーダルを閉じる
-				self.navigationController?.viewControllers[1].dismissViewControllerAnimated(true) {
-					// 注文履歴タブへ遷移
-					// 1.ルートビュー取得
-					if let rootvc:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)! {
-						//debugPrint(rootvc.title)
-						// 2.タブバーコントローラーチェック
-						if rootvc.title == "HDZHomeViewController" {
-							// 3.タブバータイテム選択
-							let tabbarctrl:UITabBarController = rootvc as! UITabBarController
-							tabbarctrl.selectedIndex = 1
-						}						
-					}
-				}
-			}
-			let controller: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
-			controller.addAction(action)
-			let basevc:UIViewController = MyWarning.getBaseViewController()
-			basevc.presentViewController(controller, animated: false) {
-			}
-			
-			
-			// メッセージ送信チェック
+			// 注文結果取得
 			guard let result: OrderResult = unboxable else {
+				// エラー終了
 				HDZItemOrderManager.shared.clearAllData()
 				return
 			}
+			
+			self.order_no = result.order_no
+			
+			// メッセージ送信チェック
 			if HDZItemOrderManager.shared.comment == "" {
-				HDZItemOrderManager.shared.clearAllData()
+				self.doAfterComplete()
 				return
 			}
 			
 			// APIメッセージ送信
 			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
-				HDZItemOrderManager.shared.clearAllData()
+				self.doAfterComplete()
 			}
 			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
 				#if DEBUG
 					debugPrint(error)
 				#endif
-				HDZItemOrderManager.shared.clearAllData()
+				self.doAfterComplete()
 			}
 			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
-			
 		}
 		
 		let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
@@ -286,7 +321,6 @@ extension HDZItemOrderDialogViewController {
 			self.presentViewController(controller, animated: true, completion: nil)
 			
 			// ボタン有効
-			//			self.barbuttonitemConfirm.enabled = true;
 			self.updateButtonEnabled(true)
 		}
 		

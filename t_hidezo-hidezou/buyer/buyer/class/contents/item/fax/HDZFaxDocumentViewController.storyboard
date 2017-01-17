@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="OlC-DU-1W2">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Fax Document Navigation Controller-->
+        <scene sceneID="pIX-5b-KhN">
+            <objects>
+                <navigationController storyboardIdentifier="HDZFaxDocumentNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" toolbarHidden="NO" id="OlC-DU-1W2" customClass="HDZFaxDocumentNavigationController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R16-Ed-uOT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="J9v-gx-kpo">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="zdB-HJ-1fG" kind="relationship" relationship="rootViewController" id="dMh-PT-psa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cba-ct-Fyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1674" y="-48"/>
+        </scene>
+        <!--FAX原稿-->
+        <scene sceneID="Uss-qf-cPQ">
+            <objects>
+                <viewController id="zdB-HJ-1fG" customClass="HDZFaxDocumentViewController" customModule="buyer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="05Y-Of-MNn"/>
+                        <viewControllerLayoutGuide type="bottom" id="khL-Hm-xpy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cVA-dX-fE0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYp-Di-vdX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zdB-HJ-1fG" id="PUz-h7-v0O"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gYp-Di-vdX" secondAttribute="trailing" id="539-ug-e0a"/>
+                            <constraint firstAttribute="bottom" secondItem="gYp-Di-vdX" secondAttribute="bottom" id="VWW-Kf-GOz"/>
+                            <constraint firstItem="gYp-Di-vdX" firstAttribute="top" secondItem="cVA-dX-fE0" secondAttribute="top" id="YlD-Ff-Ww6"/>
+                            <constraint firstItem="gYp-Di-vdX" firstAttribute="leading" secondItem="cVA-dX-fE0" secondAttribute="leading" id="jO1-w9-OSm"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="csd-Ks-nFw"/>
+                        <barButtonItem title="送信実行" style="done" id="Rdq-eS-VwS">
+                            <connections>
+                                <action selector="onSendFax:" destination="zdB-HJ-1fG" id="bc2-aH-Hdh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="HNT-GR-M54"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="FAX原稿" id="JTN-Q1-etf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="c5k-4f-d72">
+                            <connections>
+                                <action selector="onCloseSelf:" destination="zdB-HJ-1fG" id="rXH-p3-Z20"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scrollViewDocument" destination="gYp-Di-vdX" id="fGN-tC-xoj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BSd-ZH-6vg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-831.20000000000005" y="-48.125937031484263"/>
+        </scene>
+    </scenes>
+</document>
