@@ -186,6 +186,7 @@ extension HDZPdf1stView {
 		let view:HDZPdf1stView = HDZPdf1stView.createView("HDZPdf1stView")
 		view.setupOptionBox()
 		view.setupSheetBase()
+		view.setOptionNote("")
 		return view
 	}
 }

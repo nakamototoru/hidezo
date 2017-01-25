@@ -135,6 +135,9 @@ extension HDZItemDynamicTableViewController {
 			// バッジ情報を消す
 			HDZPushNotificationManager.shared.removeSupplierUp(supplierId)
 			let completion2:(unboxable: CheckDynamicItemsResultComplete?) -> Void = { (unboxable) in
+				#if DEBUG
+					debugPrint(unboxable)
+				#endif
 			}
 			let error2:(error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void = { (error,unboxable) in
 				debugPrint(error)

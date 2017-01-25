@@ -9,11 +9,11 @@
 import UIKit
 
 class HDZTopViewController: UIViewController {
-
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.		
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -34,6 +34,7 @@ class HDZTopViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
 }
 
 extension HDZTopViewController {

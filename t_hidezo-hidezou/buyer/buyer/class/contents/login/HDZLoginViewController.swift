@@ -22,7 +22,8 @@ class HDZLoginViewController: UIViewController, MFMailComposeViewControllerDeleg
 	
 	// !!!:dezami
 	private var deviceTokenRequest: Alamofire.Request? = nil
-    
+
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +33,7 @@ class HDZLoginViewController: UIViewController, MFMailComposeViewControllerDeleg
 		
 		self.buttonSignup.layer.borderColor = UIColor.redColor().CGColor
 		self.buttonSignup.layer.borderWidth = 1.0
+		
     }
 
     override func didReceiveMemoryWarning() {
@@ -213,19 +215,14 @@ extension HDZLoginViewController {
 				
 				DeployGateExtra.DGSLog("ログイン：" + HDZUserDefaults.id)
 
-				// !!!:dezami
-				// Device Token Post
-//				#if TARGET_OS_SIMULATOR
-//					//トークンは送れない
-//				#else
+				// デバイストークン送信
 				let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
 					DeployGateExtra.DGSLog("ログイン時トークン送信\n HDZLoginViewController.login\n <deviceToken>: " + HDZUserDefaults.devicetoken)
 				}
-				let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
+				let errorToken: (error: ErrorType?, result: DeviceTokenError?) -> Void = { (error, result) in
 					DeployGateExtra.DGSLog("HDZLoginViewController.login -> Failed send DeviceToken")
 				}
 				self.deviceTokenRequest = HDZApi.postDeviceToken(result.id, completionBlock: completionToken, errorBlock: errorToken)
-//				#endif
 				
             }
 			else {

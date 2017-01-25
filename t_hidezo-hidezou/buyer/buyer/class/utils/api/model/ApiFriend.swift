@@ -29,12 +29,12 @@ struct FriendError: Unboxable {
 struct FriendResult: Unboxable {
     
     let friendList: [FriendInfo]
-    let message: String
+//    let message: String
     let result: Bool
     
     init(unboxer: Unboxer) {
         self.friendList = unboxer.unbox("friendList")
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.result = unboxer.unbox("result")
     }
 }

@@ -74,9 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// アプリが起動していない時にpush通知が届き、push通知から起動した場合
 		if (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]) != nil {
-			//全ての通知を削除
-//			UIApplication.sharedApplication().cancelAllLocalNotifications()
-//			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+			//全ての通知を削除する場合
+			//		UIApplication.sharedApplication().cancelAllLocalNotifications()
+			//		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 		}
 		
 		// デバイストークン送信
@@ -87,10 +87,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// !!!:deploygate
 		DeployGateSDK.sharedInstance().launchApplicationWithAuthor("dezamisystem", key: "ab3219a7cb8eefbc04bc0ebe0af036b97d82ae4f")
 		
+		// !!!:プレゼンテーション用
+//		let aSelector = #selector(AppDelegate.tapGesture(_:))
+//		let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+//		window?.addGestureRecognizer(tapGesture)
+		
         return true
     }
 
-	// 
+	// ジェスチャーイベント処理
+	func tapGesture(gestureRecognizer: UITapGestureRecognizer){
+
+		let point = gestureRecognizer.locationOfTouch(0, inView: window)
+		
+		debugPrint(point)
+	}
+	
+	//
 	// MARK: - デバイスが通知許可してPush通知の登録が完了した場合、deviceTokenが返される
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
 		
@@ -192,9 +205,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// カスタムデータ
 		receiveRemoteNotification(userInfo)
 
-		//全ての通知を削除
-//		UIApplication.sharedApplication().cancelAllLocalNotifications()
-//		UIApplication.sharedApplication().applicationIconBadgeNumber = -1
 	}
 	
 	// バックグラウンドでPush通知

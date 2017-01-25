@@ -23,6 +23,17 @@ internal struct DeviceToken: WrapCustomizable {
 // MARK: レスポンス
 internal struct DeviceTokenResult: Unboxable {
 	
+//	let message: String
+	let result: Bool
+	
+	init(unboxer: Unboxer) {
+//		self.message = unboxer.unbox("message")
+		self.result = unboxer.unbox("result")
+	}
+}
+
+internal struct DeviceTokenError: Unboxable {
+	
 	let message: String
 	let result: Bool
 	
@@ -74,14 +85,14 @@ internal struct MessageUpResult: Unboxable {
 // MARK: - バッジ用
 struct BadgeResult: Unboxable {
 	
-	let message: String
+//	let message: String
 	let result: Int
 	let supplierUp: SupplierUpResult
 	let messageUp: MessageUpResult
 
 	init(unboxer: Unboxer) {
 		self.result = unboxer.unbox("result")
-		self.message = unboxer.unbox("message")
+//		self.message = unboxer.unbox("message")
 
 		self.supplierUp = unboxer.unbox("supplierUp");
 		self.messageUp = unboxer.unbox("messageUp");

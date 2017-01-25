@@ -30,12 +30,12 @@ struct OrderListError: Unboxable {
 
 struct OrderListResult: Unboxable {
     
-    let message: String
+//    let message: String
     let orderList: [OrderInfo]
     let result: Bool
 
     init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.orderList = unboxer.unbox("order_list")
         self.result = unboxer.unbox("result")
     }
@@ -173,11 +173,11 @@ struct Order: WrapCustomizable {
 
 struct OrderResult: Unboxable {
     
-    let message: String
+//    let message: String
 	let order_no: String
     
     init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
 		self.order_no = unboxer.unbox("order_no")
     }
 }
@@ -200,13 +200,13 @@ struct OrderMethod:WrapCustomizable {
 
 struct OrderMethodResult:Unboxable {
 	
-	let message: String
+//	let message: String
 	let result: Int
 	let method:String
 	
 	init(unboxer: Unboxer) {
 		self.result = unboxer.unbox("result")
-		self.message = unboxer.unbox("message")
+//		self.message = unboxer.unbox("message")
 		
 		self.method = unboxer.unbox("method")
 	}

@@ -324,7 +324,7 @@ extension HDZApi {
 extension HDZApi {
 	
 	// トークン送信
-	internal class func postDeviceToken(id: String, completionBlock: (unboxable: DeviceTokenResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: DeviceTokenResult?) -> Void) -> Alamofire.Request? {
+	internal class func postDeviceToken(id: String, completionBlock: (unboxable: DeviceTokenResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: DeviceTokenError?) -> Void) -> Alamofire.Request? {
 
 		let requestUrl: String = BASE_URL + "/store/device_token"
 		let parameters: DeviceToken = DeviceToken(id: id, uuid: HDZUserDefaults.uuid, device_token: HDZUserDefaults.devicetoken, device_flg: "1")
@@ -336,7 +336,7 @@ extension HDZApi {
 		let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
 			debugPrint("****** completionToken ******")
 		}
-		let errorToken: (error: ErrorType?, result: DeviceTokenResult?) -> Void = { (error, result) in
+		let errorToken: (error: ErrorType?, result: DeviceTokenError?) -> Void = { (error, result) in
 			debugPrint(error)
 		}
 		let _:Alamofire.Request = HDZApi.postDeviceToken(HDZUserDefaults.id, completionBlock: completionToken, errorBlock: errorToken)!

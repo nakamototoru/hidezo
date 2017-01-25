@@ -14,6 +14,7 @@ class HDZCustomerTableViewController: UITableViewController {
     private lazy var friendList: [FriendInfo] = []
     private var request: Alamofire.Request? = nil
 	
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

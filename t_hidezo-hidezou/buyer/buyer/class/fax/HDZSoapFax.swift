@@ -15,15 +15,32 @@ class HDZSoapFax: NSObject {
 	// MARK: アクセスアドレス
 	static let theUrlString = "https://soap.faximo.jp/soapapi-sv/SoapServFS_1200.php"
 	
+	// MARK: アカウント
+	static let faximoAccountId = "nakamoto"
+	static let faximoPassword = "ab123456"
+	
 	// MARK: XMLパーツ
 	static let soapXmlFirst = "<?xml version='1.0' encoding='UTF-8'?><SOAP-ENV:Envelope xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' xmlns:ns1='urn:faximoAPI'>"
-	static let soapXmlHeader = "<SOAP-ENV:Header><ns1:SOAPHeader><ns1:processkey>process_key</ns1:processkey><ns1:Attestation><ns1:userid>nakamoto</ns1:userid><ns1:password>ab123456</ns1:password></ns1:Attestation></ns1:SOAPHeader></SOAP-ENV:Header>"
+	static let soapXmlHeader1 = "<SOAP-ENV:Header><ns1:SOAPHeader><ns1:processkey>process_key</ns1:processkey><ns1:Attestation><ns1:userid>"
+	static let soapXmlHeader2 = "</ns1:userid><ns1:password>"
+	static let soapXmlHeader3 = "</ns1:password></ns1:Attestation></ns1:SOAPHeader></SOAP-ENV:Header>"
 
 	// MARK: - メソッド
 	// MARK: リクエスト
-	private class func request(soapMessage:String, completeBlock:(response:NSDictionary) -> Void, failureBlock:(error:NSError) -> Void) {
+	private class func request(soapMes:String, completeBlock:(response:NSDictionary) -> Void, failureBlock:(error:NSError) -> Void) {
 		
-		let soapLenth = String(soapMessage.characters.count)
+		var soapMessageFinal = soapXmlFirst
+		// XML
+		// Header
+		soapMessageFinal += soapXmlHeader1
+		soapMessageFinal += faximoAccountId
+		soapMessageFinal += soapXmlHeader2
+		soapMessageFinal += faximoPassword
+		soapMessageFinal += soapXmlHeader3
+		// Body
+		soapMessageFinal += soapMes
+
+		let soapLenth = String(soapMessageFinal.characters.count)
 
 		let theURL = NSURL(string: theUrlString)
 		let mutableR = NSMutableURLRequest(URL: theURL!)
@@ -32,7 +49,7 @@ class HDZSoapFax: NSObject {
 		mutableR.addValue("text/html; charset=utf-8", forHTTPHeaderField: "Content-Type")
 		mutableR.addValue(soapLenth, forHTTPHeaderField: "Content-Length")
 		mutableR.HTTPMethod = "POST"
-		mutableR.HTTPBody = soapMessage.dataUsingEncoding(NSUTF8StringEncoding)
+		mutableR.HTTPBody = soapMessageFinal.dataUsingEncoding(NSUTF8StringEncoding)
 
 		// 3.AFNetworking Request
 		let manager = AFHTTPRequestOperation(request: mutableR)
@@ -83,9 +100,13 @@ class HDZSoapFax: NSObject {
 		}
 		
 		// XML
-		var soapMessage = soapXmlFirst
+		var soapMessage = "" //soapXmlFirst
 		// Header
-		soapMessage += soapXmlHeader
+//		soapMessage += soapXmlHeader1
+//		soapMessage += faximoAccountId
+//		soapMessage += soapXmlHeader2
+//		soapMessage += faximoPassword
+//		soapMessage += soapXmlHeader3
 		// Body
 		soapMessage += "<SOAP-ENV:Body><ns1:doSendRequest><FAXSendRequest><ns1:SendData>"
 		soapMessage += "<ns1:sendto>"
@@ -149,9 +170,13 @@ class HDZSoapFax: NSObject {
 	internal class func requestGetSendList() {
 
 		// XML
-		var soapMessage = soapXmlFirst
+		var soapMessage = "" //soapXmlFirst
 		// Header
-		soapMessage += soapXmlHeader
+//		soapMessage += soapXmlHeader1
+//		soapMessage += faximoAccountId
+//		soapMessage += soapXmlHeader2
+//		soapMessage += faximoPassword
+//		soapMessage += soapXmlHeader3
 		// Body
 		soapMessage += "<SOAP-ENV:Body><ns1:getSendList><FAXSendListRequest><ns1:SendListSearchCondition>"
 		// 以降は任意

@@ -42,12 +42,12 @@ internal struct LoginCheckError: Unboxable {
 
 internal struct LoginCheckResult: Unboxable {
     
-    let message: String
+//    let message: String
     let result: Bool
     let status: LoginCheckStatus
     
     init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.result = unboxer.unbox("result")
         self.status = unboxer.unbox("status")
     }

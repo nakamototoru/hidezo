@@ -29,7 +29,7 @@ struct MeError: Unboxable {
 
 struct MeResult: Unboxable {
     
-    let message: String
+//    let message: String
     let result: Bool
     
     let address: String
@@ -40,7 +40,7 @@ struct MeResult: Unboxable {
     let tel: String
     
     init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.result = unboxer.unbox("result")
 
         self.address = unboxer.unbox("me.address", isKeyPath: true)

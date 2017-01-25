@@ -10,6 +10,9 @@ import UIKit
 
 class HDZOrderNavigationController: UINavigationController {
 
+//	// !!!:プレゼンテーション用
+//	var tapLocation: CGPoint = CGPoint()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,20 +24,18 @@ class HDZOrderNavigationController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
 	
-	// !!!:デザミ・アニメーションさせない
-//	override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
+//	// !!!:プレゼンテーション用
+//	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//		super.touchesBegan(touches, withEvent: event)
 //		
-//		return super.popViewControllerAnimated(false);
+//		// タッチイベントを取得する
+//		let touch = touches.first
+//		// タップした座標を取得する
+//		tapLocation = touch!.locationInView(self.view)
+//		
+//		#if DEBUG
+//			debugPrint(tapLocation)
+//		#endif
 //	}
-	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

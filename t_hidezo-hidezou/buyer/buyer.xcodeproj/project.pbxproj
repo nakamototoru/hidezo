@@ -144,6 +144,7 @@
 		D43C59DD1E2B3B7A009D6A30 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C59D21E2B3B7A009D6A30 /* AFURLRequestSerialization.m */; };
 		D43C59DE1E2B3B7A009D6A30 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C59D41E2B3B7A009D6A30 /* AFURLResponseSerialization.m */; };
 		D43C59DF1E2B3B7A009D6A30 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C59D61E2B3B7A009D6A30 /* AFURLSessionManager.m */; };
+		D477D8001E2F346D00B652F7 /* HDZTouchMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D477D7FF1E2F346D00B652F7 /* HDZTouchMarkView.swift */; };
 		D4A9CE681DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */; };
 		D4A9CE691DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A9CE671DCEDAAE00E4700C /* HDZItemStaticNoimageCell.xib */; };
 		D4A9CE6C1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE6A1DCEF4E800E4700C /* HDZItemStaticFractionNoimageCell.swift */; };
@@ -343,6 +344,7 @@
 		D43C59D41E2B3B7A009D6A30 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = "class/objective-c/AFNetworking/AFURLResponseSerialization.m"; sourceTree = "<group>"; };
 		D43C59D51E2B3B7A009D6A30 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = "class/objective-c/AFNetworking/AFURLSessionManager.h"; sourceTree = "<group>"; };
 		D43C59D61E2B3B7A009D6A30 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = "class/objective-c/AFNetworking/AFURLSessionManager.m"; sourceTree = "<group>"; };
+		D477D7FF1E2F346D00B652F7 /* HDZTouchMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZTouchMarkView.swift; path = class/extension/HDZTouchMarkView.swift; sourceTree = "<group>"; };
 		D49811BD1E066F1F007744C3 /* development.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = development.entitlements; sourceTree = "<group>"; };
 		D49811BE1E066F1F007744C3 /* production.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = production.entitlements; sourceTree = "<group>"; };
 		D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZItemStaticNoimageCell.swift; path = class/contents/item/static/view/HDZItemStaticNoimageCell.swift; sourceTree = "<group>"; };
@@ -717,6 +719,7 @@
 				371DF4101D6E7B7200D70D7F /* VcAnimator.swift */,
 				37584BED1D77E73100C879DE /* UIPlaceHolderTextView.swift */,
 				D40B89DB1E1DFE5700379568 /* MyWarning.swift */,
+				D477D7FF1E2F346D00B652F7 /* HDZTouchMarkView.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -1347,6 +1350,7 @@
 				D4F8FD911E2892D00032B9FD /* HDZPdf1stView.swift in Sources */,
 				F74189901D4DC0D0000C49F0 /* HDZOrder.swift in Sources */,
 				371DF4111D6E7B7200D70D7F /* VcAnimator.swift in Sources */,
+				D477D8001E2F346D00B652F7 /* HDZTouchMarkView.swift in Sources */,
 				37F15E301D654057008B469E /* CGPoint.swift in Sources */,
 				F7ADD9841D4E1971001E126E /* HDZItemStaticCell.swift in Sources */,
 				370273C71D658D0200C187A5 /* HDZItemCategoryTableViewCell.swift in Sources */,

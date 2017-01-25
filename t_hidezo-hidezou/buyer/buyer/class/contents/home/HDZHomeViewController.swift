@@ -35,21 +35,15 @@ class HDZHomeViewController: UITabBarController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
-	override func viewWillAppear(animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		// !!!:タブバーへバッジ表示
-//		self.updateBadgeSupplier()
-//		self.updateBadgeMessage()
-	}
+//	override func viewWillAppear(animated: Bool) {
+//		super.viewWillAppear(animated)
+//		
+//	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		// ダイアログ
-		// アプリがバックグラウンドから復帰した時に処理
-//		HDZPushNotificationManager.openDialog()
-	}
+//	override func viewDidAppear(animated: Bool) {
+//		super.viewDidAppear(animated)
+//		
+//	}
 	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -83,6 +77,7 @@ class HDZHomeViewController: UITabBarController {
 		//イベントリスナーの削除
 		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
+	
 }
 
 extension HDZHomeViewController {

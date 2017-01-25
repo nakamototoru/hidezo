@@ -30,14 +30,14 @@ struct MessageError: Unboxable {
 
 struct MessageResult: Unboxable {
     
-    let message: String
+//    let message: String
     let messageCount: Int
     let result: Bool
     let chargeList: [String]
     let messageList: [MessageInfo]
     
     init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.messageCount = unboxer.unbox("messageCount")
         self.result = unboxer.unbox("result")
         self.chargeList = unboxer.unbox("chargeList")
@@ -84,11 +84,11 @@ struct MessageAddError: Unboxable {
 
 struct MessageAddResult: Unboxable {
 
-    let message: String
+//    let message: String
     let result: Bool
     
     init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.result = unboxer.unbox("result")
     }
 }

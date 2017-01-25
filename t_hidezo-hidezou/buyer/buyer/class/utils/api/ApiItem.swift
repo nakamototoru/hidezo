@@ -85,13 +85,13 @@ struct StaticItem: Unboxable {
 
 struct OrderdItemResult:Unboxable {
     
-    let message: String
+//    let message: String
     let result: Int
     let orderdStaticItems: [OrderdStaticItem]?
     
     init(unboxer: Unboxer) {
         self.result = unboxer.unbox("result")
-        self.message = unboxer.unbox("message")
+//        self.message = unboxer.unbox("message")
         self.orderdStaticItems = unboxer.unbox("ordredStaticItem" , isKeyPath: false, context: nil, allowInvalidElements: true)
 		
 //		debugPrint(self.orderdStaticItems)
