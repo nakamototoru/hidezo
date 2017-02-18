@@ -370,18 +370,27 @@ extension HDZApi {
 extension HDZApi {
 	
 	// 注文送信方法取得
-	internal class func getOrderMethod(supplierId:String, completeBlock:(unboxable:OrderMethodResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
+//	internal class func getOrderMethod(supplierId:String, completeBlock:(unboxable:OrderMethodResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
+//		
+//		let requestUrl = BASE_URL + "/store/order_method"
+//		let parameters = OrderMethod(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id:supplierId)
+//		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
+//	}
+	
+	// 発注書情報取得
+//	internal class func getFaxDoc(orderNo:String, completeBlock:(unboxable:FaxDocResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
+//
+//		let requestUrl = BASE_URL + "/store/faxdoc"
+//		let parameters = FaxDoc(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: orderNo)
+//		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
+//	}
+	
+	// 送信
+	internal class func sendFax(orderNo:String, completeBlock:(unboxable:FaxResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:FaxError?) -> Void) -> Alamofire.Request? {
 		
-		let requestUrl = BASE_URL + "/store/order_method"
-		let parameters = OrderMethod(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id:supplierId)
+		let requestUrl = BASE_URL + "/store/fax/" + orderNo
+		let parameters = FaxParam(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
 		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
 	}
 	
-	// 発注書情報取得
-	internal class func getFaxDoc(orderNo:String, completeBlock:(unboxable:FaxDocResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
-
-		let requestUrl = BASE_URL + "/store/faxdoc"
-		let parameters = FaxDoc(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: orderNo)
-		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
-	}
 }

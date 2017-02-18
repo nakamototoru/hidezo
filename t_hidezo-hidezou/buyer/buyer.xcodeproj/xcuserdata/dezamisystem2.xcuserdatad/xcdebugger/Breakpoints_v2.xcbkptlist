@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/category/HDZItemCategoryTableViewController.swift"
-            timestampString = "503983724.451951"
+            filePath = "buyer/class/utils/networks/AlamofireUtils.swift"
+            timestampString = "509080730.556178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "getItem(supplierId:)"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "request(method:_:structParameters:encoding:headers:completionBlock:errorBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/category/HDZItemCategoryTableViewController.swift"
-            timestampString = "503983726.219556"
+            filePath = "buyer/class/utils/networks/AlamofireUtils.swift"
+            timestampString = "509080746.61009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
-            landmarkName = "getItem(supplierId:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "request(method:_:structParameters:encoding:headers:completionBlock:errorBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,45 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/home/order/comment/HDZCommentTableViewController.swift"
-            timestampString = "505661402.507956"
+            filePath = "buyer/class/utils/api/model/ApiOrder.swift"
+            timestampString = "509081545.76414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "HDZCommentTableViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/home/order/HDZOrderTableViewController.swift"
-            timestampString = "505710158.218453"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "getOrderList(reset:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/category/HDZItemCategoryTableViewController.swift"
-            timestampString = "505977237.500916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
-            landmarkName = "onCheckOrder(sender:)"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "init(unboxer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,93 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/static/HDZItemStaticTableViewController.swift"
-            timestampString = "505977282.163997"
+            filePath = "buyer/class/utils/api/model/ApiOrder.swift"
+            timestampString = "509081547.462886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
-            landmarkName = "onCheckOrder(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/AppDelegate.swift"
-            timestampString = "506495347.646743"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "applicationDidBecomeActive(application:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
-            timestampString = "506496101.52951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "getItem(supplierId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
-            timestampString = "506496207.346704"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "getItem(supplierId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/dynamic/HDZItemDynamicTableViewController.swift"
-            timestampString = "506496209.124408"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "getItem(supplierId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "buyer/class/contents/item/orderdItem/HDZItemOrderdHistoryTableViewController.swift"
-            timestampString = "506582803.222591"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "getOrderdItem(supplierId:)"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "init(unboxer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

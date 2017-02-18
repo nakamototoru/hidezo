@@ -191,6 +191,29 @@ struct OrderError: Unboxable {
 }
 
 // MARK: FAX用
+struct FaxError:Unboxable {
+	let message: String
+	let result: Bool
+	
+	init(unboxer: Unboxer) {
+		self.message = unboxer.unbox("message")
+		self.result = unboxer.unbox("result")
+	}
+}
+struct FaxResult:Unboxable {
+	let result: Bool
+//	let message: String
+	init(unboxer: Unboxer) {
+		self.result = unboxer.unbox("result")
+//		self.message = unboxer.unbox("message")
+	}
+}
+struct FaxParam:WrapCustomizable {
+	let id:String
+	let uuid:String
+}
+
+// TODO: 以下は使わなくなる
 struct OrderMethod:WrapCustomizable {
 	
 	let id: String

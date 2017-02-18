@@ -35,7 +35,7 @@ class HDZFaxDocumentViewController: UIViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		self.apiGetFaxDoc()
+//		self.apiGetFaxDoc()
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -128,28 +128,28 @@ class HDZFaxDocumentViewController: UIViewController {
 
 	}
 	
-	private func apiGetFaxDoc() {
-		
-		let completeHandler:(unboxable:FaxDocResult?) -> Void = { (unboxable) in
-			#if DEBUG
-				debugPrint("**** getFaxDoc ****")
-				debugPrint(unboxable)
-				debugPrint("**** getFaxDoc END ****")
-			#endif
-			
-			guard let docResult:FaxDocResult = unboxable else {
-				return
-			}
-			
-			self.faxNumber = docResult.faxdoc.fax
-			
-			self.createFaxDocView(docResult.faxdoc)
-		}
-		let errorHandler:(error:ErrorType?, unboxable:OrderListError?) -> Void = { (error,Unboxable) in
-			debugPrint(error)
-		}
-		HDZApi.getFaxDoc(self.orderNumber, completeBlock: completeHandler, errorBlock: errorHandler)
-	}
+//	private func apiGetFaxDoc() {
+//		
+//		let completeHandler:(unboxable:FaxDocResult?) -> Void = { (unboxable) in
+//			#if DEBUG
+//				debugPrint("**** getFaxDoc ****")
+//				debugPrint(unboxable)
+//				debugPrint("**** getFaxDoc END ****")
+//			#endif
+//			
+//			guard let docResult:FaxDocResult = unboxable else {
+//				return
+//			}
+//			
+//			self.faxNumber = docResult.faxdoc.fax
+//			
+//			self.createFaxDocView(docResult.faxdoc)
+//		}
+//		let errorHandler:(error:ErrorType?, unboxable:OrderListError?) -> Void = { (error,Unboxable) in
+//			debugPrint(error)
+//		}
+//		HDZApi.getFaxDoc(self.orderNumber, completeBlock: completeHandler, errorBlock: errorHandler)
+//	}
 	
 	private func closeMyself() {
 		// 閉じる処理

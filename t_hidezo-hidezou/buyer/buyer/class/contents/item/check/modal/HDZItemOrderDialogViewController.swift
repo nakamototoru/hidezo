@@ -204,40 +204,29 @@ extension HDZItemOrderDialogViewController {
 			
 			// タブ画面に戻る＝モーダルを閉じる
 			self.navigationController?.viewControllers[1].dismissViewControllerAnimated(true) {
-				
-				// FAX送信実行チェック
-				let completion: (unboxable: OrderMethodResult?) -> Void = { (unboxable) in
-//					debugPrint("**** getOrderMethod ****")
-//					debugPrint(unboxable)
-//					debugPrint("**** getOrderMethod END ****")
-					
-					guard let result:OrderMethodResult = unboxable else {
-						return
-					}
-					
-					if result.method == "fax" {
-						// FAX用発注書画面へ						
-						let controller:HDZFaxDocumentNavigationController = HDZFaxDocumentNavigationController.createViewController(self.order_no)
-						let basevc:UIViewController = MyWarning.getBaseViewController()
-						basevc.presentViewController(controller, animated: true, completion: nil)
-					}
-					else {
-						// 注文履歴タブへ遷移
-						// 1.ルートビュー取得
-						if let rootvc:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)! {
-							// 2.タブバーコントローラーチェック
-							if rootvc.title == "HDZHomeViewController" {
-								// 3.タブバータイテム選択
-								let tabbarctrl:UITabBarController = rootvc as! UITabBarController
-								tabbarctrl.selectedIndex = 1
-							}
-						}
-					}
-				}
-				let error: (error: ErrorType?, unboxable: OrderListError?) -> Void = { (error, unboxable) in
-					debugPrint(error)
-				}
-				HDZApi.getOrderMethod(self.supplierId, completeBlock: completion, errorBlock: error)
+		
+//				// FAX送信実行
+//				let completion:(unboxable: FaxResult?) -> Void = { (unboxable) in
+//					guard let result:FaxResult = unboxable else {
+//						return
+//					}
+//					
+//					if Bool( result.result ) {
+//						debugPrint("FAX SEND COMPLETE")
+//					}
+//					else {
+//						debugPrint("FAX Not SEND")
+//					}
+//					
+//					self.closeSelf()
+//				}
+//				let error: (error:ErrorType?, unboxable:FaxError?) -> Void = { (error,unboxable) in
+//					debugPrint(error)
+//					self.closeSelf()
+//				}
+//				HDZApi.sendFax(self.order_no, completeBlock: completion, errorBlock: error)
+
+				self.closeSelf()
 			}
 		}
 		// ダイアログ開く
@@ -248,6 +237,19 @@ extension HDZItemOrderDialogViewController {
 		
 	}
 	
+	func closeSelf() {
+		// 注文履歴タブへ遷移
+		// 1.ルートビュー取得
+		if let rootvc:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)! {
+			// 2.タブバーコントローラーチェック
+			if rootvc.title == "HDZHomeViewController" {
+				// 3.タブバータイテム選択
+				let tabbarctrl:UITabBarController = rootvc as! UITabBarController
+				tabbarctrl.selectedIndex = 1
+			}
+		}
+	}
+	
 	func doAfterComplete() {
 		HDZItemOrderManager.shared.clearAllData()
 		
@@ -256,7 +258,29 @@ extension HDZItemOrderDialogViewController {
 			try! HDZOrder.deleteObject(object)
 		}
 
-		self.openCompleteDialog()
+		// FAX送信実行
+		let completion:(unboxable: FaxResult?) -> Void = { (unboxable) in
+			self.indicatorView.stopAnimating()
+			
+			guard let result:FaxResult = unboxable else {
+				return
+			}
+			
+			if result.result {
+				debugPrint("FAX SEND COMPLETE")
+			}
+			else {
+				debugPrint("FAX Not SEND")
+			}
+			
+			self.openCompleteDialog()
+		}
+		let error: (error:ErrorType?, unboxable:FaxError?) -> Void = { (error,unboxable) in
+			self.indicatorView.stopAnimating()
+			debugPrint(error)
+			self.openCompleteDialog()
+		}
+		HDZApi.sendFax(self.order_no, completeBlock: completion, errorBlock: error)
 	}
 	
 	// 注文実行
@@ -280,7 +304,7 @@ extension HDZItemOrderDialogViewController {
 		let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
 			
 			// 注文確定
-			self.indicatorView.stopAnimating()
+//			self.indicatorView.stopAnimating()
 			
 			// 注文結果取得
 			guard let result: OrderResult = unboxable else {
