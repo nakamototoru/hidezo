@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Development</key>
+	<dict>
+		<key>ApiBaseUrl</key>
+		<string>https://dev-api.hidezo.co</string>
+	</dict>
+	<key>Staging</key>
+	<dict>
+		<key>ApiBaseUrl</key>
+		<string>https://dev-api.hidezo.co</string>
+	</dict>
+	<key>Production</key>
+	<dict>
+		<key>ApiBaseUrl</key>
+		<string>https://api.hidezo.co</string>
+	</dict>
+	<key>Debug</key>
+	<dict>
+		<key>ApiBaseUrl</key>
+		<string>https://dev-api.hidezo.co</string>
+	</dict>
+	<key>Release</key>
+	<dict>
+		<key>ApiBaseUrl</key>
+		<string>https://api.hidezo.co</string>
+	</dict>
+</dict>
+</plist>
