@@ -19,14 +19,22 @@ class HDZConfiguration: NSObject {
 			// シミュレータならば
 			return baseUrlDev
 		#else
-			// デバイス
-			// 本番サーバー
-			// TODO:申請時には本番に変更しておく
-			//    return baseUrlProduct
-			// 開発サーバー
-			return baseUrlDev
+			// デバイスならば
+			if HDZConfiguration.getIsBuildProduct() {
+				// 本番サーバー
+				return baseUrlProduct
+			}
+			else {
+				// 開発サーバー
+				return baseUrlDev
+			}
 		#endif
-
 	}
 	
+	internal class func getIsBuildProduct() -> Bool {
+		// TODO:申請時には本番に変更しておく
+		return false
+		// return true
+	}
+
 }

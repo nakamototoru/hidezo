@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="J87-F6-7Sb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="J87-F6-7Sb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -101,6 +101,16 @@
                                     <action selector="onOpenAgreement:" destination="V0W-cz-Eg4" eventType="touchUpInside" id="iNM-aX-QsR"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SERVER : DEV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5F-rw-Ykt">
+                                <rect key="frame" x="16" y="638" width="84" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="0l3-nY-LQF"/>
+                                    <constraint firstAttribute="height" constant="18" id="xTn-JC-gsv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -109,6 +119,7 @@
                             <constraint firstAttribute="trailing" secondItem="WeS-hD-WYo" secondAttribute="trailing" constant="16" id="5xT-HW-h2G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mks-p1-BpW" secondAttribute="trailing" constant="-4" id="7MJ-cN-0N6"/>
                             <constraint firstItem="Mks-p1-BpW" firstAttribute="top" secondItem="QZm-9o-mNn" secondAttribute="bottom" constant="20" id="7oU-dI-41C"/>
+                            <constraint firstItem="q5F-rw-Ykt" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leadingMargin" id="Fsf-ur-RHs"/>
                             <constraint firstItem="Mks-p1-BpW" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leadingMargin" constant="-4" id="G3C-t7-fxf"/>
                             <constraint firstItem="WeS-hD-WYo" firstAttribute="top" secondItem="xeW-5P-Bxw" secondAttribute="bottom" constant="8" id="J1j-pI-TN7"/>
                             <constraint firstItem="5Eg-6A-uMw" firstAttribute="top" secondItem="eao-AQ-vGK" secondAttribute="bottom" constant="8" id="QyX-PY-1Ei"/>
@@ -116,6 +127,7 @@
                             <constraint firstItem="QZm-9o-mNn" firstAttribute="centerX" secondItem="xJ8-ah-Os3" secondAttribute="centerX" id="XxG-Ir-OWU"/>
                             <constraint firstItem="xeW-5P-Bxw" firstAttribute="top" secondItem="5Eg-6A-uMw" secondAttribute="bottom" constant="8" id="cLi-zZ-JuI"/>
                             <constraint firstItem="xeW-5P-Bxw" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leading" constant="16" id="izA-ru-4n0"/>
+                            <constraint firstItem="jVH-C7-71W" firstAttribute="top" secondItem="q5F-rw-Ykt" secondAttribute="bottom" constant="11" id="kXz-PS-C8W"/>
                             <constraint firstItem="5Eg-6A-uMw" firstAttribute="leading" secondItem="xJ8-ah-Os3" secondAttribute="leading" constant="16" id="nYk-ug-vju"/>
                             <constraint firstItem="QZm-9o-mNn" firstAttribute="top" secondItem="WeS-hD-WYo" secondAttribute="bottom" constant="26" id="pQS-zu-6Of"/>
                             <constraint firstItem="as8-Od-vFf" firstAttribute="top" secondItem="Mks-p1-BpW" secondAttribute="bottom" constant="20" id="qx9-Sr-dl4"/>
@@ -126,6 +138,7 @@
                     <connections>
                         <outlet property="buttonSignup" destination="Mks-p1-BpW" id="Ccq-eo-t4Z"/>
                         <outlet property="idTextField" destination="5Eg-6A-uMw" id="csW-Px-m5d"/>
+                        <outlet property="labelDebugPrint" destination="q5F-rw-Ykt" id="pY9-Lq-7a4"/>
                         <outlet property="loginButton" destination="WeS-hD-WYo" id="I7u-jh-PMh"/>
                         <outlet property="passwordTextField" destination="xeW-5P-Bxw" id="wUr-Lx-p1D"/>
                     </connections>

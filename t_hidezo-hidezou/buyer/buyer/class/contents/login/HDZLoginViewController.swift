@@ -16,6 +16,7 @@ class HDZLoginViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
 	@IBOutlet weak var buttonSignup: UIButton!
+	@IBOutlet weak var labelDebugPrint: UILabel!
     
     private var loginRequest: Alamofire.Request? = nil
     private var loginCheckRequest: Alamofire.Request? = nil
@@ -34,6 +35,9 @@ class HDZLoginViewController: UIViewController, MFMailComposeViewControllerDeleg
 		self.buttonSignup.layer.borderColor = UIColor.redColor().CGColor
 		self.buttonSignup.layer.borderWidth = 1.0
 		
+		if HDZConfiguration.getIsBuildProduct() {
+			labelDebugPrint.text = ""
+		}
     }
 
     override func didReceiveMemoryWarning() {

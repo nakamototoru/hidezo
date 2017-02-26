@@ -144,8 +144,6 @@
 		D43C59DD1E2B3B7A009D6A30 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C59D21E2B3B7A009D6A30 /* AFURLRequestSerialization.m */; };
 		D43C59DE1E2B3B7A009D6A30 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C59D41E2B3B7A009D6A30 /* AFURLResponseSerialization.m */; };
 		D43C59DF1E2B3B7A009D6A30 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C59D61E2B3B7A009D6A30 /* AFURLSessionManager.m */; };
-		D466EC971E5ED5B1009C8D8C /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = D466EC961E5ED5B1009C8D8C /* Configuration.plist */; };
-		D466EC991E5ED7F2009C8D8C /* AppConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = D466EC981E5ED7F2009C8D8C /* AppConf.swift */; };
 		D466EC9B1E5EDA54009C8D8C /* HDZConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D466EC9A1E5EDA54009C8D8C /* HDZConfiguration.swift */; };
 		D477D8001E2F346D00B652F7 /* HDZTouchMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D477D7FF1E2F346D00B652F7 /* HDZTouchMarkView.swift */; };
 		D4A9CE681DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9CE661DCEDAAE00E4700C /* HDZItemStaticNoimageCell.swift */; };
@@ -347,8 +345,6 @@
 		D43C59D41E2B3B7A009D6A30 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = "class/objective-c/AFNetworking/AFURLResponseSerialization.m"; sourceTree = "<group>"; };
 		D43C59D51E2B3B7A009D6A30 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = "class/objective-c/AFNetworking/AFURLSessionManager.h"; sourceTree = "<group>"; };
 		D43C59D61E2B3B7A009D6A30 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = "class/objective-c/AFNetworking/AFURLSessionManager.m"; sourceTree = "<group>"; };
-		D466EC961E5ED5B1009C8D8C /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
-		D466EC981E5ED7F2009C8D8C /* AppConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConf.swift; sourceTree = "<group>"; };
 		D466EC9A1E5EDA54009C8D8C /* HDZConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZConfiguration.swift; path = class/HDZConfiguration.swift; sourceTree = "<group>"; };
 		D477D7FF1E2F346D00B652F7 /* HDZTouchMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HDZTouchMarkView.swift; path = class/extension/HDZTouchMarkView.swift; sourceTree = "<group>"; };
 		D49811BD1E066F1F007744C3 /* development.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = development.entitlements; sourceTree = "<group>"; };
@@ -677,8 +673,6 @@
 				37C6E5881D75AAF300D8E7C6 /* manager */,
 				37CA46BB1D644C5B006ED62E /* objecttive-c */,
 				35899BA31D16D8BB00D2AA45 /* utils */,
-				D466EC961E5ED5B1009C8D8C /* Configuration.plist */,
-				D466EC981E5ED7F2009C8D8C /* AppConf.swift */,
 				D466EC9A1E5EDA54009C8D8C /* HDZConfiguration.swift */,
 			);
 			name = class;
@@ -1181,7 +1175,6 @@
 				35255C6F1D178CC400A8D627 /* HDZHomeViewController.storyboard in Resources */,
 				F7ADD9851D4E1971001E126E /* HDZItemStaticCell.xib in Resources */,
 				3515C5451D1AD5F40074B38E /* HDZOrderDetailCell.xib in Resources */,
-				D466EC971E5ED5B1009C8D8C /* Configuration.plist in Resources */,
 				D432EE4E1DD1D1D50078C4CD /* HDZItemOrderdHistoryTableViewController.storyboard in Resources */,
 				D4F8FD941E2892D00032B9FD /* HDZPdf2ndView.xib in Resources */,
 				35F7A1C51D198C1A0012B42C /* HDZOrderDetailTableViewController.storyboard in Resources */,
@@ -1357,7 +1350,6 @@
 				354FFDAF1D1E872E00D70976 /* HDZOrderDetailFooter.swift in Sources */,
 				35899BAE1D16E25600D2AA45 /* UIViewController_Extension.swift in Sources */,
 				356D7CDD1D1850E700867F91 /* ApiOrder.swift in Sources */,
-				D466EC991E5ED7F2009C8D8C /* AppConf.swift in Sources */,
 				37F15E1B1D65400D008B469E /* GalleryConfiguration.swift in Sources */,
 				D4F8FD911E2892D00032B9FD /* HDZPdf1stView.swift in Sources */,
 				F74189901D4DC0D0000C49F0 /* HDZOrder.swift in Sources */,

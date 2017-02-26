@@ -141,6 +141,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	// リモート通知で受け取ったデータの解析
 	private func receiveRemoteNotification(userInfo:[NSObject:AnyObject]) {
+		
+		DeployGateExtra.DGSLog(">receiveRemoteNotification")
+		
 		// カスタムデータ
 		guard let dict:[NSObject : AnyObject] = userInfo else {
 			DeployGateExtra.DGSLog(">> No userInfo found in RemoteNotification")
@@ -163,12 +166,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					#endif
 					let pushAps:PushApsResult = try Unbox(value as! UnboxableDictionary)
 					//... パース成功...
+					DeployGateExtra.DGSLog("Message = " + pushAps.alert)
 					// ダイアログ
 					MyWarning.Warning(pushAps.alert)
-					
-					// TODO:最後の通知のみダイアログ表示
-					// スタックに保存
-//					HDZPushNotificationManager.appendPushAps(pushAps)
 					
 				} catch {
 					DeployGateExtra.DGSLog("... パース失敗...")
