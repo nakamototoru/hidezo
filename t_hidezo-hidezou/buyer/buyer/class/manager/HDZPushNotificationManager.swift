@@ -13,8 +13,8 @@ class HDZPushNotificationManager: NSObject {
 	private var supplierUpList:[SupplierId] = []
 	private var messageUpList:[MessageUp] = []
 	
-	var strNotificationSupplier:String = "notofication_supplier"
-	var strNotificationMessage:String = "notofication_message"
+	var strNotificationSupplier = Notification.Name("notofication_supplier")
+	var strNotificationMessage = Notification.Name("notofication_message")
 	
 //	static var arrayPushAps:[PushApsResult] = []
 //	static var isDialogOpened:Bool = false
@@ -33,7 +33,7 @@ class HDZPushNotificationManager: NSObject {
 		var loop:Int = 0;
 		for item:SupplierId in supplierUpList {
 			if item.supplierId == supplier_id {
-				supplierUpList.removeAtIndex(loop)
+				supplierUpList.remove(at: loop)
 				break
 			}
 			loop += 1;
@@ -63,7 +63,7 @@ class HDZPushNotificationManager: NSObject {
 		var loop:Int = 0;
 		for item:MessageUp in messageUpList {
 			if item.order_no == order_no {
-				messageUpList.removeAtIndex(loop)
+				messageUpList.remove(at: loop)
 				result = item.messageCount
 				break;
 			}
@@ -90,19 +90,19 @@ extension HDZPushNotificationManager {
 	
 	internal class func checkBadge() {
 		
-		let completion: (unboxable: BadgeResult?) -> Void = { (unboxable) in
+		let completion: (_ unboxable: BadgeResult?) -> Void = { (unboxable) in
 			#if DEBUG
-				debugPrint(unboxable)
+				debugPrint(unboxable.debugDescription)
 			#endif
 			
 			var strResult:String = ""
 			
 			// 商品更新
 			let supplierList: [SupplierId] = (unboxable?.supplierUp.supplierUpList)!
-			HDZPushNotificationManager.shared.setSupplierUpList( supplierList )
+			HDZPushNotificationManager.shared.setSupplierUpList( suppliers: supplierList )
 			// ローカル通知
-			let n : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
-			NSNotificationCenter.defaultCenter().postNotification(n)
+			let n = Notification(name: HDZPushNotificationManager.shared.strNotificationSupplier, object: self, userInfo: ["value": 10])
+			NotificationCenter.default.post(n)
 			
 			strResult += "supplierUpList {\n"
 			for object:SupplierId in (unboxable?.supplierUp.supplierUpList)! {
@@ -115,10 +115,10 @@ extension HDZPushNotificationManager {
 			// メッセージ更新
 			//					let messageUp:CustomDataMessageUpResult = customData.messageUp
 			let messageList: [MessageUp] = (unboxable?.messageUp.messageUpList)!
-			HDZPushNotificationManager.shared.setMessageUpList( messageList )
+			HDZPushNotificationManager.shared.setMessageUpList( messages: messageList )
 			// ローカル通知
-			let nMes : NSNotification = NSNotification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
-			NSNotificationCenter.defaultCenter().postNotification(nMes)
+			let nMes = Notification(name: HDZPushNotificationManager.shared.strNotificationMessage, object: self, userInfo: ["value": 10])
+			NotificationCenter.default.post(nMes)
 			
 			strResult += "messageUpList {\n"
 			for object:MessageUp in (unboxable?.messageUp.messageUpList)! {
@@ -138,12 +138,12 @@ extension HDZPushNotificationManager {
 			
 //			UIWarning.WarningWithTitle("開発・バッジ情報", message: strResult)
 		}
-		let error: (error: ErrorType?, result: BadgeError?) -> Void = { (error, result) in
+		let error: (_ error: Error?, _ result: BadgeError?) -> Void = { (error, result) in
 			// エラー処理
-			debugPrint(error)
-			debugPrint(result)
+			debugPrint(error.debugDescription)
+			debugPrint(result.debugDescription)
 		}
-		HDZApi.badge(completion, errorBlock: error);
+		let _ = HDZApi.badge(completionBlock: completion, errorBlock: error);
 	}
 	
 	// タブバー更新
@@ -165,7 +165,7 @@ extension HDZPushNotificationManager {
 	}
 	internal class func updateSupplierBadge(controller:UIViewController) {
 		
-		updateSupplierBadgeWithTabBar(controller.tabBarController!.tabBar)
+		updateSupplierBadgeWithTabBar(tabBar: controller.tabBarController!.tabBar)
 	}
 	
 	// メッセージ
@@ -186,16 +186,16 @@ extension HDZPushNotificationManager {
 	}
 	internal class func updateMessageBadgeWithController(controller:UIViewController) {
 		
-		updateMessageBadgeWithTabBar(controller.tabBarController!.tabBar)
+		updateMessageBadgeWithTabBar(tabBar: controller.tabBarController!.tabBar)
 	}
 	
 	// OSバッジ数
 	internal class func updateApplicationBadge(count:Int) {
 		
-		UIApplication.sharedApplication().applicationIconBadgeNumber = count
+		UIApplication.shared.applicationIconBadgeNumber = count
 		if count <= 0 {
-			UIApplication.sharedApplication().cancelAllLocalNotifications()
-			UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+			UIApplication.shared.cancelAllLocalNotifications()
+			UIApplication.shared.applicationIconBadgeNumber = -1
 		}
 	}
 //	internal class func decApplicationBadge(delta:Int) {
@@ -209,7 +209,7 @@ extension HDZPushNotificationManager {
 		var count:Int = 0
 		count += HDZPushNotificationManager.shared.getSupplierUpCount()
 		count += HDZPushNotificationManager.shared.getMessageUpCount()
-		updateApplicationBadge(count)
+		updateApplicationBadge(count: count)
 	}
 	
 	// スタック追加

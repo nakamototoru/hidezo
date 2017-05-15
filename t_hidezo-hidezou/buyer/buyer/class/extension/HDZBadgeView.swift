@@ -12,8 +12,6 @@ class HDZBadgeView: UIView {
 
 	var labelBadge:UILabel!
 	
-	
-	
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -29,21 +27,21 @@ extension HDZBadgeView {
 
     internal class func createWithSize(mysize:CGSize) -> HDZBadgeView {
         
-        let rect:CGRect = CGRectMake(0, 0, mysize.width, mysize.height)
+		let rect:CGRect = CGRect(x: 0, y: 0, width: mysize.width, height: mysize.height)
         let view:HDZBadgeView = HDZBadgeView(frame: rect )
         
-        view.backgroundColor = UIColor.redColor()
+        view.backgroundColor = UIColor.red
         view.layer.cornerRadius = rect.width / 2;
         
         view.labelBadge = UILabel(frame: rect)
-        view.labelBadge.textColor = UIColor.whiteColor()
-        view.labelBadge.textAlignment = NSTextAlignment.Center
-        view.labelBadge.font = UIFont.systemFontOfSize(rect.height * 0.8)
+        view.labelBadge.textColor = UIColor.white
+        view.labelBadge.textAlignment = NSTextAlignment.center
+		view.labelBadge.font = UIFont.systemFont(ofSize: rect.height * 0.8)
         
         view.addSubview(view.labelBadge)
 
         // 自分を隠す
-        view.hidden = true
+        view.isHidden = true
         
         return view;
     }
@@ -52,25 +50,25 @@ extension HDZBadgeView {
 		
 		let width:CGFloat = 20
 		
-		let rect:CGRect = CGRectMake(0, 0, width, width)
+		let rect:CGRect = CGRect(x: 0, y: 0, width: width, height: width)
 		let view:HDZBadgeView = HDZBadgeView(frame: rect )
 		
-		view.backgroundColor = UIColor.redColor()
+		view.backgroundColor = UIColor.red
 		view.layer.cornerRadius = rect.width / 2;
 		
 		view.labelBadge = UILabel(frame: rect)
-		view.labelBadge.textColor = UIColor.whiteColor()
-		view.labelBadge.textAlignment = NSTextAlignment.Center
-		view.labelBadge.font = UIFont.systemFontOfSize(rect.height * 0.8)
+		view.labelBadge.textColor = UIColor.white
+		view.labelBadge.textAlignment = NSTextAlignment.center
+		view.labelBadge.font = UIFont.systemFont(ofSize: rect.height * 0.8)
 		
 		view.addSubview(view.labelBadge)
 		
 		let center_x:CGFloat = position.x + (width * (0.5 - anchor.x))
 		let center_y:CGFloat = position.y + (width * (0.5 - anchor.y))
-		view.center = CGPointMake(center_x, center_y)
+		view.center = CGPoint(x: center_x, y: center_y)
 		
 		// 自分を隠す
-		view.hidden = true
+		view.isHidden = true
 		
 		return view;
 	}
@@ -83,16 +81,12 @@ extension HDZBadgeView {
 	func updateBadge(value:Int) {
 
 		if value <= 0 {
-			self.hidden = true
+			self.isHidden = true
 			return
 		}
 		
-		self.hidden = false
+		self.isHidden = false
 		self.labelBadge.text = String(value)
 	}
-	
-//	func hideBadge() {
-//		self.hidden = true
-//	}
-	
+
 }

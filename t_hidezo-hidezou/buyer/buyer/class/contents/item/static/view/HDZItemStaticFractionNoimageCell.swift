@@ -24,10 +24,10 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
     var delegate:HDZItemFractionViewControllerDelegate?
     
 //    private var staticItem: StaticItem!
-	private var displayItem:DisplayStaticItem! = nil
-    private var attr_flg: AttrFlg = AttrFlg.direct
-    private var supplierId: String = ""
-    private var itemsize:String = "0" {
+	var displayItem:DisplayStaticItem! = nil
+	var attr_flg: AttrFlg = AttrFlg.direct
+	var supplierId: String = ""
+	var itemsize:String = "0" {
         didSet {
             self.itemCount.text = itemsize
         }
@@ -38,7 +38,7 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -47,7 +47,7 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
     // Cart
     func updateItem() {
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.displayItem.id, size: self.itemsize, name: self.displayItem.name, price: self.displayItem.price, scale: self.displayItem.scale, standard: self.displayItem.standard, imageURL: "", dynamic: false, numScale: self.displayItem.num_scale)
+            try HDZOrder.add(supplierId: self.supplierId, itemId: self.displayItem.id, size: self.itemsize, name: self.displayItem.name, price: self.displayItem.price, scale: self.displayItem.scale, standard: self.displayItem.standard, imageURL: "", dynamic: false, numScale: self.displayItem.num_scale)
         } catch let error as NSError {
             #if DEBUG
                 debugPrint(error)
@@ -55,13 +55,14 @@ class HDZItemStaticFractionNoimageCell: UITableViewCell {
         }
     }
 
-    @IBAction func onFractionSelect(sender: AnyObject) {
+    @IBAction func onFractionSelect(_ sender: Any) {
         
         if self.displayItem.num_scale.count > 0 {
             // 分数選択ダイアログ
-            let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: self.displayItem.num_scale, itemsize: self.itemsize)
+            let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(parent: self.parent, fractions: self.displayItem.num_scale, itemsize: self.itemsize)
             vc.delegate = self
-            self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+            //self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+			self.parent.presentPopupViewController(popupViewController: vc)
         }
     }
 
@@ -80,7 +81,7 @@ extension HDZItemStaticFractionNoimageCell: HDZItemFractionViewControllerDelegat
         else {
             self.itemsize = "0"
             // 注文削除処理
-            try! HDZOrder.deleteItem(self.supplierId, itemId: self.displayItem.id, dynamic: false)
+            try! HDZOrder.deleteItem(supplierId: self.supplierId, itemId: self.displayItem.id, dynamic: false)
         }
         
     }
@@ -90,14 +91,14 @@ extension HDZItemStaticFractionNoimageCell: HDZItemFractionViewControllerDelegat
 extension HDZItemStaticFractionNoimageCell {
     
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZItemStaticFractionNoimageCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticFractionNoimageCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZItemStaticFractionNoimageCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: DisplayStaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticFractionNoimageCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: IndexPath, staticItem: DisplayStaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticFractionNoimageCell {
         
-        let cell: HDZItemStaticFractionNoimageCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticFractionNoimageCell", forIndexPath: indexPath) as! HDZItemStaticFractionNoimageCell
+        let cell: HDZItemStaticFractionNoimageCell = tableView.dequeueReusableCell(withIdentifier: "HDZItemStaticFractionNoimageCell", for: indexPath) as! HDZItemStaticFractionNoimageCell
         cell.displayItem = staticItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
@@ -106,7 +107,7 @@ extension HDZItemStaticFractionNoimageCell {
         cell.itemName.text = staticItem.name
         
         // アイテム数
-        if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
+        if let item: HDZOrder = try! HDZOrder.queries(supplierId: supplierId, itemId: staticItem.id, dynamic: false) {
             cell.itemsize = item.size
         } else {
             cell.itemsize = "0"
@@ -120,7 +121,9 @@ extension HDZItemStaticFractionNoimageCell {
             cell.priceLabel.text = ""
         }
         else {
-            cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+            //cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+			
+			cell.priceLabel.text = "(" + staticItem.standard + "・" + staticItem.loading + "/" + staticItem.scale + ")"
         }
         
         cell.labelUnitPrice.text = String(format: "単価:\(staticItem.price)円/\(staticItem.scale)")
@@ -134,8 +137,9 @@ extension HDZItemStaticFractionNoimageCell {
     
     static func getHeight() -> CGFloat {
         
-        let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticFractionNoimageCell", owner: self, options: nil)!
-        let cell: HDZItemStaticFractionNoimageCell = views.firstObject as! HDZItemStaticFractionNoimageCell;
+        let views = Bundle.main.loadNibNamed("HDZItemStaticFractionNoimageCell", owner: self, options: nil)!
+		let viewFirst = views.first
+        let cell: HDZItemStaticFractionNoimageCell = viewFirst as! HDZItemStaticFractionNoimageCell;
         let height :CGFloat = cell.frame.size.height;
         
         return height;

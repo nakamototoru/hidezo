@@ -17,8 +17,8 @@ internal class HDZUserDefaults {
     internal class var uuid: String {
         get {
             // Old UUID
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            if let oldUUID: String = userDefaults.stringForKey(KEY_USER_DEFAULTS_UUID) {
+            let userDefaults = UserDefaults.standard
+            if let oldUUID: String = userDefaults.string(forKey: KEY_USER_DEFAULTS_UUID) {
 				return oldUUID
 //                if self.initialization {
 //                    return oldUUID
@@ -27,7 +27,7 @@ internal class HDZUserDefaults {
             
             // New UUID
             let newUUID: NSUUID = NSUUID()
-            let uuidString: String = newUUID.UUIDString
+            let uuidString: String = newUUID.uuidString
             userDefaults.setValue(uuidString, forKey: KEY_USER_DEFAULTS_UUID)
             userDefaults.synchronize()
 //            self.initialization = true
@@ -41,14 +41,14 @@ internal class HDZUserDefaults {
     
     internal class var id: String {
         get {
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-			if let response:String = userDefaults.stringForKey( KEY_USER_DEFAULTS_ID ) {
+            let userDefaults = UserDefaults.standard
+			if let response:String = userDefaults.string( forKey: KEY_USER_DEFAULTS_ID ) {
 				return response
 			}
             return ""
         }
         set {
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            let userDefaults = UserDefaults.standard
             userDefaults.setValue(newValue, forKey: KEY_USER_DEFAULTS_ID)
             userDefaults.synchronize()
         }
@@ -59,14 +59,14 @@ internal class HDZUserDefaults {
 	
 	internal class var login_id: String {
 		get {
-			let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-			if let response:String = userDefaults.stringForKey( KEY_USER_DEFAULTS_LOGIN_ID ) {
+			let userDefaults = UserDefaults.standard
+			if let response:String = userDefaults.string( forKey: KEY_USER_DEFAULTS_LOGIN_ID ) {
 				return response
 			}
 			return ""
 		}
 		set {
-			let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+			let userDefaults = UserDefaults.standard
 			userDefaults.setValue(newValue, forKey: KEY_USER_DEFAULTS_LOGIN_ID)
 			userDefaults.synchronize()
 		}
@@ -92,16 +92,16 @@ internal class HDZUserDefaults {
     
     internal class var login: Bool {
         get {
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            return userDefaults.boolForKey(KEY_USER_DEFAULTS_LOGIN)
+            let userDefaults = UserDefaults.standard
+            return userDefaults.bool(forKey: KEY_USER_DEFAULTS_LOGIN)
         }
         set {
 //            if !newValue {
 //                self.initialization = false
 //            }
 			
-            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setBool(newValue, forKey: KEY_USER_DEFAULTS_LOGIN)
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(newValue, forKey: KEY_USER_DEFAULTS_LOGIN)
             userDefaults.synchronize()
         }
     }
@@ -111,15 +111,15 @@ internal class HDZUserDefaults {
 	
 	internal class var devicetoken: String {
 		get {
-			let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-			if let response:String = userDefaults.stringForKey(KEY_USER_DEFAULTS_DEVICETOKEN) {
+			let userDefaults = UserDefaults.standard
+			if let response:String = userDefaults.string(forKey: KEY_USER_DEFAULTS_DEVICETOKEN) {
 				return response
 			}
 			return ""
 		}
 		set {
-			let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-			userDefaults.setObject(newValue, forKey: KEY_USER_DEFAULTS_DEVICETOKEN)
+			let userDefaults = UserDefaults.standard
+			userDefaults.set(newValue, forKey: KEY_USER_DEFAULTS_DEVICETOKEN)
 			userDefaults.synchronize()
 		}
 	}	

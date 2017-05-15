@@ -20,7 +20,7 @@ class HDZItemStaticDetailViewController: UITableViewController {
 	@IBOutlet weak var cellDetail: UITableViewCell!
 	
 	// 対象商品
-	private var staticItem: StaticItem!
+	var staticItem: StaticItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +41,12 @@ class HDZItemStaticDetailViewController: UITableViewController {
 //		self.cellDetail.textLabel?.text = self.staticItem.detail
 		
 		// Header
-		self.tableView.tableHeaderView = HDZItemStaticDetailHeaderView.createView(self.staticItem, parent:self)
+		self.tableView.tableHeaderView = HDZItemStaticDetailHeaderView.createView(staticItem: self.staticItem, parent:self)
 		// Footer
-		self.tableView.tableFooterView = HDZItemStaticDetailFooterView.createView(self.staticItem, parent:self)
+		self.tableView.tableFooterView = HDZItemStaticDetailFooterView.createView(staticItem: self.staticItem, parent:self)
     }
 
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 	}
@@ -57,14 +57,16 @@ class HDZItemStaticDetailViewController: UITableViewController {
     }
 
     // MARK: Table view data source
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	//override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
 		if ( indexPath.section == 7 ) {
 			return 0.0 // self.tableView.tableFooterView!.frame.size.height
 		}
 
-		return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+		return super.tableView(tableView, heightForRowAt: indexPath) //super.tableView(tableView, heightForRowAtIndexPath: indexPath)
 	}
+
 	
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
@@ -76,21 +78,13 @@ class HDZItemStaticDetailViewController: UITableViewController {
 //        return 0
 //    }
 
-    /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - Create
 extension HDZItemStaticDetailViewController {
 	
 	internal class func createViewController(staticItem: StaticItem) -> HDZItemStaticDetailViewController {
-		let controller: HDZItemStaticDetailViewController = UIViewController.createViewController("HDZItemStaticDetailViewController")
+		let controller: HDZItemStaticDetailViewController = UIViewController.createViewController(name: "HDZItemStaticDetailViewController")
 		controller.staticItem = staticItem
 		return controller
 	}

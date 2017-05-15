@@ -13,18 +13,19 @@ class HDZItemDynamicHeaderView: UIView {
 
 	@IBOutlet weak var dateTime: UILabel!
 
-	private var dynamicItemInfo: DynamicItemInfo!
+	var dynamicItemInfo: DynamicItemInfo!
 
 	
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
+    //override func drawRect(rect: CGRect) {
         // Drawing code
 		if self.dynamicItemInfo == nil {
 			return
 		}
 
-		self.dateTime.text = self.dynamicItemInfo.lastUpdate.toString(NSDateFormatter(type: .DynamicDateTime))
+		self.dateTime.text = self.dynamicItemInfo.lastUpdate.toString(dateFormatter: DateFormatter(type: .DynamicDateTime))
     }
 }
 
@@ -32,7 +33,7 @@ class HDZItemDynamicHeaderView: UIView {
 extension HDZItemDynamicHeaderView {
 	
 	internal class func createView(dynamicItemInfo: DynamicItemInfo) -> HDZItemDynamicHeaderView {
-		let view: HDZItemDynamicHeaderView = UIView.createView("HDZItemDynamicHeaderView")
+		let view: HDZItemDynamicHeaderView = UIView.createView(nibName: "HDZItemDynamicHeaderView")
 		view.dynamicItemInfo = dynamicItemInfo
 		return view
 	}

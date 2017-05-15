@@ -16,16 +16,16 @@ class HDZOrderScaleViewController: UIViewController {
 
     @IBOutlet weak var pickerView: UIPickerView!
     
-    private var orderDetailItem: OrderDetailItem! = nil
+	var orderDetailItem: OrderDetailItem! = nil
     
-    private lazy var numScale: [String] = []
+	lazy var numScale: [String] = []
     
-    private weak var delegate: HDZOrderScaleViewControllerDelegate?
+	weak var delegate: HDZOrderScaleViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let index: Int = self.numScale.indexOf(self.orderDetailItem.order_num) {
+        if let index: Int = self.numScale.index(of: self.orderDetailItem.order_num) {
             self.pickerView.selectRow(index, inComponent: 0, animated: false)
         }
     }
@@ -39,20 +39,20 @@ extension HDZOrderScaleViewController {
     
     internal class func createViewController(viewController: HDZOrderDetailTableViewController, cell: HDZOrderDetailCell, orderDetailItem: OrderDetailItem) -> HDZOrderScaleViewController {
         
-        let controller: HDZOrderScaleViewController = UIViewController.createViewController("HDZOrderScaleViewController")
+        let controller: HDZOrderScaleViewController = UIViewController.createViewController(name: "HDZOrderScaleViewController")
         controller.orderDetailItem = orderDetailItem
         
 //        controller.numScale = orderDetailItem.num_scale
         controller.delegate = cell
         
-        let size: CGSize = UIScreen.mainScreen().bounds.size
+        let size: CGSize = UIScreen.main.bounds.size
         controller.preferredContentSize = CGSize(width: size.width, height: 216.0)
-        controller.modalPresentationStyle = .Popover
+        controller.modalPresentationStyle = .popover
         
         if let presentationController = controller.popoverPresentationController {
-            presentationController.permittedArrowDirections = [.Up, .Down]
+            presentationController.permittedArrowDirections = [.up, .down]
             presentationController.delegate = viewController
-            presentationController.backgroundColor = UIColor.lightGrayColor()
+            presentationController.backgroundColor = UIColor.lightGray
         }
 
         return controller
@@ -61,24 +61,27 @@ extension HDZOrderScaleViewController {
 
 // MARK: - UIPickerViewDelegate
 extension HDZOrderScaleViewController: UIPickerViewDelegate {
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.delegate?.didSelectRow(self.numScale[row], row: row)
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	//func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.delegate?.didSelectRow(numScale: self.numScale[row], row: row)
     }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+	
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return self.numScale[row] + (self.orderDetailItem.scale ?? "")
     }
 }
 
 // MARK: - UIPickerViewDataSource
 extension HDZOrderScaleViewController: UIPickerViewDataSource  {
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+	
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    //func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    //func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.numScale.count
     }
 }

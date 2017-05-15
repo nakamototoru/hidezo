@@ -27,7 +27,7 @@ class HDZSoapFax: NSObject {
 
 	// MARK: - メソッド
 	// MARK: リクエスト
-	private class func request(soapMes:String, completeBlock:(response:NSDictionary) -> Void, failureBlock:(error:NSError) -> Void) {
+	private class func request(soapMes:String, completeBlock:@escaping (_ response:NSDictionary) -> Void, failureBlock:(_ error:NSError) -> Void) {
 		
 		var soapMessageFinal = soapXmlFirst
 		// XML
@@ -43,16 +43,16 @@ class HDZSoapFax: NSObject {
 		let soapLenth = String(soapMessageFinal.characters.count)
 
 		let theURL = NSURL(string: theUrlString)
-		let mutableR = NSMutableURLRequest(URL: theURL!)
+		let mutableR = NSMutableURLRequest(url: theURL! as URL)
 
 		mutableR.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
 		mutableR.addValue("text/html; charset=utf-8", forHTTPHeaderField: "Content-Type")
 		mutableR.addValue(soapLenth, forHTTPHeaderField: "Content-Length")
-		mutableR.HTTPMethod = "POST"
-		mutableR.HTTPBody = soapMessageFinal.dataUsingEncoding(NSUTF8StringEncoding)
+		mutableR.httpMethod = "POST"
+		mutableR.httpBody = soapMessageFinal.data(using: String.Encoding.utf8)
 
 		// 3.AFNetworking Request
-		let manager = AFHTTPRequestOperation(request: mutableR)
+		let manager = AFHTTPRequestOperation(request: mutableR as URLRequest)
 		manager.setCompletionBlockWithSuccess(
 			{ (operation : AFHTTPRequestOperation, responseObject : AnyObject) -> Void in
 			
@@ -79,12 +79,12 @@ class HDZSoapFax: NSObject {
 					debugPrint("**** HDZSoapFax:request:completeBlock END ****")
 				#endif
 			
-			}, failure: { (operation : AFHTTPRequestOperation, error : NSError) -> Void in
+			} as? (AFHTTPRequestOperation, Any) -> Void, failure: { (operation : AFHTTPRequestOperation, error : NSError) -> Void in
 				
 				debugPrint(error, terminator: "ERROR:HDZSoapFax")
 				
 				failureBlock(error: error)
-			}
+			} as! (AFHTTPRequestOperation, Error) -> Void
 		)
 		manager.start()
 	}

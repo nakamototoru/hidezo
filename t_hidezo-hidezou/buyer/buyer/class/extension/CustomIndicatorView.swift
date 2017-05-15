@@ -25,10 +25,10 @@ extension CustomIndicatorView {
 
 	internal class func createView(framesize:CGSize) -> CustomIndicatorView {
 		
-		let indicatorView:CustomIndicatorView = CustomIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-		indicatorView.color = UIColor.blackColor()
-		indicatorView.frame = CGRectMake(0, 0, 160, 160)
-		indicatorView.center = CGPointMake(framesize.width/2, framesize.height/8)
+		let indicatorView:CustomIndicatorView = CustomIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+		indicatorView.color = UIColor.black
+		indicatorView.frame = CGRect(x: 0, y: 0, width: 160, height: 160)
+		indicatorView.center = CGPoint(x: framesize.width/2, y: framesize.height/8)
 
 		return indicatorView
 	}

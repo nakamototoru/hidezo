@@ -25,7 +25,7 @@ class HDZOrder: Object {
 	// !!!: dezami
 	dynamic var numScaleStr: String = ""
 	// !!!:dezami
-	dynamic var createdAt: NSTimeInterval = 0.0
+	dynamic var createdAt: Double = 0
 	
     override static func primaryKey() -> String? {
         return "id"
@@ -42,7 +42,7 @@ extension HDZOrder {
         
         var order: HDZOrder! = nil
         do {
-            order = try HDZOrder.queries(supplierId, itemId: itemId, dynamic: dynamic)
+            order = try HDZOrder.queries(supplierId: supplierId, itemId: itemId, dynamic: dynamic)
         } catch let error as NSError {
 			#if DEBUG
             debugPrint(error)
@@ -51,7 +51,7 @@ extension HDZOrder {
         
         if order == nil {
             order = HDZOrder()
-            order.id = NSUUID().UUIDString
+            order.id = NSUUID().uuidString
             order.itemId = itemId
             order.supplierId = supplierId
             order.dynamic = dynamic
@@ -100,7 +100,7 @@ extension HDZOrder {
 		let str:String = "supplierId = '" + supplierId + "' AND itemId = '" + itemId + "' AND dynamic = " + hash
 		let predicate = NSPredicate(format: str)
 		// !!!:ソート追加
-        return try Realm().objects(HDZOrder.self).filter(predicate).sorted("createdAt").first
+        return try Realm().objects(HDZOrder.self).filter(predicate).sorted(byKeyPath: "createdAt").first
     }
 
     internal class func queries(supplierId: String) throws -> Results<HDZOrder> {
@@ -109,7 +109,7 @@ extension HDZOrder {
 		let str:String = "supplierId = '" + supplierId + "'"
 		let predicate = NSPredicate(format: str)
 		// !!!:ソート追加
-        return try Realm().objects(HDZOrder.self).filter(predicate).sorted("createdAt")
+        return try Realm().objects(HDZOrder.self).filter(predicate).sorted(byKeyPath: "createdAt")
     }
 
     internal class func deleteObject(object: HDZOrder) throws {
@@ -120,7 +120,7 @@ extension HDZOrder {
     }
 
     internal class func deleteItem(supplierId: String, itemId: String, dynamic: Bool) throws {
-        if let result: HDZOrder = try self.queries(supplierId, itemId: itemId, dynamic: dynamic) {
+        if let result: HDZOrder = try self.queries(supplierId: supplierId, itemId: itemId, dynamic: dynamic) {
             let realm: Realm = try Realm()
             try realm.write({
                 realm.delete(result)
@@ -129,7 +129,7 @@ extension HDZOrder {
     }
     
     internal class func deleteSupplier(supplierId: String) throws {
-        let result: Results<HDZOrder> = try self.queries(supplierId)
+        let result: Results<HDZOrder> = try self.queries(supplierId: supplierId)
         try Realm().delete(result)
     }
 	
@@ -144,7 +144,7 @@ extension HDZOrder {
 	// !!!: dezami
 	internal class func updateSize(supplierId: String, itemId: String, dynamic: Bool, newsize: String) throws {
 
-		if let result: HDZOrder = try self.queries(supplierId, itemId: itemId, dynamic: dynamic) {
+		if let result: HDZOrder = try self.queries(supplierId: supplierId, itemId: itemId, dynamic: dynamic) {
 			let realm: Realm = try Realm()
 			try realm.write({
 				//realm.delete(result)

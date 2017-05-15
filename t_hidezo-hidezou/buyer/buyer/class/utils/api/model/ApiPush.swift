@@ -23,12 +23,12 @@ internal struct DeviceToken: WrapCustomizable {
 // MARK: レスポンス
 internal struct DeviceTokenResult: Unboxable {
 	
-//	let message: String
+	//	let message: String
 	let result: Bool
 	
-	init(unboxer: Unboxer) {
-//		self.message = unboxer.unbox("message")
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		//		self.message = unboxer.unbox("message")
+		self.result = try! unboxer.unbox(key: "result")
 	}
 }
 
@@ -37,9 +37,9 @@ internal struct DeviceTokenError: Unboxable {
 	let message: String
 	let result: Bool
 	
-	init(unboxer: Unboxer) {
-		self.message = unboxer.unbox("message")
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+		self.result = try! unboxer.unbox(key: "result")
 	}
 }
 
@@ -48,8 +48,8 @@ internal struct SupplierId:Unboxable {
 	
 	let supplierId: String
 	
-	init(unboxer: Unboxer) {
-		self.supplierId = unboxer.unbox("supplierId")
+	init(unboxer: Unboxer) throws {
+		self.supplierId = try! unboxer.unbox(key: "supplierId")
 	}
 }
 
@@ -58,9 +58,9 @@ internal struct MessageUp:Unboxable {
 	let order_no:String
 	let messageCount:Int
 	
-	init(unboxer: Unboxer) {
-		self.order_no = unboxer.unbox("order_no")
-		self.messageCount = unboxer.unbox("messageCount")
+	init(unboxer: Unboxer) throws {
+		self.order_no = try! unboxer.unbox(key: "order_no")
+		self.messageCount = try! unboxer.unbox(key: "messageCount")
 	}
 }
 
@@ -68,8 +68,9 @@ internal struct SupplierUpResult: Unboxable {
 	
 	let supplierUpList: [SupplierId]?
 
-	init(unboxer: Unboxer) {
-		self.supplierUpList = unboxer.unbox("supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
+	init(unboxer: Unboxer) throws {
+		//self.supplierUpList = try! unboxer.unbox(key: "supplierUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
+		self.supplierUpList = unboxer.unbox(key: "supplierUpList", allowInvalidElements: true)
 	}
 }
 
@@ -78,7 +79,8 @@ internal struct MessageUpResult: Unboxable {
 	let messageUpList: [MessageUp]?
 	
 	init(unboxer: Unboxer) {
-		self.messageUpList = unboxer.unbox("messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
+		//self.messageUpList = try! unboxer.unbox(key: "messageUpList", isKeyPath: false, context: nil, allowInvalidElements: true)
+		self.messageUpList = unboxer.unbox(key: "messageUpList", allowInvalidElements: true)
 	}
 }
 
@@ -90,12 +92,11 @@ struct BadgeResult: Unboxable {
 	let supplierUp: SupplierUpResult
 	let messageUp: MessageUpResult
 
-	init(unboxer: Unboxer) {
-		self.result = unboxer.unbox("result")
-//		self.message = unboxer.unbox("message")
-
-		self.supplierUp = unboxer.unbox("supplierUp");
-		self.messageUp = unboxer.unbox("messageUp");
+	init(unboxer: Unboxer) throws {
+		self.result = try! unboxer.unbox(key: "result")
+		//		self.message = unboxer.unbox("message")
+		self.supplierUp = try! unboxer.unbox(key: "supplierUp");
+		self.messageUp = try! unboxer.unbox(key: "messageUp");
 	}
 }
 
@@ -104,9 +105,9 @@ struct BadgeError: Unboxable {
 	let message: String
 	let result: Bool
 	
-	init(unboxer: Unboxer) {
-		self.message = unboxer.unbox("message")
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+		self.result = try! unboxer.unbox(key: "result")
 	}
 }
 
@@ -121,7 +122,7 @@ internal struct PushApsResult: Unboxable {
 
 	let alert:String
 	
-	init(unboxer:Unboxer) {
-		self.alert = unboxer.unbox("alert")
+	init(unboxer:Unboxer) throws {
+		self.alert = try! unboxer.unbox(key: "alert")
 	}
 }

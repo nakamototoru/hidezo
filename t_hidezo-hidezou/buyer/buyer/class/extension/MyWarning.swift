@@ -14,7 +14,7 @@ class MyWarning: NSObject {
 	
 	internal class func getBaseViewController() -> UIViewController {
 		// 親ビューコンをなんとか検索
-		var baseView:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
+		var baseView:UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
 		while baseView.presentedViewController != nil && !(baseView.presentedViewController?.isBeingDismissed())! {
 			baseView = baseView.presentedViewController!
 		}
@@ -28,32 +28,32 @@ class MyWarning: NSObject {
 			return
 		}
 		
-		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-		let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (UIAlertAction) in
+		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
 			// 閉じた後
 			isOpened = false
 		}
 		alert.addAction(alertAction)
 		
 		let baseView:UIViewController = getBaseViewController()
-		baseView.presentViewController(alert, animated: true) {
+		baseView.present(alert, animated: true) {
 			// 開いた後
 		}
 		isOpened = true
 	}
 	
 	internal class func Warning(message:String) {
-		Warning("", message: message)
+		Warning(title: "", message: message)
 	}
 	
 	// 一択
 	internal class func Dialog(title:String, message:String, alertActionDone:UIAlertAction) {
 		
-		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		alert.addAction(alertActionDone)
 
 		let baseView:UIViewController = getBaseViewController()
-		baseView.presentViewController(alert, animated: true) {
+		baseView.present(alert, animated: true) {
 			// 開いた後
 		}
 	}
@@ -61,15 +61,15 @@ class MyWarning: NSObject {
 	// 二択、実行時のみ登録
 	internal class func Alert(title:String, message:String, alertActionOkey:UIAlertAction) {
 		
-		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+		let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		alert.addAction(alertActionOkey)
 
-		let alertActionCancel = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (UIAlertAction) in
+		let alertActionCancel = UIAlertAction(title: "キャンセル", style: .cancel) { (UIAlertAction) in
 		}
 		alert.addAction(alertActionCancel)
 		
 		let baseView:UIViewController = getBaseViewController()
-		baseView.presentViewController(alert, animated: true) {
+		baseView.present(alert, animated: true) {
 			// 開いた後
 		}
 	}

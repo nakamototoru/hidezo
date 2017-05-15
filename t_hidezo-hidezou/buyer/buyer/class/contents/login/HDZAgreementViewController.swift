@@ -21,19 +21,17 @@ class HDZAgreementViewController: UIViewController, UIWebViewDelegate {
 		/*
 		規約ファイル読込
 		*/
-		let path_rich:String = NSBundle.mainBundle().pathForResource("kiyaku-4", ofType: "rtf")!
-		let url_rich:NSURL = NSURL(fileURLWithPath: path_rich)
-		let request:NSURLRequest = NSURLRequest(URL: url_rich)
+		let path_rich = Bundle.main.path(forResource: "kiyaku-4", ofType: "rtf")!
+		let url_rich = URL(fileURLWithPath: path_rich)
+		let request = URLRequest(url: url_rich)
 		webviewAgreement.loadRequest(request)
-		
     }
 
 	/*
 	WebViewのloadが終了した時に呼ばれるメソッド.
 	*/
-	func webViewDidFinishLoad(webView: UIWebView) {
+	func webViewDidFinishLoad(_ webView: UIWebView) {
 		print("load finished")
-
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -41,22 +39,12 @@ class HDZAgreementViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension HDZAgreementViewController {
 	
 	internal class func createViewController() -> HDZAgreementViewController {
-		let controller: HDZAgreementViewController = UIViewController.createViewController("HDZAgreementViewController")
+		let controller: HDZAgreementViewController = UIViewController.createViewController(name: "HDZAgreementViewController")
 		return controller
 	}
 

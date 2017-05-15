@@ -46,7 +46,7 @@ class HDZOrderItemTableViewController: UITableViewController {
 extension HDZOrderItemTableViewController {
     
     internal class func createViewController(orderDetailItem: OrderDetailItem) -> HDZOrderItemTableViewController {
-        let controller: HDZOrderItemTableViewController = UIViewController.createViewController("HDZOrderItemTableViewController")
+        let controller: HDZOrderItemTableViewController = UIViewController.createViewController(name: "HDZOrderItemTableViewController")
         controller.orderDetailItem = orderDetailItem
         return controller
     }

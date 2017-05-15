@@ -16,16 +16,16 @@ class HDZOrderDetailCell: UITableViewCell {
     @IBOutlet weak var scaleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     
-    private var orderDetailItem: OrderDetailItem! = nil
-    private var viewController: HDZOrderDetailTableViewController! = nil
-    private var attr_flg: AttrFlg = .other
+	var orderDetailItem: OrderDetailItem! = nil
+	var viewController: HDZOrderDetailTableViewController! = nil
+	var attr_flg: AttrFlg = .other
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -36,14 +36,14 @@ class HDZOrderDetailCell: UITableViewCell {
 extension HDZOrderDetailCell {
     
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZOrderDetailCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZOrderDetailCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZOrderDetailCell")
     }
     
-    internal class func dequeueReusableCell(controller: HDZOrderDetailTableViewController, tableView: UITableView, for indexPath: NSIndexPath, orderDetailItem: OrderDetailItem, attr_flg: AttrFlg) -> HDZOrderDetailCell {
+    internal class func dequeueReusableCell(controller: HDZOrderDetailTableViewController, tableView: UITableView, for indexPath: IndexPath, orderDetailItem: OrderDetailItem, attr_flg: AttrFlg) -> HDZOrderDetailCell {
 		
-        let cell: HDZOrderDetailCell = tableView.dequeueReusableCellWithIdentifier("HDZOrderDetailCell", forIndexPath: indexPath) as! HDZOrderDetailCell
+        let cell: HDZOrderDetailCell = tableView.dequeueReusableCell(withIdentifier: "HDZOrderDetailCell", for: indexPath) as! HDZOrderDetailCell
 		
         cell.viewController = controller
         cell.orderDetailItem = orderDetailItem
@@ -51,7 +51,7 @@ extension HDZOrderDetailCell {
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.itemNameLabel.text = orderDetailItem.name
 		
-        cell.priceLabel.text = String(format: "価格：%d円", priceValue(orderDetailItem.price, order_num: orderDetailItem.order_num, attr_flg: attr_flg))
+        cell.priceLabel.text = String(format: "価格：%d円", priceValue(price: orderDetailItem.price, order_num: orderDetailItem.order_num, attr_flg: attr_flg))
         
         if orderDetailItem.scale != nil && orderDetailItem.standard != nil && orderDetailItem.loading != nil {
 			cell.detailLabel.text = String(format: "（単価:%@円/%@・%@/%@）",orderDetailItem.price, orderDetailItem.standard ?? "", orderDetailItem.loading ?? "", orderDetailItem.scale ?? "")
@@ -66,7 +66,7 @@ extension HDZOrderDetailCell {
     
     internal class func priceValue(price: String, order_num: String, attr_flg: AttrFlg) -> Int {
         
-        let prices: [String] = price.componentsSeparatedByString(",")
+        let prices: [String] = price.components(separatedBy: ",") //componentsSeparatedByString(",")
         if prices.count < 1 {
             return 0
         }
@@ -113,8 +113,9 @@ extension HDZOrderDetailCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZOrderDetailCell", owner: self, options: nil)!
-		let cell: HDZOrderDetailCell = views.firstObject as! HDZOrderDetailCell;
+		let views = Bundle.main.loadNibNamed("HDZOrderDetailCell", owner: self, options: nil)!
+		let viewFirst = views.first
+		let cell: HDZOrderDetailCell = viewFirst as! HDZOrderDetailCell;
 		let height :CGFloat = cell.frame.size.height;
 		
 		return height;
@@ -125,9 +126,9 @@ extension HDZOrderDetailCell {
 // MARK: - action
 extension HDZOrderDetailCell {
 
-    @IBAction func didSelectedEdit(sender: UIButton) {
-        let controller: HDZOrderScaleViewController = HDZOrderScaleViewController.createViewController(self.viewController, cell: self, orderDetailItem: self.orderDetailItem)
-        self.viewController.presentViewController(controller, animated: true, completion: nil)
+    @IBAction func didSelectedEdit(_ sender: Any) {
+        let controller: HDZOrderScaleViewController = HDZOrderScaleViewController.createViewController(viewController: self.viewController, cell: self, orderDetailItem: self.orderDetailItem)
+        self.viewController.present(controller, animated: true, completion: nil)
     }
 }
 
@@ -137,6 +138,6 @@ extension HDZOrderDetailCell: HDZOrderScaleViewControllerDelegate {
     func didSelectRow(numScale: String, row: Int) {
         self.scaleLabel.text = String(format: "数量: %@%@", numScale, orderDetailItem.scale ?? "")
         
-        self.priceLabel.text = String(format: "価格：%d円", HDZOrderDetailCell.priceValue(self.orderDetailItem.price, order_num: numScale, attr_flg: self.attr_flg))
+        self.priceLabel.text = String(format: "価格：%d円", HDZOrderDetailCell.priceValue(price: self.orderDetailItem.price, order_num: numScale, attr_flg: self.attr_flg))
     }
 }

@@ -10,18 +10,19 @@ import UIKit
 import Alamofire
 import Unbox
 
+// , UIPickerViewDelegate, UIPickerViewDataSource
 class HDZCommentFormViewController: UIViewController {
 
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var sendCommentButton: UIButton!
 
-    private var order_no: String = ""
-    private var messageResult: MessageResult! = nil
+	var order_no: String = ""
+	var messageResult: MessageResult! = nil
 
-    private var request: Alamofire.Request? = nil
-    private var listCharger:[String] = []
-    private var charge: String = ""
+	var request: Alamofire.Request? = nil
+	var listCharger:[String] = []
+	var charge: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class HDZCommentFormViewController: UIViewController {
         // テキストビュー装飾
         self.commentTextView.layer.cornerRadius = 5.0
         self.commentTextView.layer.borderWidth = 1.0
-        self.commentTextView.layer.borderColor = UIColor.grayColor().CGColor
+        self.commentTextView.layer.borderColor = UIColor.gray.cgColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,12 +43,12 @@ class HDZCommentFormViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.request?.resume()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.request?.suspend()
     }
@@ -67,35 +68,53 @@ class HDZCommentFormViewController: UIViewController {
     */
 
     // アクション送信
-    @IBAction func didSelectedSend(sender: AnyObject) {
+    @IBAction func didSelectedSend(_ sender: Any) {
         
         guard let message: String = self.commentTextView.text else {
-            self.sendCommentButton.enabled = true
+            self.sendCommentButton.isEnabled = true
             return
         }
         
-        let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
+        let completion: (_ unboxable: MessageAddResult?) -> Void = { (unboxable) in
             self.request = nil
             //            self.delegate?.requestUpdate()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
-        let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        let error: (_ error: Error?, _ unboxable: MessageAddError?) -> Void = { (error, unboxable) in
+            self.dismiss(animated: true, completion: nil)
         }
         
-        self.request = HDZApi.adMessage(self.order_no, charge: self.charge, message: message, completionBlock: completion, errorBlock: error)
+        self.request = HDZApi.adMessage(order_no: self.order_no, charge: self.charge, message: message, completionBlock: completion, errorBlock: error)
         
-        self.sendCommentButton.enabled = false
+        self.sendCommentButton.isEnabled = false
     }
 
     // アクション閉じる
-    @IBAction func onCloseSelf(sender: AnyObject) {
+    @IBAction func onCloseSelf(_ sender: Any) {
         
-        self.dismissViewControllerAnimated(true) { 
+        self.dismiss(animated: true) { 
             
         }
     }
+	
+	// MARK: - UIPickerViewDataSource
+//	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//		return 1
+//	}
+//	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//		//        return self.chargeList.count
+//		return self.listCharger.count
+//	}
+//	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//		return self.listCharger[row]
+//	}
+//
+//	// MARK: - UIPickerViewDelegate
+//	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//		self.charge = self.listCharger[row]
+//	}
+
 }
 
 extension HDZCommentFormViewController {
@@ -111,25 +130,25 @@ extension HDZCommentFormViewController {
 
 // MARK: - UIPickerViewDataSource
 extension HDZCommentFormViewController: UIPickerViewDataSource {
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+	
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    //func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //        return self.chargeList.count
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.listCharger.count
     }
 }
 
 // MARK: - UIPickerViewDelegate
 extension HDZCommentFormViewController: UIPickerViewDelegate {
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.charge = self.listCharger[row]
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return self.listCharger[row]
     }
 }

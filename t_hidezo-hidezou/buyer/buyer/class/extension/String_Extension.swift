@@ -9,8 +9,10 @@
 import Foundation
 
 extension String {
-    
-    func urlEscapes() -> String? {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-    }
+	
+	// エスケープシーケンス
+//    func urlEscapes() -> String? {
+//        //return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+//		return self
+//    }
 }

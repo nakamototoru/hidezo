@@ -19,7 +19,7 @@ class HDZItemDynamicFractionCell: UITableViewCell {
 	@IBOutlet weak var itemCount: UILabel!
 	@IBOutlet weak var priceLabel: UILabel!
 
-	private var dynamicItem: DynamicItem! = nil
+	var dynamicItem: DynamicItem! = nil
 //	var count: Int = 0
 //		{
 //		didSet {
@@ -32,19 +32,17 @@ class HDZItemDynamicFractionCell: UITableViewCell {
 		}
 	}
 	
-	private var attr_flg: AttrFlg = AttrFlg.direct
-	private var supplierId: String = ""
+	var attr_flg: AttrFlg = AttrFlg.direct
+	var supplierId: String = ""
 
 	var parent:UITableViewController!
-//	var delegate:HDZItemFractionViewControllerDelegate?
-	
 	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -56,13 +54,13 @@ class HDZItemDynamicFractionCell: UITableViewCell {
 extension HDZItemDynamicFractionCell {
 	
 	internal class func register(tableView: UITableView) {
-		let bundle: NSBundle = NSBundle.mainBundle()
+		let bundle = Bundle.main
 		let nib: UINib = UINib(nibName: "HDZItemDynamicFractionCell", bundle: bundle)
-		tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemDynamicFractionCell")
+		tableView.register(nib, forCellReuseIdentifier: "HDZItemDynamicFractionCell")
 	}
 	
-	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, dynamicItem: DynamicItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemDynamicFractionCell {
-		let cell: HDZItemDynamicFractionCell = tableView.dequeueReusableCellWithIdentifier("HDZItemDynamicFractionCell", forIndexPath: indexPath) as! HDZItemDynamicFractionCell
+	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: IndexPath, dynamicItem: DynamicItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemDynamicFractionCell {
+		let cell: HDZItemDynamicFractionCell = tableView.dequeueReusableCell(withIdentifier: "HDZItemDynamicFractionCell", for: indexPath) as! HDZItemDynamicFractionCell
 		cell.dynamicItem = dynamicItem
 		cell.attr_flg = attr_flg
 		cell.supplierId = supplierId
@@ -75,10 +73,10 @@ extension HDZItemDynamicFractionCell {
 // MARK: - BuyCart
 extension HDZItemDynamicFractionCell {
 	
-	private func updateItem() {
+	func updateItem() {
 		
 		do {
-			try HDZOrder.add(self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true, numScale: self.dynamicItem.num_scale)
+			try HDZOrder.add(supplierId: self.supplierId, itemId: self.dynamicItem.id, size: self.itemsize, name: self.dynamicItem.item_name, price: self.dynamicItem.price, scale: "", standard: "", imageURL: nil, dynamic: true, numScale: self.dynamicItem.num_scale)
 		} catch let error as NSError {
 			#if DEBUG
 			debugPrint(error)
@@ -90,8 +88,9 @@ extension HDZItemDynamicFractionCell {
 		
 		//return [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil][0];
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemDynamicCell", owner: self, options: nil)!
-		let cell: HDZItemDynamicFractionCell = views.firstObject as! HDZItemDynamicFractionCell;
+		let views = Bundle.main.loadNibNamed("HDZItemDynamicCell", owner: self, options: nil)!
+		let viewFirst = views.first
+		let cell: HDZItemDynamicFractionCell = viewFirst as! HDZItemDynamicFractionCell;
 		let height :CGFloat = cell.frame.size.height;
 		
 		return height;
@@ -101,13 +100,14 @@ extension HDZItemDynamicFractionCell {
 // MARK: - Action
 extension HDZItemDynamicFractionCell {
 	
-	@IBAction func onAddScale(sender: AnyObject) {
+	@IBAction func onAddScale(_ sender: Any) {
 		
 		if self.dynamicItem.num_scale.count > 0 {
 			// 分数選択ダイアログ
-			let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(self.parent, fractions: self.dynamicItem.num_scale, itemsize: self.itemsize)
+			let vc:HDZItemFractionViewController = HDZItemFractionViewController.createViewController(parent: self.parent, fractions: self.dynamicItem.num_scale, itemsize: self.itemsize)
 			vc.delegate = self
-			self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+			//self.parent.presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+			self.parent.presentPopupViewController(popupViewController: vc)
 		}
 	}
 	
@@ -126,7 +126,7 @@ extension HDZItemDynamicFractionCell: HDZItemFractionViewControllerDelegate {
 		else {
 			self.itemsize = "0"
 			// 注文削除処理
-			try! HDZOrder.deleteItem(self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
+			try! HDZOrder.deleteItem(supplierId: self.supplierId, itemId: self.dynamicItem.id, dynamic: true)
 		}
 	}
 }

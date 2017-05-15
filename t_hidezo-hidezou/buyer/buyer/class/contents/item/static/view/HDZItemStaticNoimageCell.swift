@@ -19,9 +19,9 @@ class HDZItemStaticNoimageCell: UITableViewCell {
     var parent:UITableViewController!
     
 //    private var staticItem: StaticItem!
-	private var displayItem:DisplayStaticItem! = nil
-    private var attr_flg: AttrFlg = AttrFlg.direct
-    private var supplierId: String = ""
+	var displayItem:DisplayStaticItem! = nil
+	var attr_flg: AttrFlg = AttrFlg.direct
+	var supplierId: String = ""
     var itemsize:String = "0" {
         didSet {
             self.itemCount.text = itemsize
@@ -33,7 +33,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -43,7 +43,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
     func updateItem() {
     
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.displayItem.id, size: self.itemsize, name: self.displayItem.name, price: self.displayItem.price, scale: self.displayItem.scale, standard: self.displayItem.standard, imageURL: "", dynamic: false, numScale: self.displayItem.num_scale)
+            try HDZOrder.add(supplierId: self.supplierId, itemId: self.displayItem.id, size: self.itemsize, name: self.displayItem.name, price: self.displayItem.price, scale: self.displayItem.scale, standard: self.displayItem.standard, imageURL: "", dynamic: false, numScale: self.displayItem.num_scale)
         } catch let error as NSError {
             #if DEBUG
                 debugPrint(error)
@@ -52,7 +52,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
     }
 
     // Action
-    @IBAction func didSelectedAdd(button: UIButton) {
+    @IBAction func didSelectedAdd(_ sender: Any) {
         
         var value:Int = Int(self.itemsize)!
         value += 1
@@ -64,7 +64,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
         self.updateItem()
     }
     
-    @IBAction func didSelectedSub(button: UIButton) {
+    @IBAction func didSelectedSub(_ sender: Any) {
         
         var value:Int = Int(self.itemsize)!
         value -= 1
@@ -77,7 +77,7 @@ class HDZItemStaticNoimageCell: UITableViewCell {
             value = 0
             self.itemsize = String(value)
             //削除
-            try! HDZOrder.deleteItem(self.supplierId, itemId: self.displayItem.id, dynamic: false)
+            try! HDZOrder.deleteItem(supplierId: self.supplierId, itemId: self.displayItem.id, dynamic: false)
         }
     }
 
@@ -87,14 +87,14 @@ class HDZItemStaticNoimageCell: UITableViewCell {
 extension HDZItemStaticNoimageCell {
     
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZItemStaticNoimageCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticNoimageCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZItemStaticNoimageCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: DisplayStaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticNoimageCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: IndexPath, staticItem: DisplayStaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticNoimageCell {
         
-        let cell: HDZItemStaticNoimageCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticNoimageCell", forIndexPath: indexPath) as! HDZItemStaticNoimageCell
+        let cell: HDZItemStaticNoimageCell = tableView.dequeueReusableCell(withIdentifier: "HDZItemStaticNoimageCell", for: indexPath) as! HDZItemStaticNoimageCell
         cell.displayItem = staticItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
@@ -104,7 +104,7 @@ extension HDZItemStaticNoimageCell {
         
         // アイテム数
         cell.itemsize = "0"
-        if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
+        if let item: HDZOrder = try! HDZOrder.queries(supplierId: supplierId, itemId: staticItem.id, dynamic: false) {
             if let _: Int = Int(item.size) {
                 cell.itemsize = item.size
             }
@@ -118,7 +118,9 @@ extension HDZItemStaticNoimageCell {
             cell.priceLabel.text = ""
         }
         else {
-            cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+            //cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+			
+			cell.priceLabel.text = "(" + staticItem.standard + "・" + staticItem.loading + "/" + staticItem.scale + ")"
         }
         cell.labelUnitPrice.text = String(format: "単価:\(staticItem.price)円/\(staticItem.scale)")
         
@@ -131,8 +133,9 @@ extension HDZItemStaticNoimageCell {
     
     static func getHeight() -> CGFloat {
         
-        let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticNoimageCell", owner: self, options: nil)!
-        let cell: HDZItemStaticNoimageCell = views.firstObject as! HDZItemStaticNoimageCell;
+        let views = Bundle.main.loadNibNamed("HDZItemStaticNoimageCell", owner: self, options: nil)!
+		let viewFirst = views.first
+        let cell: HDZItemStaticNoimageCell = viewFirst as! HDZItemStaticNoimageCell;
         let height :CGFloat = cell.frame.size.height;
         
         return height;

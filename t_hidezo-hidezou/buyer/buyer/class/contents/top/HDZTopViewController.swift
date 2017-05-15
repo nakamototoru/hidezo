@@ -16,17 +16,17 @@ class HDZTopViewController: UIViewController {
         // Do any additional setup after loading the view.		
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if HDZUserDefaults.login {
             // is login
             let controller: HDZHomeViewController = HDZHomeViewController.createViewController()
-            UIApplication.setRootViewController(controller)
+            UIApplication.setRootViewController(viewController: controller)
         } else {
             // not login
             let controller: UINavigationController = HDZLoginViewController.createViewController()
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
@@ -40,6 +40,6 @@ class HDZTopViewController: UIViewController {
 extension HDZTopViewController {
     
     internal class func createViewController() -> HDZTopViewController {
-        return UIViewController.createViewController("HDZTopViewController")
+        return UIViewController.createViewController(name: "HDZTopViewController")
     }
 }

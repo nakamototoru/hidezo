@@ -22,9 +22,9 @@ internal struct CheckDynamicItemsResultError: Unboxable {
 	let message: String
 	let result: Bool
 	
-	init(unboxer: Unboxer) {
-		self.message = unboxer.unbox("message")
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+		self.result = try! unboxer.unbox(key: "result")
 	}
 }
 
@@ -36,9 +36,9 @@ internal struct CheckDynamicItemsResultComplete: Unboxable {
 //	let comment_badge_total: String
 //	let icon_badge_total: String
 	
-	init(unboxer: Unboxer) {
+	init(unboxer: Unboxer) throws {
 //		self.message = unboxer.unbox("message")
-		self.result = unboxer.unbox("result")
+		self.result = try! unboxer.unbox(key: "result")
 		
 //		self.dynamic_item_update_badge_total = unboxer.unbox("dynamic_item_update_badge_total")
 //		self.comment_badge_total = unboxer.unbox("comment_badge_total");

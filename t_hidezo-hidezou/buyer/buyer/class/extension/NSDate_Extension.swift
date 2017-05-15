@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     
-    internal func toString(dateFormatter: NSDateFormatter) -> String {
-        return dateFormatter.stringFromDate(self)
+    internal func toString(dateFormatter: DateFormatter) -> String {
+        return dateFormatter.string(from: self)
     }    
 }

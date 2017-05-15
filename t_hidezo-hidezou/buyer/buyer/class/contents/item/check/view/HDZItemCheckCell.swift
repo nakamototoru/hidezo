@@ -32,13 +32,9 @@ class HDZItemCheckCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 		
-//		//画像タップ
-//		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemCheckCell.tapGestureFromImageView1(_:)))
-//		self.iconImageView.addGestureRecognizer(myTap)
-
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -49,13 +45,13 @@ class HDZItemCheckCell: UITableViewCell {
 extension HDZItemCheckCell {
     
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZItemCheckCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemCheckCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZItemCheckCell")
     }
 
-    internal class func dequeueReusableCell(tableView: UITableView, indexPath: NSIndexPath, delegate: HDZItemCheckCellDelegate) -> HDZItemCheckCell {
-        let cell: HDZItemCheckCell = tableView.dequeueReusableCellWithIdentifier("HDZItemCheckCell", forIndexPath: indexPath) as! HDZItemCheckCell
+    internal class func dequeueReusableCell(tableView: UITableView, indexPath: IndexPath, delegate: HDZItemCheckCellDelegate) -> HDZItemCheckCell {
+        let cell: HDZItemCheckCell = tableView.dequeueReusableCell(withIdentifier: "HDZItemCheckCell", for: indexPath) as! HDZItemCheckCell
         cell.delegate = delegate
         return cell
     }
@@ -67,8 +63,9 @@ extension HDZItemCheckCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemCheckCell", owner: self, options: nil)!
-		let cell: HDZItemCheckCell = views.firstObject as! HDZItemCheckCell;
+		let views = Bundle.main.loadNibNamed("HDZItemCheckCell", owner: self, options: nil)!
+		let viewFirst = views.first
+		let cell: HDZItemCheckCell = viewFirst as! HDZItemCheckCell;
 		let height :CGFloat = cell.frame.size.height;
 		
 		return height;
@@ -80,19 +77,19 @@ extension HDZItemCheckCell {
 extension HDZItemCheckCell {
 	
 	// カート内容を更新
-	private func updateCart(newsizestr: String ) {
+	func updateCart(newsizestr: String ) {
 		
 		let supplierId:String = self.order.supplierId
-		try! HDZOrder.updateSize(supplierId, itemId: self.order.itemId, dynamic: self.order.dynamic, newsize: newsizestr)
+		try! HDZOrder.updateSize(supplierId: supplierId, itemId: self.order.itemId, dynamic: self.order.dynamic, newsize: newsizestr)
 
 		// 親に通達
 		self.delegate?.itemcheckcellReload()
 	}
 	
 	// カートから削除
-	private func deleteCartObject() {
+	func deleteCartObject() {
 		
-		try! HDZOrder.deleteObject(self.order)
+		try! HDZOrder.deleteObject(object: self.order)
 		self.delegate?.itemcheckcellReload()
 	}
 
@@ -101,12 +98,12 @@ extension HDZItemCheckCell {
 // MARK: - Action
 extension HDZItemCheckCell {
     
-    @IBAction func didSelectedDelete(button: UIButton) {
+    @IBAction func didSelectedDelete(_ sender: Any) {
 		
 		self.deleteCartObject()
     }
 	
-	@IBAction func onSelectedAdd(sender: AnyObject) {
+	@IBAction func onSelectedAdd(_ sender: Any) {
 		
 		// カート内カウント加算
 		var value:Int = Int(self.order.size)!
@@ -116,10 +113,10 @@ extension HDZItemCheckCell {
 		}
 		let newsize:String = String(value)
 
-		updateCart(newsize)
+		updateCart(newsizestr: newsize)
 	}
 	
-	@IBAction func onSelectedSub(sender: AnyObject) {
+	@IBAction func onSelectedSub(_ sender: Any) {
 		
 		// カート内カウント減算
 		var value:Int = Int(self.order.size)!
@@ -127,7 +124,7 @@ extension HDZItemCheckCell {
 		if (value > 0) {
 			//更新
 			let newsize:String = String(value)
-			updateCart(newsize)
+			updateCart(newsizestr: newsize)
 		}
 		else {
 			value = 0

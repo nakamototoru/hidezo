@@ -11,48 +11,41 @@ import UIKit
 class UIPlaceHolderTextView: UITextView {
 
 	lazy var placeHolderLabel:UILabel = UILabel()
-	var placeHolderColor:UIColor = UIColor.lightGrayColor()
+	var placeHolderColor:UIColor = UIColor.lightGray
 	var placeHolder:String = ""
 	
-//	required public init(coder aDecoder: NSCoder) {
-//		super.init(coder: aDecoder)
-//	}
-	
-//	override init(frame: CGRect){
-//		super.init(frame: frame)
-//	}
-	
-//	override init() {
-//		super.init()
-//	}
-	
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIPlaceHolderTextView.textChanged(_:)), name: UITextViewTextDidChangeNotification, object: nil)
+		// UITextViewTextDidChangeNotification
+		NotificationCenter.default.addObserver(self,
+		                                       selector: #selector(UIPlaceHolderTextView.textChanged),
+		                                       name: Notification.Name.UITextViewTextDidChange,
+		                                       object: nil)
 	}
 	
 	func updateText(text:String) {
 		super.text = text
-		self.textChanged(nil)
+		self.textChanged(notification: nil)
 	}
 	
 	func updatePlaceHolder(holder:String) {
 		self.placeHolder = holder
-		self.textChanged(nil)
+		self.textChanged(notification: nil)
 	}
 	
-	override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
+	//override func drawRect(rect: CGRect) {
 		if(self.placeHolder != "") {
-			self.placeHolderLabel.frame           = CGRectMake(8,8,self.bounds.size.width - 16,0)
-			self.placeHolderLabel.lineBreakMode   = NSLineBreakMode.ByWordWrapping
+			self.placeHolderLabel.frame           = CGRect(x:8, y:8, width:self.bounds.size.width - 16, height: 0)
+			self.placeHolderLabel.lineBreakMode   = NSLineBreakMode.byWordWrapping
 			self.placeHolderLabel.numberOfLines   = 0
 			self.placeHolderLabel.font            = self.font
-			self.placeHolderLabel.backgroundColor = UIColor.clearColor()
+			self.placeHolderLabel.backgroundColor = UIColor.clear
 			self.placeHolderLabel.textColor       = self.placeHolderColor
 			self.placeHolderLabel.alpha           = 0
 			self.placeHolderLabel.tag             = 999
@@ -62,13 +55,13 @@ class UIPlaceHolderTextView: UITextView {
 			self.addSubview(placeHolderLabel)
 		}
 		
-		self.sendSubviewToBack(placeHolderLabel)
+		self.sendSubview(toBack: placeHolderLabel)
 		
 		if(self.text == "" && self.placeHolder != ""){
 			self.viewWithTag(999)?.alpha = 1
 		}
 		
-		super.drawRect(rect)
+		super.draw(rect)
 	}
 	
 	func textChanged(notification:NSNotification?) -> (Void) {

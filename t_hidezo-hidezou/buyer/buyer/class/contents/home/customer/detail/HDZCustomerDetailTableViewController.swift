@@ -17,7 +17,7 @@ class HDZCustomerDetailTableViewController: UITableViewController {
     @IBOutlet weak var telCell: UITableViewCell!
     @IBOutlet weak var ownerCell: UITableViewCell!
     
-    private var friendInfo: FriendInfo! = nil
+	var friendInfo: FriendInfo! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class HDZCustomerDetailTableViewController: UITableViewController {
 extension HDZCustomerDetailTableViewController {
     
     internal class func createViewController(friendInfo: FriendInfo) -> HDZCustomerDetailTableViewController {
-        let controller: HDZCustomerDetailTableViewController = UIViewController.createViewController("HDZCustomerDetailTableViewController")
+        let controller: HDZCustomerDetailTableViewController = UIViewController.createViewController(name: "HDZCustomerDetailTableViewController")
         controller.friendInfo = friendInfo
         return controller
     }

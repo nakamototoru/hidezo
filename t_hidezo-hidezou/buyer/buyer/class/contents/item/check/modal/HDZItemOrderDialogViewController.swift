@@ -21,59 +21,58 @@ class HDZItemOrderDialogViewController: UIViewController {
 	@IBOutlet weak var textviewComment: UIPlaceHolderTextView!
 	@IBOutlet weak var barbuttonitemOrder: UIBarButtonItem!
 
-	private var arrayDate:[String] = [] //NSMutableArray!
-	private var arrayCharge:NSMutableArray!
-	private var arrayPlace:NSMutableArray!
+	var arrayDate:[String] = []
+	var arrayCharge: [String] = [] //:NSMutableArray!
+	var arrayPlace: [String] = [] //NSMutableArray!
 	
-	private var itemResult: ItemResult! = nil
-	private var request: Alamofire.Request? = nil
-	private var orderResult: Results<HDZOrder>? = nil
-	private var indicatorView:CustomIndicatorView!
+	var itemResult: ItemResult! = nil
+	var request: Alamofire.Request? = nil
+	var orderResult: Results<HDZOrder>? = nil
+	var indicatorView:CustomIndicatorView!
 
-	private var order_no = ""
-//	private var fax_flag = true
+	var order_no = ""
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		self.arrayCharge = NSMutableArray()
-		self.arrayPlace = NSMutableArray()
+//		self.arrayCharge = NSMutableArray()
+//		self.arrayPlace = NSMutableArray()
 		
 		self.textviewComment.text = HDZItemOrderManager.shared.comment
 		self.textviewComment.layer.cornerRadius = 5.0
 		self.textviewComment.layer.borderWidth = 1.0
-		self.textviewComment.layer.borderColor = UIColor.grayColor().CGColor
+		self.textviewComment.layer.borderColor = UIColor.gray.cgColor
 		self.textviewComment.placeHolder = "コメント"
 
 		// キーボード閉じる
 		// 仮のサイズでツールバー生成
 		let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
-		kbToolBar.barStyle = UIBarStyle.Default  // スタイルを設定
+		kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
 		kbToolBar.sizeToFit()  // 画面幅に合わせてサイズを変更
 		// スペーサー
-		let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+		let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
 		// 閉じるボタン
-		let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: #selector(HDZItemOrderDialogViewController.commitButtonTapped))
+		let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector(HDZItemOrderDialogViewController.commitButtonTapped))
 		kbToolBar.items = [spacer, commitButton]
 		self.textviewComment.inputAccessoryView = kbToolBar
 		
 		//インジケーター
-		self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+		self.indicatorView = CustomIndicatorView.createView(framesize: self.view.frame.size)
 		self.view.addSubview(self.indicatorView)
 
 		// APi
-		self.getItem(self.supplierId)
+		self.getItem(supplierId: self.supplierId)
     }
 
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 		self.request?.resume()
 	}
 	
-	override func viewDidDisappear(animated: Bool) {
+	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
 		self.request?.suspend()
@@ -84,7 +83,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 	}
 	
 	func updateButtonEnabled(enabled:Bool) {
-		barbuttonitemOrder.enabled = enabled
+		barbuttonitemOrder.isEnabled = enabled
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -98,7 +97,7 @@ class HDZItemOrderDialogViewController: UIViewController {
 extension HDZItemOrderDialogViewController {
 	
 	internal class func createViewController(supplierId: String) -> HDZItemOrderDialogViewController {
-		let controller: HDZItemOrderDialogViewController = UIViewController.createViewController("HDZItemOrderDialogViewController")
+		let controller: HDZItemOrderDialogViewController = UIViewController.createViewController(name: "HDZItemOrderDialogViewController")
 		controller.supplierId = supplierId
 		return controller
 	}
@@ -108,9 +107,9 @@ extension HDZItemOrderDialogViewController {
 // MARK: - API
 extension HDZItemOrderDialogViewController {
 	
-	private func getItem(supplierId: String) {
+	func getItem(supplierId: String) {
 		
-		let completion: (unboxable: ItemResult?) -> Void = { (unboxable) in
+		let completion: (_ unboxable: ItemResult?) -> Void = { (unboxable) in
 			
 			self.request = nil
 			
@@ -127,23 +126,26 @@ extension HDZItemOrderDialogViewController {
 			#endif
 			
 			// Picekr init
-			// 納品日一覧
+			// 1.納品日一覧
 			self.arrayDate = self.itemResult.delivery_day_list
 			
-			// 担当者一覧
-			let charges:NSArray = self.itemResult.charge_list
-			self.arrayCharge.removeAllObjects()
-			self.arrayCharge.addObjectsFromArray(charges as! [String])
+			// 2.担当者一覧
+			let charges = self.itemResult.charge_list
+			self.arrayCharge.removeAll()
+			//self.arrayCharge.addObjectsFromArray(charges as! [String])
+			self.arrayCharge.append(contentsOf: charges) //  .addObjects(from: charges)
 			// オフセット値
 			if HDZItemOrderManager.shared.charge == "" {
-				HDZItemOrderManager.shared.charge = self.arrayCharge[0] as! String
+				let charge = self.arrayCharge[0]
+				HDZItemOrderManager.shared.charge = charge //self.arrayCharge[0] as! String
 			}
 
-			// 配達先一覧（任意）
-			let places:NSArray = self.itemResult.deliver_to_list
-			self.arrayPlace.removeAllObjects()
-			self.arrayPlace.addObject("選択なし")
-			self.arrayPlace.addObjectsFromArray(places as! [String])
+			// 3.配達先一覧（任意）
+			let places = self.itemResult.deliver_to_list
+			self.arrayPlace.removeAll() //.removeAllObjects()
+			self.arrayPlace.append("選択なし") //.add("選択なし")
+			//self.arrayPlace.addObjectsFromArray(places as! [String])
+			self.arrayPlace.append(contentsOf: places) //.addObjects(from: places)
 			
 			// ピッカー更新
 			self.pickerviewCharge.reloadAllComponents()
@@ -165,7 +167,7 @@ extension HDZItemOrderDialogViewController {
 			count = 0
 			pickerposition = 0
 			for str in self.arrayCharge {
-				if HDZItemOrderManager.shared.charge == str as! String {
+				if HDZItemOrderManager.shared.charge == str {
 					pickerposition = count
 					break;
 				}
@@ -176,7 +178,7 @@ extension HDZItemOrderDialogViewController {
 			count = 0
 			pickerposition = 0
 			for str in self.arrayPlace {
-				if HDZItemOrderManager.shared.deliverto == str as! String {
+				if HDZItemOrderManager.shared.deliverto == str {
 					pickerposition = count
 					break;
 				}
@@ -187,11 +189,11 @@ extension HDZItemOrderDialogViewController {
 		}
 		
 		// API
-		let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+		let error: (_ error: Error?, _ unboxable: ItemError?) -> Void = { (error, unboxable) in
 
 			self.request = nil
 		}
-		self.request = HDZApi.item(supplierId, completionBlock: completion, errorBlock: error)
+		self.request = HDZApi.item(supplierId: supplierId, completionBlock: completion, errorBlock: error)
 	}
 }
 
@@ -200,54 +202,43 @@ extension HDZItemOrderDialogViewController {
 
 	func openCompleteDialog() {
 		// ダイアログアクション
-		let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-			
-			// タブ画面に戻る＝モーダルを閉じる
-			self.navigationController?.viewControllers[1].dismissViewControllerAnimated(true) {
+//		let action: UIAlertAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+//			
+//			// タブ画面に戻る＝モーダルを閉じる
+//			self.navigationController?.viewControllers[1].dismiss(animated: true) {
+//
+//				self.closeSelf()
+//			}
+//		}
+//		let alert: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .alert)
+//		alert.addAction(action)
+//		let basevc:UIViewController = MyWarning.getBaseViewController()
+//		basevc.present(alert, animated: false, completion: nil)
 		
-//				// FAX送信実行
-//				let completion:(unboxable: FaxResult?) -> Void = { (unboxable) in
-//					guard let result:FaxResult = unboxable else {
-//						return
-//					}
-//					
-//					if Bool( result.result ) {
-//						debugPrint("FAX SEND COMPLETE")
-//					}
-//					else {
-//						debugPrint("FAX Not SEND")
-//					}
-//					
-//					self.closeSelf()
-//				}
-//				let error: (error:ErrorType?, unboxable:FaxError?) -> Void = { (error,unboxable) in
-//					debugPrint(error)
-//					self.closeSelf()
-//				}
-//				HDZApi.sendFax(self.order_no, completeBlock: completion, errorBlock: error)
-
-				self.closeSelf()
+		// 確認ダイアログ
+		UIAlertController(title: "注文確定", message: nil, preferredStyle: .alert)
+			.addAction(title: "OK", style: .default) { (UIAlertAction) in
+				// タブ画面に戻る＝モーダルを閉じる
+				self.navigationController?.viewControllers[1].dismiss(animated: true) {
+					self.closeSelf()
+				}
 			}
-		}
-		// ダイアログ開く
-		let alert: UIAlertController = UIAlertController(title: "注文確定", message: nil, preferredStyle: .Alert)
-		alert.addAction(action)
-		let basevc:UIViewController = MyWarning.getBaseViewController()
-		basevc.presentViewController(alert, animated: false, completion: nil)
+			.show()
 		
 	}
 	
 	func closeSelf() {
 		// 注文履歴タブへ遷移
 		// 1.ルートビュー取得
-		if let rootvc:UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)! {
-			// 2.タブバーコントローラーチェック
-			if rootvc.title == "HDZHomeViewController" {
-				// 3.タブバータイテム選択
-				let tabbarctrl:UITabBarController = rootvc as! UITabBarController
-				tabbarctrl.selectedIndex = 1
-			}
+		let rootvc:UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
+		
+		// 2.タブバーコントローラーチェック
+		if rootvc.title == "HDZHomeViewController" {
+			// 3.タブバータイテム選択
+			let tabbarctrl:UITabBarController = rootvc as! UITabBarController
+			tabbarctrl.selectedIndex = 1
 		}
+		
 	}
 	
 	func doAfterComplete() {
@@ -255,11 +246,11 @@ extension HDZItemOrderDialogViewController {
 		
 		// カートを空にする
 		for object in self.orderResult! {
-			try! HDZOrder.deleteObject(object)
+			try! HDZOrder.deleteObject(object: object)
 		}
 
 		// FAX送信実行
-		let completion:(unboxable: FaxResult?) -> Void = { (unboxable) in
+		let completion:(_ unboxable: FaxResult?) -> Void = { (unboxable) in
 			self.indicatorView.stopAnimating()
 			
 			guard let result:FaxResult = unboxable else {
@@ -275,25 +266,25 @@ extension HDZItemOrderDialogViewController {
 			
 			self.openCompleteDialog()
 		}
-		let error: (error:ErrorType?, unboxable:FaxError?) -> Void = { (error,unboxable) in
+		let error: (_ error:Error?, _ unboxable:FaxError?) -> Void = { (error,unboxable) in
 			self.indicatorView.stopAnimating()
-			debugPrint(error)
+			debugPrint(error.debugDescription)
 			self.openCompleteDialog()
 		}
-		HDZApi.sendFax(self.order_no, completeBlock: completion, errorBlock: error)
+		let _ = HDZApi.sendFax(orderNo: self.order_no, completeBlock: completion, errorBlock: error)
 	}
 	
 	// 注文実行
 	func didSelectedOrder() {
-		self.orderResult = try! HDZOrder.queries(self.supplierId)
+		self.orderResult = try! HDZOrder.queries(supplierId: self.supplierId)
 		
 		guard let items: Results<HDZOrder> = self.orderResult else {
 			
 			// アイテム無し
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-			let controller: UIAlertController = UIAlertController(title: "アイテム無し", message: nil, preferredStyle: .Alert)
+			let action: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			let controller: UIAlertController = UIAlertController(title: "アイテム無し", message: nil, preferredStyle: .alert)
 			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
+			self.present(controller, animated: true, completion: nil)
 			
 			return
 		}
@@ -301,7 +292,7 @@ extension HDZItemOrderDialogViewController {
 		//インジケータ
 		self.indicatorView.startAnimating()
 		
-		let completion: (unboxable: OrderResult?) -> Void = { (unboxable) in
+		let completion: (_ unboxable: OrderResult?) -> Void = { (unboxable) in
 			
 			// 注文確定
 //			self.indicatorView.stopAnimating()
@@ -322,34 +313,34 @@ extension HDZItemOrderDialogViewController {
 			}
 			
 			// APIメッセージ送信
-			let completion: (unboxable: MessageAddResult?) -> Void = { (unboxable) in
+			let completion: (_ unboxable: MessageAddResult?) -> Void = { (unboxable) in
 				self.doAfterComplete()
 			}
-			let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error, unboxable) in
+			let error: (_ error: Error?, _ unboxable: MessageAddError?) -> Void = { (error, unboxable) in
 				#if DEBUG
-					debugPrint(error)
+					debugPrint(error.debugDescription)
 				#endif
 				self.doAfterComplete()
 			}
-			self.request = HDZApi.adMessage(result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
+			self.request = HDZApi.adMessage(order_no: result.order_no, charge: HDZItemOrderManager.shared.charge, message: HDZItemOrderManager.shared.comment, completionBlock: completion, errorBlock: error)
 		}
 		
-		let error: (error: ErrorType?, unboxable: OrderError?) -> Void = { (error, unboxable) in
+		let error: (_ error: Error?, _ unboxable: OrderError?) -> Void = { (error, unboxable) in
 			
 			// 注文エラー
 			self.indicatorView.stopAnimating()
 			
-			let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .Alert)
+			let action: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			let controller: UIAlertController = UIAlertController(title: "注文エラー", message: error.debugDescription, preferredStyle: .alert)
 			controller.addAction(action)
-			self.presentViewController(controller, animated: true, completion: nil)
+			self.present(controller, animated: true, completion: nil)
 			
 			// ボタン有効
-			self.updateButtonEnabled(true)
+			self.updateButtonEnabled(enabled: true)
 		}
 		
 		// Request
-		HDZApi.order(self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
+		HDZApi.order(supplier_id: self.supplierId, deliver_to: HDZItemOrderManager.shared.deliverto, delivery_day: HDZItemOrderManager.shared.deliverdate, charge: HDZItemOrderManager.shared.charge, items: items, completionBlock: completion, errorBlock: error)
 		
 	}
 
@@ -358,52 +349,54 @@ extension HDZItemOrderDialogViewController {
 // MARK: - Action
 extension HDZItemOrderDialogViewController {
 	
-	@IBAction func onCloseDialog(sender: AnyObject) {
-		
-	}
+//	@IBAction func onCloseDialog(_ sender: Any) {
+//		
+//	}
+//	
+//	@IBAction func onSaveDialog(_ sender: Any) {
+//		
+//	}
 	
-	@IBAction func onSaveDialog(sender: AnyObject) {
-		
-	}
-	
-	@IBAction func onSendOrder(sender: AnyObject) {
+	@IBAction func onSendOrder(_ sender: Any) {
 		
 		// TODO:注文実行
 		// 配送情報
-		// 担当者
+		// 1.担当者
 		if HDZItemOrderManager.shared.charge == "" {
 			// 担当者一覧
-			let charges:[String] = self.itemResult.charge_list
+			let charges = self.itemResult.charge_list
 			HDZItemOrderManager.shared.charge = charges[0]
 		}
-		// 配送日
+		// 3.配送日
 		if HDZItemOrderManager.shared.deliverdate == "" {
 			// 配送日一覧
-			let dates:[String] = HDZItemOrderManager.shared.getListDate()
-			HDZItemOrderManager.shared.deliverdate = dates[0]
+			//let dates:[String] = HDZItemOrderManager.shared.getListDate()
+			let dates = self.itemResult.delivery_day_list
+			HDZItemOrderManager.shared.deliverdate = dates[0] // "最短納品日"
 		}
-		// 配送先は空白ありなのでそのまま
+		
+		// 3.配送先は空白の場合ありなのでそのまま
 		//		let place:String = HDZItemOrderManager.shared.deliverto
 		
 		// ボタン無効
-		self.updateButtonEnabled(false)
+		self.updateButtonEnabled(enabled: false)
 		
 		// 「注文しますか？」
-		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .Cancel) { (action:UIAlertAction!) in
+		let cancelaction:UIAlertAction = UIAlertAction(title: "いいえ", style: .cancel) { (action:UIAlertAction!) in
 			// キャンセル
 			// ボタン有効
-			self.updateButtonEnabled(true)
+			self.updateButtonEnabled(enabled: true)
 		}
-		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .Default) { (action:UIAlertAction!) in
+		let confirmaction:UIAlertAction = UIAlertAction(title: "はい", style: .default) { (action:UIAlertAction!) in
 			// 確定
 			self.didSelectedOrder()
 		}
 		let alert:UIAlertController = UIAlertController(title:"注文",
 		                                                message: "確定しますか？",
-		                                                preferredStyle: UIAlertControllerStyle.Alert)
+		                                                preferredStyle: UIAlertControllerStyle.alert)
 		alert.addAction(cancelaction)
 		alert.addAction(confirmaction)
-		self.presentViewController(alert, animated: false, completion: nil)
+		self.present(alert, animated: false, completion: nil)
 	}
 	
 }
@@ -411,12 +404,14 @@ extension HDZItemOrderDialogViewController {
 // MARK: - UITextViewDelegate
 extension HDZItemOrderDialogViewController: UITextViewDelegate {
 	
-	func textViewDidChange(textView: UITextView) {
+	func textViewDidChange(_ textView: UITextView) {
+	//func textViewDidChange(textView: UITextView) {
 		
-		self.textviewComment.textChanged(nil)
+		self.textviewComment.textChanged(notification: nil)
 	}
 	
-	func textViewDidEndEditing(textView: UITextView) {
+	func textViewDidEndEditing(_ textView: UITextView) {
+	//func textViewDidEndEditing(textView: UITextView) {
 		HDZItemOrderManager.shared.comment = self.textviewComment.text
 	}
 
@@ -425,11 +420,13 @@ extension HDZItemOrderDialogViewController: UITextViewDelegate {
 // MARK: - UIPickerViewDataSource
 extension HDZItemOrderDialogViewController: UIPickerViewDataSource {
 	
-	func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+	//func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
 		return 1
 	}
 	
-	func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+	//func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 		
 		if pickerView == self.pickerviewDate {
 			return self.arrayDate.count
@@ -448,7 +445,8 @@ extension HDZItemOrderDialogViewController: UIPickerViewDataSource {
 // MARK: - UIPickerViewDelegate
 extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 	
-	func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	//func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		
 		if pickerView == self.pickerviewDate {
 			// 必須
@@ -456,12 +454,12 @@ extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 		}
 		else if pickerView == self.pickerviewCharge {
 			// 必須
-			HDZItemOrderManager.shared.charge = self.arrayCharge[row] as! String
+			HDZItemOrderManager.shared.charge = self.arrayCharge[row]
 		}
 		else if pickerView == self.pickerviewPlace {
 			if row >= 1 {
 				// 任意
-				HDZItemOrderManager.shared.deliverto = self.arrayPlace[row] as! String
+				HDZItemOrderManager.shared.deliverto = self.arrayPlace[row]
 			}
 			else {
 				// 空白
@@ -470,16 +468,17 @@ extension HDZItemOrderDialogViewController: UIPickerViewDelegate {
 		}
 	}
 	
-	func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+	//func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		
 		if pickerView == self.pickerviewDate {
 			return self.arrayDate[row]
 		}
 		if pickerView == self.pickerviewCharge {
-			return self.arrayCharge[row] as? String
+			return self.arrayCharge[row]
 		}
 		if pickerView == self.pickerviewPlace {
-			return self.arrayPlace[row] as? String
+			return self.arrayPlace[row]
 		}
 
 		return "aaa" //self.chargeList[row]

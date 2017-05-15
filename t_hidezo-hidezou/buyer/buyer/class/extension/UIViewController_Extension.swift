@@ -11,19 +11,19 @@ import UIKit
 extension UIViewController {
     
     internal class func createViewController<T: UIViewController>(name: String) -> T {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let storyBoard: UIStoryboard = UIStoryboard(name: name, bundle: bundle)
         return storyBoard.instantiateInitialViewController() as! T
     }
 
     internal class func createViewController<T: UIViewController>(name: String, withIdentifier identifier: String) -> T {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let storyBoard: UIStoryboard = UIStoryboard(name: name, bundle: bundle)
-        return storyBoard.instantiateViewControllerWithIdentifier(identifier) as! T
+        return storyBoard.instantiateViewController(withIdentifier: identifier) as! T
     }
     
     internal func deleteBackButtonTitle() {
-        let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButtonItem
     }
 }

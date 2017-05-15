@@ -29,9 +29,9 @@ class HDZOrderDetailFooter: UIView {
 	
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-//        self.submitButton.layer.cornerRadius = 5.0
-    }
+//	override func draw(_ rect: CGRect) {
+//		
+//	}
 }
 
 extension HDZOrderDetailFooter {
@@ -42,15 +42,7 @@ extension HDZOrderDetailFooter {
 extension HDZOrderDetailFooter {
     
     internal class func createView() -> HDZOrderDetailFooter {
-        let footer: HDZOrderDetailFooter = UIView.createView("HDZOrderDetailFooter")
+        let footer: HDZOrderDetailFooter = UIView.createView(nibName: "HDZOrderDetailFooter")
         return footer
     }
 }
-
-// MARK: - action
-//extension HDZOrderDetailFooter {
-//
-//    @IBAction func didSelectedEdit(sender: UIButton) {
-//        debugPrint("--------------------")
-//    }
-//}

@@ -12,24 +12,26 @@ import RealmSwift
 class HDZImage: Object {
     
     dynamic var url: String = ""
-    dynamic var data: NSData?
-    dynamic var createDate: NSDate = NSDate()
-    dynamic var updateDate: NSDate = NSDate()
+    dynamic var data: Data?
+    dynamic var createDate: Date = Date()
+    dynamic var updateDate: Date = Date()
     
     dynamic var image: UIImage? {
         get {
-            guard let value: NSData = self.data else {
+            guard let value = self.data else {
                 return nil
             }
-            return UIImage(data: value)
+//            return UIImage(data: value)
+			
+			return UIImage(data: value)
         }
         set {
             guard let value: UIImage = newValue else {
                 self.data = nil
                 return
             }
-            
-            self.data = UIImageJPEGRepresentation(value, 1.0)
+            //self.data = UIImageJPEGRepresentation(value, 1.0)
+			self.data = UIImageJPEGRepresentation(value, 1.0)
         }
     }
     
@@ -48,12 +50,12 @@ class HDZImage: Object {
 
 extension HDZImage {
     
-    internal class func add(url: String, data: NSData) throws {
+    internal class func add(url: String, data: Data) throws {
         
         let image: HDZImage = HDZImage()
         image.url = url
         image.data = data
-        image.updateDate = NSDate()
+        image.updateDate = Date()
         
         let realm: Realm = try Realm()
         

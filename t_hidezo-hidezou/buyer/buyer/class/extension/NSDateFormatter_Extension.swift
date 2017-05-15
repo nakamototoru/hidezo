@@ -11,9 +11,10 @@ import Foundation
 enum DateFormatType: String {
     case DateTime = "yyyy-MM-dd HH:mm:ss"
     case DynamicDateTime = "MM/dd(EEE)HH:mm"
+	case JapanesedateTime = "yyyy/MM/dd"
 }
 
-extension NSDateFormatter {
+extension DateFormatter {
     
     convenience init(type: DateFormatType) {
         self.init()

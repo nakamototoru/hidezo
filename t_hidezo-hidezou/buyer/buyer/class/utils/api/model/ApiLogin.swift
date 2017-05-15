@@ -34,9 +34,9 @@ internal struct LoginCheckError: Unboxable {
     let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+    init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -46,10 +46,10 @@ internal struct LoginCheckResult: Unboxable {
     let result: Bool
     let status: LoginCheckStatus
     
-    init(unboxer: Unboxer) {
+    init(unboxer: Unboxer) throws {
 //        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
-        self.status = unboxer.unbox("status")
+        self.result = try! unboxer.unbox(key: "result")
+        self.status = try! unboxer.unbox(key: "status")
     }
 }
 
@@ -69,9 +69,18 @@ internal struct LoginResult: Unboxable {
     let result: Bool
 	let id:String
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
-		self.id = unboxer.unbox("id")
+    init(unboxer: Unboxer) throws {
+        self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
+		self.id = try! unboxer.unbox(key: "id")
     }
+}
+
+internal struct LogoutResult: Unboxable {
+	
+	let result: Bool
+
+	init(unboxer: Unboxer) throws {
+		self.result = try! unboxer.unbox(key: "result")
+	}
 }

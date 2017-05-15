@@ -21,8 +21,8 @@ class HDZCustomerCell: UITableViewCell {
 	
 	var viewBadge:HDZBadgeView! = nil
 	
-    private var friendInfo: FriendInfo! = nil
-    private var viewController: UIViewController!
+	var friendInfo: FriendInfo! = nil
+	var viewController: UIViewController!
 	
 	var rowOfCell:Int = 0
 	var delegate: HDZCustomerCellDelegate?
@@ -33,21 +33,21 @@ class HDZCustomerCell: UITableViewCell {
         
         self.orderButton.layer.cornerRadius = 5.0
 		
-		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZCustomerCell.tapGestureFromLabel(_:)))
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZCustomerCell.tapGestureFromLabel))
 		self.shopNameLabel .addGestureRecognizer(myTap)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    override func willTransitionToState(state: UITableViewCellStateMask) {
-        super.willTransitionToState(state)
+    override func willTransition(to state: UITableViewCellStateMask) {
+        super.willTransition(to: state)
     }
     
-    override func didTransitionToState(state: UITableViewCellStateMask) {
-        super.didTransitionToState(state)
+    override func didTransition(to state: UITableViewCellStateMask) {
+        super.didTransition(to: state)
     }
 }
 
@@ -55,13 +55,13 @@ class HDZCustomerCell: UITableViewCell {
 extension HDZCustomerCell {
     
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZCustomerCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZCustomerCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZCustomerCell")
     }
     
-    internal class func dequeueReusableCell(controller: UIViewController, tableView: UITableView, for indexPath: NSIndexPath, friendInfo: FriendInfo) -> HDZCustomerCell {
-        let cell: HDZCustomerCell = tableView.dequeueReusableCellWithIdentifier("HDZCustomerCell", forIndexPath: indexPath) as! HDZCustomerCell
+    internal class func dequeueReusableCell(controller: UIViewController, tableView: UITableView, for indexPath: IndexPath, friendInfo: FriendInfo) -> HDZCustomerCell {
+        let cell: HDZCustomerCell = tableView.dequeueReusableCell(withIdentifier: "HDZCustomerCell", for: indexPath) as! HDZCustomerCell
         cell.friendInfo = friendInfo
         cell.indexLabel.text = String(format: "%d", indexPath.row + 1)
         cell.shopNameLabel.text = friendInfo.name
@@ -71,9 +71,10 @@ extension HDZCustomerCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZCustomerCell", owner: self, options: nil)!
-		let cell: HDZCustomerCell = views.firstObject as! HDZCustomerCell;
-		let height :CGFloat = cell.frame.size.height;
+		let views = Bundle.main.loadNibNamed("HDZCustomerCell", owner: self, options: nil)!
+		let viewFirst = views.first
+		let cell: HDZCustomerCell = viewFirst as! HDZCustomerCell
+		let height :CGFloat = cell.frame.size.height
 		
 		return height;
 	}
@@ -83,12 +84,12 @@ extension HDZCustomerCell {
 // MARK: - Action
 extension HDZCustomerCell {
     
-    @IBAction func didSelectedOrder(button: UIButton) {
+    @IBAction func didSelectedOrder(_ sender: Any) {
 		
 		// !!!:デザミシステム
 		// モーダルで開く
-		let controller:HDZItemCategoryNavigationController = HDZItemCategoryNavigationController.createViewController(self.friendInfo)
-		self.viewController.navigationController?.presentViewController(controller, animated: true, completion: { 
+		let controller:HDZItemCategoryNavigationController = HDZItemCategoryNavigationController.createViewController(friendInfo: self.friendInfo)
+		self.viewController.navigationController?.present(controller, animated: true, completion: { 
 			
 		})
 		
@@ -99,7 +100,7 @@ extension HDZCustomerCell {
 extension HDZCustomerCell {
 	
 	func tapGestureFromLabel(sender:UITapGestureRecognizer){
-		delegate?.customercellSelectedRow(self.rowOfCell)
+		delegate?.customercellSelectedRow(row: self.rowOfCell)
 	}
 }
 
@@ -111,10 +112,10 @@ extension HDZCustomerCell {
 		// !!!バッジビュー
 		if self.viewBadge == nil {
             
-            self.viewBadge = HDZBadgeView.createWithSize(self.viewBaseBadge.bounds.size)
+            self.viewBadge = HDZBadgeView.createWithSize(mysize: self.viewBaseBadge.bounds.size)
             self.viewBaseBadge.addSubview(self.viewBadge)
 		}
-		self.viewBadge.updateBadge(value)
+		self.viewBadge.updateBadge(value: value)
 	}
 
 }

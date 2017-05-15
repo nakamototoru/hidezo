@@ -10,9 +10,9 @@ import UIKit
 
 final class GalleryViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
     
-    private let imageControllerFactory: ImageViewControllerFactory
-    private let imageCount: Int
-    private let galleryPagingMode: GalleryPagingMode
+	let imageControllerFactory: ImageViewControllerFactory
+	let imageCount: Int
+	let galleryPagingMode: GalleryPagingMode
     
     init(imageControllerFactory: ImageViewControllerFactory, imageCount: Int, galleryPagingMode: GalleryPagingMode) {
         
@@ -21,7 +21,7 @@ final class GalleryViewControllerDatasource: NSObject, UIPageViewControllerDataS
         self.galleryPagingMode =  (imageCount > 1) ? galleryPagingMode : GalleryPagingMode.Standard
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
 
         guard let currentController = viewController as? ImageViewController else { return nil }
         let previousIndex = (currentController.index == 0) ? imageCount - 1 : currentController.index - 1
@@ -29,14 +29,14 @@ final class GalleryViewControllerDatasource: NSObject, UIPageViewControllerDataS
         switch galleryPagingMode {
             
         case .Standard:
-            return (currentController.index > 0) ? imageControllerFactory.createImageViewController(previousIndex) : nil
+            return (currentController.index > 0) ? imageControllerFactory.createImageViewController(imageIndex: previousIndex) : nil
             
         case .Carousel:
-            return imageControllerFactory.createImageViewController(previousIndex)
+            return imageControllerFactory.createImageViewController(imageIndex: previousIndex)
         }
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
 
         guard let currentController = viewController as? ImageViewController  else { return nil }
         let nextIndex = (currentController.index == imageCount - 1) ? 0 : currentController.index + 1
@@ -44,10 +44,11 @@ final class GalleryViewControllerDatasource: NSObject, UIPageViewControllerDataS
         switch galleryPagingMode {
             
         case .Standard:
-            return (currentController.index < imageCount - 1) ? imageControllerFactory.createImageViewController(nextIndex) : nil
+            return (currentController.index < imageCount - 1) ? imageControllerFactory.createImageViewController(imageIndex: nextIndex) : nil
             
         case .Carousel:
-            return imageControllerFactory.createImageViewController(nextIndex)
+            return imageControllerFactory.createImageViewController(imageIndex: nextIndex)
         }
     }
+	
 }

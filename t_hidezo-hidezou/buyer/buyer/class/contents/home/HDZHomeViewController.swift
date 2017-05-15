@@ -21,8 +21,8 @@ class HDZHomeViewController: UITabBarController {
 		// !!!:・デザミシステム
 		// アイコンカラー（画像）の設定
 		var assets :Array<String> = ["profile_white", "order_white"]
-		for (idx, item) in self.tabBar.items!.enumerate() {
-			item.image = UIImage(named: assets[idx])?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+		for (idx, item) in self.tabBar.items!.enumerated() {
+			item.image = UIImage(named: assets[idx])?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
 		}
 		
 		// !!!:タブバーへバッジ表示
@@ -31,8 +31,8 @@ class HDZHomeViewController: UITabBarController {
 		self.updateBadgeMessage()
 
 		// !!!:バッジ通知の受取
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotificationSupplier(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotificationMessage(_:)), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(getNotificationSupplier), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(getNotificationMessage), name: HDZPushNotificationManager.shared.strNotificationMessage, object: nil)
     }
 
 //	override func viewWillAppear(animated: Bool) {
@@ -64,18 +64,18 @@ class HDZHomeViewController: UITabBarController {
 	func updateBadgeSupplier() {
 		
 		// 商品更新バッジ
-		HDZPushNotificationManager.updateSupplierBadgeWithTabBar(self.tabBar)
+		HDZPushNotificationManager.updateSupplierBadgeWithTabBar(tabBar: self.tabBar)
 	}
 	
 	func updateBadgeMessage() {
 		
 		// メッセージ更新バッジ
-		HDZPushNotificationManager.updateMessageBadgeWithTabBar(self.tabBar)
+		HDZPushNotificationManager.updateMessageBadgeWithTabBar(tabBar: self.tabBar)
 	}
 
 	deinit {
 		//イベントリスナーの削除
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 }
@@ -83,6 +83,6 @@ class HDZHomeViewController: UITabBarController {
 extension HDZHomeViewController {
     
     internal class func createViewController() -> HDZHomeViewController {
-        return UIViewController.createViewController("HDZHomeViewController")
+        return UIViewController.createViewController(name: "HDZHomeViewController")
     }
 }

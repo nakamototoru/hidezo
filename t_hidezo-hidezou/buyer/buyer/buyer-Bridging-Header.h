@@ -5,17 +5,16 @@
 #ifndef BUYER_BRIDGING_HEADER_H
 #define BUYER_BRIDGING_HEADER_H
 
-#import "MJPopupBackgroundView.h"
-#import "UIViewController+MJPopupViewController.h"
+//#import "MJPopupBackgroundView.h"
+//#import "UIViewController+MJPopupViewController.h"
 
-#import "JASidePanelController.h"
-#import "UIViewController+JASidePanel.h"
+//#import "JASidePanelController.h"
+//#import "UIViewController+JASidePanel.h"
 
 #import "DeployGateExtra.h"
-
 #import <DeployGateSDK/DeployGateSDK.h>
 
-#import "AFNetworking.h"
-#import "XMLReader.h"
+//#import "AFNetworking.h"
+//#import "XMLReader.h"
 
 #endif

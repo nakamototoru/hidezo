@@ -18,9 +18,10 @@ class HDZItemFractionViewController: UIViewController {
 	
 	var delegate:HDZItemFractionViewControllerDelegate?
 	var arrayFraction:NSMutableArray!
-	var parent:UIViewController!
+	//var parent:UIViewController?
+	var master: UIViewController?
 	
-	private var strSelected:String! = "0"
+	var strSelected:String! = "0"
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class HDZItemFractionViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		var isfound:Bool = false
@@ -46,7 +47,7 @@ class HDZItemFractionViewController: UIViewController {
 		}
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
 	}
@@ -56,14 +57,6 @@ class HDZItemFractionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 	
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -74,11 +67,11 @@ extension HDZItemFractionViewController {
 		let controller: HDZItemFractionViewController = HDZItemFractionViewController(nibName: "HDZItemFractionViewController", bundle: nil)
 		//.createViewController("HDZItemFractionViewController")
 		
-		controller.parent = parent
+		controller.master = parent
 
 		controller.arrayFraction = NSMutableArray()
-		controller.arrayFraction.addObject("注文しない")
-		controller.arrayFraction.addObjectsFromArray(fractions)
+		controller.arrayFraction.add("注文しない")
+		controller.arrayFraction.addObjects(from: fractions)
 		
 		controller.strSelected = itemsize //controller.arrayFraction[0] as! String
 		
@@ -89,11 +82,15 @@ extension HDZItemFractionViewController {
 // MARK: - UIPickerViewDataSource
 extension HDZItemFractionViewController: UIPickerViewDataSource {
 	
-	func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+//	func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+//		return 1
+//	}
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return 1
 	}
 	
-	func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+	//func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 		return self.arrayFraction.count
 	}
 }
@@ -101,7 +98,8 @@ extension HDZItemFractionViewController: UIPickerViewDataSource {
 // MARK: - UIPickerViewDelegate
 extension HDZItemFractionViewController: UIPickerViewDelegate {
 	
-	func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	//func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
 		if row > 0 {
 			self.strSelected = self.arrayFraction[row] as! String
@@ -111,7 +109,8 @@ extension HDZItemFractionViewController: UIPickerViewDelegate {
 		}
 	}
 	
-	func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+	//func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		return self.arrayFraction[row] as? String
 	}
 }
@@ -119,13 +118,14 @@ extension HDZItemFractionViewController: UIPickerViewDelegate {
 // MARK: - Selector
 extension HDZItemFractionViewController {
 	
-	@IBAction func onCloseFraction(sender: AnyObject) {
+	@IBAction func onCloseFraction(_ sender: Any) {
 
 		// 値の送信
-		self.delegate?.itemfractionSelected(self.strSelected)
+		self.delegate?.itemfractionSelected(fraction: self.strSelected)
 		
 		// 自分閉じる
-		self.parent.dismissPopupViewControllerWithanimationType(MJPopupViewAnimationFade)
+		//self.master?.dismissPopupViewControllerWithanimationType(MJPopupViewAnimationFade)
+		self.master?.dismissPopupViewControllerWithanimationType(animationType: MJPopupViewAnimation.Fade)
 	}
 }
 

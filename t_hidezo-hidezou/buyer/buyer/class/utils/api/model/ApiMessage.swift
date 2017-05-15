@@ -22,9 +22,9 @@ struct MessageError: Unboxable {
     let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+    init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -36,12 +36,12 @@ struct MessageResult: Unboxable {
     let chargeList: [String]
     let messageList: [MessageInfo]
     
-    init(unboxer: Unboxer) {
+    init(unboxer: Unboxer) throws {
 //        self.message = unboxer.unbox("message")
-        self.messageCount = unboxer.unbox("messageCount")
-        self.result = unboxer.unbox("result")
-        self.chargeList = unboxer.unbox("chargeList")
-        self.messageList = unboxer.unbox("messageList")
+        self.messageCount = try! unboxer.unbox(key: "messageCount")
+        self.result = try! unboxer.unbox(key: "result")
+        self.chargeList = try! unboxer.unbox(key: "chargeList")
+        self.messageList = try! unboxer.unbox(key: "messageList")
     }
 }
 
@@ -53,12 +53,12 @@ struct MessageInfo: Unboxable {
     let posted_at: String
     let user_flg: String
     
-    init(unboxer: Unboxer) {
-        self.charge = unboxer.unbox("charge")
-        self.message = unboxer.unbox("message")
-        self.name = unboxer.unbox("name")
-        self.posted_at = unboxer.unbox("posted_at")
-        self.user_flg = unboxer.unbox("user_flg")
+    init(unboxer: Unboxer) throws {
+        self.charge = try! unboxer.unbox(key: "charge")
+        self.message = try! unboxer.unbox(key: "message")
+        self.name = try! unboxer.unbox(key: "name")
+        self.posted_at = try! unboxer.unbox(key: "posted_at")
+        self.user_flg = try! unboxer.unbox(key: "user_flg")
     }
 }
 
@@ -76,9 +76,9 @@ struct MessageAddError: Unboxable {
     let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+    init(unboxer: Unboxer) throws {
+        self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -87,8 +87,8 @@ struct MessageAddResult: Unboxable {
 //    let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
+    init(unboxer: Unboxer) throws {
 //        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }

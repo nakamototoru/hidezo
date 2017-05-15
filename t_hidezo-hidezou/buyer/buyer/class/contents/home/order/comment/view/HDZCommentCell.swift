@@ -15,8 +15,8 @@ class HDZCommentCell: UITableViewCell {
     @IBOutlet weak var indexLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    private var messageInfo: MessageInfo! = nil
-    private var maxIndex: Int = 0
+	var messageInfo: MessageInfo! = nil
+	var maxIndex: Int = 0
 	
 	var parent:UIViewController!
 	
@@ -24,12 +24,12 @@ class HDZCommentCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 		
-		let tg:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapCommentLabel(_:)))
+		let tg:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapCommentLabel))
 		self.commentLabel.addGestureRecognizer(tg)
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -40,13 +40,13 @@ class HDZCommentCell: UITableViewCell {
 extension HDZCommentCell {
     
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle: Bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZCommentCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZCommentCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZCommentCell")
     }
     
-    internal class func dequeueReusable(tableView: UITableView, indexPath: NSIndexPath, messageInfo: MessageInfo, maxIndex: Int) -> HDZCommentCell {
-        let cell: HDZCommentCell = tableView.dequeueReusableCellWithIdentifier("HDZCommentCell", forIndexPath: indexPath) as! HDZCommentCell
+    internal class func dequeueReusable(tableView: UITableView, indexPath: IndexPath, messageInfo: MessageInfo, maxIndex: Int) -> HDZCommentCell {
+        let cell: HDZCommentCell = tableView.dequeueReusableCell(withIdentifier: "HDZCommentCell", for: indexPath) as! HDZCommentCell
         cell.messageInfo = messageInfo
         cell.nameLabel.text = String(format: "%@ : %@", messageInfo.name, messageInfo.charge)
         cell.commentLabel.text = messageInfo.message
@@ -57,9 +57,12 @@ extension HDZCommentCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZCommentCell", owner: self, options: nil)!
-		let cell: HDZCommentCell = views.firstObject as! HDZCommentCell;
-		let height :CGFloat = cell.frame.size.height;
+		//Bundle.main.loadNibNamed(name: String, owner: Any?, options: [AnyHashable : Any]?)
+		
+		let views = Bundle.main.loadNibNamed("HDZCommentCell", owner: self, options: nil)!
+		let viewFirst = views.first
+		let cell: HDZCommentCell = viewFirst as! HDZCommentCell
+		let height :CGFloat = cell.frame.size.height
 		
 		return height;
 	}
@@ -75,6 +78,7 @@ extension HDZCommentCell {
 		
 		let vc:HDZCommentDetailViewController = HDZCommentDetailViewController(nibName: "HDZCommentDetailViewController", bundle: nil)
 		vc.textDetail = messageInfo.message
-		self.parent .presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+		//self.parent .presentPopupViewController(vc, animationType: MJPopupViewAnimationFade)
+		self.parent.presentPopupViewController(popupViewController: vc)
 	}
 }

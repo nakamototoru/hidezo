@@ -1,3 +1,4 @@
+
 //
 //  HDZItemDynamicFooterView.swift
 //  buyer
@@ -8,6 +9,7 @@
 
 import UIKit
 import Alamofire
+import ImageViewer
 
 class HDZItemDynamicFooterView: UIView {
 
@@ -23,28 +25,28 @@ class HDZItemDynamicFooterView: UIView {
 	
 	var parent: UIViewController!
 	
-	private var dynamicItemInfo: DynamicItemInfo!
+	var dynamicItemInfo: DynamicItemInfo!
 
 	// Only override draw() if you perform custom drawing.
 	// An empty implementation adversely affects performance during animation.
-	override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
 		// Drawing code
 		
 		if self.dynamicItemInfo == nil {
 			return
 		}
 		
-		self.imageView1.contentMode = UIViewContentMode.ScaleAspectFit
-		self.imageView2.contentMode = UIViewContentMode.ScaleAspectFit
-		self.imageView3.contentMode = UIViewContentMode.ScaleAspectFit
-		self.imageView4.contentMode = UIViewContentMode.ScaleAspectFit
-		self.imageView5.contentMode = UIViewContentMode.ScaleAspectFit
-		self.imageView6.contentMode = UIViewContentMode.ScaleAspectFit
+		self.imageView1.contentMode = UIViewContentMode.scaleAspectFit
+		self.imageView2.contentMode = UIViewContentMode.scaleAspectFit
+		self.imageView3.contentMode = UIViewContentMode.scaleAspectFit
+		self.imageView4.contentMode = UIViewContentMode.scaleAspectFit
+		self.imageView5.contentMode = UIViewContentMode.scaleAspectFit
+		self.imageView6.contentMode = UIViewContentMode.scaleAspectFit
 		
-		
-		for imagePath in self.dynamicItemInfo.imagePath.enumerate() {
+		// 画像取得
+		for imagePath in self.dynamicItemInfo.imagePath.enumerated() {
 			var imageView: UIImageView? = nil
-			switch imagePath.index {
+			switch imagePath.offset {
 			case 0:
 				imageView = self.imageView1
 			case 1:
@@ -61,31 +63,33 @@ class HDZItemDynamicFooterView: UIView {
 				imageView = nil
 			}
 			
-			if let url: NSURL = NSURL(string: imagePath.element) {
-				HDZItemDynamicFooterView.requestImage(url) { (image) in
+			guard imageView != nil else {
+				continue
+			}
+			
+			if let url = URL(string: imagePath.element) {
+				HDZItemDynamicFooterView.requestImage(url: url) { (image) in
 					imageView?.image = image
 				}
 			}
 		}
 		
 		// 画像タップ
-		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView1(_:)))
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView1))
 		self.imageView1.addGestureRecognizer(myTap)
-		let myTap2:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView2(_:)))
+		let myTap2:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView2))
 		self.imageView2.addGestureRecognizer(myTap2)
-		let myTap3:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView3(_:)))
+		let myTap3:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView3))
 		self.imageView3.addGestureRecognizer(myTap3)
-		let myTap4:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView4(_:)))
+		let myTap4:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView4))
 		self.imageView4.addGestureRecognizer(myTap4)
-		let myTap5:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView5(_:)))
+		let myTap5:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView5))
 		self.imageView5.addGestureRecognizer(myTap5)
-		let myTap6:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView6(_:)))
+		let myTap6:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemDynamicFooterView.tapGestureFromImageView6))
 		self.imageView6.addGestureRecognizer(myTap6)
 		
 		//説明文
 		self.textView.text = self.dynamicItemInfo.text
-		
-//		self.dateTime.text = self.dynamicItemInfo.lastUpdate.toString(NSDateFormatter(type: .DynamicDateTime))
 	}
 
 }
@@ -100,7 +104,7 @@ extension HDZItemDynamicFooterView {
 //	}
 	
 	internal class func createView(dynamicItemInfo: DynamicItemInfo, parent:UIViewController) -> HDZItemDynamicFooterView {
-		let view: HDZItemDynamicFooterView = UIView.createView("HDZItemDynamicFooterView")
+		let view: HDZItemDynamicFooterView = UIView.createView(nibName: "HDZItemDynamicFooterView")
 		view.dynamicItemInfo = dynamicItemInfo
 		view.parent = parent
 		return view
@@ -110,7 +114,7 @@ extension HDZItemDynamicFooterView {
 // MARK: - API
 extension HDZItemDynamicFooterView {
 	
-	private class func requestImage(url: NSURL, completion: (image: UIImage?) -> Void) {
+	class func requestImage(url: URL, completion: @escaping (_ image: UIImage?) -> Void) {
 		
 		// 画像ローカル保存したかった。。。
 		//        if let image: HDZImage = try! HDZImage.queries(url.absoluteString) {
@@ -118,24 +122,44 @@ extension HDZItemDynamicFooterView {
 		//            return
 		//        }
 		
-		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
-			if response.result.error != nil {
-				let sakanaimage:UIImage = UIImage(named: "sakana")!
-				completion(image: sakanaimage)
+//		let completionHandler: (Response<NSData, NSError>) -> Void = { (response: Response<NSData, NSError>) in
+//			if response.result.error != nil {
+//				let sakanaimage:UIImage = UIImage(named: "sakana")!
+//				completion(image: sakanaimage)
+//			}
+//			else {
+//				if let data: NSData = response.result.value {
+//					if let resultImage: UIImage = UIImage(data: data) {
+//						completion(image: resultImage)
+//					}
+//				}
+//				else {
+//					let sakanaimage:UIImage = UIImage(named: "sakana")!
+//					completion(image: sakanaimage)
+//				}
+//			}
+//		}
+		
+		//let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
+		let _ = AlamofireManager.requestData(url: url, success: { value in
+			if let resultImage = UIImage(data: value) {
+				completion(resultImage)
 			}
 			else {
-				if let data: NSData = response.result.value {
-					if let resultImage: UIImage = UIImage(data: data) {
-						completion(image: resultImage)
-					}
-				}
-				else {
-					let sakanaimage:UIImage = UIImage(named: "sakana")!
-					completion(image: sakanaimage)
-				}
+				
+				debugPrint("requestData -> Null")
+
+				let sakanaimage = UIImage(named: "sakana")!
+				completion(sakanaimage)
 			}
+		}) { error in
+			
+			debugPrint("requestData -> ERROR")
+			
+			let sakanaimage = UIImage(named: "sakana")!
+			completion(sakanaimage)
 		}
-		let _: Alamofire.Request? = Alamofire.request(.GET, url).responseData(completionHandler: completionHandler)
+		
 	}
 }
 
@@ -144,14 +168,18 @@ extension HDZItemDynamicFooterView {
 	
 	func openImageViewer(imageview:UIImageView) {
 		
-		let imageProvider = SomeImageProvider()
-		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
+//		let imageProvider = SomeImageProvider()
+//		let buttonAssets = CloseButtonAssets(normal: UIImage(named:"close_normal")!, highlighted: UIImage(named: "close_highlighted"))
+//		
+//		let imagesize = imageview.frame.size
+//		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
+//		
+//		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
+//		self.parent.presentImageViewer(imageViewer: imageViewer)
 		
-		let imagesize = imageview.frame.size
-		let configuration = ImageViewerConfiguration(imageSize: CGSize(width: imagesize.width, height: imagesize.height), closeButtonAssets: buttonAssets)
-		
-		let imageViewer = ImageViewerController(imageProvider: imageProvider, configuration: configuration, displacedView: imageview)
-		self.parent.presentImageViewer(imageViewer)
+
+		let viewer = ImageViewerManager()
+		viewer.openImageViewer(imageView: imageview, controller: self.parent)
 	}
 	
 	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
@@ -160,7 +188,7 @@ extension HDZItemDynamicFooterView {
 			return;
 		}
 		
-		openImageViewer(self.imageView1)
+		openImageViewer(imageview: self.imageView1)
 	}
 	func tapGestureFromImageView2(sender:UITapGestureRecognizer){
 		
@@ -168,7 +196,7 @@ extension HDZItemDynamicFooterView {
 			return;
 		}
 		
-		openImageViewer(self.imageView2)
+		openImageViewer(imageview: self.imageView2)
 	}
 	func tapGestureFromImageView3(sender:UITapGestureRecognizer){
 		
@@ -176,7 +204,7 @@ extension HDZItemDynamicFooterView {
 			return;
 		}
 		
-		openImageViewer(self.imageView3)
+		openImageViewer(imageview: self.imageView3)
 	}
 	func tapGestureFromImageView4(sender:UITapGestureRecognizer){
 		
@@ -184,7 +212,7 @@ extension HDZItemDynamicFooterView {
 			return;
 		}
 		
-		openImageViewer(self.imageView4)
+		openImageViewer(imageview: self.imageView4)
 	}
 	func tapGestureFromImageView5(sender:UITapGestureRecognizer){
 		
@@ -192,7 +220,7 @@ extension HDZItemDynamicFooterView {
 			return;
 		}
 		
-		openImageViewer(self.imageView5)
+		openImageViewer(imageview: self.imageView5)
 	}
 	func tapGestureFromImageView6(sender:UITapGestureRecognizer){
 		
@@ -200,6 +228,6 @@ extension HDZItemDynamicFooterView {
 			return;
 		}
 		
-		openImageViewer(self.imageView6)
+		openImageViewer(imageview: self.imageView6)
 	}
 }

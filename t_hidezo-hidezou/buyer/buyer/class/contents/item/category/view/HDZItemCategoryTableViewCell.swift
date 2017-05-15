@@ -19,7 +19,7 @@ class HDZItemCategoryTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -30,13 +30,13 @@ class HDZItemCategoryTableViewCell: UITableViewCell {
 extension HDZItemCategoryTableViewCell {
 	
 	internal class func register(tableView: UITableView) {
-		let bundle: NSBundle = NSBundle.mainBundle()
+		let bundle = Bundle.main
 		let nib: UINib = UINib(nibName: "HDZItemCategoryTableViewCell", bundle: bundle)
-		tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemCategoryTableViewCell")
+		tableView.register(nib, forCellReuseIdentifier: "HDZItemCategoryTableViewCell")
 	}
 
-	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> HDZItemCategoryTableViewCell {
-		let cell: HDZItemCategoryTableViewCell = tableView.dequeueReusableCellWithIdentifier("HDZItemCategoryTableViewCell", forIndexPath: indexPath) as! HDZItemCategoryTableViewCell
+	internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: IndexPath) -> HDZItemCategoryTableViewCell {
+		let cell: HDZItemCategoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HDZItemCategoryTableViewCell", for: indexPath) as! HDZItemCategoryTableViewCell
 
 		return cell
 	}
@@ -49,12 +49,12 @@ extension HDZItemCategoryTableViewCell {
 
 		// !!!バッジビュー
 		if self.viewBadge == nil {
-			let badgepos: CGPoint = CGPointMake(self.labelName.frame.origin.x, 0) // self.labelName.frame.origin.x
-			let anchor:CGPoint = CGPointMake(1, 0)
-			self.viewBadge = HDZBadgeView.createWithPosition(badgepos, anchor:anchor)
+			let badgepos: CGPoint = CGPoint(x: self.labelName.frame.origin.x, y: 0) // self.labelName.frame.origin.x
+			let anchor:CGPoint = CGPoint(x: 1, y: 0)
+			self.viewBadge = HDZBadgeView.createWithPosition(position: badgepos, anchor:anchor)
 			self.addSubview(self.viewBadge)
 		}
-		self.viewBadge.updateBadge(value)
+		self.viewBadge.updateBadge(value: value)
 	}
 
 }

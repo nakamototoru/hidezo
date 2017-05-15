@@ -20,9 +20,9 @@ struct FriendError: Unboxable {
     let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+    init(unboxer: Unboxer) throws {
+        self.message = try! unboxer.unbox(key: "message") //.unbox("message")
+		self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -32,10 +32,10 @@ struct FriendResult: Unboxable {
 //    let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.friendList = unboxer.unbox("friendList")
+    init(unboxer: Unboxer) throws {
+		self.friendList = try! unboxer.unbox(key: "friendList")
 //        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+		self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -49,13 +49,13 @@ struct FriendInfo: Unboxable {
     let name: String
     let tel: String
     
-    init(unboxer: Unboxer) {
-        self.address = unboxer.unbox("address")
-        self.id = unboxer.unbox("id")
-        self.mail_addr = unboxer.unbox("mail_addr")
-        self.minister = unboxer.unbox("minister")
-        self.mobile = unboxer.unbox("mobile")
-        self.name = unboxer.unbox("name")
-        self.tel = unboxer.unbox("tel")
+    init(unboxer: Unboxer) throws {
+		self.address = try! unboxer.unbox(key: "address")
+        self.id = try! unboxer.unbox(key: "id")
+        self.mail_addr = try! unboxer.unbox(key: "mail_addr")
+        self.minister = try! unboxer.unbox(key: "minister")
+        self.mobile = try! unboxer.unbox(key: "mobile")
+        self.name = try! unboxer.unbox(key: "name")
+        self.tel = try! unboxer.unbox(key: "tel")
     }
 }

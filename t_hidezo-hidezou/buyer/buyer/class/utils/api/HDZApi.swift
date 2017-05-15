@@ -34,44 +34,47 @@ internal class HDZApi {
 // MARK: - Login
 extension HDZApi {
 
-    internal class func loginCheck(id: String, password: String, completionBlock: (unboxable: LoginCheckResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginCheckError?) -> Void) -> Alamofire.Request? {
+    internal class func loginCheck(id: String, password: String, completionBlock: @escaping (_ unboxable: LoginCheckResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: LoginCheckError?) -> Void) -> DataRequest? {
 		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/login_check/store"
         let parameters: LoginCheck = LoginCheck(id: id, uuid: HDZUserDefaults.uuid, password: password)
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+        //return AlamofireUtils.request(.get, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: errorBlock)
     }
 
     internal class func login(login_id: String,
                               password: String,
-                              completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginResult?) -> Void) -> Alamofire.Request? {
+                              completionBlock: @escaping (_ unboxable: LoginResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: LoginResult?) -> Void) -> DataRequest? {
 		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/login/attempt" //"/login/store"
 		let parameters: Login = Login(login_id: login_id, uuid: HDZUserDefaults.uuid, pass: password, device_div:"1") // <-iOS
-        return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+        //return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		return AlamofireManager.requesrJson(method: .post, url: requestUrl, parameters: parameters, completed: completionBlock, failed: errorBlock)
     }
 }
 
 // MARK: - friend
 extension HDZApi {
     
-    internal class func friend(completionBlock: (unboxable: FriendResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: FriendError?) -> Void) -> Alamofire.Request? {
+    internal class func friend(completionBlock: @escaping (_ unboxable: FriendResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: FriendError?) -> Void) -> DataRequest? {
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/friend"
         let parameters: Friend = Friend(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
         
-        let error: (error: ErrorType?, unboxable: FriendError?) -> Void = { (error: ErrorType?, unboxable: FriendError?) -> Void in
+        let error: (_ error: Error?, _ unboxable: FriendError?) -> Void = { (error: Error?, unboxable: FriendError?) -> Void in
             guard let failure: FriendError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
 
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
             
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
         
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+        //return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
 }
 
@@ -79,7 +82,7 @@ extension HDZApi {
 extension HDZApi {
 	
 	// 注文実行
-    internal class func order(supplier_id: String, deliver_to: String, delivery_day: String, charge: String, items: Results<HDZOrder>, completionBlock: (unboxable: OrderResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderError?) -> Void) {
+    internal class func order(supplier_id: String, deliver_to: String, delivery_day: String, charge: String, items: Results<HDZOrder>, completionBlock: @escaping (_ unboxable: OrderResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: OrderError?) -> Void) {
 		
 		//
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/order"
@@ -104,164 +107,173 @@ extension HDZApi {
 //			debugPrint(order)
 //		#endif
 
-        AlamofireUtils.request(.POST, requestUrl, structParameters: order, completionBlock: completionBlock, errorBlock: errorBlock)
+        //AlamofireUtils.request(.POST, requestUrl, structParameters: order, completionBlock: completionBlock, errorBlock: errorBlock)
+		let _ = AlamofireManager.requesrJson(method: .post, url: requestUrl, parameters: order, completed: completionBlock, failed: errorBlock)
     }
 	
 	// 注文履歴
-    internal class func orderList(page: Int, completionBlock: (unboxable: OrderListResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderListError?) -> Void) -> Alamofire.Request? {
+    internal class func orderList(page: Int, completionBlock: @escaping (_ unboxable: OrderListResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: OrderListError?) -> Void) -> DataRequest? {
 		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/order_list"
         let parameters: OrderList = OrderList(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, page: page)
 
-        let error: (error: ErrorType?, unboxable: OrderListError?) -> Void = { (error: ErrorType?, unboxable: OrderListError?) -> Void in
+        let error: (_ error: Error?, _ unboxable: OrderListError?) -> Void = { (error: Error?, unboxable: OrderListError?) -> Void in
             guard let failure: OrderListError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
             
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
-            
-            errorBlock(error: error, unboxable: unboxable)
+			
+            errorBlock(error, unboxable)
         }
 
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+        //return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
 	
 	// 注文詳細
-    internal class func orderDitail(orderNo: String, completionBlock: (unboxable: OrderDetailResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: OrderDetailError?) -> Void) -> Alamofire.Request? {
+    internal class func orderDitail(orderNo: String, completionBlock: @escaping (_ unboxable: OrderDetailResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: OrderDetailError?) -> Void) -> DataRequest? {
 		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/order_detail"
         let parameters: OrderDetail = OrderDetail(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: orderNo)
         
-        let error: (error: ErrorType?, unboxable: OrderDetailError?) -> Void = { (error: ErrorType?, unboxable: OrderDetailError?) -> Void in
+        let error: (_ error: Error?, _ unboxable: OrderDetailError?) -> Void = { (error: Error?, unboxable: OrderDetailError?) -> Void in
             guard let failure: OrderDetailError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
             
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
             
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
 
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+        //return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
 }
 
 // MARK: - me
 extension HDZApi {
     
-    internal class func me(completionBlock: (unboxable: MeResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: MeError?) -> Void) -> Alamofire.Request? {
+    internal class func me(completionBlock: @escaping (_ unboxable: MeResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: MeError?) -> Void) -> DataRequest? {
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/me"
         let parameters: Me = Me(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
         
-        let error: (error: ErrorType?, unboxable: MeError?) -> Void = { (error: ErrorType?, unboxable: MeError?) -> Void in
+        let error: (_ error: Error?, _ unboxable: MeError?) -> Void = { (error: Error?, unboxable: MeError?) -> Void in
             guard let failure: MeError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
             
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
             
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
 
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+        //return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
 }
 
 // MARK: - message
 extension HDZApi {
     
-    internal class func message(order_no: String, completionBlock: (unboxable: MessageResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: MessageError?) -> Void) -> Alamofire.Request? {
+    internal class func message(order_no: String, completionBlock: @escaping (_ unboxable: MessageResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: MessageError?) -> Void) -> DataRequest? {
+		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/message"
         let parameters: Message = Message(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: order_no)
         
-        let error: (error: ErrorType?, unboxable: MessageError?) -> Void = { (error: ErrorType?, unboxable: MessageError?) -> Void in
+        let error: (_ error: Error?, _ unboxable: MessageError?) -> Void = { (error: Error?, unboxable: MessageError?) -> Void in
             guard let failure: MessageError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
             
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
             
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
 
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+       // return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
     
-    internal class func adMessage(order_no: String, charge: String, message: String, completionBlock: (unboxable: MessageAddResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: MessageAddError?) -> Void) -> Alamofire.Request? {
+    internal class func adMessage(order_no: String, charge: String, message: String, completionBlock: @escaping (_ unboxable: MessageAddResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: MessageAddError?) -> Void) -> DataRequest? {
+		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/add_message"
         let parameters: MessageAdd = MessageAdd(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, charge: charge, message: message, order_no: order_no)
 
-        let error: (error: ErrorType?, unboxable: MessageAddError?) -> Void = { (error: ErrorType?, unboxable: MessageAddError?) -> Void in
+        let error: (_ error: Error?, _ unboxable: MessageAddError?) -> Void = { (error: Error?, unboxable: MessageAddError?) -> Void in
             
             guard let failure: MessageAddError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
             
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
             
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
 
-        return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
-        
+        //return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .post, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
 }
 
 // MARK: - Item
 extension HDZApi {
     
-    internal class func item(supplierId: String, completionBlock: (unboxable: ItemResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: ItemError?) -> Void) -> Alamofire.Request? {
+    internal class func item(supplierId: String, completionBlock: @escaping (_ unboxable: ItemResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: ItemError?) -> Void) -> DataRequest? {
 		
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/item"
         let parameters: Item = Item(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplierId)
         
-        let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+        let error: (_ error: Error?, _ unboxable: ItemError?) -> Void = { (error, unboxable) in
             guard let failure: ItemError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
             
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
             
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
         
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+        //return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
     
     // 注文履歴からの一覧
-    internal class func orderd_item(supplierId:String, completionBlock:(unboxable:OrderdItemResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:ItemError?) -> Void) -> Alamofire.Request? {
+    internal class func orderd_item(supplierId:String, completionBlock:@escaping (_ unboxable:OrderdItemResult?) -> Void, errorBlock:@escaping (_ error:Error?, _ unboxable:ItemError?) -> Void) -> DataRequest? {
         
         let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/orderd_item"
         let parameters: Item = Item(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplierId)
-        let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+        let error: (_ error: Error?, _ unboxable: ItemError?) -> Void = { (error, unboxable) in
             guard let failure: ItemError = unboxable else {
-                errorBlock(error: error, unboxable: unboxable)
+                errorBlock(error, unboxable)
                 return
             }
-            if self.checkLogOut(failure.result, message: failure.message) {
+            if self.checkLogOut(result: failure.result, message: failure.message) {
                 return
             }
-            errorBlock(error: error, unboxable: unboxable)
+            errorBlock(error, unboxable)
         }
-        return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+        //return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: error)
     }
 }
 
@@ -278,48 +290,51 @@ extension HDZApi {
             return false
         }
 
-        guard let viewController: UIViewController = UIApplication.sharedApplication().keyWindow?.rootViewController else {
+        guard let viewController: UIViewController = UIApplication.shared.keyWindow?.rootViewController else {
             return false
         }
 
         let handler: (UIAlertAction) -> Void = { (alert: UIAlertAction) in
 			
 			// ログアウト実行
-			HDZApi.logOut({ (unboxable) in
-				}, errorBlock: { (error, unboxable) in
+			let _ = HDZApi.logOut(completionBlock: { (unboxable) in
+				// No method
+			}, errorBlock: { (error, unboxable) in
+				// No method
 			})
 			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
-            UIApplication.setRootViewController(controller)
+            UIApplication.setRootViewController(viewController: controller)
             
             let navigationController: UINavigationController = HDZLoginViewController.createViewController()
-            viewController.presentViewController(navigationController, animated: true, completion: nil)
+            viewController.present(navigationController, animated: true, completion: nil)
         }
-        let action: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: handler)
+        let action: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: handler)
         let comment: String = "他の端末でお客様のアカウントにログインしたか、サーバーの不具合でログアウトされました。"
-        let controller: UIAlertController = UIAlertController(title: message, message: comment, preferredStyle: .Alert)
+        let controller: UIAlertController = UIAlertController(title: message, message: comment, preferredStyle: .alert)
 
         controller.addAction(action)
-        viewController.presentViewController(controller, animated: true, completion: nil)
+        viewController.present(controller, animated: true, completion: nil)
         
         return true
     }
 	
-	internal class func logOut(completionBlock: (unboxable: LoginResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: LoginCheckError?) -> Void) -> Alamofire.Request? {
+	internal class func logOut(completionBlock: (_ unboxable: LogoutResult?) -> Void, errorBlock: (_ error: Error?, _ unboxable: LoginCheckError?) -> Void) -> DataRequest? {
 
 		HDZUserDefaults.login = false
 		
 		let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/logout" //"/store/logout"
 		let parameters: ParamsBadge = ParamsBadge(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
-		let completion:(unboxable:LoginResult?) ->Void = { (unboxable) in
+		let completion:(_ unboxable:LogoutResult?) ->Void = { (unboxable) in
 			// カートを空に
 			try! HDZOrder.deleteAll()
 		}
-		let error:(error:ErrorType?, unboxable:LoginCheckError?) -> Void = { (error,unboxable) in
+		let error:(_ error:Error?, _ unboxable:LoginCheckError?) -> Void = { (error,unboxable) in
 			// カートを空に
 			try! HDZOrder.deleteAll()
 		}
-		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completion, errorBlock: error)
+		//return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completion, errorBlock: error)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completion, failed: error)
 	}
 }
 
@@ -327,22 +342,23 @@ extension HDZApi {
 extension HDZApi {
 	
 	// トークン送信
-	internal class func postDeviceToken(id: String, completionBlock: (unboxable: DeviceTokenResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: DeviceTokenError?) -> Void) -> Alamofire.Request? {
+	internal class func postDeviceToken(id: String, completionBlock: @escaping (_ unboxable: DeviceTokenResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: DeviceTokenError?) -> Void) -> DataRequest? {
 
 		let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/device_token"
 		let parameters: DeviceToken = DeviceToken(id: id, uuid: HDZUserDefaults.uuid, device_token: HDZUserDefaults.devicetoken, device_flg: "1")
-		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		//return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		return AlamofireManager.requesrJson(method: .post, url: requestUrl, parameters: parameters, completed: completionBlock, failed: errorBlock)
 	}
 
 	internal class func postDeviceTokenByLogin() {
 		
-		let completionToken: (unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
+		let completionToken: (_ unboxable: DeviceTokenResult?) -> Void = { (unboxable) in
 			debugPrint("****** completionToken ******")
 		}
-		let errorToken: (error: ErrorType?, result: DeviceTokenError?) -> Void = { (error, result) in
-			debugPrint(error)
+		let errorToken: (_ error: Error?, _ result: DeviceTokenError?) -> Void = { (error, result) in
+			debugPrint(error.debugDescription)
 		}
-		let _:Alamofire.Request = HDZApi.postDeviceToken(HDZUserDefaults.id, completionBlock: completionToken, errorBlock: errorToken)!
+		let _:Alamofire.Request = HDZApi.postDeviceToken(id: HDZUserDefaults.id, completionBlock: completionToken, errorBlock: errorToken)!
 
 	}
 
@@ -352,48 +368,35 @@ extension HDZApi {
 extension HDZApi {
 	
 	// バッジ取得
-	internal class func badge(completionBlock: (unboxable: BadgeResult?) -> Void, errorBlock: (error: ErrorType?, unboxable: BadgeError?) -> Void) -> Alamofire.Request? {
+	internal class func badge(completionBlock: @escaping (_ unboxable: BadgeResult?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: BadgeError?) -> Void) -> DataRequest? {
 		
 		let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/badge"
 		let parameters: ParamsBadge = ParamsBadge(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
-		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		//return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completionBlock, failed: errorBlock)
 	}
 	
 	
 	// バッジリセット
-	internal class func postCheckDynamicItems(supplier_id: String, completionBlock: (unboxable: CheckDynamicItemsResultComplete?) -> Void, errorBlock: (error: ErrorType?, unboxable: CheckDynamicItemsResultError?) -> Void) -> Alamofire.Request? {
+	internal class func postCheckDynamicItems(supplier_id: String, completionBlock: @escaping (_ unboxable: CheckDynamicItemsResultComplete?) -> Void, errorBlock: @escaping (_ error: Error?, _ unboxable: CheckDynamicItemsResultError?) -> Void) -> DataRequest? {
 		
 		let requestUrl: String = HDZConfiguration.ApiBaseUrl() + "/store/check_dynamic_items"
 		let parameters: CheckDynamicItemsRequest = CheckDynamicItemsRequest(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id: supplier_id )
-		return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		//return AlamofireUtils.request(.POST, requestUrl, structParameters: parameters, completionBlock: completionBlock, errorBlock: errorBlock)
+		return AlamofireManager.requesrJson(method: .post, url: requestUrl, parameters: parameters, completed: completionBlock, failed: errorBlock)
 	}
 }
 
 // MARK: - FAX
 extension HDZApi {
 	
-	// 注文送信方法取得
-//	internal class func getOrderMethod(supplierId:String, completeBlock:(unboxable:OrderMethodResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
-//		
-//		let requestUrl = BASE_URL + "/store/order_method"
-//		let parameters = OrderMethod(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, supplier_id:supplierId)
-//		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
-//	}
-	
-	// 発注書情報取得
-//	internal class func getFaxDoc(orderNo:String, completeBlock:(unboxable:FaxDocResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:OrderListError?) -> Void) -> Alamofire.Request? {
-//
-//		let requestUrl = BASE_URL + "/store/faxdoc"
-//		let parameters = FaxDoc(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid, order_no: orderNo)
-//		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
-//	}
-	
 	// 送信
-	internal class func sendFax(orderNo:String, completeBlock:(unboxable:FaxResult?) -> Void, errorBlock:(error:ErrorType?, unboxable:FaxError?) -> Void) -> Alamofire.Request? {
+	internal class func sendFax(orderNo:String, completeBlock:@escaping (_ unboxable:FaxResult?) -> Void, errorBlock:@escaping (_ error:Error?, _ unboxable:FaxError?) -> Void) -> DataRequest? {
 		
 		let requestUrl = HDZConfiguration.ApiBaseUrl() + "/store/fax/" + orderNo
 		let parameters = FaxParam(id: HDZUserDefaults.id, uuid: HDZUserDefaults.uuid)
-		return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
+		//return AlamofireUtils.request(.GET, requestUrl, structParameters: parameters, completionBlock: completeBlock, errorBlock: errorBlock)
+		return AlamofireManager.requesrJson(method: .get, url: requestUrl, parameters: parameters, completed: completeBlock, failed: errorBlock)
 	}
 	
 }

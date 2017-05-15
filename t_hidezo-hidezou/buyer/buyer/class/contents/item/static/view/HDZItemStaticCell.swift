@@ -20,9 +20,9 @@ class HDZItemStaticCell: UITableViewCell {
 
 	var parent:UITableViewController!
 	
-    private var staticItem: StaticItem!
-    private var attr_flg: AttrFlg = AttrFlg.direct
-    private var supplierId: String = ""
+	var staticItem: StaticItem!
+	var attr_flg: AttrFlg = AttrFlg.direct
+	var supplierId: String = ""
 	var itemsize:String = "0" {
 		didSet {
 			self.itemCount.text = itemsize
@@ -34,7 +34,7 @@ class HDZItemStaticCell: UITableViewCell {
         // Initialization code
 		
 		//画像タップ
-		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemStaticCell.tapGestureFromImageView1(_:)))
+		let myTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HDZItemStaticCell.tapGestureFromImageView1))
 		self.iconImageView.addGestureRecognizer(myTap)
     }
     
@@ -42,7 +42,7 @@ class HDZItemStaticCell: UITableViewCell {
         super.prepareForInterfaceBuilder()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -53,14 +53,14 @@ class HDZItemStaticCell: UITableViewCell {
 extension HDZItemStaticCell {
 
     internal class func register(tableView: UITableView) {
-        let bundle: NSBundle = NSBundle.mainBundle()
+        let bundle = Bundle.main
         let nib: UINib = UINib(nibName: "HDZItemStaticCell", bundle: bundle)
-        tableView.registerNib(nib, forCellReuseIdentifier: "HDZItemStaticCell")
+        tableView.register(nib, forCellReuseIdentifier: "HDZItemStaticCell")
     }
     
-    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticCell {
+    internal class func dequeueReusableCell(tableView: UITableView, forIndexPath indexPath: IndexPath, staticItem: StaticItem, attr_flg: AttrFlg, supplierId: String) -> HDZItemStaticCell {
 		
-		let cell: HDZItemStaticCell = tableView.dequeueReusableCellWithIdentifier("HDZItemStaticCell", forIndexPath: indexPath) as! HDZItemStaticCell
+		let cell: HDZItemStaticCell = tableView.dequeueReusableCell(withIdentifier: "HDZItemStaticCell", for: indexPath) as! HDZItemStaticCell
         cell.staticItem = staticItem
         cell.attr_flg = attr_flg
         cell.supplierId = supplierId
@@ -70,7 +70,7 @@ extension HDZItemStaticCell {
 		
 		// アイテム数
 		cell.itemsize = "0"
-        if let item: HDZOrder = try! HDZOrder.queries(supplierId, itemId: staticItem.id, dynamic: false) {
+        if let item: HDZOrder = try! HDZOrder.queries(supplierId: supplierId, itemId: staticItem.id, dynamic: false) {
 			if let _: Int = Int(item.size) {
 				cell.itemsize = item.size
 			}
@@ -84,7 +84,9 @@ extension HDZItemStaticCell {
 			cell.priceLabel.text = ""
 		}
 		else {
-			cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+			//cell.priceLabel.text = String(format: "(\(staticItem.standard)・\(String(staticItem.loading))/\(staticItem.scale))")
+			
+			cell.priceLabel.text = "(" + staticItem.standard + "・" + staticItem.loading + "/" + staticItem.scale + ")"
 		}
 		
 		cell.labelUnitPrice.text = String(format: "単価:\(staticItem.price)円/\(staticItem.scale)")
@@ -98,8 +100,9 @@ extension HDZItemStaticCell {
 	
 	static func getHeight() -> CGFloat {
 		
-		let views: NSArray = NSBundle.mainBundle().loadNibNamed("HDZItemStaticCell", owner: self, options: nil)!
-		let cell: HDZItemStaticCell = views.firstObject as! HDZItemStaticCell;
+		let views = Bundle.main.loadNibNamed("HDZItemStaticCell", owner: self, options: nil)!
+		let viewFirst = views.first
+		let cell: HDZItemStaticCell = viewFirst as! HDZItemStaticCell;
 		let height :CGFloat = cell.frame.size.height;
 		
 		return height;
@@ -113,7 +116,7 @@ extension HDZItemStaticCell {
 	func tapGestureFromImageView1(sender:UITapGestureRecognizer){
 
 		//詳細画面
-		let controller: HDZItemStaticDetailViewController = HDZItemStaticDetailViewController.createViewController(self.staticItem)
+		let controller: HDZItemStaticDetailViewController = HDZItemStaticDetailViewController.createViewController(staticItem: self.staticItem)
 		self.parent.navigationController?.pushViewController(controller, animated: true)
 	}
 
@@ -125,10 +128,10 @@ extension HDZItemStaticCell {
 // MARK: - BuyCart
 extension HDZItemStaticCell {
     
-    private func updateItem() {
+	func updateItem() {
         
         do {
-            try HDZOrder.add(self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
+            try HDZOrder.add(supplierId: self.supplierId, itemId: self.staticItem.id, size: self.itemsize, name: self.staticItem.name, price: self.staticItem.price, scale: self.staticItem.scale, standard: self.staticItem.standard, imageURL: self.staticItem.image.absoluteString, dynamic: false, numScale: self.staticItem.num_scale)
         } catch let error as NSError {
 			#if DEBUG
             debugPrint(error)
@@ -140,7 +143,7 @@ extension HDZItemStaticCell {
 // MARK: - Action
 extension HDZItemStaticCell {
     
-    @IBAction func didSelectedAdd(button: UIButton) {
+    @IBAction func didSelectedAdd(_ sender: Any) {
 		
 		var value:Int = Int(self.itemsize)!
 		value += 1
@@ -152,7 +155,7 @@ extension HDZItemStaticCell {
         self.updateItem()
     }
     
-    @IBAction func didSelectedSub(button: UIButton) {
+    @IBAction func didSelectedSub(_ sender: Any) {
 		
 		var value:Int = Int(self.itemsize)!
 		value -= 1
@@ -165,7 +168,7 @@ extension HDZItemStaticCell {
 			value = 0
 			self.itemsize = String(value)
 			//削除
-			try! HDZOrder.deleteItem(self.supplierId, itemId: self.staticItem.id, dynamic: false)
+			try! HDZOrder.deleteItem(supplierId: self.supplierId, itemId: self.staticItem.id, dynamic: false)
 		}
     }
 }

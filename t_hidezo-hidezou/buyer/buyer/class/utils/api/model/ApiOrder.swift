@@ -22,9 +22,9 @@ struct OrderListError: Unboxable {
     let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+    init(unboxer: Unboxer) throws {
+        self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -34,28 +34,36 @@ struct OrderListResult: Unboxable {
     let orderList: [OrderInfo]
     let result: Bool
 
-    init(unboxer: Unboxer) {
+    init(unboxer: Unboxer) throws {
 //        self.message = unboxer.unbox("message")
-        self.orderList = unboxer.unbox("order_list")
-        self.result = unboxer.unbox("result")
+        self.orderList = try! unboxer.unbox(key: "order_list")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }
 
 struct OrderInfo: Unboxable {
 
-    let deliver_at: String // = "01/01"
+    let deliver_at: String? // = "01/01"
     let order_at: String // = "06/12"
     let order_no: String
     let supplier: String
     let supplier_name: String
     
-    init(unboxer: Unboxer) {
-        self.deliver_at = unboxer.unbox("deliver_at")
-        self.order_at = unboxer.unbox("order_at")
-        self.order_no = unboxer.unbox("order_no")
-        self.supplier = unboxer.unbox("supplier")
-        self.supplier_name = unboxer.unbox("supplier_name")
+    init(unboxer: Unboxer) throws {
+        self.deliver_at = unboxer.unbox(key: "deliver_at")
+        self.order_at = try! unboxer.unbox(key: "order_at")
+        self.order_no = try! unboxer.unbox(key: "order_no")
+        self.supplier = try! unboxer.unbox(key: "supplier")
+        self.supplier_name = try! unboxer.unbox(key: "supplier_name")
     }
+	
+//	init(unboxer: Unboxer) throws {
+//		self.deliver_at = unboxer.unbox(key: "deliver_at")
+//		self.order_at = try! unboxer.unbox(key: "order_at")
+//		self.order_no = try! unboxer.unbox(key: "order_no")
+//		self.supplier = try! unboxer.unbox(key: "supplier")
+//		self.supplier_name = try! unboxer.unbox(key: "supplier_name")
+//	}
 }
 
 struct OrderDetail: WrapCustomizable {
@@ -70,9 +78,9 @@ struct OrderDetailError: Unboxable {
     let message: String
     let result: Bool
     
-    init(unboxer: Unboxer) {
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
+    init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
     }
 }
 
@@ -91,23 +99,23 @@ struct OrderDetailResult: Unboxable {
     
     let charge: String
     let deliver_to: String
-    let delivery_day: String
+    let delivery_day: String?
     let order_no: String
 
-    init(unboxer: Unboxer) {
-        self.attr_flg = unboxer.unbox("attr_flg")
-        self.deliveryFee = unboxer.unbox("deliveryFee")
-        self.subtotal = unboxer.unbox("subtotal")
-        self.total = unboxer.unbox("total")
-        self.message = unboxer.unbox("message")
-        self.result = unboxer.unbox("result")
-        self.dynamicItemList = unboxer.unbox("dynamicItemList")
-        self.staicItemList = unboxer.unbox("staicItemList")
+    init(unboxer: Unboxer) throws {
+		self.attr_flg = try! unboxer.unbox(key: "attr_flg")
+        self.deliveryFee = try! unboxer.unbox(key: "deliveryFee")
+        self.subtotal = try! unboxer.unbox(key: "subtotal")
+        self.total = try! unboxer.unbox(key: "total")
+        self.message = try! unboxer.unbox(key: "message")
+        self.result = try! unboxer.unbox(key: "result")
+        self.dynamicItemList = try! unboxer.unbox(key: "dynamicItemList")
+        self.staicItemList = try! unboxer.unbox(key: "staicItemList")
 
-        self.order_no = unboxer.unbox("order.order_no", isKeyPath: true)
-        self.charge = unboxer.unbox("order.charge", isKeyPath: true)
-        self.deliver_to = unboxer.unbox("order.deliver_to", isKeyPath: true)
-        self.delivery_day = unboxer.unbox("order.delivery_day", isKeyPath: true)
+		self.order_no = try! unboxer.unbox(keyPath: "order.order_no")
+        self.charge = try! unboxer.unbox(keyPath: "order.charge")
+        self.deliver_to = try! unboxer.unbox(keyPath: "order.deliver_to")
+        self.delivery_day = unboxer.unbox(keyPath: "order.delivery_day")
     }
 }
 
@@ -137,16 +145,16 @@ struct OrderDetailItem: Unboxable {
     let scale: String?
     let standard: String?
     
-    init(unboxer: Unboxer) {
-        self.code = unboxer.unbox("code")
-        self.id = unboxer.unbox("id")
-        self.name = unboxer.unbox("name")
-        self.num_scale = unboxer.unbox("num_scale")
-        self.order_num = unboxer.unbox("order_num")
-        self.price = unboxer.unbox("price")
-        self.loading = unboxer.unbox("loading")
-        self.scale = unboxer.unbox("scale")
-        self.standard = unboxer.unbox("standard")
+    init(unboxer: Unboxer) throws {
+		self.code = try! unboxer.unbox(key: "code")
+        self.id = try! unboxer.unbox(key: "id")
+        self.name = try! unboxer.unbox(key: "name")
+        self.num_scale = unboxer.unbox(key: "num_scale")
+        self.order_num = try! unboxer.unbox(key: "order_num")
+        self.price = try! unboxer.unbox(key: "price")
+        self.loading = unboxer.unbox(key: "loading")
+        self.scale = unboxer.unbox(key: "scale")
+        self.standard = unboxer.unbox(key: "standard")
     }
 }
 
@@ -176,17 +184,17 @@ struct OrderResult: Unboxable {
 //    let message: String
 	let order_no: String
     
-    init(unboxer: Unboxer) {
+    init(unboxer: Unboxer) throws {
 //        self.message = unboxer.unbox("message")
-		self.order_no = unboxer.unbox("order_no")
+		self.order_no = try! unboxer.unbox(key: "order_no")
     }
 }
 
 struct OrderError: Unboxable {
     
 	let message: String
-    init(unboxer: Unboxer) {
-		self.message = unboxer.unbox("message")
+    init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
     }
 }
 
@@ -195,16 +203,16 @@ struct FaxError:Unboxable {
 	let message: String
 	let result: Bool
 	
-	init(unboxer: Unboxer) {
-		self.message = unboxer.unbox("message")
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		self.message = try! unboxer.unbox(key: "message")
+		self.result = try! unboxer.unbox(key: "result")
 	}
 }
 struct FaxResult:Unboxable {
 	let result: Bool
 //	let message: String
-	init(unboxer: Unboxer) {
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		self.result = try! unboxer.unbox(key: "result")
 //		self.message = unboxer.unbox("message")
 	}
 }
@@ -227,11 +235,11 @@ struct OrderMethodResult:Unboxable {
 	let result: Int
 	let method:String
 	
-	init(unboxer: Unboxer) {
-		self.result = unboxer.unbox("result")
+	init(unboxer: Unboxer) throws {
+		self.result = try! unboxer.unbox(key: "result")
 //		self.message = unboxer.unbox("message")
 		
-		self.method = unboxer.unbox("method")
+		self.method = try! unboxer.unbox(key: "method")
 	}
 }
 
@@ -247,10 +255,10 @@ struct FaxDocItem:Unboxable {
 	let id:String
 	let name:String
 	let size:String
-	init(unboxer:Unboxer) {
-		self.id = unboxer.unbox("id")
-		self.name = unboxer.unbox("name")
-		self.size = unboxer.unbox("size")
+	init(unboxer:Unboxer) throws {
+		self.id = try! unboxer.unbox(key: "id")
+		self.name = try! unboxer.unbox(key: "name")
+		self.size = try! unboxer.unbox(key: "size")
 	}
 }
 
@@ -266,16 +274,16 @@ struct FaxDocInfo:Unboxable {
 	let supplier_name:String
 	let fax:String
 	
-	init(unboxer: Unboxer) {
-		self.store_name = unboxer.unbox("store_name")
-		self.store_code = unboxer.unbox("store_code")
-		self.store_address = unboxer.unbox("store_address")
-		self.order_at = unboxer.unbox("order_at")
-		self.deliver_at = unboxer.unbox("deliver_at")
-		self.faxdocitems = unboxer.unbox("item_list")
-		self.comment = unboxer.unbox("comment")
-		self.supplier_name = unboxer.unbox("supplier_name")
-		self.fax = unboxer.unbox("fax")
+	init(unboxer: Unboxer) throws {
+		self.store_name = try! unboxer.unbox(key: "store_name")
+		self.store_code = try! unboxer.unbox(key: "store_code")
+		self.store_address = try! unboxer.unbox(key: "store_address")
+		self.order_at = try! unboxer.unbox(key: "order_at")
+		self.deliver_at = try! unboxer.unbox(key: "deliver_at")
+		self.faxdocitems = try! unboxer.unbox(key: "item_list")
+		self.comment = try! unboxer.unbox(key: "comment")
+		self.supplier_name = try! unboxer.unbox(key: "supplier_name")
+		self.fax = try! unboxer.unbox(key: "fax")
 	}
 	
 }
@@ -285,9 +293,8 @@ struct FaxDocResult:Unboxable {
 	let result: Int
 	let faxdoc:FaxDocInfo
 
-	init(unboxer: Unboxer) {
-		self.result = unboxer.unbox("result")
-
-		self.faxdoc = unboxer.unbox("faxdoc")
+	init(unboxer: Unboxer) throws {
+		self.result = try! unboxer.unbox(key: "result")
+		self.faxdoc = try! unboxer.unbox(key: "faxdoc")
 	}
 }

@@ -10,8 +10,8 @@ import UIKit
 
 class HDZCommentFormNavigation: UINavigationController,UIViewControllerTransitioningDelegate {
 
-    private var order_no: String! = ""
-    private var messageResult: MessageResult! = nil
+	var order_no: String! = ""
+	var messageResult: MessageResult! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class HDZCommentFormNavigation: UINavigationController,UIViewControllerTransitio
         let rootviewcontroller = self.viewControllers.first;
         if ((rootviewcontroller) != nil) {
             let vc = rootviewcontroller as! HDZCommentFormViewController
-            vc.setupMessage(messageResult, order_no: order_no)
+            vc.setupMessage(messageResult: messageResult, order_no: order_no)
         }
         
         self.transitioningDelegate = self // delegateにselfを設定
@@ -49,7 +49,7 @@ class HDZCommentFormNavigation: UINavigationController,UIViewControllerTransitio
 extension HDZCommentFormNavigation {
     
     internal class func createViewController(messageResult: MessageResult, order_no: String) -> HDZCommentFormNavigation {
-        let controller: HDZCommentFormNavigation = UIViewController.createViewController("HDZCommentForm", withIdentifier: "HDZCommentFormNavigation")
+        let controller: HDZCommentFormNavigation = UIViewController.createViewController(name: "HDZCommentForm", withIdentifier: "HDZCommentFormNavigation")
         controller.messageResult = messageResult
         controller.order_no = order_no
         return controller

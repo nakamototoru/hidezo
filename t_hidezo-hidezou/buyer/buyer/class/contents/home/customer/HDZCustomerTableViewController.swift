@@ -11,8 +11,8 @@ import Alamofire
 
 class HDZCustomerTableViewController: UITableViewController {
 
-    private lazy var friendList: [FriendInfo] = []
-    private var request: Alamofire.Request? = nil
+	lazy var friendList: [FriendInfo] = []
+	var request: Alamofire.Request? = nil
 	
 
     override func viewDidLoad() {
@@ -21,22 +21,25 @@ class HDZCustomerTableViewController: UITableViewController {
         self.deleteBackButtonTitle()
 
 		// ナビゲーション右ボタン
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .Done, target: self, action: #selector(didSelectedLogout(_:)))
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ログアウト",
+		                                                         style: .done,
+		                                                         target: self,
+		                                                         action: #selector(didSelectedLogout))
 		
 		// 再読込イベント
         let refreshControl: UIRefreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(reloadRequest), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(reloadRequest), for: .valueChanged)
         self.refreshControl = refreshControl
 
         
-        HDZCustomerCell.register(self.tableView)
+        HDZCustomerCell.register(tableView: self.tableView)
         self.friend()
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
 		
 		// !!!:バッジ通知
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getNotification(_:)), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(getNotification), name: HDZPushNotificationManager.shared.strNotificationSupplier, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +52,7 @@ class HDZCustomerTableViewController: UITableViewController {
 //		
 //	}
 	
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 		
 		self.tableView.reloadData()
@@ -57,10 +60,10 @@ class HDZCustomerTableViewController: UITableViewController {
         self.request?.resume()
 		
 		// バッジ表示
-		HDZPushNotificationManager.updateSupplierBadge(self)
+		HDZPushNotificationManager.updateSupplierBadge(controller: self)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         self.request?.suspend()		
@@ -71,7 +74,7 @@ class HDZCustomerTableViewController: UITableViewController {
         self.friendList.removeAll()
 		
 		//イベントリスナーの削除
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
     }
 
 	// 再読込
@@ -85,7 +88,7 @@ class HDZCustomerTableViewController: UITableViewController {
 		self.tableView.reloadData()
 		
 		// バッジ表示
-		HDZPushNotificationManager.updateSupplierBadge(self)
+		HDZPushNotificationManager.updateSupplierBadge(controller: self)
 	}
 	
 	// !!!:ログアウト
@@ -94,11 +97,11 @@ class HDZCustomerTableViewController: UITableViewController {
 		// ログアウト確認
 		let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
 			
-			DeployGateExtra.DGSLog("ログアウト：" + HDZUserDefaults.id)
+			DeployGateExtra.dgsLog("ログアウト：" + HDZUserDefaults.id)
 
 			// ログアウト実行
 //			HDZUserDefaults.login = false
-			HDZApi.logOut({ (unboxable) in
+			let _ = HDZApi.logOut(completionBlock: { (unboxable) in
 				
 //				let controller: HDZTopViewController = HDZTopViewController.createViewController()
 //				UIApplication.setRootViewController(controller)
@@ -120,21 +123,21 @@ class HDZCustomerTableViewController: UITableViewController {
 			// TODO:カートを空に
 			
 			let controller: HDZTopViewController = HDZTopViewController.createViewController()
-			UIApplication.setRootViewController(controller)
+			UIApplication.setRootViewController(viewController: controller)
 			let navigationController: UINavigationController = HDZLoginViewController.createViewController()
-			self.presentViewController(navigationController, animated: true, completion: {
+			self.present(navigationController, animated: true, completion: {
 				self.tabBarController?.selectedIndex = 0
 			})
 		}
 		
-		let action: UIAlertAction = UIAlertAction(title: "OK", style: .Destructive, handler: handler)
-		let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+		let action: UIAlertAction = UIAlertAction(title: "OK", style: .destructive, handler: handler)
+		let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		
-		let controller: UIAlertController = UIAlertController(title: "ログアウトしますか？", message: "別のアカウントや現在のアカウントで再ログインすることができます。", preferredStyle: .Alert)
+		let controller: UIAlertController = UIAlertController(title: "ログアウトしますか？", message: "別のアカウントや現在のアカウントで再ログインすることができます。", preferredStyle: .alert)
 		controller.addAction(action)
 		controller.addAction(cancel)
 		
-		self.presentViewController(controller, animated: true, completion: nil)
+		self.present(controller, animated: true, completion: nil)
 	}
 
 }
@@ -142,11 +145,11 @@ class HDZCustomerTableViewController: UITableViewController {
 // MARK: - API
 extension HDZCustomerTableViewController {
 	
-	private func friend() {
+	func friend() {
 		
 		self.refreshControl?.beginRefreshing()
 		
-		let completion: (unboxable: FriendResult?) -> Void = { (unboxable) in
+		let completion: (_ unboxable: FriendResult?) -> Void = { (unboxable) in
 			
 			self.refreshControl?.endRefreshing()
 			
@@ -164,45 +167,72 @@ extension HDZCustomerTableViewController {
 			HDZPushNotificationManager.checkBadge()
 		}
 		
-		let error: (error: ErrorType?, result: FriendError?) -> Void = { (error, result) in
+		let error: (_ error: Error?, _ result: FriendError?) -> Void = { (error, result) in
 			
 			self.refreshControl?.endRefreshing()
 			#if DEBUG
-			debugPrint(error)
-			debugPrint(result)
+			debugPrint(error.debugDescription)
+			debugPrint(result.debugDescription)
 			#endif
 		}
 		
-		self.request = HDZApi.friend(completion, errorBlock: error)
+		self.request = HDZApi.friend(completionBlock: completion, errorBlock: error)
 	}
 }
 
 // MARK: - Table view data source
 extension HDZCustomerTableViewController {
 	
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.friendList.count
-    }
+//	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.friendList.count
+//    }
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.friendList.count
+	}
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
         let friendInfo: FriendInfo = self.friendList[indexPath.row]
-        let cell: HDZCustomerCell = HDZCustomerCell.dequeueReusableCell(self, tableView: tableView, for: indexPath, friendInfo: friendInfo)
+        let cell: HDZCustomerCell = HDZCustomerCell.dequeueReusableCell(controller: self, tableView: tableView, for: indexPath, friendInfo: friendInfo)
 		cell.delegate = self
 		cell.rowOfCell = indexPath.row
-//		cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight|UIViewAutoresizing.FlexibleWidth
+		//		cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight|UIViewAutoresizing.FlexibleWidth
 		
         return cell
     }
 
-	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-		
+//	override func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+//		
+//		let customcell:HDZCustomerCell = cell as! HDZCustomerCell
+//		
+//		// !!!:バッジ表示判定
+////		guard let friendInfo: FriendInfo = self.friendList[indexPath.row] else {
+////			return
+////		}
+//		let friendInfo: FriendInfo = self.friendList[indexPath.row]
+//		
+//		let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
+//		var badgeValue:Int = 0
+//		for obj:SupplierId in list {
+//			let id:String = obj.supplierId
+//			if id == friendInfo.id {
+//				// !!!:バッジ表示
+//				badgeValue = 1
+//				break
+//			}
+//		}
+//		customcell.putBadge( value: badgeValue )
+//
+//	}
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		let customcell:HDZCustomerCell = cell as! HDZCustomerCell
 		
 		// !!!:バッジ表示判定
-		guard let friendInfo: FriendInfo = self.friendList[indexPath.row] else {
-			return
-		}
+		//		guard let friendInfo: FriendInfo = self.friendList[indexPath.row] else {
+		//			return
+		//		}
+		let friendInfo: FriendInfo = self.friendList[indexPath.row]
+		
 		let list:[SupplierId] = HDZPushNotificationManager.shared.getSupplierUpList()
 		var badgeValue:Int = 0
 		for obj:SupplierId in list {
@@ -213,12 +243,14 @@ extension HDZCustomerTableViewController {
 				break
 			}
 		}
-		customcell.putBadge( badgeValue )
-
+		customcell.putBadge( value: badgeValue )
 	}
 	
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		
+//	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//		
+//		return HDZCustomerCell.getHeight()
+//	}
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return HDZCustomerCell.getHeight()
 	}
 }
@@ -229,7 +261,7 @@ extension HDZCustomerTableViewController : HDZCustomerCellDelegate {
 	func customercellSelectedRow(row: Int) {
 		// 卸業者の詳細画面へ
 		let friendInfo: FriendInfo = self.friendList[row]
-		let controller: HDZCustomerDetailTableViewController = HDZCustomerDetailTableViewController.createViewController(friendInfo)
+		let controller: HDZCustomerDetailTableViewController = HDZCustomerDetailTableViewController.createViewController(friendInfo: friendInfo)
 		self.navigationController?.pushViewController(controller, animated: true)
 	}
 }

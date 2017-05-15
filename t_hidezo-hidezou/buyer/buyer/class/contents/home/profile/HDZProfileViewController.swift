@@ -18,7 +18,7 @@ class HDZProfileViewController: UITableViewController {
     @IBOutlet weak var ownerCell: UITableViewCell!
 	@IBOutlet weak var nameCell: UITableViewCell!
 
-    private var request: Alamofire.Request? = nil
+	var request: Alamofire.Request? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class HDZProfileViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if self.request == nil {
@@ -43,7 +43,7 @@ class HDZProfileViewController: UITableViewController {
         self.request?.resume()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.request?.suspend()
@@ -57,42 +57,42 @@ class HDZProfileViewController: UITableViewController {
 // MARK: - action
 extension HDZProfileViewController {
     
-    @IBAction func didSelectedLogout(sender: UIBarButtonItem) {
+    @IBAction func didSelectedLogout(_ sender: Any) {
 		
 		// ログアウト
         let handler: (UIAlertAction) -> Void = { (alertAction: UIAlertAction) in
 			// ログアウト実行
 //            HDZUserDefaults.login = false
-			HDZApi.logOut({ (unboxable) in
+			let _ = HDZApi.logOut(completionBlock: { (unboxable) in
 				}, errorBlock: { (error, unboxable) in
 			})
 			
             let controller: HDZTopViewController = HDZTopViewController.createViewController()
-            UIApplication.setRootViewController(controller)
+            UIApplication.setRootViewController(viewController: controller)
             
             let navigationController: UINavigationController = HDZLoginViewController.createViewController()
-            self.presentViewController(navigationController, animated: true, completion: {
+            self.present(navigationController, animated: true, completion: {
                 self.tabBarController?.selectedIndex = 0
             })
         }
         
-        let action: UIAlertAction = UIAlertAction(title: "OK", style: .Destructive, handler: handler)
-        let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let action: UIAlertAction = UIAlertAction(title: "OK", style: .destructive, handler: handler)
+        let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        let controller: UIAlertController = UIAlertController(title: "ログアウトしますか？", message: "別のアカウントや現在のアカウントで再ログインすることができます。", preferredStyle: .Alert)
+        let controller: UIAlertController = UIAlertController(title: "ログアウトしますか？", message: "別のアカウントや現在のアカウントで再ログインすることができます。", preferredStyle: .alert)
         controller.addAction(action)
         controller.addAction(cancel)
         
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: nil)
         
     }
 }
 
 extension HDZProfileViewController {
     
-    private func me() {
+	func me() {
         
-        let completion: (unboxable: MeResult?) -> Void = { (unboxable) in
+        let completion: (_ unboxable: MeResult?) -> Void = { (unboxable) in
             guard let result: MeResult = unboxable else {
                 return
             }
@@ -111,10 +111,10 @@ extension HDZProfileViewController {
             self.tableView.reloadData()
         }
         
-        let error: (error: ErrorType?, result: MeError?) -> Void = { (error, result) in
+        let error: (_ error: Error?, _ result: MeError?) -> Void = { (error, result) in
             
         }
         
-        self.request = HDZApi.me(completion, errorBlock: error)
+        self.request = HDZApi.me(completionBlock: completion, errorBlock: error)
     }
 }

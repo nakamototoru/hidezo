@@ -12,7 +12,7 @@ class HDZItemCategoryNavigationController: UINavigationController, UIViewControl
 
 //	@IBOutlet weak var toolbarNavi: UIToolbar!
 	
-	private var friendInfo: FriendInfo! = nil
+	var friendInfo: FriendInfo! = nil
 	
 	let kAnimator = VcAnimator()
 
@@ -24,7 +24,7 @@ class HDZItemCategoryNavigationController: UINavigationController, UIViewControl
 		let rootviewcontroller = self.viewControllers.first;
 		if ((rootviewcontroller) != nil) {
 			let vc = rootviewcontroller as! HDZItemCategoryTableViewController
-			vc.setupFriendInfo(self.friendInfo)
+			vc.setupFriendInfo(friendInfo: self.friendInfo)
 		}
 		
 		self.transitioningDelegate = self // delegateにselfを設定
@@ -54,7 +54,7 @@ class HDZItemCategoryNavigationController: UINavigationController, UIViewControl
 extension HDZItemCategoryNavigationController {
 	
 	internal class func createViewController(friendInfo: FriendInfo) -> HDZItemCategoryNavigationController {
-		let controller: HDZItemCategoryNavigationController = UIViewController.createViewController("HDZItemCategoryTableViewController", withIdentifier: "HDZItemCategoryNavigationController")
+		let controller: HDZItemCategoryNavigationController = UIViewController.createViewController(name: "HDZItemCategoryTableViewController", withIdentifier: "HDZItemCategoryNavigationController")
 		controller.friendInfo = friendInfo
 		return controller
 	}

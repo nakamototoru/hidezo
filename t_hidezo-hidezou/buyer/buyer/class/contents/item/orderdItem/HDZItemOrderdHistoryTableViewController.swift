@@ -12,15 +12,15 @@ import Unbox
 
 class HDZItemOrderdHistoryTableViewController: UITableViewController {
 
-    private var request: Alamofire.Request? = nil
-    private var resultOrderdItem: OrderdItemResult? = nil
+	var request: Alamofire.Request? = nil
+	var resultOrderdItem: OrderdItemResult? = nil
 
-    private var supplierId: String = ""
-    private var attr_flg: AttrFlg = AttrFlg.direct
-//    private var staticItems: [StaticItem] = []
-	private var displayItemList:[DisplayStaticItem] = []
+	var supplierId: String = ""
+	var attr_flg: AttrFlg = AttrFlg.direct
+	//    private var staticItems: [StaticItem] = []
+	var displayItemList:[DisplayStaticItem] = []
 
-    private var indicatorView:CustomIndicatorView!
+	var indicatorView:CustomIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,21 +34,21 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
         self.title = "履歴から注文"
         
         // セル登録
-        HDZItemStaticNoimageCell.register(self.tableView)
-        HDZItemStaticFractionNoimageCell.register(self.tableView)
+        HDZItemStaticNoimageCell.register(tableView: self.tableView)
+        HDZItemStaticFractionNoimageCell.register(tableView: self.tableView)
 
         // 再読込イベント
         let refreshControl: UIRefreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(reloadRequest), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(reloadRequest), for: .valueChanged)
         self.refreshControl = refreshControl
         
         //インジケータ
-        self.indicatorView = CustomIndicatorView.createView(self.view.frame.size)
+        self.indicatorView = CustomIndicatorView.createView(framesize: self.view.frame.size)
         self.view.addSubview(self.indicatorView)
     }
 
     func reloadRequest() {
-        getOrderdItem(supplierId)
+        getOrderdItem(supplierId: supplierId)
     }
     
     func getOrderdItem(supplierId: String) {
@@ -60,7 +60,7 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
 		
 		self.displayItemList.removeAll()
 		
-        let completion: (unboxable: OrderdItemResult?) -> Void = { (unboxable) in
+        let completion: (_ unboxable: OrderdItemResult?) -> Void = { (unboxable) in
             
             self.request = nil
             
@@ -101,7 +101,7 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
 			}
         }
 		
-        let error: (error: ErrorType?, unboxable: ItemError?) -> Void = { (error, unboxable) in
+        let error: (_ error: Error?, _ unboxable: ItemError?) -> Void = { (error, unboxable) in
             
             self.indicatorView.stopAnimating()
             self.refreshControl?.endRefreshing()
@@ -111,18 +111,18 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
         }
         
         // Request
-        self.request = HDZApi.orderd_item(supplierId, completionBlock: completion, errorBlock: error)
+        self.request = HDZApi.orderd_item(supplierId: supplierId, completionBlock: completion, errorBlock: error)
     }
 
 	func openAlertNoHistory() {
 		// アラートビュー
-		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .Default, handler: { (action:UIAlertAction!) in
+		let action2:UIAlertAction = UIAlertAction(title: "戻る", style: .default, handler: { (action:UIAlertAction!) in
 			// 画面戻る
-			self.navigationController?.popViewControllerAnimated(false)
+			self.navigationController?.popViewController(animated: false)
 		})
-		let controller: UIAlertController = UIAlertController(title: "注文履歴がありません。", message: "", preferredStyle: .Alert)
+		let controller: UIAlertController = UIAlertController(title: "注文履歴がありません。", message: "", preferredStyle: .alert)
 		controller.addAction(action2)
-		self.presentViewController(controller, animated: false, completion: nil)
+		self.present(controller, animated: false, completion: nil)
 	}
 
     override func didReceiveMemoryWarning() {
@@ -130,15 +130,15 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.request?.resume()
 
-        getOrderdItem(supplierId)
+        getOrderdItem(supplierId: supplierId)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         self.request?.suspend()
@@ -150,47 +150,113 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
+//	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return self.displayItemList.count
 //    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.displayItemList.count
-    }
+//	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        
+//        // 整数かどうかチェック
+//        var isInt: Bool = true
+//        for numScale: String in self.displayItemList[indexPath.row].num_scale {
+//            if let _: Int = Int(numScale) {
+//                //整数
+//            } else {
+//                //分数
+//                isInt = false
+//            }
+//        }
+//
+//        if isInt {
+//            // 整数セル
+//            // 画像無しセル
+//            let cell = HDZItemStaticNoimageCell.dequeueReusableCell(tableView: tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+//            cell.parent = self
+//            return cell
+//        }
+//        else {
+//            // 分数セル
+//            // 画像無しセル
+//            let cell = HDZItemStaticFractionNoimageCell.dequeueReusableCell(tableView: tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+//            cell.parent = self
+//            return cell
+//        }
+//    }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        // 整数かどうかチェック
-        var isInt: Bool = true
-        for numScale: String in self.displayItemList[indexPath.row].num_scale {
-            if let _: Int = Int(numScale) {
-                //整数
-            } else {
-                //分数
-                isInt = false
-            }
-        }
-
-        if isInt {
-            // 整数セル
-            // 画像無しセル
-            let cell = HDZItemStaticNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
-            cell.parent = self
-            return cell
-        }
-        else {
-            // 分数セル
-            // 画像無しセル
-            let cell = HDZItemStaticFractionNoimageCell.dequeueReusableCell(tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
-            cell.parent = self
-            return cell
-        }
-    }
-
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//		
+//		// 整数かどうかチェック
+//		var isInt: Bool = true
+//		for numScale: String in self.displayItemList[indexPath.row].num_scale {
+//			if let _: Int = Int(numScale) {
+//				//整数
+//			} else {
+//				//分数
+//				isInt = false
+//			}
+//		}
+//		
+//		if isInt {
+//			// 整数セル
+//			return HDZItemStaticNoimageCell.getHeight()
+//		}
+//		return HDZItemStaticFractionNoimageCell.getHeight()
+//	}
+	
+	@IBAction func onCheckOrder(_ sender: Any) {
 		
+		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(supplierId: self.supplierId)
+		self.navigationController?.pushViewController(controller, animated: true)
+		
+	}
+	
+	@IBAction func onBackHome(_ sender: Any) {
+		
+		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
+	}
+
+}
+
+extension HDZItemOrderdHistoryTableViewController {
+	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.displayItemList.count
+	}
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		// 整数かどうかチェック
+		var isInt: Bool = true
+		for numScale: String in self.displayItemList[indexPath.row].num_scale {
+			if let _: Int = Int(numScale) {
+				//整数
+			} else {
+				//分数
+				isInt = false
+			}
+		}
+		
+		if isInt {
+			// 整数セル
+			// 画像無しセル
+			let cell = HDZItemStaticNoimageCell.dequeueReusableCell(tableView: tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+			cell.parent = self
+			return cell
+		}
+		else {
+			// 分数セル
+			// 画像無しセル
+			let cell = HDZItemStaticFractionNoimageCell.dequeueReusableCell(tableView: tableView, forIndexPath: indexPath, staticItem: self.displayItemList[indexPath.row], attr_flg: self.attr_flg, supplierId: self.supplierId)
+			cell.parent = self
+			return cell
+		}
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		// 整数かどうかチェック
 		var isInt: Bool = true
 		for numScale: String in self.displayItemList[indexPath.row].num_scale {
@@ -208,70 +274,12 @@ class HDZItemOrderdHistoryTableViewController: UITableViewController {
 		}
 		return HDZItemStaticFractionNoimageCell.getHeight()
 	}
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-	
-	@IBAction func onCheckOrder(sender: AnyObject) {
-		
-		let controller: HDZItemCheckTableViewController = HDZItemCheckTableViewController.createViewController(self.supplierId)
-		self.navigationController?.pushViewController(controller, animated: true)
-		
-	}
-	
-	@IBAction func onBackHome(sender: AnyObject) {
-		
-		self.navigationController?.popToViewController((self.navigationController?.viewControllers.first)!, animated: true)
-	}
-
 }
 
 extension HDZItemOrderdHistoryTableViewController {
-    
+	
     internal class func createViewController(supplierId:String, attr_flg:AttrFlg) -> HDZItemOrderdHistoryTableViewController {
-        let controller: HDZItemOrderdHistoryTableViewController = UIViewController.createViewController("HDZItemOrderdHistoryTableViewController")
+        let controller: HDZItemOrderdHistoryTableViewController = UIViewController.createViewController(name: "HDZItemOrderdHistoryTableViewController")
         
         controller.supplierId = supplierId
         controller.attr_flg = attr_flg
